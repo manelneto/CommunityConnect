@@ -30,7 +30,7 @@ paths:
 
     get:
       operationId: R101
-      summary: 'R101: Login Form'
+      summary: 'R101: Login form'
       description: 'Provide login form. Access: PUB'
       tags:
         - 'M01: Authentication'
@@ -40,7 +40,7 @@ paths:
         
     post:
       operationId: R102
-      summary: 'R102: Login Action'
+      summary: 'R102: Login action'
       description: 'Processes the login form submission. Access: PUB'
       tags:
         - 'M01: Authentication'
@@ -83,7 +83,7 @@ paths:
 
    post:
      operationId: R103
-     summary: 'R103: Logout Action'
+     summary: 'R103: Logout action'
      description: 'Logout the current user. Access: USR, OWN, ADM'
      tags:
        - 'M01: Authentication'
@@ -105,7 +105,7 @@ paths:
 
     get:
       operationId: R104
-      summary: 'R104: Register Form'
+      summary: 'R104: Register form'
       description: 'Provide registration form. Access: PUB'
       tags:
         - 'M01: Authentication'
@@ -115,7 +115,7 @@ paths:
 
     post:
       operationId: R105
-      summary: 'R105: Register Action'
+      summary: 'R105: Register action'
       description: 'Processes the registration form submission. Access: PUB'
       tags:
         - 'M01: Authentication'
@@ -161,14 +161,14 @@ paths:
 
 # M02: Profile
 
-# View Profile
+# View/Edit Profile
 
   /user/{id}:
 
     get:
       operationId: R201
-      summary: 'R201: View user profile'
-      description: 'Show an user profile. Access: USR, OWN, ADM'
+      summary: 'R201: User profile page'
+      description: "Shows an user's profile page. Access: USR, OWN, ADM"
       tags:
         - 'M02: Profile'
 
@@ -181,7 +181,7 @@ paths:
 
       responses:
         '200':
-          description: 'OK. Show profile page.'
+          description: 'Ok. Show profile page.'
         '302':
           description: 'Redirect because user is not authenticated or id does not exist.'
           headers:
@@ -192,3 +192,141 @@ paths:
                 302Failure:
                   description: 'Failure viewing profile. Redirect to foruns page.'
                   value: '/foruns'
+  
+    post:
+      operationId: R202
+      summary: "R202: Edit user's profile action"
+      description: "Processes editions on an user's profile. Access: OWN"
+      tags:
+        - 'M02: Profile'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: True
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+                confirm_password:
+                  type: string
+                  format: password
+                profile_photo:
+                  type: string
+                  format: binary
+              required:
+                - username
+                - email
+                - password
+                - confirm_password
+
+
+      responses:
+        '302':
+          description: "Redirect after processing the edition on the user's profile."
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful edition. Redirect to profile page.'
+                  value: '/user/{id}'
+                302Failure:
+                  description: 'Failed edition. Redirect to profile page.'
+                  value: '/user/{id}'
+
+# M03: Questions
+
+  /api/question:
+
+    get:
+      operationId: R301
+      summary: 'R301: Search questions'
+      description: 'Searches for questions and returns the results as JSON. Access: PUB, USR, OWN, ADM'
+      tags:
+        - 'M03: Questions'
+      
+      parameters:
+        - in: query
+          name: text
+          description: String to use for full-text search
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: after
+          description: Start date of the search interval
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: before
+          description: End date of the search interval
+          schema:
+            type: string
+          required: false
+
+      responses:
+        '200':
+          description: 'Success.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    content:
+                      type: string
+                    date:
+                      type: string
+                    file:
+                      type: string
+                    last_edited:
+                      type: string
+                    title:
+                      type: string
+                    user:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        username:
+                          type: string
+                        image:
+                          type: string
+                example:
+                  - id: 1
+                    content: I need to cook rice but I do not have water. How can I do it?
+                    date: 2023-11-06
+                    file: 
+                    last_edited:
+                    title:  Who can I cook rice without water?
+                    user:
+                      id: 1
+                      username: matildesimoes
+                      image: 
+
+    post:
+      operationId: R302
+      summary: 'R302: Post question'
+      description: 'Searches for questions and returns the results as JSON. Access: PUB, USR, OWN, ADM'
+      tags:
+        - 'M03: Questions'

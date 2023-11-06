@@ -252,6 +252,8 @@ paths:
 
 # M03: Questions
 
+# Search and Post Questions
+
   /api/question:
 
     get:
@@ -326,10 +328,188 @@ paths:
 
     post:
       operationId: R302
-      summary: 'R302: Post question'
-      description: 'Searches for questions and returns the results as JSON. Access: PUB, USR, OWN, ADM'
+      summary: 'R302: Post question action'
+      description: 'Processes question form submission. Access: USR, OWN, ADM'
       tags:
         - 'M03: Questions'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  format: string
+                file:
+                  type: string
+                  format: binary
+                title:
+                  type: string
+                  format: string
+                id_user:
+                  type: integer
+                  format: integer
+              required:
+                - content
+                - title
+                - id_user
+      
+      responses:
+       '302':
+         description: 'Redirect after processing the question submission.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful question submission. Redirect to question page.'
+                 value: '/question/{id}'
+               302Error:
+                 description: 'Failed question submission. Redirect to question page.'
+                 value: '/question'  
+
+# View Question
+
+  /api/question/{id}:
+
+    get:
+      operationId: R303
+      summary: 'R303: View question'
+      description: 'Shows a question. Access: PUB, USR, OWN, ADM'
+      tags:
+        - 'M03: Questions'
+      
+      parameters:
+        - in: query
+          name: id
+          description: Question id
+          schema:
+            type: string
+          required: false
+
+      responses:
+        '200':
+          description: 'Success.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    content:
+                      type: string
+                    date:
+                      type: string
+                    file:
+                      type: string
+                    last_edited:
+                      type: string
+                    title:
+                      type: string
+                    user:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        username:
+                          type: string
+                        image:
+                          type: string
+                example:
+                  - id: 1
+                    content: 'I need to cook rice but I do not have water. How can I do it?'
+                    date: '2023-11-06'
+                    file: ''
+                    last_edited:
+                    title: 'How can I cook rice without water?'
+                    user:
+                      id: 1
+                      username: 'matildesimoes'
+                      image: ''
+                    
+# Delete Question
+
+  /api/question/delete:
+    post:
+      operationId: R304
+      summary: 'R304: Delete question action'
+      description: 'Processes question deletion. Access: OWN, ADM'
+      tags:
+        - 'M03: Questions'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: integer
+                required:
+                  - id
+
+      responses:
+       '302':
+         description: 'Redirect after processing the question deletion.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful question deletion. Redirect to questions page.'
+                 value: '/questions'
+               302Error:
+                 description: 'Failed question deletion. Redirect to question page.'
+                 value: '/question/{id}'  
+
+# Edit Question
+
+  /api/question/edit/:
+    post:
+        operationId: R305
+        summary: "R305: Edit question action"
+        description: "Processes editions on a question. Access: OWN"
+        tags:
+          - 'M03: Questions'
+
+        requestBody:
+          required: true
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: integer
+                  required:
+                    - id
+
+
+        responses:
+          '302':
+            description: "Redirect after processing the edition on the question."
+            headers:
+              Location:
+                schema:
+                  type: string
+                examples:
+                  302Success:
+                    description: 'Successful edition. Redirect to question page.'
+                    value: '/question/{id}'
+                  302Failure:
+                    description: 'Failed edition. Redirect to question page.'
+                    value: '/question/{id}'
 
 # Admin
 

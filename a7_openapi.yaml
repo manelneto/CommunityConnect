@@ -314,15 +314,15 @@ paths:
                           type: string
                 example:
                   - id: 1
-                    content: I need to cook rice but I do not have water. How can I do it?
-                    date: 2023-11-06
-                    file: 
+                    content: 'I need to cook rice but I do not have water. How can I do it?'
+                    date: '2023-11-06'
+                    file: ''
                     last_edited:
-                    title:  Who can I cook rice without water?
+                    title: 'How can I cook rice without water?'
                     user:
                       id: 1
-                      username: matildesimoes
-                      image: 
+                      username: 'matildesimoes'
+                      image: ''
 
     post:
       operationId: R302
@@ -433,10 +433,64 @@ paths:
 
 # Create Account 
 
-  /admin/user/:
+  /api/admin/user/:
+    get:
+      operationId: R504
+      summary: 'R504: Search users'
+      description: 'Searches for users and returns the results as JSON. Access: ADM'
+      tags:
+        - 'M03: Administration'
+      
+      parameters:
+        - in: query
+          name: username
+          description: User's username
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: email
+          description: User's email
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: register_date
+          description: User's register date
+          schema:
+            type: string
+          required: false
+
+      responses:
+        '200':
+          description: 'Success.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    username:
+                      type: string
+                    email:
+                      type: string
+                    register_date:
+                      type: string
+                    image:
+                      type: string
+                example:
+                  - id: 1
+                    username: 'matildesimoes'
+                    email: 'matildesimoes@gmail.com'
+                    register_date: '2023-02-01'
+                    image: ''
+
     post:
-        operationId: R504
-        summary: 'R504: Create Account Action'
+        operationId: R505
+        summary: 'R505: Create Account Action'
         description: 'Processes the creation of a new account. Access: ADM'
         tags:
           - 'M01: Administration'

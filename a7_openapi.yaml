@@ -192,3 +192,155 @@ paths:
                 302Failure:
                   description: 'Failure viewing profile. Redirect to foruns page.'
                   value: '/foruns'
+
+# Admin
+
+# View Admin Page
+
+  /admin:
+
+      get:
+        operationId: R501
+        summary: 'R501: View admin page'
+        description: 'Show admin page UI. Access: ADM'
+        tags:
+          - 'M05: Administration'
+
+        responses:
+          '200':
+            description: 'OK. Show the admin page UI.'
+          '403':
+            description: 'This action is unauthorized.'
+
+# View User Pages e Edit User Account
+
+  /admin/user/{id}:
+
+      get:
+        operationId: R502
+        summary: 'R502: View user profile'
+        description: 'Show an user profile. Access: ADM'
+        tags:
+          - 'M02: Administration'
+
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: integer
+            required: True
+
+        responses:
+          '200':
+            description: 'OK. Show User page.'
+          '302':
+            description: 'Redirect because id does not exist.'
+            headers:
+              Location:
+                schema:
+                  type: string
+                example:
+                  302Failure:
+                    description: 'Failure viewing profile. Redirect to Admin page.'
+                    value: '/admin'
+
+      post:
+        operationId: R503
+        summary: 'R503: Edit Account Action'
+        description: 'Processes the registration form submission. Access: ADM'
+        tags:
+          - 'M01: Administration'
+
+        requestBody:
+          required: true
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  password:
+                    type: string
+                    format: password
+                  confirm_password:
+                    type: string
+                    format: password
+                  profile_photo:
+                    type: string
+                    format: binary
+                required:
+                  - username
+                  - email
+                  - password
+                  - confirm_password
+
+        responses:
+          '302':
+            description: "Redirect after processing the edition on the user's profile."
+            headers:
+              Location:
+                schema:
+                  type: string
+                examples:
+                  302Success:
+                    description: 'Successful edition. Redirect to profile page.'
+                    value: '/user/{id}'
+                  302Failure:
+                    description: 'Failed edition. Redirect to profile page.'
+                    value: '/user/{id}'
+
+# Create Account 
+
+  /admin/user/:
+    post:
+        operationId: R504
+        summary: 'R504: Create Account Action'
+        description: 'Processes the creation of a new account. Access: ADM'
+        tags:
+          - 'M01: Administration'
+
+        requestBody:
+          required: true
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  password:
+                    type: string
+                    format: password
+                  confirm_password:
+                    type: string
+                    format: password
+                  profile_photo:
+                    type: string
+                    format: binary
+                required:
+                  - username
+                  - email
+                  - password
+                  - confirm_password
+
+        responses:
+          '302':
+            description: "Redirect after processing the creation of a new user profile."
+            headers:
+              Location:
+                schema:
+                  type: string
+                examples:
+                  302Success:
+                    description: 'Successful creation. Redirect to profile page.'
+                    value: '/user/{id}'
+                  302Failure:
+                    description: 'Failed edition. Redirect to profile page.'
+                    value: '/user/{id}'

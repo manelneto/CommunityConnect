@@ -454,8 +454,8 @@ paths:
                 id:
                   type: integer
                   format: integer
-                required:
-                  - id
+              required:
+                - id
 
       responses:
        '302':
@@ -492,8 +492,8 @@ paths:
                   id:
                     type: integer
                     format: integer
-                  required:
-                    - id
+                required:
+                  - id
 
 
         responses:
@@ -715,8 +715,8 @@ paths:
                 id:
                   type: integer
                   format: integer
-                required:
-                  - id
+              required:
+                - id
 
       responses:
        '302':
@@ -753,8 +753,8 @@ paths:
                   id:
                     type: integer
                     format: integer
-                  required:
-                    - id
+                required:
+                  - id
 
 
         responses:

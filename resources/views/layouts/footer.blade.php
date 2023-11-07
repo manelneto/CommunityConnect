@@ -1,7 +1,7 @@
 @section('footer')
 
 <footer class="main-footer">
-  <img class="footer-img" src="./images/logo-with-text.png" alt="community connect logo with text" />
+  <img class="footer-img" src="{{ asset('/storage/logo-with-text.png') }}" alt="community connect logo with text" />
   <ul class="footer-links-left">
     <li class="footer-title">Title 1</li>
     <li class="footer-link">

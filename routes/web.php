@@ -28,7 +28,8 @@ Route::redirect('/', '/login-cc');
 //});
 
 //* We can use view for static pages, and get if they require parameters
-Route::view('/login-cc', 'auth.login-cc');
+Route::view('/login-cc', 'auth.login-cc')->name('login');
+Route::view('/register-cc', 'auth.register-cc')->name('register');
 
 // Cards
 Route::controller(CardController::class)->group(function () {
@@ -58,6 +59,6 @@ Route::controller(ItemController::class)->group(function () {
 // });
 
 Route::controller(RegisterController::class)->group(function () {
-    Route::get('/register', 'showRegistrationForm')->name('register');
+    // Route::get('/register', 'showRegistrationForm')->name('register');
     Route::post('/register', 'register');
 });

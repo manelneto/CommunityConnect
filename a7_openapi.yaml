@@ -511,6 +511,267 @@ paths:
                     description: 'Failed edition. Redirect to question page.'
                     value: '/question/{id}'
 
+# M04: Answers
+
+# Search and Post Answers
+
+  /api/Answer:
+
+    get:
+      operationId: R401
+      summary: 'R401: Search answers'
+      description: 'Searches for answers and returns the results as JSON. Access: PUB, USR, OWN, ADM'
+      tags:
+        - 'M03: Answers'
+      
+      parameters:
+        - in: query
+          name: text
+          description: String to use for full-text search
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: after
+          description: Start date of the search interval
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: before
+          description: End date of the search interval
+          schema:
+            type: string
+          required: false
+
+      responses:
+        '200':
+          description: 'Success.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    content:
+                      type: string
+                    date:
+                      type: string
+                    file:
+                      type: string
+                    last_edited:
+                      type: string
+                    title:
+                      type: string
+                    user:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        username:
+                          type: string
+                        image:
+                          type: string
+                example:
+                  - id: 1
+                    content: 'I need to cook rice but I do not have water. How can I do it?'
+                    date: '2023-11-06'
+                    file: ''
+                    last_edited:
+                    title: 'How can I cook rice without water?'
+                    user:
+                      id: 1
+                      username: 'matildesimoes'
+                      image: ''
+
+    post:
+      operationId: R402
+      summary: 'R402: Post answers action'
+      description: 'Processes answers form submission. Access: USR, OWN, ADM'
+      tags:
+        - 'M04: Answers'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  format: string
+                file:
+                  type: string
+                  format: binary
+                title:
+                  type: string
+                  format: string
+                id_user:
+                  type: integer
+                  format: integer
+              required:
+                - content
+                - title
+                - id_user
+      
+      responses:
+       '302':
+         description: 'Redirect after processing the answer submission.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful answer submission. Redirect to answer page.'
+                 value: '/answer/{id}'
+               302Error:
+                 description: 'Failed answer submission. Redirect to answer page.'
+                 value: '/answer'  
+
+# View Answers
+
+  /api/answer/{id}:
+
+    get:
+      operationId: R403
+      summary: 'R403: View answer'
+      description: 'Shows a answer. Access: PUB, USR, OWN, ADM'
+      tags:
+        - 'M04: Answers'
+      
+      parameters:
+        - in: query
+          name: id
+          description: Answer id
+          schema:
+            type: string
+          required: false
+
+      responses:
+        '200':
+          description: 'Success.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    content:
+                      type: string
+                    date:
+                      type: string
+                    file:
+                      type: string
+                    last_edited:
+                      type: string
+                    title:
+                      type: string
+                    user:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        username:
+                          type: string
+                        image:
+                          type: string
+                example:
+                  - id: 1
+                    content: 'I need to cook rice but I do not have water. How can I do it?'
+                    date: '2023-11-06'
+                    file: ''
+                    last_edited:
+                    title: 'How can I cook rice without water?'
+                    user:
+                      id: 1
+                      username: 'matildesimoes'
+                      image: ''
+                    
+# Delete Question
+
+  /api/answer/delete:
+    post:
+      operationId: R404
+      summary: 'R404: Delete answer action'
+      description: 'Processes answer deletion. Access: OWN, ADM'
+      tags:
+        - 'M04: Answers'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: integer
+                required:
+                  - id
+
+      responses:
+       '302':
+         description: 'Redirect after processing the answer deletion.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful answer deletion. Redirect to answer page.'
+                 value: '/answer'
+               302Error:
+                 description: 'Failed answer deletion. Redirect to answer page.'
+                 value: '/answer/{id}'  
+
+# Edit Answer
+
+  /api/answer/edit/:
+    post:
+        operationId: R405
+        summary: "R405: Edit answer action"
+        description: "Processes editions on a answer. Access: OWN"
+        tags:
+          - 'M04: Answer'
+
+        requestBody:
+          required: true
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: integer
+                  required:
+                    - id
+
+
+        responses:
+          '302':
+            description: "Redirect after processing the edition on the answer."
+            headers:
+              Location:
+                schema:
+                  type: string
+                examples:
+                  302Success:
+                    description: 'Successful edition. Redirect to answer page.'
+                    value: '/answer/{id}'
+                  302Failure:
+                    description: 'Failed edition. Redirect to answer page.'
+                    value: '/answer/{id}'
+
 # Admin
 
 # View Admin Page

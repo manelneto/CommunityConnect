@@ -1,39 +1,44 @@
-@extends('layouts.app')
+@extends('layouts.app-cc')
+@include('layouts.header')
+@include('layouts.footer')
 
 @section('content')
-<form method="POST" action="{{ route('register') }}">
-    {{ csrf_field() }}
 
-    <label for="name">Name</label>
-    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
-    @if ($errors->has('name'))
-      <span class="error">
-          {{ $errors->first('name') }}
-      </span>
-    @endif
+  @yield('header')  
 
-    <label for="email">E-Mail Address</label>
-    <input id="email" type="email" name="email" value="{{ old('email') }}" required>
-    @if ($errors->has('email'))
-      <span class="error">
-          {{ $errors->first('email') }}
-      </span>
-    @endif
+  <main class="sign-page-main">
+    <div class="sign-page-main-content">
+      <div class="sign-page-left-content">
+        <h1 class="title-text">Join the Community</h1>
+        <h3 class="subtitle-text">Sign Up to Community Connect to ask <br> questions, answer people's questions, and
+          <br>
+          connect with others.
+        </h3>
+        <a class="go-to-sign-in" href="/login-page.php">Have an Account? Sign In</a>
+      </div>
+      <form class="sign-page-right-content" action="" method="POST">
+        <div class="form-group">
+          <label for="username">Username *</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password *</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirm password *</label>
+          <input type="password" id="confirm-password" name="confirm_password" required>
+        </div>
+        <small>Password must contain bla bla bla bla bla</small>
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  </main>
+  
+  @yield('footer')
 
-    <label for="password">Password</label>
-    <input id="password" type="password" name="password" required>
-    @if ($errors->has('password'))
-      <span class="error">
-          {{ $errors->first('password') }}
-      </span>
-    @endif
-
-    <label for="password-confirm">Confirm Password</label>
-    <input id="password-confirm" type="password" name="password_confirmation" required>
-
-    <button type="submit">
-      Register
-    </button>
-    <a class="button button-outline" href="{{ route('login') }}">Login</a>
-</form>
 @endsection

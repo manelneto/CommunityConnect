@@ -21,15 +21,16 @@ use App\Http\Controllers\Auth\RegisterController;
 
 // Home
 
-Route::redirect('/', '/login-cc');
+Route::redirect('/', '/login');
 
-// Route::get('/login-cc', function () {
-//      return view('auth.login-cc');
+// Route::get('/login', function () {
+//      return view('auth.login');
 //});
 
 //* We can use view for static pages, and get if they require parameters
-Route::view('/login-cc', 'auth.login-cc')->name('login');
-Route::view('/register-cc', 'auth.register-cc')->name('register');
+Route::view('/login', 'auth.login')->name('login');
+Route::view('/register', 'auth.register')->name('register');
+Route::view('/questions', 'pages.questions')->name('questions');
 
 // Cards
 Route::controller(CardController::class)->group(function () {
@@ -53,8 +54,8 @@ Route::controller(ItemController::class)->group(function () {
 
 // Authentication
 // Route::controller(LoginController::class)->group(function () {
-//     Route::get('/login-cc', 'showLoginForm')->name('login');
-//     Route::post('/login-cc', 'authenticate');
+//     Route::get('/login', 'showLoginForm')->name('login');
+//     Route::post('/login', 'authenticate');
 //    Route::get('/logout', 'logout')->name('logout');
 // });
 

@@ -1,37 +1,38 @@
-@extends('layouts.app')
+@extends('layouts.app-cc')
+@include('layouts.header')
+@include('layouts.footer')
 
 @section('content')
-<form method="POST" action="{{ route('login') }}">
-    {{ csrf_field() }}
 
-    <label for="email">E-mail</label>
-    <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
-    @if ($errors->has('email'))
-        <span class="error">
-          {{ $errors->first('email') }}
-        </span>
-    @endif
+  @yield('header')
 
-    <label for="password" >Password</label>
-    <input id="password" type="password" name="password" required>
-    @if ($errors->has('password'))
-        <span class="error">
-            {{ $errors->first('password') }}
-        </span>
-    @endif
+  <main class="sign-page-main">
+    <div class="sign-page-main-content sign-page-main-content-login">
+      <div class="sign-page-left-content">
+        <h1 class="title-text">Sign In</h1>
+        <h3 class="subtitle-text">Log In to Community Connect to ask <br> questions, answer people's questions, and
+          <br>
+          connect with others.
+        </h3>
+        <a class="go-to-sign-in" href="/register-page.php">Sign Up Here</a>
+      </div>
+      <form class="sign-page-right-content" action="" method="POST">
+        <div class="form-group">
+          <label for="username">Username or Email*</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password *</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <input type="checkbox" id="remember-me" name="remember-me">
+        <label for="remember-me">Remember Me</label>
+        <a href="#" class="forgot-password">Forgot Password?</a>
+        <button type="submit">Sign In</button>
+      </form>
+    </div>
+  </main>
 
-    <label>
-        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-    </label>
+  @yield('footer')
 
-    <button type="submit">
-        Login
-    </button>
-    <a class="button button-outline" href="{{ route('register') }}">Register</a>
-    @if (session('success'))
-        <p class="success">
-            {{ session('success') }}
-        </p>
-    @endif
-</form>
 @endsection

@@ -20,7 +20,17 @@ use App\Http\Controllers\Auth\RegisterController;
 */
 
 // Home
+
 Route::redirect('/', '/login');
+
+// Route::get('/login', function () {
+//      return view('auth.login');
+//});
+
+//* We can use view for static pages, and get if they require parameters
+Route::view('/login', 'auth.login')->name('login');
+Route::view('/register', 'auth.register')->name('register');
+Route::view('/questions', 'pages.questions')->name('questions');
 
 // Cards
 Route::controller(CardController::class)->group(function () {
@@ -43,13 +53,13 @@ Route::controller(ItemController::class)->group(function () {
 
 
 // Authentication
-Route::controller(LoginController::class)->group(function () {
-    Route::get('/login', 'showLoginForm')->name('login');
-    Route::post('/login', 'authenticate');
-    Route::get('/logout', 'logout')->name('logout');
-});
+// Route::controller(LoginController::class)->group(function () {
+//     Route::get('/login', 'showLoginForm')->name('login');
+//     Route::post('/login', 'authenticate');
+//    Route::get('/logout', 'logout')->name('logout');
+// });
 
 Route::controller(RegisterController::class)->group(function () {
-    Route::get('/register', 'showRegistrationForm')->name('register');
+    // Route::get('/register', 'showRegistrationForm')->name('register');
     Route::post('/register', 'register');
 });

@@ -11,10 +11,8 @@ class AnswerVote extends Model
     public $timestamps = false;
     protected $table = 'answer_vote';
 
-    // Composite primary keys have some limitations in laravel
     protected $primaryKey = ['id_answer', 'id_user'];
 
-    // Disable auto-increment as we are using a composite primary key
     public $incrementing = false;
 
     public function answer()

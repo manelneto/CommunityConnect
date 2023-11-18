@@ -20,4 +20,19 @@ class Answer extends Model
     {
         return $this->belongsTo(Question::class, 'id_question');
     }
+
+    public function votes()
+    {
+        return $this->hasMany(AnswerVote::class, 'id_answer');
+    }
+
+    public function likes()
+    {
+        return $this->votes()->where('likes', true);
+    }
+
+    public function dislikes()
+    {
+        return $this->votes()->where('likes', false);
+    }
 }

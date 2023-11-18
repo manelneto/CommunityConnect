@@ -3,7 +3,7 @@
         alt="User's profule picture" />
     <div class="content-right">
         <div class="question-details">
-            <a href="#" class="question-username">{{ $question->user->username }}</a>
+            <a href="../users/{{ $question->id_user }}" class="question-username">{{ $question->user->username }}</a>
             <span class="question-asked-date">Asked: {{ $question->date }}</span>
             <span class="question-community">In: {{ $question->community->name }}</span>
         </div>

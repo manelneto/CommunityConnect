@@ -86,7 +86,7 @@ class QuestionController extends Controller
             $question->title = $request->input('title');
             $question->content = $request->input('content');
             $question->save();
-            return redirect('questions/' . $question->id);
+            return redirect('questions/' . $id);
         }
         catch (ModelNotFoundException $e) {
             return "Question not found.";

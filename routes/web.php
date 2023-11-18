@@ -36,6 +36,7 @@ Route::get('/questions', [QuestionController::class, 'showMostLikedQuestions'])-
 Route::get('/questions/{id}', [QuestionController::class, 'show']);
 Route::get('/questions/{id}/edit', [QuestionController::class, 'edit']);
 Route::post('/questions/{id}', [QuestionController::class, 'update']);
+Route::post('/questions/{id}/delete', [QuestionController::class, 'destroy']);
 
 // Cards
 Route::controller(CardController::class)->group(function () {

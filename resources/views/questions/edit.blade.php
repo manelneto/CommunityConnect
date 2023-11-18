@@ -1,4 +1,4 @@
-<form class="question-container" method="post" action="../../questions/{{ $question->id }}">
+<form class="question-container" method="post">
     @csrf
     <img class="member-pfp question-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}"
          alt="User's profule picture" />
@@ -32,5 +32,6 @@
                 {{ $question->dislikes_count }}</span>
         </div>
     </div>
-    <button type="submit">Edit</button>
+    <button formaction="../../questions/{{ $question->id }}">Edit</button>
+    <button formaction="../../questions/{{ $question->id }}/delete">Delete</button>
 </form>

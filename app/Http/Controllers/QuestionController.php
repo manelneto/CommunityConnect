@@ -81,7 +81,7 @@ class QuestionController extends Controller
             $question->title = $request->input('title');
             $question->content = $request->input('content');
             $question->save();
-            return $this->show($id);
+            return redirect('questions/' . $question->id);
         }
         catch (ModelNotFoundException $e) {
             return "Question not found.";
@@ -91,8 +91,15 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Question $question)
+    public function destroy(int $id)
     {
-        //
+        try {
+            $question = Question::where('id', $id)->firstOrFail();
+            $question->delete();
+            return redirect('questions/');
+        }
+        catch (ModelNotFoundException $e) {
+            return "Question not found.";
+        }
     }
 }

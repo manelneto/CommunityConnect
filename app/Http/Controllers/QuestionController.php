@@ -20,11 +20,11 @@ class QuestionController extends Controller
     public function showMostLikedQuestions(Request $request)
     {
         // exact search
-        if ($request->has('search')) {
-            $searchTerm = $request->get('search');
+        if ($request->has('text')) {
+            $searchTerm = $request->get('text');
 
-            $questions = Question::where('title', 'LIKE', '%' . $searchTerm . '%')
-                ->orWhere('content', 'LIKE', '%' . $searchTerm . '%')
+            $questions = Question::where('title', 'ILIKE', '%' . $searchTerm . '%')
+                ->orWhere('content', 'ILIKE', '%' . $searchTerm . '%')
                 ->with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->orderBy('likes_count', 'desc')

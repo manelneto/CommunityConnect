@@ -14,7 +14,8 @@
             </div>
             <div class="mid-header">
                 <form action="{{ url('/questions') }}" class="main-search" method="GET">
-                    <input type="text" name="search" class="live-search" placeholder="Search" />
+                    <input type="text" name="text" class="live-search" placeholder="{{ request('text', 'Search') }}"
+                        value="{{ request('text') }}" />
                     <button type="submit" class="main-search-button">
                         <img src="{{ asset('storage/icons8-search-50.png') }}" alt="search icon" />
                     </button>

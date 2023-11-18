@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -39,10 +40,12 @@ class UserController extends Controller
     public function show(int $id)
     {
         try {
-            $questions = Question::with(['user', 'likes', 'dislikes'])->where('id_user', $id)->get();
+            $questions = Question::with(['user', 'community', 'likes', 'dislikes'])->where('id_user', $id)->get();
+            $answers = Answer::with(['user', 'question', 'likes', 'dislikes'])->where('id_user', $id)->get();
             return view('users.show', [
                 'user' => User::where('id', $id)->firstOrFail(),
-                'questions' => $questions
+                'questions' => $questions,
+                'answers' => $answers
             ]);
         }
         catch (ModelNotFoundException $e) {

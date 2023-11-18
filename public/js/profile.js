@@ -9,3 +9,15 @@ if (questionsButton) {
         }
     });
 }
+
+const answersButton = document.querySelector('#answers-button');
+
+if (answersButton) {
+    answersButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        const myAnswers = document.querySelector('#my-answers');
+        if (myAnswers) {
+            myAnswers.toggleAttribute('hidden');
+        }
+    });
+}

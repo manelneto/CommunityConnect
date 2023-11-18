@@ -19,4 +19,26 @@ class User extends Model
         'blocked' => 'boolean',
         'register_date' => 'datetime',
     ];
+
+    public function username(){
+        return $this->username;
+    }
+    public function email(){
+        return $this->email;
+    }
+    public function password(){
+        return $this->password;
+    }
+    public function register_date(){
+        return $this->register_date;
+    }
+    public function administrator(){
+        return $this->administrator;
+    }
+    public function blocked(){
+        return $this->blocked;
+    }
+    public function image(){
+        return $this->image;
+    }
 }

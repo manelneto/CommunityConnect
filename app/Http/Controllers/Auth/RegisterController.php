@@ -35,15 +35,16 @@ class RegisterController extends Controller
         ]);
 
         User::create([
-            'username' => $request->name,
+            'username' => $request->username,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'image' => 'default.png'
         ]);
 
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('username', 'password');
         Auth::attempt($credentials);
         $request->session()->regenerate();
-        return redirect()->route('cards')
+        return redirect()->route('questions')
             ->withSuccess('You have successfully registered & logged in!');
     }
 }

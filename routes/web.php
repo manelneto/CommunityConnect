@@ -10,6 +10,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Models\Question;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,11 +35,23 @@ Route::redirect('/', '/login');
 Route::view('/login', 'auth.login')->name('login');
 Route::view('/register', 'auth.register')->name('register');
 
+/*
 Route::get('/questions', [QuestionController::class, 'showMostLikedQuestions'])->name('questions');
 Route::get('/questions/{id}', [QuestionController::class, 'show'])->name('answers');
 Route::get('/questions/{id}/edit', [QuestionController::class, 'edit']);
 Route::post('/questions/{id}', [QuestionController::class, 'update']);
-Route::post('/questions/{id}/delete', [QuestionController::class, 'destroy']);
+Route::post('/questions/{id}/delete', [QuestionController::class, 'destroy']); */
+
+Route::controller(QuestionController::class)->group(function () {
+    Route::get('/questions', 'showMostLikedQuestions')->name('questions');
+    Route::get('/questions/{id}', 'show')->name('answers');
+    Route::get('/questions/{id}/edit', 'edit');
+    Route::post('/questions/{id}', 'update');
+    Route::post('/questions/{id}/delete', 'destroy');
+    Route::post('/questions', 'postQuestion');
+});
+
+Route::view('/ask-question', 'pages.ask-question')->name('ask-question');
 
 
 //answers

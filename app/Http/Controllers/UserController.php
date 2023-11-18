@@ -71,6 +71,10 @@ class UserController extends Controller
             $user->username = $request->input('username');
             $user->email = $request->input('email');
             $user->save();
+            if (!password_verify($request->input('current-password'), $user->password) || $request->input('new-password') !== $request->input('confirm-password')) {
+                return redirect('users/' . $id);
+            }
+            $user->save();
             return redirect('users/' . $id);
         }
         catch (ModelNotFoundException $e) {

@@ -17,10 +17,13 @@
     </ul>
     <label for="email">Email: </label>
     <input id="email" type="email" name="email" value="{{ $user->email }}">
-    <label for="password">Password: </label>
-    <input id="password" type="password" name="password">
-    <label for="confirm-password">Confirm Password: </label>
-    <input id="confirm-password" type="password" name="confirm-password">
+    <button id="edit-password">Edit Password</button>
+    <label class="edit-password" for="current-password" hidden>Current Password:</label>
+    <input class="edit-password" id="current-password" type="password" name="current-password" hidden>
+    <label class="edit-password" for="new-password" hidden>New Password:</label>
+    <input class="edit-password" id="new-password" type="password" name="new-password" hidden>
+    <label class="edit-password" for="confirm-password" hidden>Confirm Password:</label>
+    <input class="edit-password" id="confirm-password" type="password" name="confirm-password" hidden>
     <button formaction="../../users/{{ $user->id }}">Edit</button>
     <button formaction="../../users/{{ $user->id }}/delete">Delete</button>
 </form>

@@ -20,4 +20,19 @@ class Question extends Model
     {
         return $this->belongsTo(Community::class, 'id_community');
     }
+
+    public function votes()
+    {
+        return $this->hasMany(QuestionVote::class, 'id_question');
+    }
+
+    public function likes()
+    {
+        return $this->votes()->where('likes', true);
+    }
+
+    public function dislikes()
+    {
+        return $this->votes()->where('likes', false);
+    }
 }

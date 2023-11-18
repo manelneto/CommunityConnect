@@ -19,7 +19,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         if (Auth::check()) {
-            return redirect('/cards');
+            return redirect('/questions');
         } else {
             return view('auth.login');
         }
@@ -31,19 +31,21 @@ class LoginController extends Controller
     public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'username_or_email' => ['required'],
             'password' => ['required'],
         ]);
  
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
+        $field = filter_var($credentials['username_or_email'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        if (Auth::attempt([$field => $credentials['username_or_email'], 'password' => $credentials['password']], $request->filled('remember'))) {
             $request->session()->regenerate();
- 
-            return redirect()->intended('/cards');
+
+            return redirect()->intended('/questions');
         }
  
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+            'username_or_email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('username_or_email');
     }
 
     /**

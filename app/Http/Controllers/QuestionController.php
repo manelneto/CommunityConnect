@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Answer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
@@ -47,8 +48,12 @@ class QuestionController extends Controller
     public function show(int $id)
     {
         try {
+
+            $answers = Answer::with(['user', 'likes', 'dislikes'])->where('id_question', $id)
+            ->get();
             return view('questions.show', [
-                'question' => Question::where('id', $id)->firstOrFail()
+                'question' => Question::where('id', $id)->firstOrFail(), 
+                'answers' => $answers
             ]);
         }
         catch (ModelNotFoundException $e) {

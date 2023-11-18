@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CardController;
@@ -44,6 +45,12 @@ Route::post('/questions/{id}/delete', [QuestionController::class, 'destroy']);
 //answers
 Route::post('/answers/{id}', [AnswerController::class, 'update']);
 Route::post('/answers/{id}/delete', [AnswerController::class, 'destroy']);
+
+// users
+Route::get('/users/{id}', [UserController::class, 'show']);
+Route::get('/users/{id}/edit', [UserController::class, 'edit']);
+Route::post('/users/{id}', [UserController::class, 'update']);
+Route::post('/users/{id}/delete', [UserController::class, 'destroy']);
 
 
 // API

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CardController;
@@ -30,7 +31,7 @@ Route::redirect('/', '/login');
 //* We can use view for static pages, and get if they require parameters
 Route::view('/login', 'auth.login')->name('login');
 Route::view('/register', 'auth.register')->name('register');
-Route::view('/questions', 'pages.questions')->name('questions');
+Route::get('/questions', [QuestionController::class, 'index'])->name('questions');
 
 // Cards
 Route::controller(CardController::class)->group(function () {

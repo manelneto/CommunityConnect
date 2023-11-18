@@ -17,7 +17,7 @@ class QuestionController extends Controller
 
     public function showMostLikedQuestions()
     {
-        $allQuestions = Question::withCount(['likes', 'dislikes'])->orderBy('likes_count', 'desc')->get();
+        $allQuestions = Question::withCount(['likes', 'dislikes', 'answers'])->orderBy('likes_count', 'desc')->get();
         return view('pages.questions', ['questions' => $allQuestions]);
     }
 

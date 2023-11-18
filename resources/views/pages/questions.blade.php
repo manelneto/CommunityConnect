@@ -2,7 +2,6 @@
 @include('layouts.header')
 @include('layouts.footer')
 @include('layouts.main-navigation-list')
-@include('layouts.question')
 
 @section('content')
     <!-- <script src="./script.js"></script> -->
@@ -29,9 +28,8 @@
 
             <section class="main-info">
 
-                <!-- @yield('question') -->
                 @foreach ($questions as $question)
-                    <div>{{ $question->content }}</div>
+                    @include('partials.question', ['question' => $question])
                 @endforeach
 
             </section>

@@ -12,7 +12,15 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $allQuestions = Question::all();
+        //
+    }
+
+    public function showMostLikedQuestions()
+    {
+        $allQuestions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
+            ->withCount(['likes', 'dislikes', 'answers'])
+            ->orderBy('likes_count', 'desc')
+            ->get();
         return view('pages.questions', ['questions' => $allQuestions]);
     }
 

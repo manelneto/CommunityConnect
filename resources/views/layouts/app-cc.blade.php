@@ -16,10 +16,11 @@
     <link href="{{ asset('css/login-page.css') }}" rel="stylesheet">
     <link href="{{ asset('css/register-page.css') }}" rel="stylesheet">
     <link href="{{ asset('css/questions-listing.css') }}" rel="stylesheet">
-</head>
 
-<!-- JavaScript -->
-<script src="{{ asset('js/side-bar-responsive.js') }}"></script>
+    <!-- JavaScript -->
+    <script src="{{ asset('js/side-bar-responsive.js') }}"></script>
+    <script src="{{ asset('js/password.js') }}"></script>
+</head>
 
 <body>
     @yield('content')

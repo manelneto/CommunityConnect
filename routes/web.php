@@ -31,7 +31,11 @@ Route::redirect('/', '/login');
 //* We can use view for static pages, and get if they require parameters
 Route::view('/login', 'auth.login')->name('login');
 Route::view('/register', 'auth.register')->name('register');
+
 Route::get('/questions', [QuestionController::class, 'showMostLikedQuestions'])->name('questions');
+Route::get('/questions/{id}', [QuestionController::class, 'show']);
+Route::get('/questions/{id}/edit', [QuestionController::class, 'edit']);
+Route::post('/questions/{id}', [QuestionController::class, 'update']);
 
 // Cards
 Route::controller(CardController::class)->group(function () {

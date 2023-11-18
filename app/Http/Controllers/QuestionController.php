@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -43,25 +44,48 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Question $question)
+    public function show(int $id)
     {
-        //
+        try {
+            return view('questions.show', [
+                'question' => Question::where('id', $id)->firstOrFail()
+            ]);
+        }
+        catch (ModelNotFoundException $e) {
+            return "Question not found.";
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Question $question)
+    public function edit(int $id)
     {
-        //
+        try {
+            return view('questions.edit', [
+                'question' => Question::where('id', $id)->firstOrFail()
+            ]);
+        }
+        catch (ModelNotFoundException $e) {
+            return "Question not found.";
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Question $question)
+    public function update(Request $request, int $id)
     {
-        //
+        try {
+            $question = Question::where('id', $id)->firstOrFail();
+            $question->title = $request->input('title');
+            $question->content = $request->input('content');
+            $question->save();
+            return $this->show($id);
+        }
+        catch (ModelNotFoundException $e) {
+            return "Question not found.";
+        }
     }
 
     /**

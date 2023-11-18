@@ -17,13 +17,27 @@ class QuestionController extends Controller
         //
     }
 
-    public function showMostLikedQuestions()
+    public function showMostLikedQuestions(Request $request)
     {
-        $allQuestions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
-            ->withCount(['likes', 'dislikes', 'answers'])
-            ->orderBy('likes_count', 'desc')
-            ->get();
-        return view('pages.questions', ['questions' => $allQuestions]);
+
+        if ($request->has('search')) {
+            $searchTerm = $request->get('search');
+
+            $questions = Question::where('title', 'LIKE', '%' . $searchTerm . '%')
+                ->orWhere('content', 'LIKE', '%' . $searchTerm . '%')
+                ->with(['user', 'community', 'likes', 'dislikes', 'answers'])
+                ->withCount(['likes', 'dislikes', 'answers'])
+                ->orderBy('likes_count', 'desc')
+                ->get();
+        } else {
+
+            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
+                ->withCount(['likes', 'dislikes', 'answers'])
+                ->orderBy('likes_count', 'desc')
+                ->get();
+        }
+
+        return view('pages.questions', ['questions' => $questions]);
     }
 
     /**
@@ -50,13 +64,12 @@ class QuestionController extends Controller
         try {
 
             $answers = Answer::with(['user', 'likes', 'dislikes'])->where('id_question', $id)
-            ->get();
+                ->get();
             return view('questions.show', [
-                'question' => Question::where('id', $id)->firstOrFail(), 
+                'question' => Question::where('id', $id)->firstOrFail(),
                 'answers' => $answers
             ]);
-        }
-        catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return "Question not found.";
         }
     }
@@ -70,8 +83,7 @@ class QuestionController extends Controller
             return view('questions.edit', [
                 'question' => Question::where('id', $id)->firstOrFail()
             ]);
-        }
-        catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return "Question not found.";
         }
     }
@@ -87,8 +99,7 @@ class QuestionController extends Controller
             $question->content = $request->input('content');
             $question->save();
             return redirect('questions/' . $question->id);
-        }
-        catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return "Question not found.";
         }
     }
@@ -102,8 +113,7 @@ class QuestionController extends Controller
             $question = Question::where('id', $id)->firstOrFail();
             $question->delete();
             return redirect('questions/');
-        }
-        catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return "Question not found.";
         }
     }

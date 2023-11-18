@@ -13,6 +13,10 @@
   margin-top: 20px;
 }
 
+.question-title a {
+  color: var(--dark-blue);
+}
+
 .question-description {
   color: #abacb1;
 }

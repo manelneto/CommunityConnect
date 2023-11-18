@@ -1,3 +1,43 @@
+.questions-info {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #c6c6c6;
+  padding: 10px 30px;
+}
+
+.questions-info .filters-button {
+  background-color: var(--blue);
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  font-size: 20px;
+}
+
+.questions-info .filters-button:hover {
+  background-color: var(--hover-red);
+  transition: 0.2s;
+}
+
+.questions-info .filters-button svg {
+  margin-right: 5px;
+}
+
+.showing-text {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.questions-info .questions-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.questions-number {
+  font-size: 1.4em;
+}
+
 .question-username {
   color: var(--blue);
   margin-right: 15px;

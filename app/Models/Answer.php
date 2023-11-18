@@ -9,7 +9,7 @@ class Answer extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    private $table = 'answer';
+    protected $table = 'answer';
 
     public function user()
     {

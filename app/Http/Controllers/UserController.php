@@ -12,16 +12,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('auth.users', ['users' => $users]);
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($list_of_user_data)
     {
-        
+
     }
 
     /**

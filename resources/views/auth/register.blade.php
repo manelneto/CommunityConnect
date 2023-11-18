@@ -17,6 +17,7 @@
         <a class="go-to-sign-in" href="/login-page.php">Have an Account? Sign In</a>
       </div>
       <form class="sign-page-right-content" action="" method="POST">
+        @csrf
         <div class="form-group">
           <label for="username">Username *</label>
           <input type="text" id="username" name="username" required>

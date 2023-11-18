@@ -14,7 +14,7 @@
           <br>
           connect with others.
         </h3>
-        <a class="go-to-sign-in" href="/register-page.php">Sign Up Here</a>
+        <a class="go-to-sign-in" href="/register">Sign Up Here</a>
       </div>
       <form class="sign-page-right-content" action="" method="POST">
         <div class="form-group">

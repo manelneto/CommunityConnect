@@ -20,25 +20,16 @@ class User extends Model
         'register_date' => 'datetime',
     ];
 
-    public function username(){
-        return $this->username;
+    public static function create(array $attributes = []){
+        $user = new User();
+
+        $user->username = $attributes['username'];
+        $user->email = $attributes['email'];
+        $user->password = $attributes['password'];
+        $user->image = 'default.png' ; //to be changed
+
+        $user->save();
+        return $user;
     }
-    public function email(){
-        return $this->email;
-    }
-    public function password(){
-        return $this->password;
-    }
-    public function register_date(){
-        return $this->register_date;
-    }
-    public function administrator(){
-        return $this->administrator;
-    }
-    public function blocked(){
-        return $this->blocked;
-    }
-    public function image(){
-        return $this->image;
-    }
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AnswerController extends Controller
 {
@@ -51,5 +52,23 @@ class AnswerController extends Controller
         catch (ModelNotFoundException $e) {
             return "Answer not found.";
         }
+    }
+
+    public function postAnswer(Request $request){
+
+        $request->validate([
+            'content' => 'required|string|max:1000',
+            'id_question' => 'required|integer',
+            'id_user' => 'required|integer'
+        ]);
+
+        $answer = new Answer();
+        $answer->id_question = $request->id_question;
+        $answer->id_user = $request->id_user;
+        $answer->content = $request->content;
+
+        $answer->save();
+        
+        return redirect('questions/' . $answer->id_question);
     }
 }

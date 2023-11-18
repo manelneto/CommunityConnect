@@ -3,9 +3,9 @@
         alt="User's profule picture" />
     <div class="content-right">
         <div class="question-details">
-            <a href="#" class="question-username">{{ $question->id_user }}</a>
+            <a href="#" class="question-username">{{ $question->user->username }}</a>
             <span class="question-asked-date">Asked: {{ $question->date }}</span>
-            <span class="question-community">In: {{ $question->id_community }}</span>
+            <span class="question-community">In: {{ $question->community->name }}</span>
         </div>
         <h2 class="question-title">{{ $question->title }}</h2>
         <p class="question-description">{{ $question->content }}</p>

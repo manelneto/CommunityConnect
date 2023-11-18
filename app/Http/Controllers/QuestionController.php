@@ -19,7 +19,7 @@ class QuestionController extends Controller
 
     public function showMostLikedQuestions(Request $request)
     {
-
+        // exact search
         if ($request->has('search')) {
             $searchTerm = $request->get('search');
 

@@ -1,0 +1,70 @@
+.question-username {
+  color: var(--blue);
+  margin-right: 15px;
+}
+
+.question-description,
+.answers-details {
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+.question-title {
+  margin-top: 20px;
+}
+
+.question-description {
+  color: #abacb1;
+}
+
+.question-asked-date,
+.question-community {
+  color: #abacb1;
+  font-size: 14px;
+}
+
+.question-asked-date {
+  margin-right: 15px;
+}
+
+.question-container {
+  display: flex;
+  align-items: start;
+}
+
+.question-member-pfp {
+  margin-right: 20px; /* Space between the image and the content on the right */
+}
+
+.content-right {
+  flex: 1;
+}
+
+.question-container {
+  margin: 35px 50px;
+}
+
+.answers-details {
+  background-color: #f0f0f0;
+  padding: 10px 40px;
+  font-size: 14px;
+}
+
+.question-answer-btn {
+  background-color: white;
+  padding: 5px 10px;
+  color: #abacb1;
+  border: 1px solid #c6c6c6;
+}
+
+.question-answer-btn svg {
+  margin-right: 5px;
+}
+
+.answers-details span {
+  margin-left: 5px;
+}
+
+.question-upvotes {
+  color: var(--blue);
+}

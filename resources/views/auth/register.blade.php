@@ -16,7 +16,8 @@
         </h3>
         <a class="go-to-sign-in" href="/login-page.php">Have an Account? Sign In</a>
       </div>
-      <form class="sign-page-right-content" action="" method="POST">
+      <form class="sign-page-right-content" action="{{ route('register') }}" method="POST">
+        @csrf
         <div class="form-group">
           <label for="username">Username *</label>
           <input type="text" id="username" name="username" required>
@@ -30,8 +31,8 @@
           <input type="password" id="password" name="password" required>
         </div>
         <div class="form-group">
-          <label for="confirm-password">Confirm password *</label>
-          <input type="password" id="confirm-password" name="confirm_password" required>
+          <label for="password_confirmation">Confirm password *</label>
+          <input type="password" id="password_confirmation" name="password_confirmation" required>
         </div>
         <small>Password must contain bla bla bla bla bla</small>
         <button type="submit">Sign Up</button>

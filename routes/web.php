@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CardController;
@@ -30,13 +32,17 @@ Route::redirect('/', '/login');
 //* We can use view for static pages, and get if they require parameters
 Route::view('/login', 'auth.login')->name('login');
 Route::view('/register', 'auth.register')->name('register');
-Route::view('/questions', 'pages.questions')->name('questions');
 
-// Cards
-Route::controller(CardController::class)->group(function () {
-    Route::get('/cards', 'list')->name('cards');
-    Route::get('/cards/{id}', 'show');
-});
+Route::get('/questions', [QuestionController::class, 'showMostLikedQuestions'])->name('questions');
+Route::get('/questions/{id}', [QuestionController::class, 'show'])->name('answers');
+Route::get('/questions/{id}/edit', [QuestionController::class, 'edit']);
+Route::post('/questions/{id}', [QuestionController::class, 'update']);
+Route::post('/questions/{id}/delete', [QuestionController::class, 'destroy']);
+
+
+//answers
+Route::post('/answers/{id}', [AnswerController::class, 'update']);
+Route::post('/answers/{id}/delete', [AnswerController::class, 'destroy']);
 
 
 // API

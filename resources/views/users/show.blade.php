@@ -15,6 +15,11 @@
         <li>Questions</li>
         <li>Answers</li>
     </ul>
+    <section id="my-questions">
+        @foreach ($questions as $question)
+            @include('partials.question', ['question' => $question])
+        @endforeach
+    </section>
 </main>
 
 @yield('footer')

@@ -20,6 +20,11 @@
             @include('partials.question', ['question' => $question])
         @endforeach
     </section>
+    <section id="my-answers">
+        @foreach ($answers as $answer)
+            @include('partials.answer', ['answer' => $answer])
+        @endforeach
+    </section>
 </main>
 
 @yield('footer')

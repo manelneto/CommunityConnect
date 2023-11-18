@@ -4,7 +4,7 @@
         alt="User's profule picture" />
     <div class="content-right">
         <div class="answer-details">
-            <a href="#" class="answer-username">{{ $answer->user->username }}</a>
+            <a href="../users/{{ $answer->id_user }}" class="answer-username">{{ $answer->user->username }}</a>
             <span class="answer-asked-date">Asked: {{ $answer->date }}</span>
         </div>
         <p class="answer-description">{{ $answer->content }}</p>

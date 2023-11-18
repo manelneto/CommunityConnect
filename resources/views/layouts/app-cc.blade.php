@@ -18,6 +18,7 @@
         <link href="{{ asset('css/questions-listing.css') }}" rel="stylesheet"> 
 
         <script src="{{ asset('js/password.js') }} " defer></script>
+        <script src="{{ asset('js/profile.js') }} " defer></script>
     </head>
     <body>
         @yield('content')

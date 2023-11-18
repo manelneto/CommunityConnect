@@ -12,10 +12,10 @@
         alt="User's profile picture" />
     <ul>
         <li>About</li>
-        <li>Questions</li>
+        <li id="questions-button">Questions</li>
         <li>Answers</li>
     </ul>
-    <section id="my-questions">
+    <section id="my-questions" hidden>
         @foreach ($questions as $question)
             @include('partials.question', ['question' => $question])
         @endforeach

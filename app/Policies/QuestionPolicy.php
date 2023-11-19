@@ -21,11 +21,6 @@ class QuestionPolicy {
         return ($user->id == Auth::user()->id) && ($question->id_user == $user->id || Auth::user()->administrator);
     }
 
-    /*public function search() 
-    {
-        return Auth::check();
-    }*/
-
     public function update(User $user, Question $question) {
         return ($user->id == Auth::user()->id) && ($question->id_user == $user->id || Auth::user()->administrator);
     }

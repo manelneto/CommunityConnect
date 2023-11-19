@@ -12,10 +12,10 @@ class AnswerController extends Controller
      */
     public function edit(int $id)
     {
+        $answer = Answer::findOrFail($id);
+        $this->authorize('edit', $answer);
         try {
-            return view('answer.edit', [
-                'answer' => Answer::where('id', $id)->firstOrFail()
-            ]);
+            return view('answer.edit', ['answer' => $asnwer]);
         }
         catch (ModelNotFoundException $e) {
             return "Answer not found.";
@@ -27,8 +27,9 @@ class AnswerController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        $answer = Answer::findOrFail($id);
+        $this->authorize('update', $answer);
         try {
-            $answer = Answer::where('id', $id)->firstOrFail();
             $answer->content = $request->input('content');
             $answer->save();
             return redirect('questions/' . $answer->id_question);
@@ -43,8 +44,9 @@ class AnswerController extends Controller
      */
     public function destroy(int $id)
     {
+        $answer = Answer::findOrFail($id);
+        $this->authorize('destroy', $answer);
         try {
-            $answer = Answer::where('id', $id)->firstOrFail();
             $answer->delete();
             return redirect('questions/' . $answer->id_question);
         }

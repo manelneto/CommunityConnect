@@ -19,16 +19,28 @@ class QuestionController extends Controller
 
     public function showMostLikedQuestions(Request $request)
     {
-        // exact search
-        if ($request->has('text')) {
+        if ($request->has('text') && $request->get('text') != '') {
             $searchTerm = $request->get('text');
 
-            $questions = Question::where('title', 'ILIKE', '%' . $searchTerm . '%')
-                ->orWhere('content', 'ILIKE', '%' . $searchTerm . '%')
-                ->with(['user', 'community', 'likes', 'dislikes', 'answers'])
+            // check for exact match (enclosed in quotes)
+            if (preg_match('/^".+"$/', $searchTerm)) {
+                $searchTerm = trim($searchTerm, '"');
+
+                $questions = Question::where('title', 'ILIKE', '%' . $searchTerm . '%')
+                    ->orWhere('content', 'ILIKE', '%' . $searchTerm . '%');
+
+            } else {
+                // perform full text search
+                $formattedTerm = str_replace(' ', ' | ', $searchTerm);
+
+                $questions = Question::whereRaw("tsvectors @@ to_tsquery('english', ?)", [$formattedTerm]);
+            }
+
+            $questions = $questions->with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->orderBy('likes_count', 'desc')
                 ->get();
+
         } else {
 
             $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])

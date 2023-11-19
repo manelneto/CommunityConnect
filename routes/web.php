@@ -54,7 +54,6 @@ Route::controller(QuestionController::class)->group(function () {
 
 Route::view('/ask-question', 'pages.ask-question')->name('ask-question');
 
-
 // answers
 Route::post('/answers/{id}', [AnswerController::class, 'update']);
 Route::post('/answers/{id}/delete', [AnswerController::class, 'destroy']);
@@ -68,17 +67,7 @@ Route::post('/users/{id}/delete', [UserController::class, 'destroy']);
 
 
 // API
-Route::controller(CardController::class)->group(function () {
-    Route::put('/api/cards', 'create');
-    Route::delete('/api/cards/{card_id}', 'delete');
-});
-
-Route::controller(ItemController::class)->group(function () {
-    Route::put('/api/cards/{card_id}', 'create');
-    Route::post('/api/item/{id}', 'update');
-    Route::delete('/api/item/{id}', 'delete');
-});
-
+Route::get('api/questions', [QuestionController::class, 'filterQuestions']);
 
 // Authentication
 // Route::controller(LoginController::class)->group(function () {

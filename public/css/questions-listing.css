@@ -38,6 +38,14 @@
   font-size: 1.4em;
 }
 
+.questions-filters {
+  height: 200px;
+  background-color: var(--light-gray);
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 1px solid #c6c6c6;
+}
+
 .question-username {
   color: var(--blue);
   margin-right: 15px;

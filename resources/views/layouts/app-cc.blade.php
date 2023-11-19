@@ -21,6 +21,7 @@
     <script src="{{ asset('js/side-bar-responsive.js') }}"></script>
     <script src="{{ asset('js/password.js') }}"></script>
     <script src="{{ asset('js/profile.js') }} " defer></script>
+    <script src="{{ asset('js/questions-filters.js') }} " defer></script>
 </head>
 
 <body>

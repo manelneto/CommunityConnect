@@ -42,6 +42,39 @@
                                 </g>
                             </svg>Filter</button>
                     </div>
+                    <div class="questions-filters">
+                        <form action="#" method="POST">
+                            <fieldset>
+                                <legend>Filter by</legend>
+                                <label for="no-answers">
+                                    <input type="checkbox" id="no-answers" name="filter" value="no-answers">
+                                    No answers
+                                </label>
+                                <label for="no-accepted-answer">
+                                    <input type="checkbox" id="no-accepted-answer" name="filter"
+                                        value="no-accepted-answer">
+                                    No accepted answer
+                                </label>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Sort by</legend>
+                                <label for="most-popular">
+                                    <input type="radio" id="most-popular" name="sort" value="most-popular" checked>
+                                    Most Popular
+                                </label>
+                                <label for="newest">
+                                    <input type="radio" id="newest" name="sort" value="newest" checked>
+                                    Newest
+                                </label>
+                            </fieldset>
+
+                            <div class="buttons">
+                                <button type="submit" class="apply-button">Apply</button>
+                                <button type="button" class="cancel-button" onclick="closeModal()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 @foreach ($questions as $question)

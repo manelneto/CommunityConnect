@@ -79,6 +79,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $this->authorize('edit', $user);
+
         try {
             return view('users.edit', ['user' => $user]);
         }
@@ -94,13 +95,32 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $this->authorize('update', $user);
+
+        if ($request->input('username') !== $user->username){
+            $request->validate([
+                'username' => 'required|string|max:20|unique:users'
+            ]);
+        }
+        if ($request->input('email') !== $user->email){
+            $request->validate([
+                'email' => 'required|email|max:250|unique:users'
+            ]);
+        }
+        if ($request->input('password') !== null){
+            $request->validate([
+                'current-password' => 'required|min:8',
+                'password' => 'required|min:8|confirmed'
+            ]);
+        }
+
         try {
             $user->username = $request->input('username');
             $user->email = $request->input('email');
             $user->save();
-            if (!password_verify($request->input('current-password'), $user->password) || $request->input('new-password') !== $request->input('confirm-password')) {
-                return redirect('users/' . $id);
+            if (!password_verify($request->input('current-password'), $user->password) && $request->input('current-password') !== null) {
+                return redirect('users/' . $id . '/edit')->withErrors(['current-password' => 'Current password is incorrect.']);
             }
+            $user->password = $request->input('password') !== NULL ? Hash::make($request->input('password')) : $user->password;
             $user->save();
             return redirect('users/' . $id);
         }

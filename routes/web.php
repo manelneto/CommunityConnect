@@ -10,7 +10,6 @@ use App\Http\Controllers\ItemController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\UserController;
 use App\Models\Question;
 
 /*

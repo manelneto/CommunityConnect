@@ -374,7 +374,7 @@ paths:
 
 # View Question
 
-  /api/question/{id}:
+  /question/{id}:
 
     get:
       operationId: R303
@@ -436,7 +436,7 @@ paths:
                     
 # Delete Question
 
-  /api/question/delete:
+  /question/{id}/delete:
     post:
       operationId: R304
       summary: 'R304: Delete question action'
@@ -474,7 +474,7 @@ paths:
 
 # Edit Question
 
-  /api/question/edit/:
+  /question/{id}/edit/:
     post:
         operationId: R305
         summary: "R305: Edit question action"
@@ -515,7 +515,7 @@ paths:
 
 # Search and Post Answers
 
-  /api/Answer:
+  /Answer:
 
     get:
       operationId: R401
@@ -874,7 +874,7 @@ paths:
 
 # Create Account 
 
-  /api/admin/user/:
+  /admin/user/:
     get:
       operationId: R504
       summary: 'R504: Search users'

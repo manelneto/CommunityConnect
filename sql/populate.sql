@@ -1,6 +1,6 @@
 SET search_path TO lbaw23114;
 
-insert into users (username, email, password, register_date, administrator, blocked, image) values ('sforty0', 'tgypson0@google.de', '$2a$04$36Nf1MOnHC9DeTvNZcFYIOHlAyEFjE1ykWImHJY8CkJ6tUu0BSin6', '2022-03-03', false, false, null);
+insert into users (username, email, password, register_date, administrator, blocked, image) values ('matildesimoes', 'matildesimoes@gmail.com', '$2y$12$2Px/gwl.xcijAyK2Hfj3ier4xPAHx2SYg1161sbT1SUsrdSfVy7OS', '2023-19-11', true, false, 'http://dummyimage.com/250x250.png/5fa2dd/ffffff');
 insert into users (username, email, password, register_date, administrator, blocked, image) values ('moneil1', 'tdriffill1@disqus.com', '$2a$04$pKYj1hTFUAPy/dk9b2FiEeJRhvgM7eXM3qu8bUu1RAfzkmI/ZY0zO', '2022-01-03', false, true, 'http://dummyimage.com/120x180.png/ff4444/ffffff');
 insert into users (username, email, password, register_date, administrator, blocked, image) values ('cburnapp2', 'sdivisek2@elegantthemes.com', '$2a$04$VVnpII1yGpyneWWfnEzzZ.QX4NTV895USJRZQDZHF566D1tgnJc.u', '2022-01-30', false, false, 'http://dummyimage.com/250x219.png/ff4444/ffffff');
 insert into users (username, email, password, register_date, administrator, blocked, image) values ('nfarrears3', 'dbroadberry3@flavors.me', '$2a$04$WR7Z3vKDT5.j4obgyt/.3.9xdVAkva6CvtAqOSueFJsi11VUnXpMu', '2022-02-11', false, true, 'http://dummyimage.com/170x239.png/5fa2dd/ffffff');

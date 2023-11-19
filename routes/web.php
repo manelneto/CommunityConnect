@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CardController;
@@ -37,7 +38,7 @@ Route::view('/register', 'auth.register')->name('register');
 
 /*
 Route::get('/questions', [QuestionController::class, 'showMostLikedQuestions'])->name('questions');
-Route::get('/questions/{id}', [QuestionController::class, 'show'])->name('answers');
+Route::get('/questions/{id}', [QuestionController::class, 'show']);
 Route::get('/questions/{id}/edit', [QuestionController::class, 'edit']);
 Route::post('/questions/{id}', [QuestionController::class, 'update']);
 Route::post('/questions/{id}/delete', [QuestionController::class, 'destroy']); */
@@ -54,9 +55,15 @@ Route::controller(QuestionController::class)->group(function () {
 Route::view('/ask-question', 'pages.ask-question')->name('ask-question');
 
 
-//answers
+// answers
 Route::post('/answers/{id}', [AnswerController::class, 'update']);
 Route::post('/answers/{id}/delete', [AnswerController::class, 'destroy']);
+
+// users
+Route::get('/users/{id}', [UserController::class, 'show']);
+Route::get('/users/{id}/edit', [UserController::class, 'edit']);
+Route::post('/users/{id}', [UserController::class, 'update']);
+Route::post('/users/{id}/delete', [UserController::class, 'destroy']);
 
 
 // API

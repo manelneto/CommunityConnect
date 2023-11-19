@@ -15,7 +15,7 @@ class AnswerController extends Controller {
         $answer = Answer::findOrFail($id);
         $this->authorize('edit', $answer);
         try {
-            return view('answer.edit', ['answer' => $asnwer]);
+            return view('answer.edit', ['answer' => $answer]);
         }
         catch (ModelNotFoundException $e) {
             return "Answer not found.";

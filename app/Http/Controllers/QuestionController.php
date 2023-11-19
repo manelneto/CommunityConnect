@@ -149,7 +149,7 @@ class QuestionController extends Controller
     public function postQuestion(Request $request){
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'content' => 'required|string|max:1000',
             'id_user' => 'required|integer',
             'id_community' => 'required|integer',
         ]);

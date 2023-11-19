@@ -58,6 +58,7 @@ Route::view('/ask-question', 'pages.ask-question')->name('ask-question');
 // answers
 Route::post('/answers/{id}', [AnswerController::class, 'update']);
 Route::post('/answers/{id}/delete', [AnswerController::class, 'destroy']);
+Route::post('/submit-answer', [AnswerController::class, 'postAnswer']);
 
 // users
 Route::get('/users/{id}', [UserController::class, 'show']);

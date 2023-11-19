@@ -39,11 +39,13 @@ class UserController extends Controller
      */
     public function show(int $id)
     {
+        $this->authorize('show', User::class);
         try {
+            $user = User::findOrFail($id);
             $questions = Question::with(['user', 'community', 'likes', 'dislikes'])->where('id_user', $id)->get();
             $answers = Answer::with(['user', 'question', 'likes', 'dislikes'])->where('id_user', $id)->get();
             return view('users.show', [
-                'user' => User::where('id', $id)->firstOrFail(),
+                'user' => $user,
                 'questions' => $questions,
                 'answers' => $answers
             ]);
@@ -58,10 +60,10 @@ class UserController extends Controller
      */
     public function edit(int $id)
     {
+        $user = User::findOrFail($id);
+        $this->authorize('edit', $user);
         try {
-            return view('users.edit', [
-                'user' => User::where('id', $id)->firstOrFail()
-            ]);
+            return view('users.edit', ['user' => $user]);
         }
         catch (ModelNotFoundException $e) {
             return "User not found.";
@@ -73,8 +75,9 @@ class UserController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        $user = User::findOrFail($id);
+        $this->authorize('update', $user);
         try {
-            $user = User::where('id', $id)->firstOrFail();
             $user->username = $request->input('username');
             $user->email = $request->input('email');
             $user->save();

@@ -50,7 +50,7 @@
 
             </section>
             <section class="right-bar">
-                <button class="ask-a-question-button">Ask a Question</button>
+                <button class="ask-a-question-button" onclick="window.location='{{ route('ask-question') }}'">Ask a Question</button>
                 <section class="right-bar-stats">
                     <div class="left-top-square">
                         <span class="square-text">Questions</span>

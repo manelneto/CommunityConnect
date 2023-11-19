@@ -15,7 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-
+        // $this->authorize('index', User::class);
+        $users = User::all();
+        return view('users.admin', ['users' => $users]);
     }
 
     /**
@@ -23,7 +25,7 @@ class UserController extends Controller
      */
     public function create($list_of_user_data)
     {
-
+        
     }
 
     /**
@@ -31,7 +33,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->username = $request->input('new-username');
+        $user->email = $request->input('email');
+        if ($request->input('password') !== $request->input('confirm-password')) {
+            return view('users.admin', ['users' => $users]);
+        }
+        $user->password = password_hash($request->input('password'), PASSWORD_DEFAULT);
+        $user->save();
+        $users = User::all();
+        return view('users.admin', ['users' => $users]);
     }
 
     /**

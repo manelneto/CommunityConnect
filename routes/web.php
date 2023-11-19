@@ -65,6 +65,9 @@ Route::get('/users/{id}/edit', [UserController::class, 'edit']);
 Route::post('/users/{id}', [UserController::class, 'update']);
 Route::post('/users/{id}/delete', [UserController::class, 'destroy']);
 
+// admin
+Route::get('/admin', [UserController::class, 'index']);
+Route::post('/users', [UserController::class, 'store']);
 
 // API
 Route::get('api/questions', [QuestionController::class, 'filterQuestions']);

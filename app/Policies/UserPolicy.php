@@ -16,10 +16,15 @@ class UserPolicy{
         return ($user->id == Auth::user()->id || Auth::user()->administrator);
     }
 
-    /*public function search() 
+    public function search() 
     {
-        return Auth::check();
-    }*/
+        return Auth::user()->administrator;
+    }
+
+    public function create() 
+    {
+        return Auth::user()->administrator;
+    }
 
     public function show() {
         return true;

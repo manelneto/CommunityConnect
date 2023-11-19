@@ -42,15 +42,49 @@
                                 </g>
                             </svg>Filter</button>
                     </div>
-                </div>
+                    <div class="questions-filters">
+                        <form action="#" method="post">
+                            <fieldset>
+                                <legend>Filter by</legend>
+                                <label for="after">After</label>
+                                <input id="after" type="date" name="after">
+                                <label for="before">Before</label>
+                                <input id="before" type="date" name="before">
+                                <!--label for="no-answers">
+                                    <input type="checkbox" id="no-answers" name="filter" value="no-answers">
+                                    No answers
+                                </label>
+                                <label for="no-accepted-answer">
+                                    <input type="checkbox" id="no-accepted-answer" name="filter"
+                                        value="no-accepted-answer">
+                                    No accepted answer
+                                </label-->
+                            </fieldset>
 
+                            <!--fieldset>
+                                <legend>Sort by</legend>
+                                <label for="most-popular">
+                                    <input type="radio" id="most-popular" name="sort" value="most-popular" checked>
+                                    Most Popular
+                                </label>
+                                <label for="newest">
+                                    <input type="radio" id="newest" name="sort" value="newest" checked>
+                                    Newest
+                                </label>
+                            </fieldset-->
+                            <button id="apply-button" type="submit">Apply</button>
+                        </form>
+                    </div>
+                </div>
+                <section id="questions">
                 @foreach ($questions as $question)
                     @include('partials.question', ['question' => $question])
                 @endforeach
+                </section>
 
             </section>
             <section class="right-bar">
-                <button class="ask-a-question-button">Ask a Question</button>
+                <button class="ask-a-question-button" onclick="window.location='{{ route('ask-question') }}'">Ask a Question</button>
                 <section class="right-bar-stats">
                     <div class="left-top-square">
                         <span class="square-text">Questions</span>

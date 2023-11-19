@@ -17,6 +17,19 @@ class QuestionController extends Controller
         //
     }
 
+    public function filterQuestions(Request $request) {
+        $after = $request->get('after');
+        $before = $request->get('before');
+
+        $questions = Question::where('date', '>=', $after, 'and')->where('date', '<=', $before);
+
+        $questions = $questions->with(['user', 'community', 'likes', 'dislikes', 'answers'])
+            ->withCount(['likes', 'dislikes', 'answers'])
+            ->orderBy('likes_count', 'desc')
+            ->get();
+        return response()->json($questions);
+    }
+
     public function showMostLikedQuestions(Request $request)
     {
         if ($request->has('text') && $request->get('text') != '') {
@@ -76,7 +89,6 @@ class QuestionController extends Controller
     {
         $this->authorize('show', Question::class);
         try {
-
             $answers = Answer::with(['user', 'likes', 'dislikes'])->where('id_question', $id)
                 ->get();
             return view('questions.show', [
@@ -132,5 +144,25 @@ class QuestionController extends Controller
         } catch (ModelNotFoundException $e) {
             return "Question not found.";
         }
+    }
+
+    public function postQuestion(Request $request){
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'id_user' => 'required|integer',
+            'id_community' => 'required|integer',
+        ]);
+
+        $question = new Question;
+        $question->title = $validatedData['title'];
+        $question->content = $validatedData['content'];
+        $question->id_user = $validatedData['id_user'];
+        $question->id_community = $validatedData['id_community'];
+
+        $question->save();
+
+        return redirect()->route('questions' )
+        ->withSuccess('Question posted successfully!');
     }
 }

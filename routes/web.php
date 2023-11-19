@@ -10,6 +10,8 @@ use App\Http\Controllers\ItemController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\UserController;
+use App\Models\Question;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,16 +36,28 @@ Route::redirect('/', '/login');
 Route::view('/login', 'auth.login')->name('login');
 Route::view('/register', 'auth.register')->name('register');
 
+/*
 Route::get('/questions', [QuestionController::class, 'showMostLikedQuestions'])->name('questions');
 Route::get('/questions/{id}', [QuestionController::class, 'show']);
 Route::get('/questions/{id}/edit', [QuestionController::class, 'edit']);
 Route::post('/questions/{id}', [QuestionController::class, 'update']);
-Route::post('/questions/{id}/delete', [QuestionController::class, 'destroy']);
+Route::post('/questions/{id}/delete', [QuestionController::class, 'destroy']); */
 
+Route::controller(QuestionController::class)->group(function () {
+    Route::get('/questions', 'showMostLikedQuestions')->name('questions');
+    Route::get('/questions/{id}', 'show')->name('answers');
+    Route::get('/questions/{id}/edit', 'edit');
+    Route::post('/questions/{id}', 'update');
+    Route::post('/questions/{id}/delete', 'destroy');
+    Route::post('/questions', 'postQuestion');
+});
+
+Route::view('/ask-question', 'pages.ask-question')->name('ask-question');
 
 // answers
 Route::post('/answers/{id}', [AnswerController::class, 'update']);
 Route::post('/answers/{id}/delete', [AnswerController::class, 'destroy']);
+Route::post('/submit-answer', [AnswerController::class, 'postAnswer']);
 
 // users
 Route::get('/users/{id}', [UserController::class, 'show']);
@@ -56,17 +70,7 @@ Route::get('/admin', [UserController::class, 'index']);
 Route::post('/users', [UserController::class, 'store']);
 
 // API
-Route::controller(CardController::class)->group(function () {
-    Route::put('/api/cards', 'create');
-    Route::delete('/api/cards/{card_id}', 'delete');
-});
-
-Route::controller(ItemController::class)->group(function () {
-    Route::put('/api/cards/{card_id}', 'create');
-    Route::post('/api/item/{id}', 'update');
-    Route::delete('/api/item/{id}', 'delete');
-});
-
+Route::get('api/questions', [QuestionController::class, 'filterQuestions']);
 
 // Authentication
 // Route::controller(LoginController::class)->group(function () {

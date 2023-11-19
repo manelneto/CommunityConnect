@@ -29,6 +29,9 @@ class AnswerController extends Controller {
     {
         $answer = Answer::findOrFail($id);
         $this->authorize('update', $answer);
+        $request->validate([
+            'content' => 'required|string|max:1000'
+        ]);
         try {
             $answer->content = $request->input('content');
             $answer->save();

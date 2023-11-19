@@ -61,7 +61,7 @@
                                 </label-->
                             </fieldset>
 
-                            <fieldset>
+                            <!--fieldset>
                                 <legend>Sort by</legend>
                                 <label for="most-popular">
                                     <input type="radio" id="most-popular" name="sort" value="most-popular" checked>
@@ -71,7 +71,7 @@
                                     <input type="radio" id="newest" name="sort" value="newest" checked>
                                     Newest
                                 </label>
-                            </fieldset>
+                            </fieldset-->
                             <button id="apply-button" type="submit">Apply</button>
                         </form>
                     </div>

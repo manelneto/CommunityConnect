@@ -68,7 +68,7 @@ class QuestionController extends Controller
                 ->get();
             return view('questions.show', [
                 'question' => Question::where('id', $id)->firstOrFail(),
-                'answers' => $answers
+                'answers' => $answers            
             ]);
         } catch (ModelNotFoundException $e) {
             return "Question not found.";

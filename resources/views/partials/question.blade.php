@@ -10,7 +10,6 @@
         <h2 class="question-title"><a href="../questions/{{ $question->id }}">{{ $question->title }}</a></h2>
         <p class="question-description">{{ $question->content }}</p>
         <div class="answers-details">
-            <p> HELOOOOOOOOOO </p>
             <button class="question-answer-btn">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
                     xmlns="http://www.w3.org/2000/svg">

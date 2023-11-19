@@ -22,10 +22,17 @@
                 </form>
             </div>
             <div class="right-header">
-                <div class="group-buttons">
-                    <a href="{{ route('login') }}" class="sign-in-button">Sign In</a>
-                    <a href="{{ route('register') }}" class="sign-up-button">Sign Up</a>
-                </div>
+                @guest
+                    <div class="group-buttons">
+                        <a href="{{ route('login') }}" class="sign-in-button">Sign In</a>
+                        <a href="{{ route('register') }}" class="sign-up-button">Sign Up</a>
+                    </div>
+                @endguest
+                @auth
+                    <div class="group-buttons">
+                        <a href="{{ route('users.show', Auth::user()->id) }}" class="my-account-button">My account</a>
+                    </div>
+                @endauth
             </div>
         </div>
     </header>

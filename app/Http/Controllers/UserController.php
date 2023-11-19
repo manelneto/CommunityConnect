@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;    
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
@@ -33,14 +34,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
-        $user->username = $request->input('new-username');
-        $user->email = $request->input('email');
-        if ($request->input('password') !== $request->input('confirm-password')) {
-            return view('users.admin', ['users' => $users]);
-        }
-        $user->password = password_hash($request->input('password'), PASSWORD_DEFAULT);
-        $user->save();
+        $request->validate([
+            'username' => 'required|string|max:20|unique:users',
+            'email' => 'required|email|max:250|unique:users',
+            'password' => 'required|min:8|confirmed'
+        ]);
+
+        User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'image' => 'default.png'
+        ]);
+
         $users = User::all();
         return view('users.admin', ['users' => $users]);
     }

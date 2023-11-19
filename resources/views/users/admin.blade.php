@@ -21,17 +21,26 @@
             <button id="find-user" type="submit">Visit</button>
         </form>
     </details>
+    @if ($errors->any())
+        <div class="error-box">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+     @endif
     <form action="../../users" method="post">
         @csrf
         <h2>Create a user</h2>
-        <label for="new-username">Username</label>
-        <input type="text" id="new-username" name="new-username">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username">
         <label for="email">Email</label>
         <input type="text" id="email" name="email">
         <label for="password">Password</label>
         <input type="password" id="password" name="password">
-        <label for="confirm-password">Confirm Password</label>
-        <input type="password" id="confirm-password" name="confirm-password">
+        <label for="password_confirmation">Confirm Password</label>
+        <input type="password" id="password_confirmation" name="password_confirmation">
         <button id="create-user" type="submit">Create User</button>
     </form>
 </section>

@@ -38,7 +38,7 @@ class RegisterController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'image' => 'default.png'
+            'image' => 'default.png'	
         ]);
 
         $credentials = $request->only('username', 'password');

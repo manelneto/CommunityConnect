@@ -34,6 +34,15 @@
     @foreach ($answers as $answer)
         @include('partials.answer', ['answer' => $answer])
     @endforeach
+    @if ($errors->any())
+        <div class="error-box">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
     <form action="/submit-answer" method="POST">
         @csrf
         <label for="content">Your Answer:</label>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;    
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
@@ -33,14 +34,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
-        $user->username = $request->input('new-username');
-        $user->email = $request->input('email');
-        if ($request->input('password') !== $request->input('confirm-password')) {
-            return view('users.admin', ['users' => $users]);
-        }
-        $user->password = password_hash($request->input('password'), PASSWORD_DEFAULT);
-        $user->save();
+        $request->validate([
+            'username' => 'required|string|max:20|unique:users',
+            'email' => 'required|email|max:250|unique:users',
+            'password' => 'required|min:8|confirmed'
+        ]);
+
+        User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'image' => 'default.png'
+        ]);
+
         $users = User::all();
         return view('users.admin', ['users' => $users]);
     }
@@ -73,6 +79,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $this->authorize('edit', $user);
+
         try {
             return view('users.edit', ['user' => $user]);
         }
@@ -88,13 +95,32 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $this->authorize('update', $user);
+
+        if ($request->input('username') !== $user->username){
+            $request->validate([
+                'username' => 'required|string|max:20|unique:users'
+            ]);
+        }
+        if ($request->input('email') !== $user->email){
+            $request->validate([
+                'email' => 'required|email|max:250|unique:users'
+            ]);
+        }
+        if ($request->input('password') !== null){
+            $request->validate([
+                'current-password' => 'required|min:8',
+                'password' => 'required|min:8|confirmed'
+            ]);
+        }
+
         try {
             $user->username = $request->input('username');
             $user->email = $request->input('email');
             $user->save();
-            if (!password_verify($request->input('current-password'), $user->password) || $request->input('new-password') !== $request->input('confirm-password')) {
-                return redirect('users/' . $id);
+            if (!password_verify($request->input('current-password'), $user->password) && $request->input('current-password') !== null) {
+                return redirect('users/' . $id . '/edit')->withErrors(['current-password' => 'Current password is incorrect.']);
             }
+            $user->password = $request->input('password') !== NULL ? Hash::make($request->input('password')) : $user->password;
             $user->save();
             return redirect('users/' . $id);
         }

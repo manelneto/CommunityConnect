@@ -5,6 +5,16 @@
 
 @yield('header')
 
+@if ($errors->any())
+    <div class="error-box">
+      <ul>
+        @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+ @endif
+
 <form method="post">
     @csrf
     <h1><input type="text" name="username" value="{{ $user->username }}"></h1>
@@ -20,10 +30,10 @@
     <button id="edit-password">Edit Password</button>
     <label class="edit-password" for="current-password" hidden>Current Password:</label>
     <input class="edit-password" id="current-password" type="password" name="current-password" hidden>
-    <label class="edit-password" for="new-password" hidden>New Password:</label>
-    <input class="edit-password" id="new-password" type="password" name="new-password" hidden>
-    <label class="edit-password" for="confirm-password" hidden>Confirm Password:</label>
-    <input class="edit-password" id="confirm-password" type="password" name="confirm-password" hidden>
+    <label class="edit-password" for="password" hidden>New Password:</label>
+    <input class="edit-password" id="password" type="password" name="password" hidden>
+    <label class="edit-password" for="password_confirmation" hidden>Confirm Password:</label>
+    <input class="edit-password" id="password_confirmation" type="password" name="password_confirmation" hidden>
     <button formaction="../../users/{{ $user->id }}">Edit</button>
     <button formaction="../../users/{{ $user->id }}/delete">Delete</button>
 </form>

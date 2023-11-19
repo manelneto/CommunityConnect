@@ -121,9 +121,15 @@ class QuestionController extends Controller
     {
         $question = Question::findOrFail($id);
         $this->authorize('update', $question);
+
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string|max:1000'
+        ]);
+
         try {
-            $question->title = $request->input('title');
-            $question->content = $request->input('content');
+            $question->title = $validatedData['title'];
+            $question->content = $validatedData['content'];
             $question->save();
             return redirect('questions/' . $id);
         } catch (ModelNotFoundException $e) {
@@ -149,7 +155,7 @@ class QuestionController extends Controller
     public function postQuestion(Request $request){
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'content' => 'required|string|max:1000',
             'id_user' => 'required|integer',
             'id_community' => 'required|integer',
         ]);

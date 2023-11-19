@@ -16,6 +16,15 @@
         </h3>
         <a class="go-to-sign-in" href="/register">Sign Up Here</a>
       </div>
+      @if ($errors->any())
+        <div class="error-box">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
       <form class="sign-page-right-content" action="{{ route('login') }}" method="POST">
         @csrf
         <div class="form-group">

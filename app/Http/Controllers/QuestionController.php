@@ -17,6 +17,19 @@ class QuestionController extends Controller
         //
     }
 
+    public function filterQuestions(Request $request) {
+        $after = $request->get('after');
+        $before = $request->get('before');
+
+        $questions = Question::where('date', '>=', $after, 'and')->where('date', '<=', $before);
+
+        $questions = $questions->with(['user', 'community', 'likes', 'dislikes', 'answers'])
+            ->withCount(['likes', 'dislikes', 'answers'])
+            ->orderBy('likes_count', 'desc')
+            ->get();
+        return response()->json($questions);
+    }
+
     public function showMostLikedQuestions(Request $request)
     {
         if ($request->has('text') && $request->get('text') != '') {
@@ -75,7 +88,6 @@ class QuestionController extends Controller
     public function show(int $id)
     {
         try {
-
             $answers = Answer::with(['user', 'likes', 'dislikes'])->where('id_question', $id)
                 ->get();
             return view('questions.show', [

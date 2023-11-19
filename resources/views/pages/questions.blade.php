@@ -43,10 +43,14 @@
                             </svg>Filter</button>
                     </div>
                     <div class="questions-filters">
-                        <form action="#" method="POST">
+                        <form action="#" method="post">
                             <fieldset>
                                 <legend>Filter by</legend>
-                                <label for="no-answers">
+                                <label for="after">After</label>
+                                <input id="after" type="date" name="after">
+                                <label for="before">Before</label>
+                                <input id="before" type="date" name="before">
+                                <!--label for="no-answers">
                                     <input type="checkbox" id="no-answers" name="filter" value="no-answers">
                                     No answers
                                 </label>
@@ -54,7 +58,7 @@
                                     <input type="checkbox" id="no-accepted-answer" name="filter"
                                         value="no-accepted-answer">
                                     No accepted answer
-                                </label>
+                                </label-->
                             </fieldset>
 
                             <fieldset>
@@ -68,18 +72,15 @@
                                     Newest
                                 </label>
                             </fieldset>
-
-                            <div class="buttons">
-                                <button type="submit" class="apply-button">Apply</button>
-                                <button type="button" class="cancel-button" onclick="closeModal()">Cancel</button>
-                            </div>
+                            <button id="apply-button" type="submit">Apply</button>
                         </form>
                     </div>
                 </div>
-
+                <section id="questions">
                 @foreach ($questions as $question)
                     @include('partials.question', ['question' => $question])
                 @endforeach
+                </section>
 
             </section>
             <section class="right-bar">

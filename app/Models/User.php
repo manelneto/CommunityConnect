@@ -60,13 +60,5 @@ class User extends Authenticatable
         'blocked' => 'boolean',
         'register_date' => 'datetime',
     ];
-
-    /**
-     * Get the cards for a user.
-     */
-    public function cards(): HasMany
-    {
-        return $this->hasMany(Card::class);
-    }
 }
 

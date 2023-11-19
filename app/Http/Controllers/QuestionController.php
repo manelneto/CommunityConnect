@@ -74,12 +74,13 @@ class QuestionController extends Controller
      */
     public function show(int $id)
     {
+        $this->authorize('show', Question::class);
         try {
 
             $answers = Answer::with(['user', 'likes', 'dislikes'])->where('id_question', $id)
                 ->get();
             return view('questions.show', [
-                'question' => Question::where('id', $id)->firstOrFail(),
+                'question' => Question::findOrFail($id),
                 'answers' => $answers
             ]);
         } catch (ModelNotFoundException $e) {
@@ -92,10 +93,10 @@ class QuestionController extends Controller
      */
     public function edit(int $id)
     {
+        $question = Question::findOrFail($id);
+        $this->authorize('edit', $question);
         try {
-            return view('questions.edit', [
-                'question' => Question::where('id', $id)->firstOrFail()
-            ]);
+            return view('questions.edit', ['question' => $question]);
         } catch (ModelNotFoundException $e) {
             return "Question not found.";
         }
@@ -106,8 +107,9 @@ class QuestionController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        $question = Question::findOrFail($id);
+        $this->authorize('update', $question);
         try {
-            $question = Question::where('id', $id)->firstOrFail();
             $question->title = $request->input('title');
             $question->content = $request->input('content');
             $question->save();
@@ -122,8 +124,9 @@ class QuestionController extends Controller
      */
     public function destroy(int $id)
     {
+        $question = Question::findOrFail($id);
+        $this->authorize('destroy', $question);
         try {
-            $question = Question::where('id', $id)->firstOrFail();
             $question->delete();
             return redirect('questions/');
         } catch (ModelNotFoundException $e) {

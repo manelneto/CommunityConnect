@@ -53,7 +53,7 @@ Route::post('/users/{id}/delete', [UserController::class, 'destroy']);
 
 // admin
 Route::get('/admin', [UserController::class, 'index']);
-
+Route::post('/users', [UserController::class, 'store']);
 
 // API
 Route::controller(CardController::class)->group(function () {

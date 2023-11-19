@@ -21,6 +21,21 @@
             <button id="find-user" type="submit">Visit</button>
         </form>
     </details>
+    <form action="../../users" method="post">
+        @csrf
+        <h2>Create a user</h2>
+        <label for="new-username">Username</label>
+        <input type="text" id="new-username" name="new-username">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password">
+        <button id="create-user" type="submit">Create User</button>
+    </form>
 </section>
+
+
 
 @yield('footer')

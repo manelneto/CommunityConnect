@@ -22,11 +22,11 @@ class UserPolicy{
     }*/
 
     public function show() {
-        return Auth::check();
+        return true;
     }
 
-    public function update() {
-        return Auth::check();
+    public function update(User $user) {
+        return $user->id == Auth::user()->id;
     }
 }
 

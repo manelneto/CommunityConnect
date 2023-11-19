@@ -133,4 +133,24 @@ class QuestionController extends Controller
             return "Question not found.";
         }
     }
+
+    public function postQuestion(Request $request){
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'id_user' => 'required|integer',
+            'id_community' => 'required|integer',
+        ]);
+
+        $question = new Question;
+        $question->title = $validatedData['title'];
+        $question->content = $validatedData['content'];
+        $question->id_user = $validatedData['id_user'];
+        $question->id_community = $validatedData['id_community'];
+
+        $question->save();
+
+        return redirect()->route('questions' )
+        ->withSuccess('Question posted successfully!');
+    }
 }

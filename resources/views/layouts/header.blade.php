@@ -13,19 +13,28 @@
                 </a>
             </div>
             <div class="mid-header">
-                <form action="{{ url('/questions') }}" class="main-search" method="GET">
-                    <input type="text" name="text" class="live-search" placeholder="{{ request('text', 'Search') }}"
-                        value="{{ request('text') }}" />
-                    <button type="submit" class="main-search-button">
-                        <img src="{{ asset('storage/icons8-search-50.png') }}" alt="search icon" />
-                    </button>
-                </form>
+                @if (Request::route()->getName() == 'questions')
+                    <form action="{{ url('/questions') }}" class="main-search" method="GET">
+                        <input type="text" name="text" class="live-search"
+                            placeholder="{{ request('text', 'Search') }}" value="{{ request('text') }}" />
+                        <button type="submit" class="main-search-button">
+                            <img src="{{ asset('storage/icons8-search-50.png') }}" alt="search icon" />
+                        </button>
+                    </form>
+                @endif
             </div>
             <div class="right-header">
-                <div class="group-buttons">
-                    <a href="{{ route('login') }}" class="sign-in-button">Sign In</a>
-                    <a href="{{ route('register') }}" class="sign-up-button">Sign Up</a>
-                </div>
+                @guest
+                    <div class="group-buttons">
+                        <a href="{{ route('login') }}" class="sign-in-button">Sign In</a>
+                        <a href="{{ route('register') }}" class="sign-up-button">Sign Up</a>
+                    </div>
+                @endguest
+                @auth
+                    <div class="group-buttons">
+                        <a href="{{ route('users.show', Auth::user()->id) }}" class="my-account-button">My account</a>
+                    </div>
+                @endauth
             </div>
         </div>
     </header>

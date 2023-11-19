@@ -59,7 +59,7 @@ Route::post('/answers/{id}/delete', [AnswerController::class, 'destroy']);
 Route::post('/submit-answer', [AnswerController::class, 'postAnswer']);
 
 // users
-Route::get('/users/{id}', [UserController::class, 'show']);
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 Route::get('/users/{id}/edit', [UserController::class, 'edit']);
 Route::post('/users/{id}', [UserController::class, 'update']);
 Route::post('/users/{id}/delete', [UserController::class, 'destroy']);

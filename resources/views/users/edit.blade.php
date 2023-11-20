@@ -35,7 +35,6 @@
     <label class="edit-password" for="password_confirmation" hidden>Confirm Password:</label>
     <input class="edit-password" id="password_confirmation" type="password" name="password_confirmation" hidden>
     <button formaction="../../users/{{ $user->id }}">Edit</button>
-    <button formaction="../../users/{{ $user->id }}/delete">Delete</button>
 </form>
 
 @yield('footer')

@@ -38,7 +38,6 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/users/{id}', 'show')->name('profile');
     Route::get('/users/{id}/edit', 'edit')->name('edit-profile');
     Route::post('/users/{id}', 'update');
-    Route::post('/users/{id}/delete', 'destroy');
 });
 
 // Questions

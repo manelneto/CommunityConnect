@@ -98,3 +98,18 @@
 .content-right .answer-description {
   display: block;
 }
+
+.edit-answer-button {
+  margin-right: 10px;
+  background-color: var(--blue);
+  padding: 4px 10px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.delete-answer-button {
+  background-color: var(--hover-red);
+  padding: 4px 10px;
+  color: #fff;
+  border-radius: 5px;
+}

@@ -17,6 +17,7 @@
 
 .leave-answer-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px 0;
@@ -24,13 +25,38 @@
   border-bottom: 1px solid #c6c6c6;
 }
 
-.leave-answer-button {
-  background-color: var(--blue);
-  color: #fff;
-  width: 80%;
-  padding: 10px 0;
+.leave-answer-container form textarea {
+  resize: none;
+  border: 1px solid #c6c6c6;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.leave-answer-container form textarea:focus-visible {
+  border: 2px solid var(--blue);
+  outline: none;
+}
+
+.leave-answer-container .leave-answer-text {
   font-size: 20px;
+  font-size: bold;
+  margin-bottom: 20px;
+}
+
+.leave-answer-container form input[type="submit"] {
+  background-color: var(--blue);
+  border: none;
+  color: #fff;
+  padding: 10px 40px;
   border-radius: 5px;
+  font-size: 14px;
+  font-style: bold;
+  cursor: pointer;
+}
+
+.leave-answer-container form input[type="submit"]:hover {
+  background-color: var(--hover-red);
+  transition: 0.2s;
 }
 
 .answer-container {
@@ -65,4 +91,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.content-right .answer-description {
+  display: block;
 }

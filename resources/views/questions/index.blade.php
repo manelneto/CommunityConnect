@@ -51,28 +51,7 @@
                                 <input id="after" type="date" name="after">
                                 <label for="before">Before</label>
                                 <input id="before" type="date" name="before">
-                                <!--label for="no-answers">
-                                    <input type="checkbox" id="no-answers" name="filter" value="no-answers">
-                                    No answers
-                                </label>
-                                <label for="no-accepted-answer">
-                                    <input type="checkbox" id="no-accepted-answer" name="filter"
-                                        value="no-accepted-answer">
-                                    No accepted answer
-                                </label-->
                             </fieldset>
-
-                            <!--fieldset>
-                                <legend>Sort by</legend>
-                                <label for="most-popular">
-                                    <input type="radio" id="most-popular" name="sort" value="most-popular" checked>
-                                    Most Popular
-                                </label>
-                                <label for="newest">
-                                    <input type="radio" id="newest" name="sort" value="newest" checked>
-                                    Newest
-                                </label>
-                            </fieldset-->
                             <button id="apply-button" type="submit">Apply</button>
                         </form>
                     </div>

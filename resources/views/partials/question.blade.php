@@ -8,7 +8,7 @@
             <span class="question-community">In: {{ $question->community->name }}</span>
         </div>
         <h2 class="question-title"><a href="../questions/{{ $question->id }}">{{ $question->title }}</a></h2>
-        <p class="question-description">{{ $question->content }}@if (Request::route()->getName() == 'question' and $question->id_user == Auth::user()?->id)
+        <p class="question-description">{{ $question->content }}@if (Request::route()->getName() == 'question' and ($question->id_user == Auth::user()?->id or Auth::user()?->administrator))
                 <a href=" {{ route('edit-question', ['id' => $question->id]) }}" class="edit-question-button">Edit</a>
             @endif
         </p>

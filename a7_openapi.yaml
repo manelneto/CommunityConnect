@@ -160,13 +160,13 @@ paths:
 
 # M02: Profile
 
-# View/Edit Profile
+# View and Edit Profile
 
   /users/{id}:
 
     get:
       operationId: R201
-      summary: 'R201: User profile page'
+      summary: 'R201: View profile'
       description: "Shows an user's profile page. Access: PUB, USR, OWN, ADM"
       tags:
         - 'M02: Profile'
@@ -181,21 +181,11 @@ paths:
       responses:
         '200':
           description: 'Ok. Show profile page.'
-        '302':
-          description: 'Redirect because id does not exist.'
-          headers:
-            Location:
-              schema:
-                type: string
-              example:
-                302Failure:
-                  description: 'Failure viewing profile. Redirect to foruns page.'
-                  value: '/foruns'
-  
+
     post:
       operationId: R202
-      summary: "R202: Edit user's profile action"
-      description: "Processes editions on an user's profile. Access: OWN"
+      summary: 'R202: Edit profile action'
+      description: "Processes editions on an user's profile. Access: OWN, ADM"
       tags:
         - 'M02: Profile'
 
@@ -224,15 +214,11 @@ paths:
                 confirm_password:
                   type: string
                   format: password
-                profile_photo:
-                  type: string
-                  format: binary
               required:
                 - username
                 - email
                 - password
                 - confirm_password
-
 
       responses:
         '302':
@@ -246,18 +232,241 @@ paths:
                   description: 'Successful edition. Redirect to profile page.'
                   value: '/user/{id}'
                 302Failure:
-                  description: 'Failed edition. Redirect to profile page.'
-                  value: '/user/{id}'
+                  description: 'Failed edition. Redirect to profile edition page.'
+                  value: '/user/{id}/edit'
+        '403':
+          description: 'This action is unauthorized.'
+
+# Edit Profile Form
+
+  /users/{id}/edit:
+
+    get:
+      operationId: R203
+      summary: 'R203: Edit profile form'
+      description: "Provide user's profile edition form. Access: OWN, ADM"
+      tags:
+        - 'M02: Profile'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: True
+
+      responses:
+        '200':
+          description: "Ok. Show user's profile edition UI"
+        '403':
+          description: 'This action is unauthorized.'
 
 # M03: Questions
 
-# Search and Post Questions
+# View Questions and Create Question Action
 
-  /api/question:
+  /questions:
 
     get:
       operationId: R301
-      summary: 'R301: Search questions'
+      summary: 'R301: View questions'
+      description: 'Shows all questions.  Access: PUB, USR, OWN, ADM'
+      tags:
+        - 'M03: Questions'
+      responses:
+        '200':
+          description: 'Ok. Show all questions.'
+
+    post:
+      operationId: R302
+      summary: 'R302: Create question action'
+      description: 'Processes question form submission. Access: USR, OWN, ADM'
+      tags:
+        - 'M03: Questions'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  format: string
+                content:
+                  type: string
+                  format: string
+                id_user:
+                  type: integer
+                  format: integer
+                id_community:
+                  type: integer
+                  format: integer
+              required:
+                - title
+                - content
+                - id_user
+                - id_community
+      
+      responses:
+       '302':
+         description: 'Redirect after processing the question submission.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful question submission. Redirect to questions page.'
+                 value: '/questions'
+
+# Create Question Form
+
+  /questions/create:
+
+    get:
+      operationId: R303
+      summary: 'R303: Create question form'
+      description: "Provide question's creation form. Access: USR, OWN, ADM"
+      tags:
+        - 'M03: Questions'
+      responses:
+        '200':
+          description: "Ok. Show question's creation UI"
+        '403':
+          description: 'This action is unauthorized.'
+
+# View and Edit Question
+
+  /questions/{id}:
+
+    get:
+      operationId: R304
+      summary: 'R304: View question'
+      description: 'Shows a question. Access: PUB, USR, OWN, ADM'
+      tags:
+        - 'M03: Questions'
+      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: True
+
+      responses:
+        '200':
+          description: 'Ok. Show question.'
+
+    post:
+      operationId: R305
+      summary: 'R305: Edit question action'
+      description: "Processes editions on a question. Access: OWN, ADM"
+      tags:
+        - 'M03: Questions'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: True
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  format: string
+                content:
+                  type: string
+                  format: string
+              required:
+                - title
+                - content
+      
+      responses:
+        '302':
+         description: 'Redirect after processing the question edition.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful question edition. Redirect to question page.'
+                 value: '/questions/{id}'
+        '403':
+          description: 'This action is unauthorized.'
+
+# Edit Question Form
+
+  /question/{id}/edit/:
+
+    get:
+      operationId: R306
+      summary: 'R306: Edit question form'
+      description: "Provide question's edition form. Access: OWN, ADM"
+      tags:
+        - 'M03: Questions'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: True
+
+      responses:
+        '200':
+          description: "Ok. Show question's edition UI"
+        '403':
+          description: 'This action is unauthorized.'
+
+# Delete Question
+
+  /question/{id}/delete:
+
+    post:
+      operationId: R307
+      summary: 'R307: Delete question action'
+      description: 'Processes question deletion. Access: OWN, ADM'
+      tags:
+        - 'M03: Questions'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: True
+
+      responses:
+        '302':
+         description: 'Redirect after processing the question deletion.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful question deletion. Redirect to questions page.'
+                 value: '/questions'
+        '403':
+          description: 'This action is unauthorized.'
+
+# Search Questions
+
+  /api/questions:
+
+    get:
+      operationId: R308
+      summary: 'R308: Search questions'
       description: 'Searches for questions and returns the results as JSON. Access: PUB, USR, OWN, ADM'
       tags:
         - 'M03: Questions'
@@ -265,7 +474,7 @@ paths:
       parameters:
         - in: query
           name: text
-          description: String to use for full-text search
+          description: String to use for search
           schema:
             type: string
           required: false
@@ -315,213 +524,51 @@ paths:
                           type: string
                 example:
                   - id: 1
-                    content: 'I need to cook rice but I do not have water. How can I do it?'
-                    date: '2023-11-06'
-                    file: ''
-                    last_edited:
-                    title: 'How can I cook rice without water?'
+                    content: 'Healthcare has been changing rapidly. How can technology, especially emerging tech, improve the way healthcare is delivered?'
+                    date: '2023-02-25'
+                    file: null
+                    last_edited: null
+                    title: 'How Can Technology Improve Healthcare Delivery?'
+                    id_user: 398
+                    id_community: 20
+                    tsvectors: "'chang':10B 'deliv':23B 'deliveri':6A 'emerg':16B 'especi':15B 'healthcar':5A,7B,21B 'improv':4A,18B 'rapid':11B 'tech':17B 'technolog':3A,14B 'way':20B"
+                    likes_count: 0
+                    dislikes_count: 0
+                    answers_count: 0
                     user:
-                      id: 1
-                      username: 'matildesimoes'
-                      image: ''
-
-    post:
-      operationId: R302
-      summary: 'R302: Post question action'
-      description: 'Processes question form submission. Access: USR, OWN, ADM'
-      tags:
-        - 'M03: Questions'
-
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                content:
-                  type: string
-                  format: string
-                file:
-                  type: string
-                  format: binary
-                title:
-                  type: string
-                  format: string
-                id_user:
-                  type: integer
-                  format: integer
-              required:
-                - content
-                - title
-                - id_user
-      
-      responses:
-       '302':
-         description: 'Redirect after processing the question submission.'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'Successful question submission. Redirect to question page.'
-                 value: '/question/{id}'
-               302Error:
-                 description: 'Failed question submission. Redirect to question page.'
-                 value: '/question'  
-
-# View Question
-
-  /question/{id}:
-
-    get:
-      operationId: R303
-      summary: 'R303: View question'
-      description: 'Shows a question. Access: PUB, USR, OWN, ADM'
-      tags:
-        - 'M03: Questions'
-      
-      parameters:
-        - in: query
-          name: id
-          description: Question id
-          schema:
-            type: string
-          required: false
-
-      responses:
-        '200':
-          description: 'Success.'
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    content:
-                      type: string
-                    date:
-                      type: string
-                    file:
-                      type: string
-                    last_edited:
-                      type: string
-                    title:
-                      type: string
-                    user:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        username:
-                          type: string
-                        image:
-                          type: string
-                example:
-                  - id: 1
-                    content: 'I need to cook rice but I do not have water. How can I do it?'
-                    date: '2023-11-06'
-                    file: ''
-                    last_edited:
-                    title: 'How can I cook rice without water?'
-                    user:
-                      id: 1
-                      username: 'matildesimoes'
-                      image: ''
-                    
-# Delete Question
-
-  /question/{id}/delete:
-    post:
-      operationId: R304
-      summary: 'R304: Delete question action'
-      description: 'Processes question deletion. Access: OWN, ADM'
-      tags:
-        - 'M03: Questions'
-
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: integer
-                  format: integer
-              required:
-                - id
-
-      responses:
-       '302':
-         description: 'Redirect after processing the question deletion.'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'Successful question deletion. Redirect to questions page.'
-                 value: '/questions'
-               302Error:
-                 description: 'Failed question deletion. Redirect to question page.'
-                 value: '/question/{id}'  
-
-# Edit Question
-
-  /question/{id}/edit/:
-    post:
-        operationId: R305
-        summary: "R305: Edit question action"
-        description: "Processes editions on a question. Access: OWN"
-        tags:
-          - 'M03: Questions'
-
-        requestBody:
-          required: true
-          content:
-            application/x-www-form-urlencoded:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: integer
-                required:
-                  - id
-
-
-        responses:
-          '302':
-            description: "Redirect after processing the edition on the question."
-            headers:
-              Location:
-                schema:
-                  type: string
-                examples:
-                  302Success:
-                    description: 'Successful edition. Redirect to question page.'
-                    value: '/question/{id}'
-                  302Failure:
-                    description: 'Failed edition. Redirect to question page.'
-                    value: '/question/{id}'
+                      id: 398
+                      username: 'nathanielstewart'
+                      email: 'mirandachristopher@rivera.com'
+                      register_date: '2019-11-05T00:00:00.000000Z'
+                      administrator: false
+                      blocked: false
+                      image: 'https:\/\/picsum.photos\/250\/250'
+                    community:
+                      id: 20
+                      name: 'Outdoors'
+                    likes:
+                    dislikes:
+                    answers:
 
 # M04: Answers
 
-# Post Answers
+# Create Answer Action
 
-  /question/{id}/answer:
+  /question/{id}:
 
     post:
-      operationId: R402
-      summary: 'R402: Post answers action'
-      description: 'Processes answers form submission. Access: USR, OWN, ADM'
+      operationId: R401
+      summary: 'R402: Create answer action'
+      description: "Processes answer's creation form submission. Access: USR, OWN, ADM"
       tags:
         - 'M04: Answers'
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: True
 
       requestBody:
         required: true
@@ -533,22 +580,19 @@ paths:
                 content:
                   type: string
                   format: string
-                file:
-                  type: string
-                  format: binary
-                title:
-                  type: string
-                  format: string
+                id_question:
+                  type: integer
+                  format: integer
                 id_user:
                   type: integer
                   format: integer
               required:
                 - content
-                - title
+                - id_question
                 - id_user
       
       responses:
-       '302':
+        '302':
          description: 'Redirect after processing the answer submission.'
          headers:
            Location:
@@ -556,22 +600,28 @@ paths:
                type: string
              examples:
                302Success:
-                 description: 'Successful answer submission. Redirect to answer page.'
-                 value: '/answer/{id}'
-               302Error:
-                 description: 'Failed answer submission. Redirect to answer page.'
-                 value: '/answer'  
+                 description: 'Successful answer submission. Redirect to question page.'
+                 value: '/questions/{id}'
+        '403':
+          description: 'This action is unauthorized.'
 
 # Edit Answer
 
-  /answer/{id}/edit/:
+  /answers/{id}/:
   
     post:
-        operationId: R405
-        summary: "R405: Edit answer action"
-        description: "Processes editions on a answer. Access: OWN"
+        operationId: R402
+        summary: 'R402: Edit answer action'
+        description: 'Processes editions on an answer. Access: OWN, ADM'
         tags:
-          - 'M04: Answer'
+          - 'M04: Answers'
+
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: integer
+            required: True
 
         requestBody:
           required: true
@@ -580,13 +630,12 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
-                    type: integer
-                    format: integer
+                  content:
+                    type: string
+                    format: string
                 required:
-                  - id
-
-
+                  - content
+    
         responses:
           '302':
             description: "Redirect after processing the edition on the answer."
@@ -596,33 +645,28 @@ paths:
                   type: string
                 examples:
                   302Success:
-                    description: 'Successful edition. Redirect to answer page.'
-                    value: '/answer/{id}'
-                  302Failure:
-                    description: 'Failed edition. Redirect to answer page.'
-                    value: '/answer/{id}'
+                    description: 'Successful edition. Redirect to question page.'
+                    value: '/questions/{id}'
+          '403':
+            description: 'This action is unauthorized.'
 
-  /answer/{id}/delete:
+# Delete Answer
+
+  /answers/{id}/delete:
 
     post:
-      operationId: R406
-      summary: "R406: Delete answer action"
+      operationId: R403
+      summary: 'R403: Delete answer action'
       description: "Processes deletion of an answer. Access: OWN, ADM"
       tags:
-        - 'M04: Answer'
+        - 'M04: Answers'
 
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: integer
-                  format: integer
-              required:
-                - id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: True
 
       responses:
         '302':
@@ -635,9 +679,8 @@ paths:
                 302Success:
                   description: 'Successful deletion. Redirect to answer page.'
                   value: '/question{id}'
-                302Failure:
-                  description: 'Failed deletion. Redirect to answer page.'
-                  value: '/question/{id}'
+        '403':
+          description: 'This action is unauthorized.'
 
 # M05: Administration
 
@@ -658,189 +701,54 @@ paths:
           '403':
             description: 'This action is unauthorized.'
 
-# View User Pages e Edit User Account
-
-  /admin/user/{id}:
-
-      get:
-        operationId: R502
-        summary: 'R502: View user profile'
-        description: 'Show an user profile. Access: ADM'
-        tags:
-          - 'M02: Administration'
-
-        parameters:
-          - in: path
-            name: id
-            schema:
-              type: integer
-            required: True
-
-        responses:
-          '200':
-            description: 'OK. Show User page.'
-          '302':
-            description: 'Redirect because id does not exist.'
-            headers:
-              Location:
-                schema:
-                  type: string
-                example:
-                  302Failure:
-                    description: 'Failure viewing profile. Redirect to Admin page.'
-                    value: '/admin'
-
-      post:
-        operationId: R503
-        summary: 'R503: Edit Account Action'
-        description: 'Processes the registration form submission. Access: ADM'
-        tags:
-          - 'M01: Administration'
-
-        requestBody:
-          required: true
-          content:
-            application/x-www-form-urlencoded:
-              schema:
-                type: object
-                properties:
-                  username:
-                    type: string
-                  email:
-                    type: string
-                    format: email
-                  password:
-                    type: string
-                    format: password
-                  confirm_password:
-                    type: string
-                    format: password
-                  profile_photo:
-                    type: string
-                    format: binary
-                required:
-                  - username
-                  - email
-                  - password
-                  - confirm_password
-
-        responses:
-          '302':
-            description: "Redirect after processing the edition on the user's profile."
-            headers:
-              Location:
-                schema:
-                  type: string
-                examples:
-                  302Success:
-                    description: 'Successful edition. Redirect to profile page.'
-                    value: '/user/{id}'
-                  302Failure:
-                    description: 'Failed edition. Redirect to profile page.'
-                    value: '/user/{id}'
-
 # Create Account 
 
-  /admin/user/:
-    get:
-      operationId: R504
-      summary: 'R504: Search users'
-      description: 'Searches for users and returns the results as JSON. Access: ADM'
+  /users:
+    
+    post:
+      operationId: R502
+      summary: 'R502: Create user action'
+      description: "Processes user's creation form submission. Access: ADM"
       tags:
-        - 'M03: Administration'
+        - 'M05: Administration'
       
-      parameters:
-        - in: query
-          name: username
-          description: User's username
-          schema:
-            type: string
-          required: false
-        - in: query
-          name: email
-          description: User's email
-          schema:
-            type: string
-          required: false
-        - in: query
-          name: register_date
-          description: User's register date
-          schema:
-            type: string
-          required: false
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+                confirm_password:
+                  type: string
+                  format: password
+              required:
+                - username
+                - email
+                - password
+                - password_confirmation
 
       responses:
-        '200':
-          description: 'Success.'
-          content:
-            application/json:
+        '302':
+          description: 'Redirect after processing the user credentials.'
+          headers:
+            Location:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    username:
-                      type: string
-                    email:
-                      type: string
-                    register_date:
-                      type: string
-                    image:
-                      type: string
-                example:
-                  - id: 1
-                    username: 'matildesimoes'
-                    email: 'matildesimoes@gmail.com'
-                    register_date: '2023-02-01'
-                    image: ''
-
-    post:
-        operationId: R505
-        summary: 'R505: Create Account Action'
-        description: 'Processes the creation of a new account. Access: ADM'
-        tags:
-          - 'M01: Administration'
-
-        requestBody:
-          required: true
-          content:
-            application/x-www-form-urlencoded:
-              schema:
-                type: object
-                properties:
-                  username:
-                    type: string
-                  email:
-                    type: string
-                    format: email
-                  password:
-                    type: string
-                    format: password
-                  confirm_password:
-                    type: string
-                    format: password
-                  profile_photo:
-                    type: string
-                    format: binary
-                required:
-                  - username
-                  - email
-                  - password
-                  - confirm_password
-
-        responses:
-          '302':
-            description: "Redirect after processing the creation of a new user profile."
-            headers:
-              Location:
-                schema:
-                  type: string
-                examples:
-                  302Success:
-                    description: 'Successful creation. Redirect to profile page.'
-                    value: '/user/{id}'
-                  302Failure:
-                    description: 'Failed edition. Redirect to profile page.'
-                    value: '/user/{id}'
+                type: string
+              examples:
+                302Success:
+                  description: "Successful user's creation. Redirect to admin page."
+                  value: '/admin'
+                302Failure:
+                  description: "Failed user's creation. Redirect to admin page."
+                  value: '/admin'
+        '403':
+          description: 'This action is unauthorized.'

@@ -58,7 +58,7 @@ paths:
                   type: string
                   format: password
               required:
-                - email
+                - username_or_email
                 - password
       
       responses:
@@ -110,7 +110,7 @@ paths:
         - 'M01: Authentication'
       responses:
         '200':
-          description: 'Ok. Show registration UI'
+          description: 'Ok. Show registration UI.'
 
     post:
       operationId: R105
@@ -134,7 +134,7 @@ paths:
                 password:
                   type: string
                   format: password
-                confirm_password:
+                password_confirmation:
                   type: string
                   format: password
               required:
@@ -257,7 +257,7 @@ paths:
 
       responses:
         '200':
-          description: "Ok. Show user's profile edition UI"
+          description: "Ok. Show user's profile edition UI."
         '403':
           description: 'This action is unauthorized.'
 
@@ -333,7 +333,7 @@ paths:
         - 'M03: Questions'
       responses:
         '200':
-          description: "Ok. Show question's creation UI"
+          description: "Ok. Show question's creation UI."
         '403':
           description: 'This action is unauthorized.'
 
@@ -424,7 +424,7 @@ paths:
 
       responses:
         '200':
-          description: "Ok. Show question's edition UI"
+          description: "Ok. Show question's edition UI."
         '403':
           description: 'This action is unauthorized.'
 
@@ -558,7 +558,7 @@ paths:
 
     post:
       operationId: R401
-      summary: 'R402: Create answer action'
+      summary: 'R401: Create answer action'
       description: "Processes answer's creation form submission. Access: USR, OWN, ADM"
       tags:
         - 'M04: Answers'
@@ -727,7 +727,7 @@ paths:
                 password:
                   type: string
                   format: password
-                confirm_password:
+                password_confirmation:
                   type: string
                   format: password
               required:

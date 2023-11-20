@@ -1,0 +1,35 @@
+.question-tags,
+.question-tag {
+  display: inline;
+}
+
+.question-tags {
+  margin-left: 35px;
+}
+
+.question-tag {
+  background-color: #676767;
+  opacity: 0.37;
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+.leave-answer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid #c6c6c6;
+  border-bottom: 1px solid #c6c6c6;
+  margin-bottom: 30px;
+}
+
+.leave-answer-button {
+  background-color: var(--blue);
+  color: #fff;
+  width: 80%;
+  padding: 10px 0;
+  font-size: 20px;
+  border-radius: 5px;
+}

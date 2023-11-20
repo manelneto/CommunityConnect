@@ -10,13 +10,15 @@
         <h2 class="question-title"><a href="../questions/{{ $question->id }}">{{ $question->title }}</a></h2>
         <p class="question-description">{{ $question->content }}</p>
         <div class="answers-details">
-            <button class="question-answer-btn">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M22.8 4.8H20.4V15.6H4.8V18C4.8 18.66 5.34 19.2 6 19.2H19.2L24 24V6C24 5.34 23.46 4.8 22.8 4.8ZM18 12V1.2C18 0.54 17.46 0 16.8 0H1.2C0.54 0 0 0.54 0 1.2V18L4.8 13.2H16.8C17.46 13.2 18 12.66 18 12Z"
-                        fill="#abacb1" />
-                </svg>{{ $question->answers_count }} Answers</button>
+            @if (Request::route()->getName() == 'questions')
+                <button class="question-answer-btn">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M22.8 4.8H20.4V15.6H4.8V18C4.8 18.66 5.34 19.2 6 19.2H19.2L24 24V6C24 5.34 23.46 4.8 22.8 4.8ZM18 12V1.2C18 0.54 17.46 0 16.8 0H1.2C0.54 0 0 0.54 0 1.2V18L4.8 13.2H16.8C17.46 13.2 18 12.66 18 12Z"
+                            fill="#abacb1" />
+                    </svg>{{ $question->answers_count }} Answers</button>
+            @endif
             <span class="question-upvotes">
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -29,6 +31,13 @@
                     <path d="M0.000244141 0L9.00024 12L18.0002 0H0.000244141Z" fill="#ABACB1" />
                 </svg>
                 {{ $question->dislikes_count }}</span>
+            @if (Request::route()->getName() == 'question')
+                <ul class="question-tags">
+                    @foreach ($question->tags as $tag)
+                        <li class="question-tag">{{ $tag->name }}</li>
+                    @endforeach
+                </ul>
+            @endif
         </div>
     </div>
 </div>

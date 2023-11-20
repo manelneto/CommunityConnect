@@ -630,7 +630,7 @@ CREATE TRIGGER new_badge_notification
 
 
 -- Emblemas
-
+/*
 CREATE OR REPLACE FUNCTION award_badge_on_first_question() RETURNS TRIGGER AS 
 $BODY$
 BEGIN
@@ -726,9 +726,10 @@ CREATE TRIGGER award_badge_on_first_100_answer
     AFTER INSERT ON answer
     FOR EACH ROW
     EXECUTE PROCEDURE award_badge_on_first_100_answer();
-
+*/
 SET search_path TO lbaw23114;
 
+INSERT INTO users (username, email, password, register_date, administrator, blocked, image) VALUES ('admin', 'admin@gmail.com', '$2y$12$WqwqIw936mBUW3rK3lSeuOy8MgVjxa/3RR3N9hUySaFdXdyBpgoKK', '2023-11-20', TRUE, FALSE, 'https://picsum.photos/250/250');
 INSERT INTO users (username, email, password, register_date, administrator, blocked, image) VALUES ('kevin25', 'vernon01@gmail.com', '$2b$12$S/VZqvaHkB/YCzizx0uuvubiTJnFUa9pdoa41G2fLIK3kX8s8qtPG', '2023-09-20', FALSE, FALSE, 'https://picsum.photos/250/250');
 INSERT INTO users (username, email, password, register_date, administrator, blocked, image) VALUES ('josephwest', 'umarshall@yahoo.com', '$2b$12$JvNbuGHQJ/1902rLW/80UOGL1Kk5F7QeZfu8nNeqF3dp7/JNdootS', '2023-02-19', FALSE, FALSE, 'https://picsum.photos/250/250');
 INSERT INTO users (username, email, password, register_date, administrator, blocked, image) VALUES ('david56', 'caseyholmes@martin.net', '$2b$12$z2e9794MF0g9pDsC30G.deAmkq3PbTC/CBg4F/mD/tsX0POAtAvmm', '2022-11-09', FALSE, FALSE, 'https://picsum.photos/250/250');

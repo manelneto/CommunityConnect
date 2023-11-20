@@ -8,6 +8,29 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AnswerController extends Controller {
     /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $this->authorize('store', Answer::class);
+
+        $request->validate([
+            'content' => 'required|string|max:1000',
+            'id_question' => 'required|integer',
+            'id_user' => 'required|integer'
+        ]);
+
+        $answer = new Answer();
+        $answer->content = $request['content'];
+        $answer->id_question = $request['id_question'];
+        $answer->id_user = $request['id_user'];
+
+        $answer->save();
+
+        return redirect('questions/' . $answer->id_question)->withSuccess('Answer posted successfully!');
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(int $id)
@@ -29,9 +52,11 @@ class AnswerController extends Controller {
     {
         $answer = Answer::findOrFail($id);
         $this->authorize('update', $answer);
+
         $request->validate([
             'content' => 'required|string|max:1000'
         ]);
+
         try {
             $answer->content = $request->input('content');
             $answer->save();
@@ -56,23 +81,5 @@ class AnswerController extends Controller {
         catch (ModelNotFoundException $e) {
             return "Answer not found.";
         }
-    }
-
-    public function postAnswer(Request $request){
-
-        $request->validate([
-            'content' => 'required|string|max:1000',
-            'id_question' => 'required|integer',
-            'id_user' => 'required|integer'
-        ]);
-
-        $answer = new Answer();
-        $answer->id_question = $request->id_question;
-        $answer->id_user = $request->id_user;
-        $answer->content = $request->content;
-
-        $answer->save();
-        
-        return redirect('questions/' . $answer->id_question);
     }
 }

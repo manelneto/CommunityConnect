@@ -1,3 +1,11 @@
+@extends('layouts.app-cc')
+@include('layouts.header')
+@include('layouts.footer')
+@include('layouts.main-navigation-list')
+
+@section('content')
+    @yield('header')
+
 <div class="question-container">
     <img class="member-pfp question-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}"
          alt="User's profule picture" />
@@ -8,6 +16,9 @@
             <span class="question-community">In: {{ $question->community->name }}</span>
         </div>
         <h2 class="question-title">{{ $question->title }}</h2>
+        @if(Auth::user()->id === $question->id_user || Auth::user()->administrator)
+            <a href="{{ route('edit-question', $question->id) }}">Edit</a>
+        @endif
         <p class="question-description">{{ $question->content }}</p>
         <div class="answers-details">
             <button class="question-answer-btn">
@@ -43,7 +54,8 @@
           </ul>
         </div>
       @endif
-    <form action="/submit-answer" method="POST">
+    @auth
+    <form action="/answers" method="POST">
         @csrf
         <label for="content">Your Answer:</label>
         <textarea id="content" name="content" rows="4" cols="50"></textarea>
@@ -51,5 +63,10 @@
         <input type="hidden" name="id_question" value="{{ $question->id }}">
         <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
         <input type="submit" value="Post Answer">
- </form>
+    </form>
+    @endauth
 </div>
+
+    @yield('footer')
+@endsection
+

@@ -9,69 +9,57 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function search(Request $request)
     {
-        //
-    }
+        $after = ($request->has('after') && $request->get('after') !== '') ? $request->get('after') : '2020-01-01';
+        $before = ($request->has('before') && $request->get('before') !== '') ? $request->get('before') : '2030-12-31';
 
-    public function filterQuestions(Request $request) {
-        $after = $request->get('after');
-        $before = $request->get('before');
-
-        $questions = Question::where('date', '>=', $after, 'and')->where('date', '<=', $before);
-
-        $questions = $questions->with(['user', 'community', 'likes', 'dislikes', 'answers'])
-            ->withCount(['likes', 'dislikes', 'answers'])
-            ->orderBy('likes_count', 'desc')
-            ->get();
-        return response()->json($questions);
-    }
-
-    public function showMostLikedQuestions(Request $request)
-    {
-        if ($request->has('text') && $request->get('text') != '') {
+        if ($request->has('text') && $request->get('text') !== '') {
             $searchTerm = $request->get('text');
 
-            // check for exact match (enclosed in quotes)
             if (preg_match('/^".+"$/', $searchTerm)) {
+                // exact-match search
                 $searchTerm = trim($searchTerm, '"');
-
-                $questions = Question::where('title', 'ILIKE', '%' . $searchTerm . '%')
-                    ->orWhere('content', 'ILIKE', '%' . $searchTerm . '%');
-
+                $questions = Question::where('title', 'ILIKE', '%' . $searchTerm . '%')->orWhere('content', 'ILIKE', '%' . $searchTerm . '%');
             } else {
-                // perform full text search
+                // full-text search
                 $formattedTerm = str_replace(' ', ' | ', $searchTerm);
-
                 $questions = Question::whereRaw("tsvectors @@ to_tsquery('english', ?)", [$formattedTerm]);
             }
 
             $questions = $questions->with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
+                ->where('date', '>=', $after, 'and')
+                ->where('date', '<=', $before)
                 ->orderBy('likes_count', 'desc')
                 ->get();
-
         } else {
-
             $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
+                ->where('date', '>=', $after, 'and')
+                ->where('date', '<=', $before)
                 ->orderBy('likes_count', 'desc')
                 ->get();
         }
-
-        return view('pages.questions', ['questions' => $questions]);
+        return response()->json($questions);
     }
 
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+        $questions = json_decode($this->search($request)->content());
+        return view('questions.index', ['questions' => $questions]);
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $this->authorize('create', Question::class);
+        return view('questions.create');
     }
 
     /**
@@ -79,7 +67,24 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('store', Question::class);
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string|max:1000',
+            'id_user' => 'required|integer',
+            'id_community' => 'required|integer',
+        ]);
+
+        $question = new Question();
+        $question->title = $request['title'];
+        $question->content = $request['content'];
+        $question->id_user = $request['id_user'];
+        $question->id_community = $request['id_community'];
+
+        $question->save();
+
+        return redirect()->route('questions')->withSuccess('Question posted successfully!');
     }
 
     /**
@@ -87,9 +92,10 @@ class QuestionController extends Controller
      */
     public function show(int $id)
     {
-        $this->authorize('show', Question::class);
         try {
-            $answers = Answer::with(['user', 'likes', 'dislikes'])->where('id_question', $id)
+            $answers = Answer::with(['user', 'likes', 'dislikes'])
+                ->where('id_question', $id)
+                ->orderBy('date')
                 ->get();
             return view('questions.show', [
                 'question' => Question::findOrFail($id),
@@ -122,14 +128,14 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
         $this->authorize('update', $question);
 
-        $validatedData = $request->validate([
+        $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string|max:1000'
         ]);
 
         try {
-            $question->title = $validatedData['title'];
-            $question->content = $validatedData['content'];
+            $question->title = $request->input(['title']);
+            $question->content = $request->input(['content']);
             $question->save();
             return redirect('questions/' . $id);
         } catch (ModelNotFoundException $e) {
@@ -150,25 +156,5 @@ class QuestionController extends Controller
         } catch (ModelNotFoundException $e) {
             return "Question not found.";
         }
-    }
-
-    public function postQuestion(Request $request){
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string|max:1000',
-            'id_user' => 'required|integer',
-            'id_community' => 'required|integer',
-        ]);
-
-        $question = new Question;
-        $question->title = $validatedData['title'];
-        $question->content = $validatedData['content'];
-        $question->id_user = $validatedData['id_user'];
-        $question->id_community = $validatedData['id_community'];
-
-        $question->save();
-
-        return redirect()->route('questions' )
-        ->withSuccess('Question posted successfully!');
     }
 }

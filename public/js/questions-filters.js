@@ -17,8 +17,9 @@ if (applyButton) {
     event.preventDefault();
     const after = document.querySelector('#after').value;
     const before = document.querySelector('#before').value;
+    const text = document.querySelector('.live-search').value;
 
-    const questions = await fetchQuestions(after, before);
+    const questions = await fetchQuestions(after, before, text);
 
     const section = document.querySelector('#questions');
     section.innerHTML = '';
@@ -30,10 +31,11 @@ if (applyButton) {
   });
 }
 
-async function fetchQuestions(after, before) {
+async function fetchQuestions(after, before, text) {
   const url = '/api/questions?' + encodeForAjax({
     after: after,
-    before: before
+    before: before,
+    text: text
   });
 
   const response = await fetch(url);

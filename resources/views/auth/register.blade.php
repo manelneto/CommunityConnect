@@ -14,7 +14,7 @@
           <br>
           connect with others.
         </h3>
-        <a class="go-to-sign-in" href="/login-page.php">Have an Account? Sign In</a>
+        <a class="go-to-sign-in" href="/login">Have an Account? Sign In</a>
       </div>
       @if ($errors->any())
         <div class="error-box">

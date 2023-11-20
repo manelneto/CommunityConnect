@@ -32,7 +32,7 @@
                 @endguest
                 @auth
                     <div class="group-buttons">
-                        <a href="{{ route('users.show', Auth::user()->id) }}" class="my-account-button">My account</a>
+                        <a href="{{ route('profile', Auth::user()->id) }}" class="my-account-button">My account</a>
                     </div>
                 @endauth
             </div>

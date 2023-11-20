@@ -1,13 +1,11 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Models\Question;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,28 +19,32 @@ use App\Models\Question;
 */
 
 // Home
+Route::redirect('/', '/questions');
 
-Route::redirect('/', '/login');
+// Authentication
+Route::controller(RegisterController::class)->group(function () {
+    Route::get('/register', 'showRegisterForm')->name('register');
+    Route::post('/register', 'register');
+});
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'showLoginForm')->name('login');
+    Route::post('/login', 'authenticate');
+    Route::get('/logout', 'logout')->name('logout');
+});
 
-// Route::get('/login', function () {
-//      return view('auth.login');
-//});
+// Profile
+Route::controller(UserController::class)->group(function () {
+    Route::get('/users/{id}', 'show')->name('profile');
+    Route::get('/users/{id}/edit', 'edit')->name('edit-profile');
+    Route::post('/users/{id}', 'update');
+    Route::post('/users/{id}/delete', 'destroy');
+});
 
-//* We can use view for static pages, and get if they require parameters
-Route::view('/login', 'auth.login')->name('login');
-Route::view('/register', 'auth.register')->name('register');
-
-/*
-Route::get('/questions', [QuestionController::class, 'showMostLikedQuestions'])->name('questions');
-Route::get('/questions/{id}', [QuestionController::class, 'show']);
-Route::get('/questions/{id}/edit', [QuestionController::class, 'edit']);
-Route::post('/questions/{id}', [QuestionController::class, 'update']);
-Route::post('/questions/{id}/delete', [QuestionController::class, 'destroy']); */
-
+// Questions
 Route::controller(QuestionController::class)->group(function () {
     Route::get('/questions', 'showMostLikedQuestions')->name('questions');
     Route::get('/questions/{id}', 'show')->name('answers');
-    Route::get('/questions/{id}/edit', 'edit');
+    Route::get('/questions/{id}/edit', 'edit')->name('edit-question');
     Route::post('/questions/{id}', 'update');
     Route::post('/questions/{id}/delete', 'destroy');
     Route::post('/questions', 'postQuestion');
@@ -50,38 +52,16 @@ Route::controller(QuestionController::class)->group(function () {
 
 Route::view('/ask-question', 'pages.ask-question')->name('ask-question');
 
-// answers
-Route::post('/answers/{id}', [AnswerController::class, 'update']);
-Route::post('/answers/{id}/delete', [AnswerController::class, 'destroy']);
-Route::post('/submit-answer', [AnswerController::class, 'postAnswer']);
+// Answers
+Route::controller(AnswerController::class)->group(function () {
+    Route::post('/answers/{id}', 'update');
+    Route::post('/answers/{id}/delete', 'destroy');
+    Route::post('/submit-answer', 'postAnswer');
+});
 
-// users
-Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
-Route::get('/users/{id}/edit', [UserController::class, 'edit']);
-Route::post('/users/{id}', [UserController::class, 'update']);
-Route::post('/users/{id}/delete', [UserController::class, 'destroy']);
-
-// admin
+// Admin
 Route::get('/admin', [UserController::class, 'index']);
 Route::post('/users', [UserController::class, 'store']);
 
 // API
 Route::get('api/questions', [QuestionController::class, 'filterQuestions']);
-
-// Authentication
-// Route::controller(LoginController::class)->group(function () {
-//     Route::get('/login', 'showLoginForm')->name('login');
-//     Route::post('/login', 'authenticate');
-//    Route::get('/logout', 'logout')->name('logout');
-// });
-
-Route::controller(RegisterController::class)->group(function () {
-    // Route::get('/register', 'showRegistrationForm')->name('register');
-    Route::post('/register', 'register');
-});
-
-Route::controller(LoginController::class)->group(function () {
-    Route::get('/login', 'showLoginForm')->name('login');
-    Route::post('/login', 'authenticate');
-    Route::get('/logout', 'logout')->name('logout');
-});

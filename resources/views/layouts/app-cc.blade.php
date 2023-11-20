@@ -16,6 +16,8 @@
     <link href="{{ asset('css/login-page.css') }}" rel="stylesheet">
     <link href="{{ asset('css/register-page.css') }}" rel="stylesheet">
     <link href="{{ asset('css/questions-listing.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/profile-page.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/edit-profile.css') }}" rel="stylesheet">    
 
     <!-- JavaScript -->
     <script src="{{ asset('js/app.js') }}" defer></script>

@@ -6,7 +6,7 @@ if (button) {
         const fields = document.querySelectorAll('.edit-password');
         if (fields) {
             fields.forEach((field) => {
-                field.toggleAttribute('hidden');
+                field.style.display = (field.style.display === 'none' || field.style.display === '' ? 'block' : 'none')
                 field.value = '';
             });
         }

@@ -20,14 +20,9 @@
     <h1><input type="text" name="username" value="{{ $user->username }}"></h1>
     <img class="member-pfp question-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}"
         alt="User's profile picture" />
-    <ul>
-        <li>About</li>
-        <li>Questions</li>
-        <li>Answers</li>
-    </ul>
-    <label for="email">Email: </label>
+    <label id="email-label" for="email">Email: </label>
     <input id="email" type="email" name="email" value="{{ $user->email }}">
-    <button id="edit-password">Edit Password</button>
+    <button id="edit-password" class="edit-password-button">Edit Password</button>
     <label class="edit-password" for="current-password" hidden>Current Password:</label>
     <input class="edit-password" id="current-password" type="password" name="current-password" hidden>
     <label class="edit-password" for="password" hidden>New Password:</label>

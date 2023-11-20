@@ -1,6 +1,8 @@
 @section ('right')
     <section class="right-bar">
+        @auth
         <button class="ask-a-question-button" onclick="window.location='{{ route('create-question') }}'">Ask a Question</button>
+        @endauth
         <section class="right-bar-stats">
             <div class="left-top-square">
                 <span class="square-text">Questions</span>

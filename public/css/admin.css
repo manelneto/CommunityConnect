@@ -1,0 +1,46 @@
+#admin {
+    width: 80%;
+    margin: auto;
+}
+ 
+input[type=text], input[type=password], select {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+ 
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+ 
+button:hover {
+    opacity: 0.8;
+}
+ 
+summary {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color:var(--light-gray);
+}
+
+summary:hover {
+    background-color: var(--blue);
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+  

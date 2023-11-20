@@ -4,9 +4,9 @@
 @include('layouts.main-navigation-list')
 
 @yield('header')
+@yield('main-navigation-list')
 
-<section>
-    <h1>Admin</h1>
+<section id="admin">
     <details>
         <summary>Find a user</summary>
         <form action="../../users/" method="get">
@@ -30,19 +30,21 @@
             </ul>
         </div>
     @endif
-    <form action="../../users" method="post">
-        @csrf
-        <h2>Create a user</h2>
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username">
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password">
-        <label for="password_confirmation">Confirm Password</label>
-        <input type="password" id="password_confirmation" name="password_confirmation">
-        <button id="create-user" type="submit">Create User</button>
-    </form>
+    <details>
+        <summary>Create a user</summary>
+        <form action="../../users" method="post">
+            @csrf
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+            <label for="password_confirmation">Confirm Password</label>
+            <input type="password" id="password_confirmation" name="password_confirmation">
+            <button id="create-user" type="submit">Create User</button>
+        </form>
+    </details>
 </section>
 
 @yield('footer')

@@ -501,6 +501,11 @@ footer.main-footer {
   padding: 50px 100px;
 }
 
+.footer-link {
+  display: inline;
+  margin-right: 10px;
+}
+
 .footer-img {
   height: 4rem;
   grid-column: 1 / 2;

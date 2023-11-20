@@ -16,6 +16,9 @@
             <span class="question-community">In: {{ $question->community->name }}</span>
         </div>
         <h2 class="question-title">{{ $question->title }}</h2>
+        @if(Auth::user()->id === $question->id_user || Auth::user()->administrator)
+            <a href="{{ route('edit-question', $question->id) }}">Edit</a>
+        @endif
         <p class="question-description">{{ $question->content }}</p>
         <div class="answers-details">
             <button class="question-answer-btn">

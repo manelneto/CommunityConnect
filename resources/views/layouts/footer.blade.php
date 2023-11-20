@@ -3,7 +3,6 @@
 <footer class="main-footer">
   <img class="footer-img" src="{{ asset('assets/logo.png') }}" alt="community connect logo with text" />
   <ul class="footer-links-left">
-    <li class="footer-title">Title 1</li>
     <li class="footer-link">
       <a href="">About</a>
     </li>
@@ -11,31 +10,7 @@
       <a href="">Contact Us</a>
     </li>
     <li class="footer-link">
-      <a href="">Link 3</a>
-    </li>
-  </ul>
-  <ul class="footer-links-middle">
-    <li class="footer-title">Title 2</li>
-    <li class="footer-link">
       <a href="">Main Features</a>
-    </li>
-    <li class="footer-link">
-      <a href="">Link 2</a>
-    </li>
-    <li class="footer-link">
-      <a href="">Link 3</a>
-    </li>
-  </ul>
-  <ul class="footer-links-right">
-    <li class="footer-title">Title 3</li>
-    <li class="footer-link">
-      <a href="">Link 1</a>
-    </li>
-    <li class="footer-link">
-      <a href="">Link 2</a>
-    </li>
-    <li class="footer-link">
-      <a href="">Link 3</a>
     </li>
   </ul>
   <div class="footer-social-links">

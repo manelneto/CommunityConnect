@@ -22,13 +22,13 @@
         <a href="../users/{{ $answer->id_user }}" class="answer-username">{{ $answer->user->username }}</a>
         <span class="answer-asked-date">Answer added {{ $answer->date }}</span>
         @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
-            <textarea class="answer-description" name="content">{{ $answer->content }}</textarea>
+            <textarea class="answer-description non-movable-textarea" name="content" cols="40" rows="5">{{ $answer->content }}</textarea>
         @else
             <p class="answer-description">{{ $answer->content }}</p>
         @endif
+        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
+            <button class="edit-answer-button" formaction="../../answers/{{ $answer->id }}">Edit</button>
+            <button class="delete-answer-button" formaction="../../answers/{{ $answer->id }}/delete">Delete</button>
+        @endif
     </div>
-    @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
-        <button formaction="../../answers/{{ $answer->id }}">Edit</button>
-        <button formaction="../../answers/{{ $answer->id }}/delete">Delete</button>
-    @endif
 </form>

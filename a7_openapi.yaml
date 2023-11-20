@@ -696,7 +696,7 @@ paths:
           '403':
             description: 'This action is unauthorized.'
 
-# Create Account 
+# Create User
 
   /users:
     

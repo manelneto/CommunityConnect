@@ -36,7 +36,7 @@ Route::controller(LoginController::class)->group(function () {
 Route::controller(UserController::class)->group(function () {
     Route::post('/users', 'store');
     Route::get('/users/{id}', 'show')->name('profile');
-    Route::get('/users/{id}/edit', 'edit')->name('edit-profile');
+    Route::get('/users/{id}/edit', 'edit')->name('edit-user');
     Route::post('/users/{id}', 'update');
 });
 

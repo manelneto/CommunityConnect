@@ -34,6 +34,7 @@ Route::controller(LoginController::class)->group(function () {
 
 // Profile
 Route::controller(UserController::class)->group(function () {
+    Route::post('/users', 'store');
     Route::get('/users/{id}', 'show')->name('profile');
     Route::get('/users/{id}/edit', 'edit')->name('edit-profile');
     Route::post('/users/{id}', 'update');
@@ -59,10 +60,9 @@ Route::controller(AnswerController::class)->group(function () {
     Route::post('/answers/{id}/delete', 'destroy');
 });
 
-// TODO
 // Admin
 Route::get('/admin', [UserController::class, 'index']);
-Route::post('/users', [UserController::class, 'store']);
 
 // API
 Route::get('api/questions', [QuestionController::class, 'search']);
+Route::get('api/users', [UserController::class, 'search']);

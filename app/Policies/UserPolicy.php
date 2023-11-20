@@ -7,31 +7,37 @@ use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
 
-class UserPolicy{
+class UserPolicy {
 
     use HandlesAuthorization;
 
-    public function edit(User $user)
-    {
-        return ($user->id == Auth::user()->id || Auth::user()->administrator);
-    }
-
-    public function search() 
+    public function search(User $user): bool
     {
         return Auth::user()->administrator;
     }
 
-    public function create() 
+    public function index(User $user): bool
     {
         return Auth::user()->administrator;
     }
 
-    public function show() {
-        return true;
+    public function create(User $user): bool
+    {
+        return Auth::user()->administrator;
     }
 
-    public function update(User $user) {
-        return ($user->id == Auth::user()->id || Auth::user()->administrator);
+    public function store(User $user): bool
+    {
+        return Auth::user()->administrator;
+    }
+
+    public function edit(User $user): bool
+    {
+        return ($user->id === Auth::user()->id || Auth::user()->administrator);
+    }
+
+    public function update(User $user): bool
+    {
+        return ($user->id === Auth::user()->id || Auth::user()->administrator);
     }
 }
-

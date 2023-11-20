@@ -11,22 +11,32 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function search(Request $request)
+    {
+        $this->authorize('search', User::class);
+        $username = ($request->has('username') && $request->get('username') !== '') ? $request->get('username') : '';
+        $users = User::where('username', 'ILIKE', '%' . $username . '%')->get();
+        return response()->json($users);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // $this->authorize('index', User::class);
+        $this->authorize('index', User::class);
         $users = User::all();
-        return view('users.admin', ['users' => $users]);
+        return view('pages.admin', ['users' => $users]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create($list_of_user_data)
+    public function create()
     {
-        
+        $this->authorize('create', User::class);
+        $users = User::all();
+        return view('pages.admin', ['users' => $users]);
     }
 
     /**
@@ -34,6 +44,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('store', User::class);
+
         $request->validate([
             'username' => 'required|string|max:20|unique:users',
             'email' => 'required|email|max:250|unique:users',
@@ -48,7 +60,7 @@ class UserController extends Controller
         ]);
 
         $users = User::all();
-        return view('users.admin', ['users' => $users]);
+        return view('pages.admin', ['users' => $users]);
     }
 
     /**
@@ -56,7 +68,6 @@ class UserController extends Controller
      */
     public function show(int $id)
     {
-        $this->authorize('show', User::class);
         try {
             $user = User::findOrFail($id);
             $questions = Question::with(['user', 'community', 'likes', 'dislikes'])->where('id_user', $id)->get();
@@ -96,17 +107,17 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $this->authorize('update', $user);
 
-        if ($request->input('username') !== $user->username){
+        if ($request->input('username') !== $user->username) {
             $request->validate([
                 'username' => 'required|string|max:20|unique:users'
             ]);
         }
-        if ($request->input('email') !== $user->email){
+        if ($request->input('email') !== $user->email) {
             $request->validate([
                 'email' => 'required|email|max:250|unique:users'
             ]);
         }
-        if ($request->input('password') !== null){
+        if ($request->input('password') !== null) {
             $request->validate([
                 'current-password' => 'required|min:8',
                 'password' => 'required|min:8|confirmed'
@@ -127,13 +138,5 @@ class UserController extends Controller
         catch (ModelNotFoundException $e) {
             return "User not found.";
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        //
     }
 }

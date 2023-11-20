@@ -11,10 +11,10 @@ class QuestionController extends Controller
 {
     public function search(Request $request)
     {
-        $after = ($request->has('after') && $request->get('after') != '') ? $request->get('after') : '2020-01-01';
-        $before = ($request->has('before') && $request->get('before') != '') ? $request->get('before') : '2030-12-31';
+        $after = ($request->has('after') && $request->get('after') !== '') ? $request->get('after') : '2020-01-01';
+        $before = ($request->has('before') && $request->get('before') !== '') ? $request->get('before') : '2030-12-31';
 
-        if ($request->has('text') && $request->get('text') != '') {
+        if ($request->has('text') && $request->get('text') !== '') {
             $searchTerm = $request->get('text');
 
             if (preg_match('/^".+"$/', $searchTerm)) {

@@ -11,8 +11,8 @@
         <summary>Find a user</summary>
         <form action="../../users/" method="get">
             @csrf
-            <label for="username">Username</label>
-            <select id="username" name="username">
+            <label for="user">Username</label>
+            <select id="user" name="user">
                 <option value="0">None</option>
                 <?php foreach ($users as $user) { ?>
                 <option value="{{ $user->id }}">{{ $user->username }}</option>

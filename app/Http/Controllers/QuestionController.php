@@ -99,6 +99,7 @@ class QuestionController extends Controller
 
             // Retrieve answers related to the question
             $answers = Answer::with(['user', 'likes', 'dislikes'])
+                ->withCount(['likes', 'dislikes'])
                 ->where('id_question', $id)
                 ->orderBy('date')
                 ->get();

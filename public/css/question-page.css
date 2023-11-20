@@ -22,7 +22,6 @@
   padding: 20px 0;
   border-top: 1px solid #c6c6c6;
   border-bottom: 1px solid #c6c6c6;
-  margin-bottom: 30px;
 }
 
 .leave-answer-button {
@@ -32,4 +31,38 @@
   padding: 10px 0;
   font-size: 20px;
   border-radius: 5px;
+}
+
+.answer-container {
+  display: flex;
+  align-items: flex-start;
+  padding: 35px 50px;
+  border-bottom: 1px solid #c6c6c6;
+}
+
+.answer-container .content-right {
+  margin-left: 20px;
+}
+
+.content-right .answer-username {
+  color: var(--blue);
+  display: block;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.content-right .answer-asked-date {
+  font-size: 14px;
+  color: #abacb1;
+}
+
+.content-right .answer-description {
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+.left-content .answers-votes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

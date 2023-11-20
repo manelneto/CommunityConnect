@@ -72,7 +72,7 @@ paths:
                302Success:
                  description: 'Successful authentication. Redirect to questions page.'
                  value: '/questions'
-               302Error:
+               302Failure:
                  description: 'Failed authentication. Redirect to login page.'
                  value: '/login'
 
@@ -310,7 +310,7 @@ paths:
                 - id_community
       
       responses:
-       '302':
+        '302':
          description: 'Redirect after processing the question submission.'
          headers:
            Location:
@@ -320,6 +320,8 @@ paths:
                302Success:
                  description: 'Successful question submission. Redirect to questions page.'
                  value: '/questions'
+        '403':
+          description: 'This action is unauthorized.'
 
 # Create Question Form
 

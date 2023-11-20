@@ -5,7 +5,7 @@ if (filterButton) {
     event.preventDefault();
     const questionsFilters = document.querySelector(".questions-filters");
     if (questionsFilters) {
-      questionsFilters.classList.toggle("hidden");
+      questionsFilters.toggleAttribute("hidden");
     }
   });
 }

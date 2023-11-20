@@ -6,6 +6,7 @@ use App\Models\Question;
 use App\Models\Answer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
@@ -57,6 +58,9 @@ class QuestionController extends Controller
      */
     public function create()
     {
+        if (!Auth::check()) {
+            return redirect()->route('login')->withErrors('You must login before creating a question');
+        }
         $this->authorize('create', Question::class);
         return view('questions.create');
     }

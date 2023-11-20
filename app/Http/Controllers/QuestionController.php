@@ -121,9 +121,9 @@ class QuestionController extends Controller
      */
     public function edit(int $id)
     {
-        $question = Question::findOrFail($id);
-        $this->authorize('edit', $question);
         try {
+            $question = Question::with('tags')->withCount(['likes', 'dislikes'])->findOrFail($id);
+            $this->authorize('edit', $question);
             return view('questions.edit', ['question' => $question]);
         } catch (ModelNotFoundException $e) {
             return "Question not found.";

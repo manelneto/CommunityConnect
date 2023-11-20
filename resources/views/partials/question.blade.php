@@ -8,7 +8,10 @@
             <span class="question-community">In: {{ $question->community->name }}</span>
         </div>
         <h2 class="question-title"><a href="../questions/{{ $question->id }}">{{ $question->title }}</a></h2>
-        <p class="question-description">{{ $question->content }}</p>
+        <p class="question-description">{{ $question->content }}@if (Request::route()->getName() == 'question' and $question->id_user == Auth::user()->id)
+                <a href=" {{ route('edit-question', ['id' => $question->id]) }}" class="edit-question-button">Edit</a>
+            @endif
+        </p>
         <div class="answers-details">
             @if (Request::route()->getName() == 'questions')
                 <button class="question-answer-btn">
@@ -31,7 +34,7 @@
                     <path d="M0.000244141 0L9.00024 12L18.0002 0H0.000244141Z" fill="#ABACB1" />
                 </svg>
                 {{ $question->dislikes_count }}</span>
-            @if (Request::route()->getName() == 'question')
+            @if (Request::route()->getName() == 'question' or Request::route()->getName() == 'edit-question')
                 <ul class="question-tags">
                     @foreach ($question->tags as $tag)
                         <li class="question-tag">{{ $tag->name }}</li>

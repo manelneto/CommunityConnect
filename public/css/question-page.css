@@ -25,14 +25,16 @@
   border-bottom: 1px solid #c6c6c6;
 }
 
-.leave-answer-container form textarea {
+.leave-answer-container form textarea,
+.non-movable-textarea {
   resize: none;
   border: 1px solid #c6c6c6;
   font-size: 18px;
   margin-bottom: 20px;
 }
 
-.leave-answer-container form textarea:focus-visible {
+.leave-answer-container form textarea:focus-visible,
+.non-movable-textarea:focus-visible {
   border: 2px solid var(--blue);
   outline: none;
 }

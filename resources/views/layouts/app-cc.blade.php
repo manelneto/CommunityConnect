@@ -17,6 +17,9 @@
     <link href="{{ asset('css/login-page.css') }}" rel="stylesheet">
     <link href="{{ asset('css/register-page.css') }}" rel="stylesheet">
     <link href="{{ asset('css/questions-listing.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/question-page.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/edit-questions-page.css') }}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/error.css') }}" rel="stylesheet">
     <link href="{{ asset('css/edit-profile.css') }}" rel="stylesheet">
     <link href="{{ asset('css/profile-page.css') }}" rel="stylesheet">

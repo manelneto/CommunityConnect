@@ -43,7 +43,7 @@
                                 </g>
                             </svg>Filter</button>
                     </div>
-                    <div class="questions-filters">
+                    <div class="questions-filters" hidden>
                         <form action="#" method="post">
                             <fieldset>
                                 <legend>Filter by</legend>

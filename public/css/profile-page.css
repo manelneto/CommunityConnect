@@ -1,38 +1,41 @@
-body {
-    background-color: #f4f4f4;
-    margin: 0;
-}
 
-main {
-    max-width: 800px;
+#profile-info {
+    background-color: white;
+    margin: 0;
     margin: 50px auto;
-    background-color: #fff;
+    width: 89%;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+#profile-info h1 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 28px;
     margin-bottom: 5px;
 }
 
-h2 {
+#profile-info h2 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
     color: #555;
     margin-bottom: 20px;
 }
 
-img.member-pfp {
-    width: 100px;
-    height: 100px;
+#profile-info img.member-pfp {
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
-ul {
+#profile-info ul {
     display: block;
     font-family: Arial, Helvetica, sans-serif;
     list-style: none;
@@ -40,7 +43,7 @@ ul {
     text-align: center;
 }
 
-li {
+#profile-info li {
     display: inline-block;
     font-weight: bold;
     cursor: pointer;
@@ -49,7 +52,7 @@ li {
     margin-right: 25px;
 }
 
-li:hover {
+#profile-info li:hover {
     color: var(--blue);
 }
 
@@ -77,16 +80,10 @@ a:hover.edit-profile {
     background-color: var(--dark-blue);
 }
 
-section {
-    margin-top: 20px;
-}
-
-/* Styles for the hidden sections (you may adjust the styles based on your design) */
 #my-questions, #my-answers {
     display: none;
 }
 
-/* Styles for the visible sections when active */
 #questions-button.active, #my-questions {
     display: block;
 }

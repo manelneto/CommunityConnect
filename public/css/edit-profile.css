@@ -1,4 +1,4 @@
-body {
+/*body {
     background-color: #f4f4f4;
     margin: 0;
 }
@@ -65,4 +65,4 @@ button[formaction="../users/{{ $user->id }}/delete"] {
 
 button[formaction="../users/{{ $user->id }}/delete"]:hover {
     background-color: #d32f2f;
-}
+}*/

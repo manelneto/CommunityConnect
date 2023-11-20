@@ -496,14 +496,14 @@ main {
 
 footer.main-footer {
   display: grid;
-  grid-template-columns: 2.5fr 1fr 1fr 1fr 1.5fr;
+  grid-template-columns: 2.5fr 1.5fr  1.5fr;
   background-color: var(--dark-blue);
   padding: 50px 100px;
 }
 
 .footer-link {
   display: inline;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .footer-img {
@@ -512,6 +512,7 @@ footer.main-footer {
 }
 
 .footer-links-left {
+  margin-top:1.5rem;
   grid-column: 2 / 3;
 }
 

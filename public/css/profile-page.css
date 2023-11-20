@@ -84,11 +84,10 @@ a:hover.edit-profile {
     display: none;
 }
 
-#questions-button.active, #my-questions {
+#questions-button.active {
     display: block;
 }
 
-#answers-button.active, #my-answers {
+#answers-button.active {
     display: block;
 }
-

@@ -19,7 +19,7 @@
     <link href="{{ asset('css/questions-listing.css') }}" rel="stylesheet">
     <link href="{{ asset('css/error.css') }}" rel="stylesheet">
     <link href="{{ asset('css/edit-profile.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/profile-page.css') }}" rel="stylesheet">
 
     <!-- JavaScript -->
     <script src="{{ asset('js/app.js') }}" defer></script>

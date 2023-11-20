@@ -93,27 +93,37 @@ class QuestionController extends Controller
     public function show(int $id)
     {
         try {
+            // Retrieve the question
+            $question = Question::withCount(['likes', 'dislikes', 'tags'])
+                ->findOrFail($id);
+
+            // Retrieve answers related to the question
             $answers = Answer::with(['user', 'likes', 'dislikes'])
+                ->withCount(['likes', 'dislikes'])
                 ->where('id_question', $id)
                 ->orderBy('date')
                 ->get();
+
+            // Pass the question and answers to the view
             return view('questions.show', [
-                'question' => Question::findOrFail($id),
+                'question' => $question,
                 'answers' => $answers
             ]);
+
         } catch (ModelNotFoundException $e) {
             return "Question not found.";
         }
     }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(int $id)
     {
-        $question = Question::findOrFail($id);
-        $this->authorize('edit', $question);
         try {
+            $question = Question::with('tags')->withCount(['likes', 'dislikes'])->findOrFail($id);
+            $this->authorize('edit', $question);
             return view('questions.edit', ['question' => $question]);
         } catch (ModelNotFoundException $e) {
             return "Question not found.";

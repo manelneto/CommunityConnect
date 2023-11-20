@@ -40,4 +40,14 @@ class Question extends Model
     {
         return $this->votes()->where('likes', false);
     }
+
+    public function questionTags()
+    {
+        return $this->hasMany(QuestionTag::class, 'id_question');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'question_tags', 'id_question', 'id_tag');
+    }
 }

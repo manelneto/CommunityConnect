@@ -49,6 +49,7 @@
 .question-username {
   color: var(--blue);
   margin-right: 15px;
+  font-size: 20px;
 }
 
 .question-description,
@@ -119,4 +120,16 @@
 
 .question-upvotes {
   color: var(--blue);
+}
+
+a.edit-question-button {
+  background-color: #c6c6c6;
+  margin-left: 10px;
+  padding: 4px 10px;
+  border-radius: 5px;
+}
+
+a.edit-question-button:hover {
+  background-color: var(--blue);
+  transition: 0.2s;
 }

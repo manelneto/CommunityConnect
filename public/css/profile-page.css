@@ -22,7 +22,7 @@
     margin-bottom: 20px;
 }
 
-#profile-info img.member-pfp {
+#profile-info .member-pfp question-member-pfp {
     width: 200px;
     height: 200px;
     border-radius: 50%;

@@ -1,11 +1,9 @@
-/*body {
+
+#edit-profile{
     background-color: #f4f4f4;
     margin: 0;
-}
-
-form {
     font-family: Arial, sans-serif;
-    max-width: 600px;
+    width: 85%;
     margin: 50px auto;
     background-color: #fff;
     padding: 20px;
@@ -13,12 +11,12 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+#edit-profile h1 {
     margin-bottom: 20px;
     font-size: 24px;
 }
 
-img.member-pfp {
+#edit-profile img.member-pfp {
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -27,7 +25,7 @@ img.member-pfp {
 }
     
 
-label {
+#edit-profile label {
     margin-bottom: 8px;
     font-weight: bold;
 }
@@ -36,7 +34,7 @@ label {
     display: block;
 }
 
-input {
+#edit-profile input {
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
@@ -45,7 +43,7 @@ input {
     border-radius: 4px;
 }
 
-button {
+#edit-profile button {
     background-color: var(--blue);
     color: #fff;
     padding: 10px 15px;
@@ -53,16 +51,9 @@ button {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    margin-bottom: 20px;
 }
 
-button:hover {
+#edit-profile button:hover {
     background-color: var(--dark-blue);
 }
-
-button[formaction="../users/{{ $user->id }}/delete"] {
-    background-color: #f44336;
-}
-
-button[formaction="../users/{{ $user->id }}/delete"]:hover {
-    background-color: #d32f2f;
-}*/

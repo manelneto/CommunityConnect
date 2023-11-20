@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    public function search(Request $request) {
+    public function search(Request $request)
+    {
         $after = ($request->has('after') && $request->get('after') != '') ? $request->get('after') : '2020-01-01';
         $before = ($request->has('before') && $request->get('before') != '') ? $request->get('before') : '2030-12-31';
 
@@ -68,18 +69,18 @@ class QuestionController extends Controller
     {
         $this->authorize('store', Question::class);
 
-        $validatedData = $request->validate([
+        $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string|max:1000',
             'id_user' => 'required|integer',
             'id_community' => 'required|integer',
         ]);
 
-        $question = new Question;
-        $question->title = $validatedData['title'];
-        $question->content = $validatedData['content'];
-        $question->id_user = $validatedData['id_user'];
-        $question->id_community = $validatedData['id_community'];
+        $question = new Question();
+        $question->title = $request['title'];
+        $question->content = $request['content'];
+        $question->id_user = $request['id_user'];
+        $question->id_community = $request['id_community'];
 
         $question->save();
 
@@ -92,7 +93,10 @@ class QuestionController extends Controller
     public function show(int $id)
     {
         try {
-            $answers = Answer::with(['user', 'likes', 'dislikes'])->where('id_question', $id)->get();
+            $answers = Answer::with(['user', 'likes', 'dislikes'])
+                ->where('id_question', $id)
+                ->orderBy('date')
+                ->get();
             return view('questions.show', [
                 'question' => Question::findOrFail($id),
                 'answers' => $answers
@@ -124,14 +128,14 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
         $this->authorize('update', $question);
 
-        $validatedData = $request->validate([
+        $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string|max:1000'
         ]);
 
         try {
-            $question->title = $validatedData['title'];
-            $question->content = $validatedData['content'];
+            $question->title = $request->input(['title']);
+            $question->content = $request->input(['content']);
             $question->save();
             return redirect('questions/' . $id);
         } catch (ModelNotFoundException $e) {

@@ -43,7 +43,8 @@
           </ul>
         </div>
       @endif
-    <form action="/submit-answer" method="POST">
+    @auth
+    <form action="/answers" method="POST">
         @csrf
         <label for="content">Your Answer:</label>
         <textarea id="content" name="content" rows="4" cols="50"></textarea>
@@ -51,5 +52,6 @@
         <input type="hidden" name="id_question" value="{{ $question->id }}">
         <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
         <input type="submit" value="Post Answer">
- </form>
+    </form>
+    @endauth
 </div>

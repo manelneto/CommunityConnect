@@ -43,21 +43,23 @@ Route::controller(UserController::class)->group(function () {
 // Questions
 Route::controller(QuestionController::class)->group(function () {
     Route::get('/questions', 'index')->name('questions');
-    Route::get('/ask-question', 'create')->name('ask-question');
-    Route::get('/questions/{id}', 'show')->name('answers');
+    Route::get('/questions/create', 'create')->name('create-question');
+    Route::post('/questions', 'store');
+    Route::get('/questions/{id}', 'show')->name('question');
     Route::get('/questions/{id}/edit', 'edit')->name('edit-question');
     Route::post('/questions/{id}', 'update');
     Route::post('/questions/{id}/delete', 'destroy');
-    Route::post('/questions', 'store');
 });
 
 // Answers
 Route::controller(AnswerController::class)->group(function () {
+    Route::get('/answers/{id}/edit', 'edit')->name('edit-answer');
+    Route::post('/answers', 'store');
     Route::post('/answers/{id}', 'update');
     Route::post('/answers/{id}/delete', 'destroy');
-    Route::post('/submit-answer', 'postAnswer');
 });
 
+// TODO
 // Admin
 Route::get('/admin', [UserController::class, 'index']);
 Route::post('/users', [UserController::class, 'store']);

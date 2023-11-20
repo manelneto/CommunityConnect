@@ -43,7 +43,7 @@
           <label for="password_confirmation">Confirm password *</label>
           <input type="password" id="password_confirmation" name="password_confirmation" required>
         </div>
-        <small>Password must contain bla bla bla bla bla</small>
+        <small>Password must contain at least 8 characters</small>
         <button type="submit">Sign Up</button>
       </form>
     </div>

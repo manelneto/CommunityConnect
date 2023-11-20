@@ -18,6 +18,7 @@
     <link href="{{ asset('css/questions-listing.css') }}" rel="stylesheet">
     <link href="{{ asset('css/question-page.css') }}" rel="stylesheet">
     <link href="{{ asset('css/edit-questions-page.css') }}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 
     <!-- JavaScript -->
     <script src="{{ asset('js/app.js') }}" defer></script>

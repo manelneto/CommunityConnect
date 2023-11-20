@@ -13,3 +13,20 @@ function sendAjaxRequest(method, url, data) {
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   request.send(encodeForAjax(data));
 }
+
+function show(element) {
+  element.style.display = 'initial';
+}
+
+function hide(element) {
+  element.style.display = 'none';
+}
+
+function toggle(element) {
+  console.log(element.style.display);
+  if (element.style.display === 'none' || !element.style.display) {
+    element.style.display = 'flex';
+  } else {
+    hide(element);
+  }
+}

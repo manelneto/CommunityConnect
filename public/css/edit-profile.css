@@ -57,3 +57,7 @@
 #edit-profile button:hover {
     background-color: var(--dark-blue);
 }
+
+#edit-profile .edit-password {
+    display: none;
+}

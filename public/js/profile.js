@@ -1,11 +1,3 @@
-function show(element) {
-    element.style.display = 'initial';
-}
-
-function hide(element) {
-    element.style.display = 'none';
-}
-
 const aboutButton = document.querySelector('#about-button');
 
 if (aboutButton) {

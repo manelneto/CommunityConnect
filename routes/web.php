@@ -42,7 +42,7 @@ Route::controller(UserController::class)->group(function () {
 
 // Questions
 Route::controller(QuestionController::class)->group(function () {
-    Route::get('/questions', 'showMostLikedQuestions')->name('questions');
+    Route::get('/questions', 'index')->name('questions');
     Route::get('/questions/{id}', 'show')->name('answers');
     Route::get('/questions/{id}/edit', 'edit')->name('edit-question');
     Route::post('/questions/{id}', 'update');
@@ -64,4 +64,4 @@ Route::get('/admin', [UserController::class, 'index']);
 Route::post('/users', [UserController::class, 'store']);
 
 // API
-Route::get('api/questions', [QuestionController::class, 'filterQuestions']);
+Route::get('api/questions', [QuestionController::class, 'search']);

@@ -9,62 +9,48 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+    public function search(Request $request) {
+        $after = ($request->has('after') && $request->get('after') != '') ? $request->get('after') : '2020-01-01';
+        $before = ($request->has('before') && $request->get('before') != '') ? $request->get('before') : '2030-12-31';
 
-    public function filterQuestions(Request $request) {
-        $after = $request->get('after');
-        $before = $request->get('before');
-
-        $questions = Question::where('date', '>=', $after, 'and')->where('date', '<=', $before);
-
-        $questions = $questions->with(['user', 'community', 'likes', 'dislikes', 'answers'])
-            ->withCount(['likes', 'dislikes', 'answers'])
-            ->orderBy('likes_count', 'desc')
-            ->get();
-        return response()->json($questions);
-    }
-
-    public function showMostLikedQuestions(Request $request)
-    {
         if ($request->has('text') && $request->get('text') != '') {
             $searchTerm = $request->get('text');
 
-            // check for exact match (enclosed in quotes)
             if (preg_match('/^".+"$/', $searchTerm)) {
+                // exact-match search
                 $searchTerm = trim($searchTerm, '"');
-
-                $questions = Question::where('title', 'ILIKE', '%' . $searchTerm . '%')
-                    ->orWhere('content', 'ILIKE', '%' . $searchTerm . '%');
-
+                $questions = Question::where('title', 'ILIKE', '%' . $searchTerm . '%')->orWhere('content', 'ILIKE', '%' . $searchTerm . '%');
             } else {
-                // perform full text search
+                // full-text search
                 $formattedTerm = str_replace(' ', ' | ', $searchTerm);
-
                 $questions = Question::whereRaw("tsvectors @@ to_tsquery('english', ?)", [$formattedTerm]);
             }
 
             $questions = $questions->with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
+                ->where('date', '>=', $after, 'and')
+                ->where('date', '<=', $before)
                 ->orderBy('likes_count', 'desc')
                 ->get();
-
         } else {
-
             $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
+                ->where('date', '>=', $after, 'and')
+                ->where('date', '<=', $before)
                 ->orderBy('likes_count', 'desc')
                 ->get();
         }
-
-        return view('pages.questions', ['questions' => $questions]);
+        return response()->json($questions);
     }
 
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+        $questions = json_decode($this->search($request)->content());
+        return view('pages.questions', ['questions' => $questions]);
+    }
 
     /**
      * Show the form for creating a new resource.

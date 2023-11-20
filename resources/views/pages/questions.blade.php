@@ -29,7 +29,7 @@
                 <div class="questions-info">
                     <span class="showing-text">Showing</span>
                     <div class="questions-stats">
-                        <span class="questions-number">{{ $questions->count() }} questions</span>
+                        <span class="questions-number">{{ count($questions) }} questions</span>
                         <button class="filters-button"><svg xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="16" height="16"
                                 viewBox="0 0 256 256" xml:space="preserve">

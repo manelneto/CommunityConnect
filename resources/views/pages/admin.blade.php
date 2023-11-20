@@ -26,7 +26,7 @@
         <section id="admin">
             <details>
                 <summary>Find a user</summary>
-                <form action="../../users/" method="get">
+                <form action="../../users/" method="get" class="form-admin">
                     @csrf
                     <label for="username">Username</label>
                     <select id="username" name="username">
@@ -49,7 +49,7 @@
             @endif
             <details>
                 <summary>Create a user</summary>
-                <form action="../../users" method="post">
+                <form action="../../users" method="post" class="form-admin">
                     @csrf
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username">

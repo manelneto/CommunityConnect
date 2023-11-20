@@ -1,6 +1,7 @@
 #admin{
     background-color: white;
 }
+
 input[type=text], input[type=password], select {
     padding: 12px 20px;
     margin: 8px 0;
@@ -12,17 +13,17 @@ input[type=text], input[type=password], select {
 #find-user, #create-user {
     background-color: var(--blue);
     color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
     border: none;
     cursor: pointer;
 }
  
-button:hover {
-    opacity: 0.8;
-}
- 
 summary {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    width:80%;
     font-size: 1.2em;
     font-weight: bold;
     color: #333;
@@ -40,3 +41,11 @@ summary::-webkit-details-marker {
     display: none;
 }
   
+.form-admin{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    width: 80%;
+    padding: 10px;
+    background-color: var(--light-gray);
+}

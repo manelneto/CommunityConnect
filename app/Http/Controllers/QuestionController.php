@@ -57,7 +57,8 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Question::class);
+        return view('pages.ask-question');
     }
 
     /**
@@ -65,7 +66,24 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('store', Question::class);
+
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string|max:1000',
+            'id_user' => 'required|integer',
+            'id_community' => 'required|integer',
+        ]);
+
+        $question = new Question;
+        $question->title = $validatedData['title'];
+        $question->content = $validatedData['content'];
+        $question->id_user = $validatedData['id_user'];
+        $question->id_community = $validatedData['id_community'];
+
+        $question->save();
+
+        return redirect()->route('questions')->withSuccess('Question posted successfully!');
     }
 
     /**
@@ -73,10 +91,8 @@ class QuestionController extends Controller
      */
     public function show(int $id)
     {
-        $this->authorize('show', Question::class);
         try {
-            $answers = Answer::with(['user', 'likes', 'dislikes'])->where('id_question', $id)
-                ->get();
+            $answers = Answer::with(['user', 'likes', 'dislikes'])->where('id_question', $id)->get();
             return view('questions.show', [
                 'question' => Question::findOrFail($id),
                 'answers' => $answers
@@ -136,25 +152,5 @@ class QuestionController extends Controller
         } catch (ModelNotFoundException $e) {
             return "Question not found.";
         }
-    }
-
-    public function postQuestion(Request $request){
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string|max:1000',
-            'id_user' => 'required|integer',
-            'id_community' => 'required|integer',
-        ]);
-
-        $question = new Question;
-        $question->title = $validatedData['title'];
-        $question->content = $validatedData['content'];
-        $question->id_user = $validatedData['id_user'];
-        $question->id_community = $validatedData['id_community'];
-
-        $question->save();
-
-        return redirect()->route('questions' )
-        ->withSuccess('Question posted successfully!');
     }
 }

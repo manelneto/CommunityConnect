@@ -12,21 +12,28 @@ class QuestionPolicy {
 
     use HandlesAuthorization;
 
-    public function show() {
-        return true;
-    }
-
-    public function edit(User $user, Question $question)
+    public function create(User $user): bool
     {
-        return ($user->id == Auth::user()->id) && ($question->id_user == $user->id || Auth::user()->administrator);
+        return Auth::check();
     }
 
-    public function update(User $user, Question $question) {
-        return ($user->id == Auth::user()->id) && ($question->id_user == $user->id || Auth::user()->administrator);
+    public function store(User $user): bool
+    {
+        return Auth::check();
     }
 
-    public function destroy(User $user, Question $question) {
-        return ($user->id == Auth::user()->id) && ($question->id_user == $user->id || Auth::user()->administrator);
+    public function edit(User $user, Question $question): bool
+    {
+        return ($user->id === Auth::user()->id) && ($question->id_user === $user->id || Auth::user()->administrator);
+    }
+
+    public function update(User $user, Question $question): bool
+    {
+        return ($user->id === Auth::user()->id) && ($question->id_user === $user->id || Auth::user()->administrator);
+    }
+
+    public function destroy(User $user, Question $question): bool
+    {
+        return ($user->id === Auth::user()->id) && ($question->id_user === $user->id || Auth::user()->administrator);
     }
 }
-

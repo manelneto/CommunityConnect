@@ -1,0 +1,19 @@
+.error-box {
+    color: red;
+    text-align: center;
+    border: 1px solid red;
+    background-color: #f8d7da;
+    padding: 1rem;
+    border-radius: 15px;
+    text-align: center;
+    border-radius: 15px;
+    position: fixed;
+    top: 15%;
+    left: 30%;
+}
+ 
+.error-box ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+ 

@@ -60,7 +60,7 @@ Route::controller(AnswerController::class)->group(function () {
 });
 
 // Admin
-Route::get('/admin', [UserController::class, 'index']);
+Route::get('/admin', [UserController::class, 'index'])->name('admin');
 
 // API
 Route::get('api/questions', [QuestionController::class, 'search']);

@@ -44,6 +44,7 @@
       </svg>
       Contact Us</a>
   </li>
+  <li><a href="{{ route('admin') }}">Admin</a></li>
 </ul>
 
 @endsection

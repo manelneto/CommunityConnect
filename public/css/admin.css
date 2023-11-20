@@ -1,7 +1,6 @@
-#admin {
-    margin: auto;
+#admin{
+    background-color: white;
 }
- 
 input[type=text], input[type=password], select {
     padding: 12px 20px;
     margin: 8px 0;

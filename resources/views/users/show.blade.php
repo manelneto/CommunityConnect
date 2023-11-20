@@ -10,7 +10,7 @@
     <h2>{{ $user->email }}</h2>
     <img class="member-pfp question-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}"
         alt="User's profile picture" />
-    @if(Auth::user()->id === $user->id || Auth::user()->administrator)
+    @if(Auth::user()?->id === $user->id || Auth::user()?->administrator)
         <a href="{{ route('edit-user', $user->id) }}">Edit</a>
     @endif
     <ul>

@@ -6,6 +6,7 @@ use App\Models\Question;
 use App\Models\Answer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
@@ -14,9 +15,8 @@ class QuestionController extends Controller
         $after = ($request->has('after') && $request->get('after') !== '') ? $request->get('after') : '2020-01-01';
         $before = ($request->has('before') && $request->get('before') !== '') ? $request->get('before') : '2030-12-31';
 
-        if ($request->has('text') && $request->get('text') !== '') {
+        if ($request->has('text') && $request->get('text') != '') {
             $searchTerm = $request->get('text');
-
             if (preg_match('/^".+"$/', $searchTerm)) {
                 // exact-match search
                 $searchTerm = trim($searchTerm, '"');
@@ -58,6 +58,9 @@ class QuestionController extends Controller
      */
     public function create()
     {
+        if (!Auth::check()) {
+            return redirect()->route('login')->withErrors('You must login before creating a question');
+        }
         $this->authorize('create', Question::class);
         return view('questions.create');
     }

@@ -39,11 +39,31 @@
 }
 
 .questions-filters {
-  height: 200px;
+  height: 170px;
   background-color: var(--light-gray);
   margin-top: 20px;
   border-radius: 5px;
   border: 1px solid #c6c6c6;
+}
+
+fieldset {
+  padding: 1rem;
+  margin: 1rem;
+}
+
+#apply-button {
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+}
+
+fieldset label {
+  margin-left: 20px;
+  font-weight: bold;
 }
 
 .question-username {

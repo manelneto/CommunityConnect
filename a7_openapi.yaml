@@ -406,7 +406,7 @@ paths:
 
 # Edit Question Form
 
-  /question/{id}/edit/:
+  /questions/{id}/edit/:
 
     get:
       operationId: R306
@@ -430,7 +430,7 @@ paths:
 
 # Delete Question
 
-  /question/{id}/delete:
+  /questions/{id}/delete:
 
     post:
       operationId: R307
@@ -554,7 +554,7 @@ paths:
 
 # Create Answer Action
 
-  /question/{id}:
+  /answers:
 
     post:
       operationId: R401
@@ -562,13 +562,6 @@ paths:
       description: "Processes answer's creation form submission. Access: USR, OWN, ADM"
       tags:
         - 'M04: Answers'
-
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: True
 
       requestBody:
         required: true

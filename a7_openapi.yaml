@@ -6,7 +6,7 @@ info:
   description: 'Web Resources Specification (A7) for Community Connect'
 
 servers:
-  - url: http://lbaw.fe.up.pt
+  - url: https://lbaw23114.lbaw.fe.up.pt
     description: Production server
 
 externalDocs:
@@ -52,9 +52,8 @@ paths:
             schema:
               type: object
               properties:
-                email:
+                username_or_email:
                   type: string
-                  format: email
                 password:
                   type: string
                   format: password
@@ -71,8 +70,8 @@ paths:
                type: string
              examples:
                302Success:
-                 description: 'Successful authentication. Redirect to foruns page.'
-                 value: '/foruns'
+                 description: 'Successful authentication. Redirect to questions page.'
+                 value: '/questions'
                302Error:
                  description: 'Failed authentication. Redirect to login page.'
                  value: '/login'
@@ -81,7 +80,7 @@ paths:
 
   /logout:
 
-   post:
+   get:
      operationId: R103
      summary: 'R103: Logout action'
      description: 'Logout the current user. Access: USR, OWN, ADM'
@@ -96,8 +95,8 @@ paths:
                type: string
              examples:
                302Success:
-                 description: 'Successful logout. Redirect to foruns page.'
-                 value: '/foruns'
+                 description: 'Successful logout. Redirect to questions page.'
+                 value: '/questions'
 
 # Register
 
@@ -142,7 +141,7 @@ paths:
                 - username
                 - email
                 - password
-                - confirm_password
+                - password_confirmation
 
       responses:
         '302':
@@ -153,8 +152,8 @@ paths:
                 type: string
               examples:
                 302Success:
-                  description: 'Successful registration. Redirect to foruns page.'
-                  value: '/foruns'
+                  description: 'Successful registration. Redirect to questions page.'
+                  value: '/questions'
                 302Failure:
                   description: 'Failed registration. Redirect to register page.'
                   value: '/register'
@@ -163,12 +162,12 @@ paths:
 
 # View/Edit Profile
 
-  /user/{id}:
+  /users/{id}:
 
     get:
       operationId: R201
       summary: 'R201: User profile page'
-      description: "Shows an user's profile page. Access: USR, OWN, ADM"
+      description: "Shows an user's profile page. Access: PUB, USR, OWN, ADM"
       tags:
         - 'M02: Profile'
 
@@ -183,7 +182,7 @@ paths:
         '200':
           description: 'Ok. Show profile page.'
         '302':
-          description: 'Redirect because user is not authenticated or id does not exist.'
+          description: 'Redirect because id does not exist.'
           headers:
             Location:
               schema:

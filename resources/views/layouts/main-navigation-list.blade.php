@@ -44,7 +44,9 @@
       </svg>
       Contact Us</a>
   </li>
-  <li><a href="{{ route('admin') }}">Admin</a></li>
+  @if(Auth::user()?->administrator)
+    <li><a href="{{ route('admin') }}">Admin</a></li>
+  @endif
 </ul>
 
 @endsection

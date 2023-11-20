@@ -1,3 +1,11 @@
+@extends('layouts.app-cc')
+@include('layouts.header')
+@include('layouts.footer')
+@include('layouts.main-navigation-list')
+
+@section('content')
+    @yield('header')
+
 @if ($errors->any())
         <div class="error-box">
           <ul>
@@ -37,3 +45,6 @@
     <button formaction="../../questions/{{ $question->id }}">Edit</button>
     <button formaction="../../questions/{{ $question->id }}/delete">Delete</button>
 </form>
+
+    @yield('footer')
+@endsection

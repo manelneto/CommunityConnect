@@ -1,3 +1,11 @@
+@extends('layouts.app-cc')
+@include('layouts.header')
+@include('layouts.footer')
+@include('layouts.main-navigation-list')
+
+@section('content')
+    @yield('header')
+
 <div class="question-container">
     <img class="member-pfp question-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}"
          alt="User's profule picture" />
@@ -55,3 +63,7 @@
     </form>
     @endauth
 </div>
+
+    @yield('footer')
+@endsection
+

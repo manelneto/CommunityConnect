@@ -50,7 +50,7 @@ class QuestionController extends Controller
     public function index(Request $request)
     {
         $questions = json_decode($this->search($request)->content());
-        return view('pages.questions', ['questions' => $questions]);
+        return view('questions.index', ['questions' => $questions]);
     }
 
     /**
@@ -59,7 +59,7 @@ class QuestionController extends Controller
     public function create()
     {
         $this->authorize('create', Question::class);
-        return view('pages.ask-question');
+        return view('questions.create');
     }
 
     /**

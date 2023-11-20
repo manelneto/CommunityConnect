@@ -1,6 +1,8 @@
 @section ('right')
     <section class="right-bar">
+        @auth
         <button class="ask-a-question-button" onclick="window.location='{{ route('create-question') }}'">Ask a Question</button>
+        @endauth
         <section class="right-bar-stats">
             <div class="left-top-square">
                 <span class="square-text">Questions</span>
@@ -29,7 +31,7 @@
                         </svg>Popular Questions
                     </span>
             <div class="popular-question">
-                <img class="user-profile-picture" src="./images/random-profile-picture.jpeg"
+                <img class="user-profile-picture" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}"
                      alt="User's profule picture" />
                 <a class="question-title" href="#">
                     How do I cook rice without water?
@@ -43,7 +45,7 @@
                 </div>
             </div>
             <div class="popular-question">
-                <img class="user-profile-picture" src="./images/random-profile-picture.jpeg"
+                <img class="user-profile-picture" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}"
                      alt="User's profule picture" />
                 <a class="question-title" href="#">
                     How do I cook rice without water?
@@ -57,7 +59,7 @@
                 </div>
             </div>
             <div class="popular-question">
-                <img class="user-profile-picture" src="./images/random-profile-picture.jpeg"
+                <img class="user-profile-picture" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}"
                      alt="User's profule picture" />
                 <a class="question-title" href="#">
                     How do I cook rice without water?
@@ -88,19 +90,19 @@
                         Top Members
                     </span>
             <div class="top-member">
-                <img class="top-member-pfp member-pfp" src="./images/random-profile-picture.jpeg"
+                <img class="top-member-pfp member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}"
                      alt="User's profule picture" />
                 <a href="#" class="top-member-username">matildesimoes</a>
                 <span class="top-member-score">120 score</span>
             </div>
             <div class="top-member">
-                <img class="top-member-pfp member-pfp" src="./images/random-profile-picture.jpeg"
+                <img class="top-member-pfp member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}"
                      alt="User's profule picture" />
                 <a href="#" class="top-member-username">matildesimoes</a>
                 <span class="top-member-score">120 score</span>
             </div>
             <div class="top-member">
-                <img class="top-member-pfp member-pfp" src="./images/random-profile-picture.jpeg"
+                <img class="top-member-pfp member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}"
                      alt="User's profule picture" />
                 <a href="#" class="top-member-username">matildesimoes</a>
                 <span class="top-member-score">120 score</span>

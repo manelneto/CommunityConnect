@@ -7,8 +7,11 @@
             <a href="../users/{{ $answer->id_user }}" class="answer-username">{{ $answer->user->username }}</a>
             <span class="answer-asked-date">Asked: {{ $answer->date }}</span>
         </div>
-        <p class="answer-description">{{ $answer->content }}</p>
-        <textarea class="answer-description" name="content">{{ $answer->content }}</textarea>
+        @if(Auth::user()->id === $answer->id_user || Auth::user()->administrator)
+            <textarea class="answer-description" name="content">{{ $answer->content }}</textarea>
+        @else
+            <p class="answer-description">{{ $answer->content }}</p>
+        @endif
         <div class="answers-details">
             <span class="answer-upvotes">
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
@@ -24,6 +27,8 @@
                 {{ $answer->dislikes_count }}</span>
         </div>
     </div>
-    <button formaction="../../answers/{{ $answer->id }}">Edit</button>
-    <button formaction="../../answers/{{ $answer->id }}/delete">Delete</button>
+    @if(Auth::user()->id === $answer->id_user || Auth::user()->administrator)
+        <button formaction="../../answers/{{ $answer->id }}">Edit</button>
+        <button formaction="../../answers/{{ $answer->id }}/delete">Delete</button>
+    @endif
 </form>

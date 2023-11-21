@@ -31,14 +31,14 @@ class QuestionController extends Controller
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->where('date', '>=', $after, 'and')
                 ->where('date', '<=', $before)
-                ->orderBy('likes_count', 'desc')
+                ->orderBy('likes_count', 'desc')->limit(10)
                 ->get();
         } else {
             $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->where('date', '>=', $after, 'and')
                 ->where('date', '<=', $before)
-                ->orderBy('likes_count', 'desc')
+                ->orderBy('likes_count', 'desc')->limit(10)
                 ->get();
         }
         return response()->json($questions);

@@ -65,3 +65,8 @@ Route::get('/admin', [UserController::class, 'index'])->name('admin');
 // API
 Route::get('api/questions', [QuestionController::class, 'search']);
 Route::get('api/users', [UserController::class, 'search']);
+
+// Test
+Route::get('/test',function () {
+    return view('test');
+});

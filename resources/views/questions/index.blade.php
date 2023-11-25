@@ -63,9 +63,11 @@
                                     <input type="radio" id="sort-recent" name="sort" value="recent"> Recent
                                 </label>
                             </fieldset>
-                            <button id="apply-button" type="submit">Apply</button>
+                            <div class="filters-buttons">
+                                <button id="apply-button" type="submit">Apply</button>
+                                <button type="reset" class="reset-filters-button">Reset Filters</button>
+                            </div>
                         </form>
-
                     </div>
                 </div>
                 <section id="questions">

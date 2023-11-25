@@ -32,6 +32,10 @@ ol {
   list-style: none;
 }
 
+fieldset {
+  border: none;
+}
+
 /* Header */
 
 input:focus {
@@ -496,7 +500,7 @@ main {
 
 footer.main-footer {
   display: grid;
-  grid-template-columns: 2.5fr 1.5fr  1.5fr;
+  grid-template-columns: 2.5fr 1.5fr 1.5fr;
   background-color: var(--dark-blue);
   padding: 50px 100px;
 }
@@ -512,7 +516,7 @@ footer.main-footer {
 }
 
 .footer-links-left {
-  margin-top:1.5rem;
+  margin-top: 1.5rem;
   grid-column: 2 / 3;
 }
 

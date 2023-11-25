@@ -59,6 +59,12 @@ fieldset {
   margin-top: 0.5rem;
   margin-left: 1rem;
   margin-bottom: 0.5rem;
+  font-size: 18px;
+}
+
+#apply-button:hover {
+  background-color: var(--hover-red);
+  transition: 0.2s;
 }
 
 fieldset label {

@@ -26,6 +26,12 @@ if (applyButton) {
 
     const questions = await fetchQuestions(after, before, text, sort, 0);
 
+    const questionsCountElement = document.querySelector(".questions-number");
+
+    if (questionsCountElement) {
+      questionsCountElement.textContent = `${questions.total} questions`;
+    }
+
     const section = document.querySelector("#questions");
     section.innerHTML = "";
 

@@ -39,7 +39,7 @@
                     <li id="answers-button">Answers</li>
                 </ul>
                 <section id="my-questions">
-                    @foreach ($questions as $question)
+                    @foreach ($questions->data as $question)
                         @include('partials.question', ['question' => $question])
                     @endforeach
                 </section>

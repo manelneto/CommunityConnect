@@ -25,7 +25,7 @@ if (applyButton) {
     const section = document.querySelector("#questions");
     section.innerHTML = "";
 
-    questions.forEach((question) => {
+    questions.data.forEach((question) => {
       const newQuestion = addQuestion(question);
       section.append(newQuestion);
     });

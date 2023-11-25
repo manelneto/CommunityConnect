@@ -48,7 +48,9 @@ class QuestionController extends Controller
             $questions = $questions->orderBy('likes_count', 'desc');
         }
 
-        $questions = $questions->get();
+        $questions = $questions->paginate(10);
+
+        // $questions = $questions->get();
         return response()->json($questions);
     }
 

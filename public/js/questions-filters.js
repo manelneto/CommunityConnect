@@ -1,6 +1,5 @@
 let currentPage = 1;
 let isFetching = false;
-let totalPages = 5;
 
 const filterButton = document.querySelector(".filters-button");
 
@@ -24,7 +23,14 @@ if (applyButton) {
     const text = document.querySelector(".live-search").value;
     const sort = document.querySelector('input[name="sort"]:checked').value;
 
-    const questions = await fetchQuestions(after, before, text, sort, 0);
+    currentPage = 1;
+    const questions = await fetchQuestions(
+      after,
+      before,
+      text,
+      sort,
+      currentPage
+    );
 
     const questionsCountElement = document.querySelector(".questions-number");
 
@@ -45,9 +51,8 @@ if (applyButton) {
 window.addEventListener("scroll", () => {
   // Check if the user is near the bottom and if more data can be fetched
   if (
-    window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 &&
-    !isFetching &&
-    currentPage < totalPages
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 10 &&
+    !isFetching
   ) {
     loadMoreQuestions();
   }
@@ -60,6 +65,7 @@ async function loadMoreQuestions() {
   const text = document.querySelector(".live-search").value;
   const sort = document.querySelector('input[name="sort"]:checked').value;
 
+  currentPage++;
   const newQuestions = await fetchQuestions(
     after,
     before,
@@ -75,11 +81,10 @@ async function loadMoreQuestions() {
   });
 
   isFetching = false;
-  currentPage++;
-  totalPages = newQuestions.last_page; // Update total pages from response
 }
 
 async function fetchQuestions(after, before, text, sort, page) {
+  console.log(page);
   const url =
     "/api/questions?" +
     encodeForAjax({
@@ -91,6 +96,7 @@ async function fetchQuestions(after, before, text, sort, page) {
     });
 
   const response = await fetch(url);
+  console.log("returned");
   return await response.json();
 }
 

@@ -30,12 +30,8 @@
                 <div class="questions-info">
                     <span class="showing-text">Showing</span>
                     <div class="questions-stats">
-                        <div class="questions-number-and-sort">
-                            <span class="questions-number">{{ count($questions) }} questions</span>
-                            <button class="sort-popular">Popular</button>
-                            <button class="sort-recent">Recent</button>
-                        </div>
-                        <button class="filters-button"><svg xmlns="http://www.w3.org/2000/svg"
+                        <span class="questions-number">{{ count($questions) }} questions</span>
+                        <button class="filters-button"><svg xmlns="http://wwwF.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="16" height="16"
                                 viewBox="0 0 256 256" xml:space="preserve">
                                 <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
@@ -51,13 +47,25 @@
                         <form action="#" method="post">
                             <fieldset>
                                 <legend>Filter by</legend>
+
                                 <label for="after">After</label>
                                 <input id="after" type="date" name="after">
+
                                 <label for="before">Before</label>
                                 <input id="before" type="date" name="before">
                             </fieldset>
+                            <fieldset>
+                                <legend>Sort by</legend>
+                                <label for="sort-popular">
+                                    <input type="radio" id="sort-popular" name="sort" value="popular" checked> Popular
+                                </label>
+                                <label for="sort-recent">
+                                    <input type="radio" id="sort-recent" name="sort" value="recent"> Recent
+                                </label>
+                            </fieldset>
                             <button id="apply-button" type="submit">Apply</button>
                         </form>
+
                     </div>
                 </div>
                 <section id="questions">

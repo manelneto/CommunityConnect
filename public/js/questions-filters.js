@@ -13,16 +13,17 @@ if (filterButton) {
 const applyButton = document.querySelector("#apply-button");
 
 if (applyButton) {
-  applyButton.addEventListener('click', async function (event) {
+  applyButton.addEventListener("click", async function (event) {
     event.preventDefault();
-    const after = document.querySelector('#after').value;
-    const before = document.querySelector('#before').value;
-    const text = document.querySelector('.live-search').value;
+    const after = document.querySelector("#after").value || "2020-01-01";
+    const before = document.querySelector("#before").value || "2030-12-31";
+    const text = document.querySelector(".live-search").value;
+    const sort = document.querySelector('input[name="sort"]:checked').value;
 
-    const questions = await fetchQuestions(after, before, text);
+    const questions = await fetchQuestions(after, before, text, sort);
 
-    const section = document.querySelector('#questions');
-    section.innerHTML = '';
+    const section = document.querySelector("#questions");
+    section.innerHTML = "";
 
     questions.forEach((question) => {
       const newQuestion = addQuestion(question);
@@ -31,20 +32,23 @@ if (applyButton) {
   });
 }
 
-async function fetchQuestions(after, before, text) {
-  const url = '/api/questions?' + encodeForAjax({
-    after: after,
-    before: before,
-    text: text
-  });
+async function fetchQuestions(after, before, text, sort) {
+  const url =
+    "/api/questions?" +
+    encodeForAjax({
+      after: after,
+      before: before,
+      text: text,
+      sort: sort,
+    });
 
   const response = await fetch(url);
   return await response.json();
 }
 
 function addQuestion(question) {
-  const newQuestion = document.createElement('div');
-  newQuestion.classList.add('question-container');
+  const newQuestion = document.createElement("div");
+  newQuestion.classList.add("question-container");
   newQuestion.innerHTML = `
   <img class="member-pfp question-member-pfp" src="../assets/profile-images/test-profile-image.jpeg"
        alt="User's profule picture" />
@@ -78,7 +82,7 @@ function addQuestion(question) {
         ${question.dislikes_count}</span>
     </div>
   </div>
-  `
+  `;
 
   return newQuestion;
 }

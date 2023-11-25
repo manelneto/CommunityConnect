@@ -153,3 +153,31 @@ a.edit-question-button:hover {
   background-color: var(--blue);
   transition: 0.2s;
 }
+
+.questions-number-and-sort {
+  display: flex;
+}
+
+.questions-number-and-sort button {
+  padding: 5px 10px;
+  border-top: 1px solid #c6c6c6;
+  border-right: 1px solid #c6c6c6;
+  border-bottom: 1px solid #c6c6c6;
+}
+
+.questions-number-and-sort button:hover {
+  background-color: #d1e6fa;
+  transition: 0.2s;
+}
+
+.questions-number-and-sort button:first-of-type {
+  margin-left: 15px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-left: 1px solid #c6c6c6;
+}
+
+.questions-number-and-sort button:last-of-type {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

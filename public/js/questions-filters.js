@@ -1,3 +1,7 @@
+let currentPage = 1;
+let isFetching = false;
+let totalPages = 5;
+
 const filterButton = document.querySelector(".filters-button");
 
 if (filterButton) {
@@ -20,7 +24,7 @@ if (applyButton) {
     const text = document.querySelector(".live-search").value;
     const sort = document.querySelector('input[name="sort"]:checked').value;
 
-    const questions = await fetchQuestions(after, before, text, sort);
+    const questions = await fetchQuestions(after, before, text, sort, 0);
 
     const section = document.querySelector("#questions");
     section.innerHTML = "";
@@ -32,7 +36,44 @@ if (applyButton) {
   });
 }
 
-async function fetchQuestions(after, before, text, sort) {
+window.addEventListener("scroll", () => {
+  // Check if the user is near the bottom and if more data can be fetched
+  if (
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 &&
+    !isFetching &&
+    currentPage < totalPages
+  ) {
+    loadMoreQuestions();
+  }
+});
+
+async function loadMoreQuestions() {
+  isFetching = true;
+  const after = document.querySelector("#after").value || "2020-01-01";
+  const before = document.querySelector("#before").value || "2030-12-31";
+  const text = document.querySelector(".live-search").value;
+  const sort = document.querySelector('input[name="sort"]:checked').value;
+
+  const newQuestions = await fetchQuestions(
+    after,
+    before,
+    text,
+    sort,
+    currentPage
+  );
+
+  const section = document.querySelector("#questions");
+  newQuestions.data.forEach((question) => {
+    const newQuestion = addQuestion(question);
+    section.append(newQuestion);
+  });
+
+  isFetching = false;
+  currentPage++;
+  totalPages = newQuestions.last_page; // Update total pages from response
+}
+
+async function fetchQuestions(after, before, text, sort, page) {
   const url =
     "/api/questions?" +
     encodeForAjax({
@@ -40,6 +81,7 @@ async function fetchQuestions(after, before, text, sort) {
       before: before,
       text: text,
       sort: sort,
+      page: page,
     });
 
   const response = await fetch(url);

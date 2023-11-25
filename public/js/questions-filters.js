@@ -84,7 +84,6 @@ async function loadMoreQuestions() {
 }
 
 async function fetchQuestions(after, before, text, sort, page) {
-  console.log(page);
   const url =
     "/api/questions?" +
     encodeForAjax({
@@ -96,7 +95,6 @@ async function fetchQuestions(after, before, text, sort, page) {
     });
 
   const response = await fetch(url);
-  console.log("returned");
   return await response.json();
 }
 

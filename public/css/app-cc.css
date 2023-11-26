@@ -73,11 +73,12 @@ input.live-search {
   background-color: #101010;
   border: none;
   height: 47px;
-  width: 250px;
+  width: 350px;
   border-radius: 2px;
   padding: 0 40px 0 10px;
   color: #979494;
   font-size: 18px;
+  margin: 0;
 }
 
 .search-box {
@@ -106,6 +107,23 @@ input.live-search {
 
 .my-account-button {
   background-color: var(--blue);
+}
+
+.search-bar-info {
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+}
+
+.search-bar-info p {
+  margin-bottom: 5px;
+}
+
+.search-bar-info p:last-of-type {
+  margin-bottom: 0;
 }
 
 /* navigation bar */
@@ -157,7 +175,7 @@ div.group-buttons {
 
 .main-search-button {
   position: absolute;
-  margin-top: 28px;
+  margin-top: 25px;
   right: 5px;
   padding-left: 0px;
   cursor: pointer;

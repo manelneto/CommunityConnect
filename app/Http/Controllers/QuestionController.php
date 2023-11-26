@@ -23,12 +23,20 @@ class QuestionController extends Controller
 
         if ($searchTerm != '') {
             if (preg_match('/^".+"$/', $searchTerm)) {
+                // exact match search
                 $searchTerm = trim($searchTerm, '"');
                 $questions->where(function ($query) use ($searchTerm) {
                     $query->where('title', 'ILIKE', '%' . $searchTerm . '%')
                         ->orWhere('content', 'ILIKE', '%' . $searchTerm . '%');
                 });
+            } else if (preg_match('/^\[.+\]$/', $searchTerm)) {
+                // search by tag
+                $tagName = trim($searchTerm, '[]');
+                $questions->whereHas('tags', function ($query) use ($tagName) {
+                    $query->where('name', $tagName);
+                });
             } else {
+                // full-text-search
                 $formattedTerm = str_replace(' ', ' | ', $searchTerm);
                 $questions->whereRaw("tsvectors @@ to_tsquery('english', ?)", [$formattedTerm]);
             }

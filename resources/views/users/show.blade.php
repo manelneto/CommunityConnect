@@ -44,7 +44,10 @@
                     </p>
                     <ul class="user-badges">
                         @foreach ($user->badges as $badge)
-                            <li>{{ $badge->name }}</li>
+                            <li class="user-received-badge">
+                                <img src="{{ asset('assets/badge-images') . '/badge_' . $badge->id . '.png' }}"
+                                    alt="badge image">
+                            </li>
                         @endforeach
                     </ul>
                 </section>

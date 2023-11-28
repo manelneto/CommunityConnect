@@ -11,7 +11,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public $timestamps  = false;
+    public $timestamps = false;
 
     protected $fillable = ['username', 'email', 'password'];
 
@@ -22,4 +22,14 @@ class User extends Authenticatable
         'blocked' => 'boolean',
         'register_date' => 'datetime',
     ];
+
+    public function userBadges()
+    {
+        return $this->hasMany(UserEarnsBadge::class, 'id_user');
+    }
+
+    public function badges()
+    {
+        return $this->belongsToMany(Badge::class, 'user_earns_badge', 'id_user', 'id_badge');
+    }
 }

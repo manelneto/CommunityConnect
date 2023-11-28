@@ -42,6 +42,11 @@
                     <p class="user-register-date">
                         Member since {{ $user->register_date->format('Y-m-d') }}
                     </p>
+                    <ul class="user-badges">
+                        @foreach ($user->badges as $badge)
+                            <li>{{ $badge->name }}</li>
+                        @endforeach
+                    </ul>
                 </section>
                 <section id="my-questions">
                     @foreach ($questions as $question)

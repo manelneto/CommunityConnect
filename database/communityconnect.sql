@@ -630,7 +630,7 @@ CREATE TRIGGER new_badge_notification
 
 
 -- Emblemas
-/*
+
 CREATE OR REPLACE FUNCTION award_badge_on_first_question() RETURNS TRIGGER AS 
 $BODY$
 BEGIN
@@ -726,7 +726,7 @@ CREATE TRIGGER award_badge_on_first_100_answer
     AFTER INSERT ON answer
     FOR EACH ROW
     EXECUTE PROCEDURE award_badge_on_first_100_answer();
-*/
+
 SET search_path TO lbaw23114;
 
 INSERT INTO users (username, email, password, register_date, administrator, blocked, image) VALUES ('admin', 'admin@email.com', '$2y$12$/boh21q7KMYjCbBJVOTbruDDtoQGqC8KBRoBWOPxyiWc.yxy1Imc6', '2023-11-20', TRUE, FALSE, 'https://picsum.photos/250/250');

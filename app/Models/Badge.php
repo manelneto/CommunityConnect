@@ -12,4 +12,9 @@ class Badge extends Model
     public $timestamps = false;
 
     protected $table = 'badge';
+
+    public function userBadges()
+    {
+        return $this->hasMany(UserEarnsBadge::class, 'id_badge');
+    }
 }

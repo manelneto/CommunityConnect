@@ -1,65 +1,47 @@
-const aboutButton = document.querySelector("#about-button");
+const tabs = {
+  about: {
+    button: document.querySelector("#about-button"),
+    content: document.querySelector(".about-user"),
+  },
+  questions: {
+    button: document.querySelector("#questions-button"),
+    content: document.querySelector("#my-questions"),
+  },
+  answers: {
+    button: document.querySelector("#answers-button"),
+    content: document.querySelector("#my-answers"),
+  },
+};
 
-if (aboutButton) {
-  aboutButton.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    const about = document.querySelector(".about-user");
-    if (about) {
-      show(about);
-    }
-
-    const myQuestions = document.querySelector("#my-questions");
-    if (myQuestions) {
-      hide(myQuestions);
-    }
-    const myAnswers = document.querySelector("#my-answers");
-    if (myQuestions) {
-      hide(myAnswers);
-    }
+function hideAllContents() {
+  Object.values(tabs).forEach((tab) => {
+    if (tab.content) tab.content.style.display = "none";
   });
 }
 
-const questionsButton = document.querySelector("#questions-button");
-
-if (questionsButton) {
-  questionsButton.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    const about = document.querySelector(".about-user");
-    if (about) {
-      hide(about);
-    }
-
-    const myQuestions = document.querySelector("#my-questions");
-    if (myQuestions) {
-      show(myQuestions);
-    }
-    const myAnswers = document.querySelector("#my-answers");
-    if (myQuestions) {
-      hide(myAnswers);
-    }
+function deselectAllButtons() {
+  Object.values(tabs).forEach((tab) => {
+    if (tab.button) tab.button.classList.remove("selected-profile-tab");
   });
 }
 
-const answersButton = document.querySelector("#answers-button");
+function showContentAndHighlightButton(selectedTab) {
+  hideAllContents();
+  deselectAllButtons();
 
-if (answersButton) {
-  answersButton.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    const about = document.querySelector(".about-user");
-    if (about) {
-      hide(about);
-    }
-
-    const myQuestions = document.querySelector("#my-questions");
-    if (myQuestions) {
-      hide(myQuestions);
-    }
-    const myAnswers = document.querySelector("#my-answers");
-    if (myQuestions) {
-      show(myAnswers);
-    }
-  });
+  if (selectedTab.content) {
+    selectedTab.content.style.display = "block";
+    selectedTab.button.classList.add("selected-profile-tab");
+  }
 }
+
+Object.values(tabs).forEach((tab) => {
+  if (tab.button) {
+    tab.button.addEventListener("click", function (event) {
+      event.preventDefault();
+      showContentAndHighlightButton(tab);
+    });
+  }
+});
+
+showContentAndHighlightButton(tabs.about);

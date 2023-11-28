@@ -142,3 +142,7 @@ a:hover.edit-profile {
   color: #000;
   font-size: 20px;
 }
+
+.selected-profile-tab {
+  color: var(--blue) !important;
+}

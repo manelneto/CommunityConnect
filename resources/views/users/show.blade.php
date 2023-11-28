@@ -38,6 +38,11 @@
                     <li id="questions-button">Questions</li>
                     <li id="answers-button">Answers</li>
                 </ul>
+                <section class="about-user">
+                    <p class="user-register-date">
+                        Member since {{ $user->register_date->format('Y-m-d') }}
+                    </p>
+                </section>
                 <section id="my-questions">
                     @foreach ($questions as $question)
                         @include('partials.question', ['question' => $question])

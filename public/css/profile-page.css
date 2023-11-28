@@ -97,3 +97,9 @@ a:hover.edit-profile {
   height: 100px;
   margin-bottom: 20px;
 }
+
+.user-register-date {
+  text-align: center;
+  color: #abacb1;
+  margin-top: 20px;
+}

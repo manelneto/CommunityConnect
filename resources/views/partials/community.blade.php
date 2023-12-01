@@ -5,5 +5,5 @@
     </svg>
     <h2>{{ $community->name }}</h2>
     <button>Follow</button>
-    <p>{{ community->users_count }} Followers</p>
+    <p>{{ $community->users_count }} Followers</p>
 </article>

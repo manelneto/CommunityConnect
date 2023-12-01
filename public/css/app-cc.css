@@ -245,6 +245,14 @@ div.group-buttons {
   font-size: 16px;
 }
 
+.active-nav-item a svg {
+  fill: var(--blue) !important;
+}
+
+.active-nav-item a {
+  color: var(--blue) !important;
+}
+
 /* Main Content */
 
 #questions-listing {

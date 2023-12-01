@@ -12,46 +12,38 @@ class QuestionController extends Controller
 {
     public function search(Request $request)
     {
-        $after = ($request->has('after') && $request->get('after') !== '') ? $request->get('after') : '2020-01-01';
-        $before = ($request->has('before') && $request->get('before') !== '') ? $request->get('before') : '2030-12-31';
+        $after = $request->get('after', '2020-01-01');
+        $before = $request->get('before', '2030-12-31');
+        $sort = $request->get('sort') == 'recent' ? 'date' : 'likes_count';
+        $searchTerm = $request->get('text', '');
 
-        // recent questions - sort
-        $recentSort = ($request->has('sort') && $request->get('sort') == 'recent');
+        $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
+            ->withCount(['likes', 'dislikes', 'answers'])
+            ->whereBetween('date', [$after, $before]);
 
-        if ($request->has('text') && $request->get('text') != '') {
-            $searchTerm = $request->get('text');
+        if ($searchTerm != '') {
             if (preg_match('/^".+"$/', $searchTerm)) {
-                // exact-match search
+                // exact match search
                 $searchTerm = trim($searchTerm, '"');
-                $questions = Question::where('title', 'ILIKE', '%' . $searchTerm . '%')->orWhere('content', 'ILIKE', '%' . $searchTerm . '%');
+                $questions->where(function ($query) use ($searchTerm) {
+                    $query->where('title', 'ILIKE', '%' . $searchTerm . '%')
+                        ->orWhere('content', 'ILIKE', '%' . $searchTerm . '%');
+                });
+            } else if (preg_match('/^\[.+\]$/', $searchTerm)) {
+                // search by tag
+                $tagName = trim($searchTerm, '[]');
+                $questions->whereHas('tags', function ($query) use ($tagName) {
+                    $query->where('name', $tagName);
+                });
             } else {
-                // full-text search
+                // full-text-search
                 $formattedTerm = str_replace(' ', ' | ', $searchTerm);
-                $questions = Question::whereRaw("tsvectors @@ to_tsquery('english', ?)", [$formattedTerm]);
+                $questions->whereRaw("tsvectors @@ to_tsquery('english', ?)", [$formattedTerm]);
             }
-
-            $questions = $questions->with(['user', 'community', 'likes', 'dislikes', 'answers'])
-                ->withCount(['likes', 'dislikes', 'answers'])
-                ->where('date', '>=', $after)
-                ->where('date', '<=', $before);
-
-        } else {
-            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
-                ->withCount(['likes', 'dislikes', 'answers'])
-                ->where('date', '>=', $after)
-                ->where('date', '<=', $before);
         }
 
-        if ($recentSort) {
-            $questions = $questions->orderBy('date', 'desc');
-        } else {
-            $questions = $questions->orderBy('likes_count', 'desc');
-        }
-
-        $questions = $questions->get();
-        return response()->json($questions);
+        return response()->json($questions->orderBy($sort, 'desc')->paginate(10));
     }
-
 
     /**
      * Display a listing of the resource.

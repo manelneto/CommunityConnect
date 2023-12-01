@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;    
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
@@ -69,7 +69,7 @@ class UserController extends Controller
     public function show(int $id)
     {
         try {
-            $user = User::findOrFail($id);
+            $user = User::with('badges')->findOrFail($id);
             $questions = Question::with(['user', 'community', 'likes', 'dislikes'])->where('id_user', $id)->get();
             $answers = Answer::with(['user', 'question', 'likes', 'dislikes'])->where('id_user', $id)->get();
             return view('users.show', [
@@ -77,8 +77,7 @@ class UserController extends Controller
                 'questions' => $questions,
                 'answers' => $answers
             ]);
-        }
-        catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return "User not found.";
         }
     }
@@ -93,8 +92,7 @@ class UserController extends Controller
 
         try {
             return view('users.edit', ['user' => $user]);
-        }
-        catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return "User not found.";
         }
     }
@@ -134,8 +132,7 @@ class UserController extends Controller
             $user->password = $request->input('password') !== NULL ? Hash::make($request->input('password')) : $user->password;
             $user->save();
             return redirect('users/' . $id);
-        }
-        catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return "User not found.";
         }
     }

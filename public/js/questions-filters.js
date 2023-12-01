@@ -1,3 +1,6 @@
+let currentPage = 1;
+let isFetching = false;
+
 const filterButton = document.querySelector(".filters-button");
 
 if (filterButton) {
@@ -13,38 +16,91 @@ if (filterButton) {
 const applyButton = document.querySelector("#apply-button");
 
 if (applyButton) {
-  applyButton.addEventListener('click', async function (event) {
+  applyButton.addEventListener("click", async function (event) {
     event.preventDefault();
-    const after = document.querySelector('#after').value;
-    const before = document.querySelector('#before').value;
-    const text = document.querySelector('.live-search').value;
+    const after = document.querySelector("#after").value || "2020-01-01";
+    const before = document.querySelector("#before").value || "2030-12-31";
+    const text = document.querySelector(".live-search").value;
+    const sort = document.querySelector('input[name="sort"]:checked').value;
 
-    const questions = await fetchQuestions(after, before, text);
+    currentPage = 1;
+    const questions = await fetchQuestions(
+      after,
+      before,
+      text,
+      sort,
+      currentPage
+    );
 
-    const section = document.querySelector('#questions');
-    section.innerHTML = '';
+    const questionsCountElement = document.querySelector(".questions-number");
 
-    questions.forEach((question) => {
+    if (questionsCountElement) {
+      questionsCountElement.textContent = `${questions.total} questions`;
+    }
+
+    const section = document.querySelector("#questions");
+    section.innerHTML = "";
+
+    questions.data.forEach((question) => {
       const newQuestion = addQuestion(question);
       section.append(newQuestion);
     });
   });
 }
 
-async function fetchQuestions(after, before, text) {
-  const url = '/api/questions?' + encodeForAjax({
-    after: after,
-    before: before,
-    text: text
+window.addEventListener("scroll", () => {
+  // Check if the user is near the bottom and if more data can be fetched
+  if (
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 10 &&
+    !isFetching
+  ) {
+    loadMoreQuestions();
+  }
+});
+
+async function loadMoreQuestions() {
+  isFetching = true;
+  const after = document.querySelector("#after").value || "2020-01-01";
+  const before = document.querySelector("#before").value || "2030-12-31";
+  const text = document.querySelector(".live-search").value;
+  const sort = document.querySelector('input[name="sort"]:checked').value;
+
+  currentPage++;
+  const newQuestions = await fetchQuestions(
+    after,
+    before,
+    text,
+    sort,
+    currentPage
+  );
+
+  const section = document.querySelector("#questions");
+  newQuestions.data.forEach((question) => {
+    const newQuestion = addQuestion(question);
+    section.append(newQuestion);
   });
+
+  isFetching = false;
+}
+
+async function fetchQuestions(after, before, text, sort, page) {
+  const url =
+    "/api/questions?" +
+    encodeForAjax({
+      after: after,
+      before: before,
+      text: text,
+      sort: sort,
+      page: page,
+    });
 
   const response = await fetch(url);
   return await response.json();
 }
 
 function addQuestion(question) {
-  const newQuestion = document.createElement('div');
-  newQuestion.classList.add('question-container');
+  const newQuestion = document.createElement("div");
+  newQuestion.classList.add("question-container");
   newQuestion.innerHTML = `
   <img class="member-pfp question-member-pfp" src="../assets/profile-images/test-profile-image.jpeg"
        alt="User's profule picture" />
@@ -78,7 +134,7 @@ function addQuestion(question) {
         ${question.dislikes_count}</span>
     </div>
   </div>
-  `
+  `;
 
   return newQuestion;
 }

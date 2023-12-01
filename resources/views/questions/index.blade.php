@@ -8,7 +8,7 @@
                     <span class="showing-text">Showing</span>
                     <div class="questions-stats">
                         <div class="questions-number-and-sort">
-                            <span class="questions-number">{{ count($questions) }} questions</span>
+                            <span class="questions-number">{{ $questions->total }} questions</span>
                             <button class="sort-popular">Popular</button>
                             <button class="sort-recent">Recent</button>
                         </div>
@@ -30,12 +30,24 @@
                                 <label for="before">Before</label>
                                 <input id="before" type="date" name="before">
                             </fieldset>
-                            <button id="apply-button" type="submit">Apply</button>
+                            <fieldset>
+                                <legend>Sort by</legend>
+                                <label for="sort-popular">
+                                    <input type="radio" id="sort-popular" name="sort" value="popular" checked> Popular
+                                </label>
+                                <label for="sort-recent">
+                                    <input type="radio" id="sort-recent" name="sort" value="recent"> Recent
+                                </label>
+                            </fieldset>
+                            <div class="filters-buttons">
+                                <button id="apply-button" type="submit">Apply</button>
+                                <button type="reset" class="reset-filters-button">Reset Filters</button>
+                            </div>
                         </form>
                     </div>
                 </div>
                 <section id="questions">
-                    @foreach ($questions as $question)
+                    @foreach ($questions->data as $question)
                         @include('partials.question', ['question' => $question])
                     @endforeach
                 </section>

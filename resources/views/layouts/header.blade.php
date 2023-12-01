@@ -15,6 +15,10 @@
                     <button type="submit" class="main-search-button">
                         <img src="{{ asset('assets/search.png') }}" alt="search icon" />
                     </button>
+                    <div class="search-bar-info hidden">
+                        <p><strong>"word"</strong> exact search</p>
+                        <p><strong>[tag]</strong> search by tag</p>
+                    </div>
                 </form>
             </div>
         @endif

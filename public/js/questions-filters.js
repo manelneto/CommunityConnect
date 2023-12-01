@@ -49,7 +49,6 @@ if (applyButton) {
 }
 
 window.addEventListener("scroll", () => {
-  // Check if the user is near the bottom and if more data can be fetched
   if (
     window.innerHeight + window.scrollY >= document.body.offsetHeight - 10 &&
     !isFetching

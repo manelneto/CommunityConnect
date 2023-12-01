@@ -88,15 +88,14 @@ class QuestionController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string|max:1000',
-            'id_user' => 'required|integer',
             'id_community' => 'required|integer',
         ]);
 
         $question = new Question();
         $question->title = $request['title'];
         $question->content = $request['content'];
-        $question->id_user = $request['id_user'];
         $question->id_community = $request['id_community'];
+        $question->id_user = Auth::user()->id;
 
         $question->save();
 

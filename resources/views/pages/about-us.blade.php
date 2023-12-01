@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@include ('layouts.errors')
 
 @section('main')
     <main id="about-us">
         <div class="main-content">
+          <section class="about-us">
             <h1 class="about-us-title">About Us</h1>
             <p class="about-cc-text-1"> <strong>Community Connect</strong> is a web-based information system that allows users to share questions
                 and get answers on
@@ -17,6 +17,7 @@
                 <li>Manuel Ramos Leite Carvalho Neto, <a href="mailto:up202108744@up.pt">up202108744@up.pt</a></li>
                 <li>Matilde Isabel da Silva Simões, <a href="mailto:up202108782@up.pt">up202108782@up.pt</a></li>
             </ul>
+          </section>
         </div>
     </main>
 @endsection

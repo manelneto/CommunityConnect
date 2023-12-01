@@ -9,12 +9,10 @@ class QuestionTag extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $table = 'question_tags'; // not sure if needed (because of the underscore)
+    protected $table = 'question_tags'; 
 
-    // Composite primary keys have some limitations in laravel
     protected $primaryKey = ['id_question', 'id_tag'];
 
-    // Disable auto-increment as we are using a composite primary key
     public $incrementing = false;
 
     public function question()

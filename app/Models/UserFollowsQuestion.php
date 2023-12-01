@@ -11,10 +11,8 @@ class UserFollowsQuestion extends Model
     public $timestamps = false;
     protected $table = 'user_follows_question';
 
-    // Composite primary keys have some limitations in laravel
     protected $primaryKey = ['id_user', 'id_question'];
 
-    // Disable auto-increment as we are using a composite primary key
     public $incrementing = false;
 
     public function user()

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Home
-Route::redirect('/', '/questions');
+Route::redirect('/', '/communities');
 
 // Authentication
 Route::controller(RegisterController::class)->group(function () {

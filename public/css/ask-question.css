@@ -40,9 +40,14 @@
     height: 80px;
     resize: none;
  }
- 
+
+#create-question select{
+   width: 85%;
+}
+
  #create-question input,
- #create-question textarea {
+ #create-question textarea,
+ #create-question select {
     display: flex;
     flex-direction: column;
     padding: 10px;

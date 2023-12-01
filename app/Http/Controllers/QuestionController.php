@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\Community;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -73,7 +74,8 @@ class QuestionController extends Controller
     public function create()
     {
         $this->authorize('create', Question::class);
-        return view('questions.create');
+        $communities = Community::all();
+        return view('questions.create', ['communities' => $communities]);
     }
 
     /**

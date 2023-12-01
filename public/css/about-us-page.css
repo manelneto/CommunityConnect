@@ -2,4 +2,32 @@
   background-color: white;
   border-right: 1px solid #c6c6c6;
   border-left: 1px solid #c6c6c6;
+  padding: 20px;
+}
+
+.about-us-title {
+  text-align: center;
+  font-size: 50px;
+}
+
+#about-us p {
+  margin-top: 30px;
+  font-size: 20px;
+  text-align: justify;
+}
+
+#about-us .made-by-list {
+  margin-top: 30px;
+  margin-left: 20px;
+  font-size: 20px;
+  list-style: disc;
+}
+
+#about-us .made-by-list li {
+  margin-top: 10px;
+}
+
+#about-us .made-by-list li a {
+  color: var(--blue);
+  font-size: 18px;
 }

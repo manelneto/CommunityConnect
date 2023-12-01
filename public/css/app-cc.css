@@ -247,11 +247,21 @@ div.group-buttons {
 
 /* Main Content */
 
-main {
+#questions-listing {
+  background-color: white;
+  border-right: 1px solid #c6c6c6;
+  border-left: 1px solid #c6c6c6;
+}
+
+.sign-page-main {
   background-color: var(--light-gray);
 }
 
-.main-content {
+#page-info {
+  background-color: var(--light-gray);
+}
+
+#page-info {
   display: grid;
   grid-template-columns: [start-col-main] 240px [mid1-col-main] 800px [mid2-col-main] 240px [end-col-main];
   justify-content: center;
@@ -267,8 +277,7 @@ main {
 .main-info {
   grid-column: mid1-col-main / mid2-col-main;
   background-color: white;
-  border-right: 1px solid #c6c6c6;
-  border-left: 1px solid #c6c6c6;
+
 }
 
 .right-bar {
@@ -312,7 +321,7 @@ main {
   height: 150px;
 }
 
-.right-bar-stats div {
+.right-bar-stats article {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -322,7 +331,7 @@ main {
   align-items: center;
 }
 
-.right-bar-stats div :first-child {
+.right-bar-stats article :first-child {
   margin-bottom: 5px;
   font-size: 14px;
 }

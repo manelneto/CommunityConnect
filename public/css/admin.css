@@ -49,3 +49,13 @@ summary::-webkit-details-marker {
     padding: 10px;
     background-color: var(--light-gray);
 }
+
+#admin {
+    background-color: white;
+    margin: 0;
+    margin: 50px auto;
+    width: 89%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

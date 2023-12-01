@@ -65,3 +65,6 @@ Route::get('/admin', [UserController::class, 'index'])->name('admin');
 // API
 Route::get('api/questions', [QuestionController::class, 'search']);
 Route::get('api/users', [UserController::class, 'search']);
+
+// Static info pages
+Route::view('/about-us', 'pages.about-us')->name('about-us');

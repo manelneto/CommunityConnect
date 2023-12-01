@@ -9,8 +9,6 @@
                     <div class="questions-stats">
                         <div class="questions-number-and-sort">
                             <span class="questions-number">{{ $questions->total }} questions</span>
-                            <button class="sort-popular">Popular</button>
-                            <button class="sort-recent">Recent</button>
                         </div>
                         <button class="filters-button">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="16" height="16" viewBox="0 0 256 256" xml:space="preserve">

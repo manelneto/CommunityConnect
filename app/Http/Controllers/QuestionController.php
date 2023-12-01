@@ -18,7 +18,13 @@ class QuestionController extends Controller
         $sort = $request->get('sort') == 'recent' ? 'date' : 'likes_count';
         $searchTerm = $request->get('text', '');
 
-        if ($community != 0) {
+        if ($community !== 0) {
+            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
+                ->withCount(['likes', 'dislikes', 'answers'])
+                ->whereBetween('date', [$after, $before])
+                ->where('id_community', $community);
+        } else if ($request->get('community', 0) != 0) {
+            $community = $request->get('community', '');
             $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->whereBetween('date', [$after, $before])

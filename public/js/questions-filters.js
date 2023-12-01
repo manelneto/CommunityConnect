@@ -61,6 +61,11 @@ async function loadMoreQuestions() {
   isFetching = true;
   const after = document.querySelector("#after").value || "2020-01-01";
   const before = document.querySelector("#before").value || "2030-12-31";
+  let community = window.location.pathname.split('/').pop();
+  if (community === 'questions') {
+    community = 0;
+  }
+
   const text = document.querySelector(".live-search").value;
   const sort = document.querySelector('input[name="sort"]:checked').value;
 
@@ -68,6 +73,7 @@ async function loadMoreQuestions() {
   const newQuestions = await fetchQuestions(
     after,
     before,
+    community,
     text,
     sort,
     currentPage
@@ -82,12 +88,13 @@ async function loadMoreQuestions() {
   isFetching = false;
 }
 
-async function fetchQuestions(after, before, text, sort, page) {
+async function fetchQuestions(after, before, community, text, sort, page) {
   const url =
     "/api/questions?" +
     encodeForAjax({
       after: after,
       before: before,
+      community: community,
       text: text,
       sort: sort,
       page: page,

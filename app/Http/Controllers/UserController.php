@@ -13,9 +13,10 @@ class UserController extends Controller
 {
     public function search(Request $request)
     {
-        $this->authorize('search', User::class);
         $username = ($request->has('username') && $request->get('username') !== '') ? $request->get('username') : '';
-        $users = User::where('username', 'ILIKE', '%' . $username . '%')->get();
+        $users = User::with('communities')
+            ->where('username', 'ILIKE', '%' . $username . '%')
+            ->get();
         return response()->json($users);
     }
 

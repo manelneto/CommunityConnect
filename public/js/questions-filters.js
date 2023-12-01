@@ -58,12 +58,25 @@ if (applyButton) {
 }
 
 async function loadMoreQuestions() {
+  const usernameButton = document.querySelector(".my-account-button").textContent;
+  let username = usernameButton.split('(')[1];
+  username = username.slice(0, -1);
+  
+  const user = await fetchUser(username);
+  let communities = Array();
+  user[0]['communities'].forEach((community) => communities.push(community['id']));
+
   isFetching = true;
   const after = document.querySelector("#after").value || "2020-01-01";
   const before = document.querySelector("#before").value || "2030-12-31";
   let community = window.location.pathname.split('/').pop();
   if (community === 'questions') {
     community = 0;
+    communities = 0;
+    console.log('questions')
+  } else if (community === 'feed') {
+    community = 0;
+    console.log('feed')
   }
 
   const text = document.querySelector(".live-search").value;
@@ -74,6 +87,7 @@ async function loadMoreQuestions() {
     after,
     before,
     community,
+    communities,
     text,
     sort,
     currentPage
@@ -88,13 +102,14 @@ async function loadMoreQuestions() {
   isFetching = false;
 }
 
-async function fetchQuestions(after, before, community, text, sort, page) {
+async function fetchQuestions(after, before, community, communities, text, sort, page) {
   const url =
     "/api/questions?" +
     encodeForAjax({
       after: after,
       before: before,
       community: community,
+      communities: communities,
       text: text,
       sort: sort,
       page: page,
@@ -143,4 +158,15 @@ function addQuestion(question) {
   `;
 
   return newQuestion;
+}
+
+async function fetchUser(username) {
+  const url =
+    "/api/users?" +
+    encodeForAjax({
+      username: username,
+    });
+
+  const response = await fetch(url);
+  return await response.json();
 }

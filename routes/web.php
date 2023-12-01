@@ -66,6 +66,7 @@ Route::get('/admin', [UserController::class, 'index'])->name('admin');
 //Communities
 Route::get('/communities', [CommunityController::class, 'index'])->name('communities');
 Route::get('/communities/{id}', [QuestionController::class, 'communityIndex'])->name('community');
+Route::get('/feed', [QuestionController::class, 'personalIndex'])->name('feed');
 
 // API
 Route::get('api/questions', [QuestionController::class, 'search']);

@@ -56,3 +56,9 @@
   background-color: #cccccc;
   transition: 0.2s;
 }
+
+#question-edit {
+  background-color: white;
+  border-right: 1px solid #c6c6c6;
+  border-left: 1px solid #c6c6c6;
+}

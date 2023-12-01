@@ -41,7 +41,6 @@
 
 .leave-answer-container .leave-answer-text {
   font-size: 20px;
-  font-size: bold;
   margin-bottom: 20px;
 }
 
@@ -52,7 +51,6 @@
   padding: 10px 40px;
   border-radius: 5px;
   font-size: 14px;
-  font-style: bold;
   cursor: pointer;
 }
 
@@ -112,4 +110,14 @@
   padding: 4px 10px;
   color: #fff;
   border-radius: 5px;
+}
+
+#question-show{
+  background-color: white;
+  border-right: 1px solid #c6c6c6;
+  border-left: 1px solid #c6c6c6;
+}
+
+#submit-answer {
+  display: block;
 }

@@ -10,16 +10,23 @@ use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
-    public function search(Request $request)
+    public function search(Request $request, int $community = 0)
     {
         $after = $request->get('after', '2020-01-01');
         $before = $request->get('before', '2030-12-31');
         $sort = $request->get('sort') == 'recent' ? 'date' : 'likes_count';
         $searchTerm = $request->get('text', '');
 
-        $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
-            ->withCount(['likes', 'dislikes', 'answers'])
-            ->whereBetween('date', [$after, $before]);
+        if ($community != 0) {
+            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
+                ->withCount(['likes', 'dislikes', 'answers'])
+                ->whereBetween('date', [$after, $before])
+                ->where('id_community', $community);
+        } else {
+            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
+                ->withCount(['likes', 'dislikes', 'answers'])
+                ->whereBetween('date', [$after, $before]);
+        }
 
         if ($searchTerm != '') {
             if (preg_match('/^".+"$/', $searchTerm)) {
@@ -51,6 +58,12 @@ class QuestionController extends Controller
     public function index(Request $request)
     {
         $questions = json_decode($this->search($request)->content());
+        return view('questions.index', ['questions' => $questions]);
+    }
+
+    public function communityIndex(Request $request, int $community)
+    {
+        $questions = json_decode($this->search($request, $community)->content());
         return view('questions.index', ['questions' => $questions]);
     }
 

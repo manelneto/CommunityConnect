@@ -11,6 +11,15 @@ if (filterButton) {
       questionsFilters.toggleAttribute("hidden");
     }
   });
+
+  window.addEventListener("scroll", () => {
+    if (
+      window.innerHeight + window.scrollY >= document.body.offsetHeight - 10 &&
+      !isFetching
+    ) {
+      loadMoreQuestions();
+    }
+  });
 }
 
 const applyButton = document.querySelector("#apply-button");
@@ -47,15 +56,6 @@ if (applyButton) {
     });
   });
 }
-
-window.addEventListener("scroll", () => {
-  if (
-    window.innerHeight + window.scrollY >= document.body.offsetHeight - 10 &&
-    !isFetching
-  ) {
-    loadMoreQuestions();
-  }
-});
 
 async function loadMoreQuestions() {
   isFetching = true;

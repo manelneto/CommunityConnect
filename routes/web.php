@@ -70,3 +70,5 @@ Route::get('/communities/{id}', [QuestionController::class, 'communityIndex'])->
 // API
 Route::get('api/questions', [QuestionController::class, 'search']);
 Route::get('api/users', [UserController::class, 'search']);
+Route::post('api/communities/follow', [CommunityController::class, 'follow']);
+Route::post('api/communities/unfollow', [CommunityController::class, 'unfollow']);

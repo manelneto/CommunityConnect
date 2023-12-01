@@ -23,7 +23,7 @@ class User extends Authenticatable
         'register_date' => 'datetime',
     ];
 
-    public function userBadges()
+    public function userBadges() // TODO
     {
         return $this->hasMany(UserEarnsBadge::class, 'id_user');
     }
@@ -31,5 +31,10 @@ class User extends Authenticatable
     public function badges()
     {
         return $this->belongsToMany(Badge::class, 'user_earns_badge', 'id_user', 'id_badge');
+    }
+
+    public function communities()
+    {
+        return $this->belongsToMany(Community::class, 'user_follows_community', 'id_user', 'id_community');
     }
 }

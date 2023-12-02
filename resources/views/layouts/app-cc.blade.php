@@ -33,6 +33,7 @@
     <script src="{{ asset('js/findUser.js') }} " defer></script>
     <script src="{{ asset('js/questions-filters.js') }} " defer></script>
     <script src="{{ asset('js/search-bar.js') }} " defer></script>
+    <script src="{{ asset('js/votes.js') }} " defer></script>
 </head>
 
 <body>

@@ -1,3 +1,8 @@
+<script>
+    //! Isto funciona!
+    var userId = @json(Auth::user()?->id);
+    var questionId = @json($question->id);
+</script>
 <div class="question-container">
     <img class="member-pfp question-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}"
         alt="User's profule picture" />

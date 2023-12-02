@@ -37,7 +37,10 @@
     width: 330px;
     height: 130px;
     box-sizing: border-box;
-    padding: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

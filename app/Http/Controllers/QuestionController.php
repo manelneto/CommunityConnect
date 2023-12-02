@@ -21,13 +21,11 @@ class QuestionController extends Controller
 
         if ($community === 0 && count($communities) === 0 && (int) $request->get('community', 0) === 0  && (int) $request->get('communities', 0) === 0) {
             // all questions
-            error_log('1');
             $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->whereBetween('date', [$after, $before]);
         } else if ($community !== 0 || (int) $request->get('community', 0) !== 0) {
             // community page
-            error_log('2');
             $id_community = $community !== 0 ? $community : $request->get('community');
             $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
@@ -35,38 +33,13 @@ class QuestionController extends Controller
                 ->where('id_community', $id_community);
         } else {
             // personal feed
-            error_log('3');
             $communities = $communities !== [] ? $communities : explode(',', $request->get('communities'));
             $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->whereBetween('date', [$after, $before])
                 ->whereIn('id_community', $communities);
         }
-/*
-        if ($community !== 0) {
-            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
-                ->withCount(['likes', 'dislikes', 'answers'])
-                ->whereBetween('date', [$after, $before])
-                ->where('id_community', $community);
-        } else if ($request->get('community', 0) != 0) {
-            $community = $request->get('community', '');
-            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
-                ->withCount(['likes', 'dislikes', 'answers'])
-                ->whereBetween('date', [$after, $before])
-                ->where('id_community', $community);
-        } else {
-            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
-                ->withCount(['likes', 'dislikes', 'answers'])
-                ->whereBetween('date', [$after, $before]);
-        }
 
-        if (count($communities) > 0) {
-            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
-                ->withCount(['likes', 'dislikes', 'answers'])
-                ->whereBetween('date', [$after, $before])
-                ->whereIn('id_community', $communities);
-        }
-*/
         if ($searchTerm != '') {
             if (preg_match('/^".+"$/', $searchTerm)) {
                 // exact match search
@@ -108,6 +81,8 @@ class QuestionController extends Controller
 
     public function personalIndex(Request $request)
     {
+        $this->authorize('personalIndex', Question::class);
+        
         $user = Auth::user()->id;
         $communities = UserFollowsCommunity::where('id_user', $user)->pluck('id_community')->toArray();
         $questions = json_decode($this->search($request, 0, $communities)->content());

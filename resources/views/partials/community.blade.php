@@ -4,10 +4,12 @@
         <path d="M128.098 59.0439C131.815 59.0439 134.833 62.0514 134.845 65.7688L134.957 98.8584C134.957 118.765 118.763 134.959 98.8563 134.959H36.1011C16.1949 134.959 0 118.765 0 98.8584V65.7938C0 62.0669 3.02109 59.0459 6.74781 59.0459L128.098 59.0439Z" />
     </svg>
     <h2><a href="communities/{{ $community->id }}">{{ $community->name }}</a></h2>
-    @if (Auth::user()->communities->contains($community->id))
-    <button id="{{ $community->id }}" class="unfollow-community">Unfollow</button>
-    @else
-    <button id="{{ $community->id }}" class="follow-community">Follow</button>
-    @endif
+    @auth
+        @if (Auth::user()->communities->contains($community->id))
+        <button id="{{ $community->id }}" class="unfollow-community">Unfollow</button>
+        @else
+        <button id="{{ $community->id }}" class="follow-community">Follow</button>
+        @endif
+    @endauth
     <p>{{ $community->users_count }} Followers</p>
 </article>

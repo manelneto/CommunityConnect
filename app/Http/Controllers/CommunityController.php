@@ -23,6 +23,8 @@ class CommunityController extends Controller
 
     public function follow(Request $request)
     {
+        $this->authorize('follow', Community::class);
+
         $id = $request->get('id');
         try {
             $community = Community::findOrFail($id);
@@ -39,6 +41,8 @@ class CommunityController extends Controller
 
     public function unfollow(Request $request)
     {
+        $this->authorize('unfollow', Community::class);
+
         $id = $request->get('id');
         try {
             $community = Community::findOrFail($id);

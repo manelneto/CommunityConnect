@@ -15,7 +15,9 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        $communities = Community::withCount(['users'])->get();
+        $communities = Community::with(['users'])
+            ->withCount(['users'])
+            ->get();
         return view('pages.communities', ['communities' => $communities]);
     }
 

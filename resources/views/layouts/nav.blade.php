@@ -29,8 +29,6 @@
             </a>
         </li>
         @endauth
-        <li class="img-menu">
-            <a href="">
         <li class="img-menu {{ Request::routeIs('about-us') ? 'active-nav-item' : '' }}">
             <a href="{{ route('about-us') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">

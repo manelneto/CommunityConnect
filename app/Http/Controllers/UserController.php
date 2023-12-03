@@ -140,7 +140,7 @@ class UserController extends Controller
 
     public function block_user(Request $request) {
         $user = User::findOrFail($request->input('user'));
-        //$this->authorize('block_user', $user);
+        $this->authorize('block_user', User::class);
 
         try{
             $user->blocked = !$user->blocked;
@@ -153,7 +153,7 @@ class UserController extends Controller
 
     public function unblock_user(Request $request) {
         $user = User::findOrFail($request->input('user'));
-        //$this->authorize('unblock_user', $user);
+        $this->authorize('unblock_user', User::class);
 
         try{
             $user->blocked = !$user->blocked;

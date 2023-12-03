@@ -48,5 +48,14 @@
                 <li>Follow a Community</li>
             </ul> 
         </article>
+        <article class="feature-section">
+            <h3>if you are the author of a question, you can:</h3>
+            <ul> 
+                <li>Edit Questions</li>
+                <li>Delete Questions</li>
+                <li>Edit Tags of Own Questions</li>
+                <li>Mark Answers as Correct</li>
+            </ul>
+        </article>
     </section>
 @endsection

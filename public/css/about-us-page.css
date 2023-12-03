@@ -1,0 +1,35 @@
+section.about-us {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 50px auto;
+  width: 89%;
+}
+
+.about-us-title {
+  text-align: center;
+  font-size: 40px;
+}
+
+#about-us p {
+  margin-top: 30px;
+  font-size: 20px;
+  text-align: justify;
+}
+
+#about-us .made-by-list {
+  margin-top: 30px;
+  margin-left: 20px;
+  font-size: 20px;
+  list-style: disc;
+}
+
+#about-us .made-by-list li {
+  margin-top: 10px;
+}
+
+#about-us .made-by-list li a {
+  color: var(--blue);
+  font-size: 18px;
+}

@@ -2,7 +2,7 @@
     <img class="footer-img" src="{{ asset('assets/logo.png') }}" alt="community connect logo with text" />
     <ul class="footer-links-left">
         <li class="footer-link">
-            <a href="">About</a>
+            <a href="{{ route('about-us') }}">About</a>
         </li>
         <li class="footer-link">
             <a href="">Contact Us</a>

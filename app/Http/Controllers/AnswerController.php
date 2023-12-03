@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Answer;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 
 class AnswerController extends Controller {
     /**
@@ -17,13 +18,12 @@ class AnswerController extends Controller {
         $request->validate([
             'content' => 'required|string|max:1000',
             'id_question' => 'required|integer',
-            'id_user' => 'required|integer'
         ]);
 
         $answer = new Answer();
         $answer->content = $request['content'];
         $answer->id_question = $request['id_question'];
-        $answer->id_user = $request['id_user'];
+        $answer->id_user = Auth::user()->id;
 
         $answer->save();
 

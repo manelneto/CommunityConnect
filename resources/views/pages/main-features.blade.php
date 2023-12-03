@@ -64,5 +64,12 @@
                 <li>Delete answers or comments</li>
             </ul>
         </article>
+        <article class="feature-section">
+            <h3>If you are a moderator, you can:</h3>
+            <ul>
+                <li>Delete content</li>
+                <li>Edit tags of questions</li>
+            </ul>
+        </article>
     </section>
 @endsection

@@ -37,4 +37,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Community::class, 'user_follows_community', 'id_user', 'id_community');
     }
+
+    public function followedQuestions()
+    {
+        return $this->belongsToMany(Question::class, 'user_follows_question', 'id_user', 'id_question');
+    }
 }

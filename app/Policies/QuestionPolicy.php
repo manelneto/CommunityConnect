@@ -41,4 +41,14 @@ class QuestionPolicy {
     {
         return ($user->id === Auth::user()->id) && ($question->id_user === $user->id || Auth::user()->administrator);
     }
+
+    public function follow(User $user): bool
+    {
+        return Auth::check();
+    }
+
+    public function unfollow(User $user): bool
+    {
+        return Auth::check();
+    }
 }

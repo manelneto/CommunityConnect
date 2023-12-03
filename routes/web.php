@@ -73,6 +73,8 @@ Route::get('api/questions', [QuestionController::class, 'search']);
 Route::get('api/users', [UserController::class, 'search']);
 Route::post('api/communities/follow', [CommunityController::class, 'follow']);
 Route::post('api/communities/unfollow', [CommunityController::class, 'unfollow']);
+Route::post('api/questions/{id}/follow', [QuestionController::class, 'follow']);
+Route::post('api/questions/{id}/unfollow', [QuestionController::class, 'unfollow']);
 
 // Static info pages
 Route::view('/about-us', 'pages.about-us')->name('about-us');

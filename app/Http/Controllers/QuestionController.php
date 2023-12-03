@@ -6,6 +6,7 @@ use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Community;
 use App\Models\UserFollowsCommunity;
+use App\Models\UserFollowsQuestion;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -202,5 +203,41 @@ class QuestionController extends Controller
         } catch (ModelNotFoundException $e) {
             return "Question not found.";
         }
+    }
+
+    public function follow(Request $request)
+    {
+        $this->authorize('follow', Question::class);
+
+        $id = $request->get('id');
+        try {
+            $question = Question::findOrFail($id);
+            $user = Auth::user()->id;
+            UserFollowsQuestion::insert([
+                'id_user' => $user,
+                'id_question' => $id
+            ]);
+            return response('Followed Question');
+        } catch (ModelNotFoundException $e) {
+            return response('Question not found');
+        };
+    }
+
+    public function unfollow(Request $request)
+    {
+        $this->authorize('unfollow', Question::class);
+
+        $id = $request->get('id');
+        try {
+            $question = Question::findOrFail($id);
+            $user = Auth::user()->id;
+            UserFollowsQuestion::where([
+                'id_user' => $user,
+                'id_question' => $id
+            ])->delete();
+            return response('Unfollowed Question');
+        } catch (ModelNotFoundException $e) {
+            return response('Question not found');
+        };
     }
 }

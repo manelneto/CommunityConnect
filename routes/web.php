@@ -62,6 +62,8 @@ Route::controller(AnswerController::class)->group(function () {
 
 // Admin
 Route::get('/admin', [UserController::class, 'index'])->name('admin');
+Route::post('/admin/block', [UserController::class, 'block_user'])->name('block-user');
+Route::post('/admin/unblock', [UserController::class, 'unblock_user'])->name('unblock-user');
 
 //Communities
 Route::get('/communities', [CommunityController::class, 'index'])->name('communities');

@@ -34,6 +34,38 @@
                     <button id="create-user" type="submit">Create User</button>
                 </form>
             </details>
+            <details>
+                <summary>Block a user</summary>
+                <form action="../admin/block" method="post" class="form-admin">
+                    @csrf
+                    <label for="user">Username</label>
+                    <select id="user" name="user">
+                        <option value="0">None</option>
+                        @foreach ($users as $user)
+                            @if ($user->blocked === false)
+                                <option value="{{ $user->id }}">{{ $user->username }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    <button id="find-user" type="submit">Block</button>
+                </form>
+            </details>
+            <details>
+                <summary>Unblock a user</summary>
+                <form action="../admin/unblock" method="post" class="form-admin">
+                    @csrf
+                    <label for="user">Username</label>
+                    <select id="user" name="user">
+                        <option value="0">None</option>
+                        @foreach ($users as $user)
+                            @if ($user->blocked === true)
+                                <option value="{{ $user->id }}">{{ $user->username }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    <button id="find-user" type="submit">Unblock</button>
+                </form>
+            </details> 
         </section>
     </main>
 @endsection

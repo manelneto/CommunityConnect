@@ -71,5 +71,15 @@
                 <li>Edit tags of questions</li>
             </ul>
         </article>
+        <article class="feature-section">
+            <h3>If you are an administrator, you can:</h3>
+            <ul> 
+                <li>Manage user accounts</li>
+                <li>Manage tags</li>
+                <li>Have an administrator account</li>
+                <li>Block and unblock accounts</li>
+                <li>Delete accounts</li>
+            </ul>
+        </article>
     </section>
 @endsection

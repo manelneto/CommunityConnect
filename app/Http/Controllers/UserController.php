@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -170,7 +171,13 @@ class UserController extends Controller
 
         try {
             $user->delete();
-            return redirect('communities');
+            if (Auth::user()->administrator) {
+                return redirect('users/' . $id);
+            }
+            else {
+                auth()->logout();
+                return redirect('login');
+            }
         } catch (ModelNotFoundException $e) {
             return "User not found.";
         }

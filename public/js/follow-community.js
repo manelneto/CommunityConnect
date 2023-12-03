@@ -1,5 +1,4 @@
 async function followCommunity(id) {
-    console.log('following community', id);
     await fetch('/api/communities/follow', {
         method: 'POST',
         headers: {
@@ -11,7 +10,6 @@ async function followCommunity(id) {
 }
 
 async function unfollowCommunity(id) {
-    console.log('unfollowing community', id);
     await fetch('/api/communities/unfollow', {
         method: 'POST',
         headers: {
@@ -22,19 +20,23 @@ async function unfollowCommunity(id) {
     });
 }
 
-const communityButtons = document.querySelectorAll('.community button');
+const communities = document.querySelectorAll('.community');
 
-if (communityButtons) {
-    communityButtons.forEach((button) => {
+if (communities) {
+    communities.forEach((community) => {
+        const button = community.querySelector('button');
+        const numberFollowers = community.querySelector('.number-followers');
         button.addEventListener('click', (event) => {
             event.preventDefault();
             const id = button.id;
             if (button.classList.contains('follow-community')) {
                 followCommunity(id);
                 button.textContent = 'Unfollow';
+                numberFollowers.textContent = parseInt(numberFollowers.textContent) + 1 + " Followers";
             } else {
                 unfollowCommunity(id);
                 button.textContent = 'Follow';
+                numberFollowers.textContent = parseInt(numberFollowers.textContent) - 1 + " Followers";
             }
             button.classList.toggle('follow-community');
             button.classList.toggle('unfollow-community');

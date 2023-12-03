@@ -13,6 +13,6 @@ class Community extends Model
 
     public function users()
     {
-        return $this->hasMany(UserFollowsCommunity::class, 'id_user');
+        return $this->hasMany(UserFollowsCommunity::class, 'id_community');
     }
 }

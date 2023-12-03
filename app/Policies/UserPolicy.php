@@ -40,4 +40,14 @@ class UserPolicy {
     {
         return ($user->id === Auth::user()->id || Auth::user()->administrator);
     }
+
+    public function block_user(User $user): bool
+    {
+        return Auth::user()->administrator;
+    }
+
+    public function unblock_user(User $user): bool
+    {
+        return Auth::user()->administrator;
+    }
 }

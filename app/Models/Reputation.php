@@ -11,10 +11,8 @@ class Reputation extends Model
     public $timestamps = false;
     private $table = 'reputation';
 
-    // Composite primary keys have some limitations in laravel
     protected $primaryKey = ['id_user', 'id_community'];
 
-    // Disable auto-increment as we are using a composite primary key
     public $incrementing = false;
 
     public function user()

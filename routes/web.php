@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Home
-Route::redirect('/', '/questions');
+Route::redirect('/', '/communities');
 
 // Authentication
 Route::controller(RegisterController::class)->group(function () {
@@ -62,6 +63,13 @@ Route::controller(AnswerController::class)->group(function () {
 // Admin
 Route::get('/admin', [UserController::class, 'index'])->name('admin');
 
+//Communities
+Route::get('/communities', [CommunityController::class, 'index'])->name('communities');
+Route::get('/communities/{id}', [QuestionController::class, 'communityIndex'])->name('community');
+Route::get('/feed', [QuestionController::class, 'personalIndex'])->name('feed');
+
 // API
 Route::get('api/questions', [QuestionController::class, 'search']);
 Route::get('api/users', [UserController::class, 'search']);
+Route::post('api/communities/follow', [CommunityController::class, 'follow']);
+Route::post('api/communities/unfollow', [CommunityController::class, 'unfollow']);

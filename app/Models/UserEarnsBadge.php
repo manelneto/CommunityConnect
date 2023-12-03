@@ -11,10 +11,8 @@ class UserEarnsBadge extends Model
     public $timestamps = false;
     protected $table = 'user_earns_badge';
 
-    // Composite primary keys have some limitations in laravel
     protected $primaryKey = ['id_user', 'id_badge'];
 
-    // Disable auto-increment as we are using a composite primary key
     public $incrementing = false;
 
     public function user()

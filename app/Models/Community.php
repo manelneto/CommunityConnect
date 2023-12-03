@@ -10,4 +10,9 @@ class Community extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'community';
+
+    public function users()
+    {
+        return $this->hasMany(UserFollowsCommunity::class, 'id_user');
+    }
 }

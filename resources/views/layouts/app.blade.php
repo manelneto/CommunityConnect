@@ -30,6 +30,7 @@
         <link href="{{ asset('css/edit-profile.css') }}" rel="stylesheet">
         <link href="{{ asset('css/profile-page.css') }}" rel="stylesheet">
         <link href="{{ asset('css/ask-question.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/communities.css') }}" rel="stylesheet">
 
         <!-- JavaScript -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -39,6 +40,7 @@
         <script src="{{ asset('js/findUser.js') }} " defer></script>
         <script src="{{ asset('js/questions-filters.js') }} " defer></script>
         <script src="{{ asset('js/search-bar.js') }} " defer></script>
+        <script src="{{ asset('js/follow-community.js') }} " defer></script>
     </head>
 
     <body>

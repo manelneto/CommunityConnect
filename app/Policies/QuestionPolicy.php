@@ -12,6 +12,11 @@ class QuestionPolicy {
 
     use HandlesAuthorization;
 
+    public function personalIndex(User $user): bool
+    {
+        return Auth::check();
+    }
+
     public function create(User $user): bool
     {
         return Auth::check();

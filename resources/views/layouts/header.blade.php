@@ -8,7 +8,7 @@
                 <img id="CC-image" src="{{ asset('assets/logo.png') }}"  alt="community connect logo with text" />
             </a>
         </div>
-        @if (Request::route()->getName() == 'questions') <!-- TODO -->
+        @if (Request::route()->getName() == 'questions' || Request::route()->getName() == 'community' || Request::route()->getName() == 'feed') <!-- TODO -->
             <div class="mid-header">
                 <form action="{{ url('/questions') }}" class="main-search" method="GET">
                     <input type="text" name="text" class="live-search" placeholder="{{ request('text', 'Search') }}" value="{{ request('text') }}" />

@@ -4,22 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\Community;
+use App\Models\UserFollowsCommunity;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
-    public function search(Request $request)
+    public function search(Request $request, int $community = 0, array $communities = [])
     {
         $after = $request->get('after', '2020-01-01');
         $before = $request->get('before', '2030-12-31');
         $sort = $request->get('sort') == 'recent' ? 'date' : 'likes_count';
         $searchTerm = $request->get('text', '');
 
-        $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
-            ->withCount(['likes', 'dislikes', 'answers'])
-            ->whereBetween('date', [$after, $before]);
+        if ($community === 0 && count($communities) === 0 && (int) $request->get('community', 0) === 0  && (int) $request->get('communities', 0) === 0) {
+            // all questions
+            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
+                ->withCount(['likes', 'dislikes', 'answers'])
+                ->whereBetween('date', [$after, $before]);
+        } else if ($community !== 0 || (int) $request->get('community', 0) !== 0) {
+            // community page
+            $id_community = $community !== 0 ? $community : $request->get('community');
+            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
+                ->withCount(['likes', 'dislikes', 'answers'])
+                ->whereBetween('date', [$after, $before])
+                ->where('id_community', $id_community);
+        } else {
+            // personal feed
+            $communities = $communities !== [] ? $communities : explode(',', $request->get('communities'));
+            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
+                ->withCount(['likes', 'dislikes', 'answers'])
+                ->whereBetween('date', [$after, $before])
+                ->whereIn('id_community', $communities);
+        }
 
         if ($searchTerm != '') {
             if (preg_match('/^".+"$/', $searchTerm)) {
@@ -50,7 +69,23 @@ class QuestionController extends Controller
      */
     public function index(Request $request)
     {
-        $questions = json_decode($this->search($request)->content());
+        $questions = json_decode($this->search($request, 0, array())->content());
+        return view('questions.index', ['questions' => $questions]);
+    }
+
+    public function communityIndex(Request $request, int $community)
+    {
+        $questions = json_decode($this->search($request, $community, array())->content());
+        return view('questions.index', ['questions' => $questions]);
+    }
+
+    public function personalIndex(Request $request)
+    {
+        $this->authorize('personalIndex', Question::class);
+        
+        $user = Auth::user()->id;
+        $communities = UserFollowsCommunity::where('id_user', $user)->pluck('id_community')->toArray();
+        $questions = json_decode($this->search($request, 0, $communities)->content());
         return view('questions.index', ['questions' => $questions]);
     }
 
@@ -60,7 +95,8 @@ class QuestionController extends Controller
     public function create()
     {
         $this->authorize('create', Question::class);
-        return view('questions.create');
+        $communities = Community::all();
+        return view('questions.create', ['communities' => $communities]);
     }
 
     /**
@@ -73,15 +109,14 @@ class QuestionController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string|max:1000',
-            'id_user' => 'required|integer',
             'id_community' => 'required|integer',
         ]);
 
         $question = new Question();
         $question->title = $request['title'];
         $question->content = $request['content'];
-        $question->id_user = $request['id_user'];
         $question->id_community = $request['id_community'];
+        $question->id_user = Auth::user()->id;
 
         $question->save();
 

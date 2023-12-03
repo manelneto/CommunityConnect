@@ -57,5 +57,12 @@
                 <li>Mark Answers as Correct</li>
             </ul>
         </article>
+        <article class="feature-section">
+            <h3>If you are the author of an answer or a comment, you can:</h3>
+            <ul> 
+                <li>Edit answers or comments</li>
+                <li>Delete answers or comments</li>
+            </ul>
+        </article>
     </section>
 @endsection

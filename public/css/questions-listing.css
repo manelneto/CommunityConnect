@@ -112,7 +112,7 @@ fieldset label {
 }
 
 .question-member-pfp {
-  margin-right: 20px; /* Space between the image and the content on the right */
+  margin-right: 20px; 
 }
 
 .content-right {
@@ -158,4 +158,30 @@ a.edit-question-button {
 a.edit-question-button:hover {
   background-color: var(--blue);
   transition: 0.2s;
+}
+
+.question-details button.follow-question-button:hover + .follow-question-tooltip {
+  visibility: visible;
+}
+
+.content-right .question-details {
+  position: relative;
+}
+
+button.follow-question-button {
+  position: absolute;
+  right: 5px;
+  top: -4px;
+}
+
+span.follow-question-tooltip {
+  visibility: hidden;
+  position: absolute;
+  right: 35px;
+  bottom: 0;
+  font-size: 12px;
+  background-color: #f0f0f0;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

@@ -26,6 +26,11 @@ class Question extends Model
         return $this->hasMany(QuestionVote::class, 'id_question');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(QuestionComment::class, 'id_question');
+    }
+
     public function answers()
     {
         return $this->hasMany(Answer::class, 'id_question');

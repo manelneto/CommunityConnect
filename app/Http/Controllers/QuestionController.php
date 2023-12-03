@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnswerComment;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Community;
+use App\Models\QuestionComment;
 use App\Models\UserFollowsCommunity;
 use App\Models\UserFollowsQuestion;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -133,28 +135,24 @@ class QuestionController extends Controller
     public function show(int $id)
     {
         try {
-            // Retrieve the question
-            $question = Question::withCount(['likes', 'dislikes', 'tags'])
+            $question = Question::withCount(['answers', 'likes', 'dislikes', 'tags', 'comments'])
                 ->findOrFail($id);
 
-            // Retrieve answers related to the question
-            $answers = Answer::with(['user', 'likes', 'dislikes'])
+            $answers = Answer::with(['user', 'likes', 'dislikes', 'comments'])
                 ->withCount(['likes', 'dislikes'])
                 ->where('id_question', $id)
                 ->orderBy('date')
                 ->get();
 
-            // Pass the question and answers to the view
             return view('questions.show', [
                 'question' => $question,
-                'answers' => $answers
+                'answers' => $answers,
             ]);
 
         } catch (ModelNotFoundException $e) {
             return "Question not found.";
         }
     }
-
 
     /**
      * Show the form for editing the specified resource.

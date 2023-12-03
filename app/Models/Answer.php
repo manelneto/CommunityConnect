@@ -26,6 +26,11 @@ class Answer extends Model
         return $this->hasMany(AnswerVote::class, 'id_answer');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(AnswerComment::class, 'id_answer');
+    }
+
     public function likes()
     {
         return $this->votes()->where('likes', true);

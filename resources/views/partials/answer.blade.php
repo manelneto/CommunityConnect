@@ -1,6 +1,6 @@
-<form class="answer-container" method="post">
+<form class="answer" method="post">
     @csrf
-    <div class="left-content">
+    <div class="content-left">
         <img class="member-pfp answer-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profule picture" />
         <div class="answers-votes">
             <span class="answer-upvotes">
@@ -17,16 +17,16 @@
         </div>
     </div>
     <div class="content-right">
-        <a href="../users/{{ $answer->id_user }}" class="answer-username">{{ $answer->user->username }}</a>
-        <span class="answer-asked-date">Answer added {{ $answer->date }}</span>
+        <a class="username" href="../users/{{ $answer->id_user }}">{{ $answer->user->username }}</a>
+        <span class="date">Answer added {{ $answer->date }}</span>
         @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
-            <textarea class="answer-description non-movable-textarea" name="content" cols="40" rows="5">{{ $answer->content }}</textarea>
+            <textarea class="description non-movable-textarea" name="content" cols="40" rows="5">{{ $answer->content }}</textarea>
         @else
-            <p class="answer-description">{{ $answer->content }}</p>
+            <p class="description">{{ $answer->content }}</p>
         @endif
         @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
-            <button class="edit-answer-button" formaction="../../answers/{{ $answer->id }}">Edit</button>
-            <button class="delete-answer-button" formaction="../../answers/{{ $answer->id }}/delete">Delete</button>
+            <button class="edit" formaction="../../answers/{{ $answer->id }}">Edit</button>
+            <button class="delete" formaction="../../answers/{{ $answer->id }}/delete">Delete</button>
         @endif
     </div>
 </form>

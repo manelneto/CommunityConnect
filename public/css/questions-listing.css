@@ -193,3 +193,26 @@ span.follow-question-tooltip {
 .unfollow-question-button path {
   fill: #f05555;
 }
+
+.questions-filters legend {
+  font-weight: bold;
+}
+
+.questions-filters label {
+  font-weight: normal;
+}
+
+.questions-filters .filters-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.questions-filters .reset-filters-button {
+  margin-right: 1rem;
+  color: #676767;
+}
+
+.questions-filters .reset-filters-button:hover {
+  color: var(--blue);
+  transition: 0.2s;
+}

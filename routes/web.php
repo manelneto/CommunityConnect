@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AnswerCommentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\QuestionCommentController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -53,12 +55,26 @@ Route::controller(QuestionController::class)->group(function () {
     Route::post('/questions/{id}/delete', 'destroy');
 });
 
+// Question Comments
+Route::controller(QuestionCommentController::class)->group(function() {
+    Route::post('/question-comments', 'store');
+    Route::post('/question-comments/{id}', 'update');
+    Route::post('/question-comments/{id}/delete', 'destroy');
+});
+
 // Answers
 Route::controller(AnswerController::class)->group(function () {
     Route::get('/answers/{id}/edit', 'edit')->name('edit-answer');
     Route::post('/answers', 'store');
     Route::post('/answers/{id}', 'update');
     Route::post('/answers/{id}/delete', 'destroy');
+});
+
+// Answer Comments
+Route::controller(AnswerCommentController::class)->group(function() {
+    Route::post('/answer-comments', 'store');
+    Route::post('/answer-comments/{id}', 'update');
+    Route::post('/answer-comments/{id}/delete', 'destroy');
 });
 
 // Admin

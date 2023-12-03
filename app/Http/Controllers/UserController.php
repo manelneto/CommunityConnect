@@ -137,4 +137,13 @@ class UserController extends Controller
             return "User not found.";
         }
     }
+
+    public function block_user(Request $request) {
+        $user = User::findOrFail($request->id);
+        $this->authorize('block_user', $user);
+
+        $user->blocked = !$user->blocked;
+        $user->save();
+        return redirect('users/' . $request->id);
+    }
 }

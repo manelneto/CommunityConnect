@@ -9,5 +9,5 @@
             @endif
         @endauth
     </div>
-    <p>{{ $community->users_count }} Followers</p>
+    <p class="number-followers">{{ $community->users_count }} Followers</p>
 </article>

@@ -15,9 +15,7 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        $communities = Community::with(['users'])
-            ->withCount(['users'])
-            ->get();
+        $communities = Community::withCount(['users'])->get();
         return view('pages.communities', ['communities' => $communities]);
     }
 
@@ -26,6 +24,7 @@ class CommunityController extends Controller
         $this->authorize('follow', Community::class);
 
         $id = $request->get('id');
+        error_log($id);
         try {
             $community = Community::findOrFail($id);
             $user = Auth::user()->id;
@@ -33,6 +32,7 @@ class CommunityController extends Controller
                 'id_user' => $user,
                 'id_community' => $id
             ]);
+            error_log('here');
             return response('Followed Community');
         } catch (ModelNotFoundException $e) {
             return response('Community not found');

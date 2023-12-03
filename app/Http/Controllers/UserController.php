@@ -165,7 +165,14 @@ class UserController extends Controller
     }
 
     public function destroy(int $id) {
+        $user = User::findOrFail($id);
+        $this->authorize('destroy', $user);
 
-       
+        try {
+            $user->delete();
+            return redirect('communities');
+        } catch (ModelNotFoundException $e) {
+            return "User not found.";
+        }
     }
 }

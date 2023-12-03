@@ -33,12 +33,15 @@ class QuestionController extends Controller
                 ->whereBetween('date', [$after, $before])
                 ->where('id_community', $id_community);
         } else {
-            // personal feed
+            // personal feed -> questions from communities that user follows AND quetions that user follows
             $communities = $communities !== [] ? $communities : explode(',', $request->get('communities'));
+            $user = Auth::user()?->id;
+            $userQuestions = UserFollowsQuestion::where('id_user', $user)->pluck('id_question')->toArray();
             $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->whereBetween('date', [$after, $before])
-                ->whereIn('id_community', $communities);
+                ->whereIn('id_community', $communities)
+                ->orWhereIn('id', $userQuestions);
         }
 
         if ($searchTerm != '') {

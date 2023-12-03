@@ -5,7 +5,7 @@
             <a href="../users/{{ $question->id_user }}" class="question-username">{{ $question->user->username }}</a>
             <span class="question-asked-date">Asked: {{ $question->date }}</span>
             <span class="question-community">In: {{ $question->community->name }}</span>
-            @if (Request::route()->getName() == 'question')
+            @if (Request::route()->getName() == 'question' && Auth::user())
                 @if (Auth::user()?->followedQuestions->contains($question->id))
                     <button id="{{ $question->id }}" class="unfollow-question-button">
                         <svg width="30" height="30" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">

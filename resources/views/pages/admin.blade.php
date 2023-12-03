@@ -36,7 +36,7 @@
             </details>
             <details>
                 <summary>Block a user</summary>
-                <form action="../../users/" method="get" class="form-admin">
+                <form action="../admin/block" method="post" class="form-admin">
                     @csrf
                     <label for="user">Username</label>
                     <select id="user" name="user">
@@ -52,7 +52,7 @@
             </details>
             <details>
                 <summary>Unblock a user</summary>
-                <form action="../../users/" method="get" class="form-admin">
+                <form action="../admin/unblock" method="post" class="form-admin">
                     @csrf
                     <label for="user">Username</label>
                     <select id="user" name="user">

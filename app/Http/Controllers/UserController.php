@@ -139,11 +139,28 @@ class UserController extends Controller
     }
 
     public function block_user(Request $request) {
-        $user = User::findOrFail($request->id);
-        $this->authorize('block_user', $user);
+        $user = User::findOrFail($request->input('user'));
+        //$this->authorize('block_user', $user);
 
-        $user->blocked = !$user->blocked;
-        $user->save();
-        return redirect('users/' . $request->id);
+        try{
+            $user->blocked = !$user->blocked;
+            $user->save();
+            return redirect('admin');
+        } catch (ModelNotFoundException $e) {
+            return "User not found.";
+        }        
+    }
+
+    public function unblock_user(Request $request) {
+        $user = User::findOrFail($request->input('user'));
+        //$this->authorize('unblock_user', $user);
+
+        try{
+            $user->blocked = !$user->blocked;
+            $user->save();
+            return redirect('admin');
+        } catch (ModelNotFoundException $e) {
+            return "User not found.";
+        }
     }
 }

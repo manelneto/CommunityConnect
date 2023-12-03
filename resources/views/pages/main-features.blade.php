@@ -18,5 +18,12 @@
                 <li>View ratings</li>
             </ul>
         </article>
+        <article class="feature-section">
+            <h3>If you are a visitor, you can:</h3>
+            <ul>
+                <li>Login/logout</li>
+                <li>Registration</li>
+            </ul>
+        </article> 
     </section>
 @endsection

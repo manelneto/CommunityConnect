@@ -160,7 +160,7 @@ a.edit-question-button:hover {
   transition: 0.2s;
 }
 
-.question-details button.follow-question-button:hover + .follow-question-tooltip {
+.question-details button:hover + .follow-question-tooltip {
   visibility: visible;
 }
 
@@ -168,7 +168,7 @@ a.edit-question-button:hover {
   position: relative;
 }
 
-button.follow-question-button {
+.question-details button {
   position: absolute;
   right: 5px;
   top: -4px;
@@ -184,4 +184,12 @@ span.follow-question-tooltip {
   padding: 5px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.follow-question-button path {
+  fill: #abacb1;
+}
+
+.unfollow-question-button path {
+  fill: #f05555;
 }

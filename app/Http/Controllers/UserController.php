@@ -163,4 +163,9 @@ class UserController extends Controller
             return "User not found.";
         }
     }
+
+    public function destroy(int $id) {
+
+       
+    }
 }

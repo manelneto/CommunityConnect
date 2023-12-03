@@ -8,6 +8,7 @@
                     <h1>{{ $user->username }}</h1>
                     @if (Auth::user()?->id === $user->id || Auth::user()?->administrator)
                         <a class="edit-profile" href="{{ route('edit-user', $user->id) }}">Edit</a>
+                        <button id="delete-account"> Delete account </button>
                     @endif
                 </span>
                 <h2>{{ $user->email }}</h2>

@@ -50,4 +50,9 @@ class UserPolicy {
     {
         return Auth::user()->administrator;
     }
+
+    public function destroy(User $user): bool
+    {
+        return ($user->id === Auth::user()->id || Auth::user()->administrator);
+    }
 }

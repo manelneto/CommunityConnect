@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -159,6 +160,24 @@ class UserController extends Controller
             $user->blocked = !$user->blocked;
             $user->save();
             return redirect('admin');
+        } catch (ModelNotFoundException $e) {
+            return "User not found.";
+        }
+    }
+
+    public function destroy(int $id) {
+        $user = User::findOrFail($id);
+        $this->authorize('destroy', $user);
+
+        try {
+            $user->delete();
+            if (Auth::user()->administrator) {
+                return redirect('users/' . $id);
+            }
+            else {
+                auth()->logout();
+                return redirect('login');
+            }
         } catch (ModelNotFoundException $e) {
             return "User not found.";
         }

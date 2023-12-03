@@ -73,7 +73,21 @@ a.edit-profile {
   padding-bottom: 0px;
 }
 
-a:hover.edit-profile {
+#delete-account{
+  margin-left: 0.3rem;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  background-color: var(--red);
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: var(--hover-red);
+}
+
+.edit-profile:hover {
   background-color: var(--dark-blue);
 }
 

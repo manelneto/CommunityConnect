@@ -82,4 +82,17 @@ class AnswerController extends Controller {
             return "Answer not found.";
         }
     }
+
+    public function markCorrect(int $id)
+    {
+        $answer = Answer::findOrFail($id);
+        try {
+            $answer->correct = true;
+            $answer->save();
+            return redirect('questions/' . $answer->id_question);
+        }
+        catch (ModelNotFoundException $e) {
+            return "Answer not found.";
+        }
+    }
 }

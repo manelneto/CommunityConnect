@@ -27,7 +27,6 @@ async function unfollowTag(id) {
 }
 
 const followTagButtons = document.querySelectorAll(".tag-tooltip-content button");
-// const questionTooltips = document.querySelectorAll(".follow-question-tooltip");
 
 if (followTagButtons) {
   followTagButtons.forEach((button) => {
@@ -36,20 +35,16 @@ if (followTagButtons) {
       const id = button.id;
       if (button.classList.contains("follow-tag-button")) {
         followTag(id);
-        button.textContent = 'Unfollow tag';
-        // if (questionTooltips) {
-        //   questionTooltips.forEach((tooltip) => {
-        //     tooltip.textContent = "Unfollow this question.";
-        //   });
-        // }
+        let span = button.querySelector("span");
+        if (span) {
+          span.textContent = 'Unfollow tag';
+        }
       } else { 
         unfollowTag(id);
-        button.textContent = 'Follow tag';
-        // if (questionTooltips) {
-        //   questionTooltips.forEach((tooltip) => {
-        //     tooltip.textContent = "Follow this question.";
-        //   });
-        // }
+        let span = button.querySelector("span");
+        if (span) {
+          span.textContent = 'Follow tag';
+        }
       }
       button.classList.toggle("follow-tag-button");
       button.classList.toggle("unfollow-tag-button");

@@ -96,5 +96,5 @@ Route::post('api/questions/{id}/follow', [QuestionController::class, 'follow']);
 Route::post('api/questions/{id}/unfollow', [QuestionController::class, 'unfollow']);
 
 // Static info pages
-Route::view('/about-us', 'pages.about-us')->name('about-us');
+Route::view('/about-contact-us', 'pages.about-contact-us')->name('about-contact-us');
 Route::view('/main-features', 'pages.main-features')->name('main-features');

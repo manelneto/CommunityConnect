@@ -108,6 +108,24 @@ button.delete {
   border-radius: 5px;
 }
 
+.username, .date{
+  display:block;
+}
+
+.answer-info{
+  display: flex;
+  align-items: center;
+}
+
+.username{
+  color: var(--blue);
+  font-size: 19px;
+}
+
+.content-right svg {
+  margin-left: auto;
+}
+
 button.mark-correct {
   background-color: green;
   padding: 4px 10px;

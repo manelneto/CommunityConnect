@@ -10,11 +10,12 @@
 .feature-section h3{
     margin-top:20px;
     font-size: 20px;
-    font-weight: 600;
 }
 
 .feature-section ul li{
-    font-size: 16px;
+    font-size: 18px;
+    list-style: circle;
+    margin-left: 20px;
 }
 
 #title-main-features {

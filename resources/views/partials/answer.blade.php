@@ -25,9 +25,9 @@
             <p class="description">{{ $answer->content }}</p>
         @endif
         @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
+            <button class="mark-correct" formaction="../../answers/{{ $answer->id }}/correct">Mark as correct</button>
             <button class="edit" formaction="../../answers/{{ $answer->id }}">Edit</button>
             <button class="delete" formaction="../../answers/{{ $answer->id }}/delete">Delete</button>
-            <button class="mark-correct" formaction="../../answers/{{ $answer->id }}/correct">Mark as correct</button>
         @endif
     </div>
 </form>

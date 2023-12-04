@@ -86,6 +86,7 @@ class AnswerController extends Controller {
     public function markCorrect(int $id)
     {
         $answer = Answer::findOrFail($id);
+        $this->authorize('correct', $answer);
         try {
             $answer->correct = true;
             $answer->save();

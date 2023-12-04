@@ -68,6 +68,8 @@ Route::controller(AnswerController::class)->group(function () {
     Route::post('/answers', 'store');
     Route::post('/answers/{id}', 'update');
     Route::post('/answers/{id}/delete', 'destroy');
+    Route::post('/answers/{id}/correct', 'markCorrect');
+    Route::post('/answers/{id}/incorrect', 'markIncorrect');
 });
 
 // Answer Comments

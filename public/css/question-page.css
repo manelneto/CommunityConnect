@@ -94,7 +94,7 @@
 }
 
 button.edit {
-  margin-right: 10px;
+  margin-right: 8px;
   background-color: var(--blue);
   padding: 4px 10px;
   color: #fff;
@@ -104,6 +104,40 @@ button.edit {
 button.delete {
   background-color: var(--hover-red);
   padding: 4px 10px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.username, .date{
+  display:block;
+}
+
+.answer-info{
+  display: flex;
+  align-items: center;
+}
+
+.username{
+  color: var(--blue);
+  font-size: 19px;
+}
+
+.content-right svg {
+  margin-left: auto;
+}
+
+button.mark-correct {
+  background-color: green;
+  padding: 4px 10px;
+  margin-right:8px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+button.mark-incorrect {
+  background-color: var(--hover-red);
+  padding: 4px 10px;
+  margin-right:8px;
   color: #fff;
   border-radius: 5px;
 }

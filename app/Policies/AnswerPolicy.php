@@ -31,4 +31,14 @@ class AnswerPolicy {
     {
         return ($user->id === Auth::user()->id) && ($answer->id_user === $user->id || Auth::user()->administrator);
     }
+
+    public function correct(User $user, Answer $answer): bool
+    {
+        return ($user->id === Auth::user()->id) && ($answer->id_user === $user->id || Auth::user()->administrator);
+    }
+
+    public function incorrect(User $user, Answer $answer): bool
+    {
+        return ($user->id === Auth::user()->id) && ($answer->id_user === $user->id || Auth::user()->administrator);
+    }
 }

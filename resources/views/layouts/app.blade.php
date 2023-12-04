@@ -31,7 +31,7 @@
         <link href="{{ asset('css/profile-page.css') }}" rel="stylesheet">
         <link href="{{ asset('css/ask-question.css') }}" rel="stylesheet">
         <link href="{{ asset('css/communities.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/about-us-page.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/about-contact-us.css') }}" rel="stylesheet">
         <link href="{{ asset('css/main-features.css') }}" rel="stylesheet">
 
         <!-- JavaScript -->

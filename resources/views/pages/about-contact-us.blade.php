@@ -16,6 +16,7 @@
             <li>Manuel Ramos Leite Carvalho Neto, <a href="mailto:up202108744@up.pt">up202108744@up.pt</a></li>
             <li>Matilde Isabel da Silva Simões, <a href="mailto:up202108782@up.pt">up202108782@up.pt</a></li>
         </ul>
+        <p>For more information, please contact us using the emails above.</p>
         </section>
     </main>
 @endsection

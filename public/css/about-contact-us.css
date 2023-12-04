@@ -5,25 +5,24 @@ section.about-us {
   padding: 20px;
   margin: 50px auto;
   width: 89%;
-  font-size: 20px;
 }
 
 .about-us-title {
   text-align: center;
-  font-size: 40px;
+  font-size: 25px;
 }
 
 #about-us p {
   margin-top: 30px;
-  font-size: 20px;
+  font-size: 18px;
   text-align: justify;
 }
 
 #about-us .made-by-list {
   margin-top: 30px;
   margin-left: 20px;
-  font-size: 20px;
-  list-style: disc;
+  font-size: 18px;
+  list-style: circle;
 }
 
 #about-us .made-by-list li {

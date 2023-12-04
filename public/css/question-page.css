@@ -181,7 +181,7 @@ button.mark-incorrect {
   opacity: 0;
 }
 
-.tag-tooltip-content button {
+.tag-tooltip-content button, .tag-tooltip-content a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,7 +192,12 @@ button.mark-incorrect {
   border: 1px solid;
 }
 
-.tag-tooltip-content button.watch-tag-button path {
+.tag-tooltip-content a {
+  height: 20px;
+  border-color: var(--blue);
+}
+
+.tag-tooltip-content a.watch-tag-button path {
   stroke: #fff;
 }
 
@@ -200,11 +205,11 @@ button.mark-incorrect {
   fill: #000;
 }
 
-.tag-tooltip-content button svg {
+.tag-tooltip-content button svg, .tag-tooltip-content a svg {
   margin-right: 4px;
 }
 
-.tag-tooltip-content button.watch-tag-button {
+.tag-tooltip-content a.watch-tag-button {
   background-color: var(--blue);
   margin-right: 10px;
 }
@@ -218,8 +223,9 @@ button.mark-incorrect {
   transition: 0.2s;
 }
 
-.tag-tooltip-content button.watch-tag-button:hover {
+.tag-tooltip-content a.watch-tag-button:hover {
   background-color: #00a1fd;
+  border-color: #00a1fd;
 }
 
 .tag-tooltip-content button.follow-tag-button:hover {

@@ -44,6 +44,7 @@
         <script src="{{ asset('js/search-bar.js') }} " defer></script>
         <script src="{{ asset('js/follow-community.js') }} " defer></script>
         <script src="{{ asset('js/follow-question.js') }} " defer></script>
+        <script src="{{ asset('js/follow-tag.js') }} " defer></script>
     </head>
 
     <body>

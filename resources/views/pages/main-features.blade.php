@@ -2,8 +2,8 @@
 
 @section('main')
     <main>
-        <section class="main-features-content">
-            <h1>Main Features<h1>
+        <section id="main-features-content">
+            <h1 id="title-main-features">Main Features<h1>
             <article class="feature-section">
                 <h3>If you are an user, you can:</h3>
                 <ul>
@@ -20,7 +20,7 @@
             <article class="feature-section">
                 <h3>If you are a visitor, you can:</h3>
                 <ul>
-                    <li>Login/logout</li>
+                    <li>Login</li>
                     <li>Registration</li>
                 </ul>
             </article> 
@@ -30,7 +30,7 @@
                     <li>View personal feed</li>
                     <li>Post questions and answers</li>
                     <li>View own questions and answers</li>
-                    <li>Log out</li>
+                    <li>Logout</li>
                     <li>View and edit profile</li>
                     <li>Like/dislike questions and answers</li>
                     <li>Comment on questions and answers</li>
@@ -48,7 +48,7 @@
                 </ul> 
             </article>
             <article class="feature-section">
-                <h3>if you are the author of a question, you can:</h3>
+                <h3>If you are the author of a question, you can:</h3>
                 <ul> 
                     <li>Edit Questions</li>
                     <li>Delete Questions</li>

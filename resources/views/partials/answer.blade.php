@@ -36,7 +36,7 @@
         @endif
         @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
             @if ($answer->correct)
-                <button class="mark-incorrect" formaction="../../answers/{{ $answer->id }}/incorrect">Mark as incorrect</button>
+                <button class="mark-incorrect" formaction="../../answers/{{ $answer->id }}/incorrect">Remove correct mark</button>
             @else
                 <button class="mark-correct" formaction="../../answers/{{ $answer->id }}/correct">Mark as correct</button>
             @endif

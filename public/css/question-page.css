@@ -134,6 +134,14 @@ button.mark-correct {
   border-radius: 5px;
 }
 
+button.mark-incorrect {
+  background-color: var(--hover-red);
+  padding: 4px 10px;
+  margin-right:8px;
+  color: #fff;
+  border-radius: 5px;
+}
+
 .question-tags,
 .question-tag {
   display: inline;

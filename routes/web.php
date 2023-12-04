@@ -8,6 +8,7 @@ use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\QuestionCommentController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -96,6 +97,8 @@ Route::post('api/communities/follow', [CommunityController::class, 'follow']);
 Route::post('api/communities/unfollow', [CommunityController::class, 'unfollow']);
 Route::post('api/questions/{id}/follow', [QuestionController::class, 'follow']);
 Route::post('api/questions/{id}/unfollow', [QuestionController::class, 'unfollow']);
+Route::post('api/tags/follow', [TagController::class, 'follow']);
+Route::post('api/tags/unfollow', [TagController::class, 'unfollow']);
 
 // Static info pages
 Route::view('/about-contact-us', 'pages.about-contact-us')->name('about-contact-us');

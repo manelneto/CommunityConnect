@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Question::class, 'user_follows_question', 'id_user', 'id_question');
     }
+
+    public function followedTags()
+    {
+        return $this->belongsToMany(Tag::class, 'user_follows_tag', 'id_user', 'id_tag');
+    }
 }

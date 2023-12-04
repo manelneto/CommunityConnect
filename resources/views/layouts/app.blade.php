@@ -32,6 +32,7 @@
         <link href="{{ asset('css/ask-question.css') }}" rel="stylesheet">
         <link href="{{ asset('css/communities.css') }}" rel="stylesheet">
         <link href="{{ asset('css/about-us-page.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/main-features.css') }}" rel="stylesheet">
 
         <!-- JavaScript -->
         <script src="{{ asset('js/app.js') }}" defer></script>

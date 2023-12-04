@@ -63,6 +63,12 @@
                                 Answers</span>
                             </li>
                         </ul>
+                        <ul id="rating-communities">
+                            @foreach ($reputations as $reputation)
+                            <li>{{ $reputation->community->name }}</li>
+                            <li>{{ $reputation->rating }}</li>
+                            @endforeach
+                        </ul>
                 </section>
                 <section id="my-questions">
                     @foreach ($questions as $question)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use App\Models\Question;
+use App\Models\Reputation;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -74,10 +75,12 @@ class UserController extends Controller
             $user = User::with('badges')->findOrFail($id);
             $questions = Question::with(['user', 'community', 'likes', 'dislikes'])->where('id_user', $id)->get();
             $answers = Answer::with(['user', 'question', 'likes', 'dislikes'])->where('id_user', $id)->get();
+            $reputations = Reputation::with(['user', 'community'])->where('id_user', $id)->get();
             return view('users.show', [
                 'user' => $user,
                 'questions' => $questions,
-                'answers' => $answers
+                'answers' => $answers,
+                'reputations' => $reputations
             ]);
         } catch (ModelNotFoundException $e) {
             return "User not found.";

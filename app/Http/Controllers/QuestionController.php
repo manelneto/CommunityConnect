@@ -9,6 +9,7 @@ use App\Models\Community;
 use App\Models\QuestionComment;
 use App\Models\UserFollowsCommunity;
 use App\Models\UserFollowsQuestion;
+use App\Models\UserFollowsTag;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,15 +36,22 @@ class QuestionController extends Controller
                 ->whereBetween('date', [$after, $before])
                 ->where('id_community', $id_community);
         } else {
-            // personal feed -> questions from communities that user follows AND quetions that user follows
+            // personal feed -> questions from communities that user follows AND questions that user follows AND questions from tags that user follows
             $communities = $communities !== [] ? $communities : explode(',', $request->get('communities'));
             $user = Auth::user()?->id;
             $userQuestions = UserFollowsQuestion::where('id_user', $user)->pluck('id_question')->toArray();
+            $userTags = UserFollowsTag::where('id_user', $user)->pluck('id_tag')->toArray();
             $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
-                ->whereBetween('date', [$after, $before])
-                ->whereIn('id_community', $communities)
-                ->orWhereIn('id', $userQuestions);
+                ->where(function ($query) use ($communities, $userQuestions, $after, $before) {
+                    $query->whereBetween('date', [$after, $before])
+                          ->whereIn('id_community', $communities)
+                          ->orWhereIn('id', $userQuestions);
+                })
+                ->orWhereHas('tags', function ($query) use ($userTags) {
+                    $query->whereIn('id', $userTags);
+                });
+
         }
 
         if ($searchTerm != '') {

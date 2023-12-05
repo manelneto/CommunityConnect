@@ -12,7 +12,7 @@
                 <label id="email-label" for="email">Email</label>
                 <input id="email" type="email" name="email" value="{{ $user->email }}">
                 <label id="photo-label" for="photo">Profile Photo</label>
-                <input id="photo" type="file" name="file" required>
+                <input id="photo" type="file" name="file" accept="image/png,image/jpg,image/jpeg">
                 <input type="hidden" name="type" value="profile">
                 <button id="edit-password" class="edit-password-button">Edit Password</button>
                 <label class="edit-password" for="current-password">Current Password</label>

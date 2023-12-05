@@ -112,11 +112,22 @@ class UserController extends Controller
                 'username' => 'required|string|max:20|unique:users'
             ]);
         }
+
         if ($request->input('email') !== $user->email) {
             $request->validate([
                 'email' => 'required|email|max:250|unique:users'
             ]);
         }
+
+        if ($request->hasFile('file')) {
+            $request->validate([
+                'file' => 'image|mimes:png,jpg,jpeg|max:2048'
+            ]);
+
+            $fileController = new FileController();
+            $fileController->upload($request, $id);
+        }
+
         if ($request->input('password') !== null) {
             $request->validate([
                 'current-password' => 'required|min:8',

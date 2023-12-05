@@ -43,8 +43,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Question::class, 'user_follows_question', 'id_user', 'id_question');
     }
-
-    public function getProfilePhoto() {
-        return FileController::get('profile', $this->id);
-    }
 }

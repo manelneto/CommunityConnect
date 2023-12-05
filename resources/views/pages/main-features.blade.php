@@ -41,10 +41,10 @@
                     <li>Profile picture</li>
                     <li>View personal notifications</li>
                     <li>Receive badges</li>
-                    <li>Become an Expert</li>
-                    <li>Attach Files</li>
-                    <li>Have a Rating</li>
-                    <li>Follow a Community</li>
+                    <li>Become an expert</li>
+                    <li>Attach files</li>
+                    <li>Have a rating</li>
+                    <li>Follow a community</li>
                 </ul> 
             </article>
             <article class="feature-section">

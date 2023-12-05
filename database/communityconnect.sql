@@ -8290,3 +8290,5 @@ insert into answer_comment (content, date, last_edited, id_user, id_answer) valu
 insert into answer_comment (content, date, last_edited, id_user, id_answer) values ('Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.', '2022-10-27', null, 744, 548);
 insert into answer_comment (content, date, last_edited, id_user, id_answer) values ('Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti.', '2022-11-09', '2022-11-19', 291, 973);
 insert into answer_comment (content, date, last_edited, id_user, id_answer) values ('Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique.', '2022-10-01', null, 390, 133);
+
+insert into reputation (id_user, id_community, rating, expert) values (1, 1, 1000, true);

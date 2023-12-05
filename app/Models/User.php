@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\FileController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -41,5 +42,9 @@ class User extends Authenticatable
     public function followedQuestions()
     {
         return $this->belongsToMany(Question::class, 'user_follows_question', 'id_user', 'id_question');
+    }
+
+    public function getProfilePhoto() {
+        return FileController::get('profile', $this->id);
     }
 }

@@ -162,42 +162,24 @@ a.edit-profile {
 }
 
 .card-rating {
-  border-radius: 10%;
-  transition: transform 0.8s;
-  position: relative;
-  background-color: var(--light-gray);
+  display:flex;
   text-align: center;     
-  width: 5rem;
-  height: 4rem;
+  width: 120px;
+  height: 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 2px solid #abacb1;
 }
 
-.card-taing:hover {
-  transform: rotateY(180deg);
+.rating-stars {
+  width: 50px;
+  height: 40px;
 }
 
-.card-rating h3 {
-  backface-visibility: hidden;
-  padding:10px;
-  opacity: 1; 
-}
-
-.card-rating p {
-  visibility: hidden;
-  opacity: 0;
-  transform: rotateY(180deg);
-  margin-left: 0.6rem;
-  margin-right: 0.6rem;
-}
-
-.card-rating:hover h3 {
-  opacity: 0;
-}
-
-.card-rating:hover p {
-  visibility: visible;
-  opacity: 1;
+#rating-communities{
+  margin-top: 2rem;
+  display:flex;
+  justify-content: center;
 }

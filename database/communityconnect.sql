@@ -152,7 +152,7 @@ CREATE TABLE question_comment (
     content TEXT NOT NULL,
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     last_edited DATE,
-    id_user INTEGER NOT NULL REFERENCES users (id\) ON UPDATE CASCADE ON DELETE CASCADE,
+    id_user INTEGER NOT NULL REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE,
     id_question INTEGER NOT NULL REFERENCES question (id) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT question_comment_last_edited_ck CHECK (last_edited >= date)
 );
@@ -1940,7 +1940,7 @@ insert into user_follows_tag (id_user, id_tag) values (917, 70);
 insert into user_follows_tag (id_user, id_tag) values (117, 50);
 insert into user_follows_tag (id_user, id_tag) values (673, 81);
 
-insert into community (name) values ('Research and Development');
+insert into community (name) values ('Development');
 insert into community (name) values ('Legal');
 insert into community (name) values ('Accounting');
 insert into community (name) values ('Training');

@@ -1,21 +1,39 @@
 #communities h1, #title {
     text-align: left;
+}
+
+#communities h1, #svg-communities {
+    padding-top: 2rem;
+}
+
+#communities p#title {
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid #c6c6c6;
+    padding-left: 2rem;
+}
+
+#svg-communities {
     padding-left: 2rem;
 }
 
 #communities h1 {
-    padding-top: 2rem;
-}
-
-#communities #title {
-    padding-bottom: 1.1rem;
-    border-bottom: 1px solid #c6c6c6;
+    padding-left:0.5rem;
 }
 
 .community h2 a {
     color: var(--dark-blue);
     text-decoration: none;
     font-size: 1.1rem;
+}
+
+#communities header{
+    display: flex;
+    flex-direction:row;
+}
+
+.community-interaction header{
+    display: flex;
+    flex-direction:row;
 }
 
 .community h2 a:hover {

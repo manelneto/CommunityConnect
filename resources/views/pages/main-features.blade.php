@@ -41,19 +41,20 @@
                     <li>Profile picture</li>
                     <li>View personal notifications</li>
                     <li>Receive badges</li>
-                    <li>Become an Expert</li>
-                    <li>Attach Files</li>
-                    <li>Have a Rating</li>
-                    <li>Follow a Community</li>
+                    <li>Become an expert</li>
+                    <li>Attach files</li>
+                    <li>Have a rating</li>
+                    <li>Follow a community</li>
                 </ul> 
             </article>
             <article class="feature-section">
                 <h3>If you are the author of a question, you can:</h3>
                 <ul> 
-                    <li>Edit Questions</li>
-                    <li>Delete Questions</li>
-                    <li>Edit Tags of Own Questions</li>
-                    <li>Mark Answers as Correct</li>
+                    <li>Edit questions</li>
+                    <li>Delete questions</li>
+                    <li>Edit tags of own questions</li>
+                    <li>Mark answers as correct</li>
+                    <li>Remove correct mark from answers</li>
                 </ul>
             </article>
             <article class="feature-section">

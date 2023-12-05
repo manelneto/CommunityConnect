@@ -34,7 +34,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Badge::class, 'user_earns_badge', 'id_user', 'id_badge');
     }
 
-    public function communities()
+    public function communities()  // followedCommunities
     {
         return $this->belongsToMany(Community::class, 'user_follows_community', 'id_user', 'id_community');
     }
@@ -42,5 +42,16 @@ class User extends Authenticatable
     public function followedQuestions()
     {
         return $this->belongsToMany(Question::class, 'user_follows_question', 'id_user', 'id_question');
+    }
+
+
+    public function communitiesRating()
+    {
+        return $this->belongsToMany(Community::class, 'reputation', 'id_user', 'id_community')->withPivot('rating', 'expert');
+    }
+    
+    public function followedTags()
+    {
+        return $this->belongsToMany(Tag::class, 'user_follows_tag', 'id_user', 'id_tag');
     }
 }

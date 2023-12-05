@@ -152,9 +152,105 @@ button.mark-incorrect {
 }
 
 .question-tag {
-  background-color: #676767;
-  opacity: 0.37;
+  background-color: rgba(103, 103, 103, 0.37);
   color: #fff;
   padding: 5px 15px;
   border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.tag-tooltip-content {
+  content: attr(data-tooltip);
+  background-color: #fff;
+  position: absolute;
+  white-space: nowrap;
+  left: 50%;
+  top: 35px;
+  transform: translateX(-50%); 
+  border: 1px solid #adadad;
+  color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  z-index: 10;
+  transition: visibility 0s linear 0.5s, opacity 0.2s linear;
+  opacity: 0;
+}
+
+.tag-tooltip-content button, .tag-tooltip-content a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  padding: 7px 12px;
+  border-radius: 5px;
+  color: #fff;
+  border: 1px solid;
+}
+
+.tag-tooltip-content a {
+  height: 20px;
+  border-color: var(--blue);
+}
+
+.tag-tooltip-content a.watch-tag-button path {
+  stroke: #fff;
+}
+
+.tag-tooltip-content button.follow-tag-button path {
+  fill: #000;
+}
+
+.tag-tooltip-content button.unfollow-tag-button path {
+  fill: #fff;
+}
+
+.tag-tooltip-content button svg, .tag-tooltip-content a svg {
+  margin-right: 4px;
+}
+
+.tag-tooltip-content a.watch-tag-button {
+  background-color: var(--blue);
+  margin-right: 10px;
+}
+
+.tag-tooltip-content button.follow-tag-button {
+  background-color: #fff;
+  color: #000;
+}
+
+.tag-tooltip-content button.unfollow-tag-button {
+  background-color: var(--hover-red);
+  color: #fff;
+}
+
+.tag-tooltip-content button:hover {
+  transition: 0.2s;
+}
+
+.tag-tooltip-content a.watch-tag-button:hover {
+  background-color: #00a1fd;
+  border-color: #00a1fd;
+}
+
+.tag-tooltip-content button.follow-tag-button:hover {
+  background-color: #e0e0e0;
+}
+
+.tag-tooltip-content button.unfollow-tag-button:hover {
+  background-color: #d81c1c;
+}
+
+.question-tag:hover {
+  background-color: rgb(119, 119, 119, 0.8);
+}
+
+.question-tag:hover .tag-tooltip-content {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
 }

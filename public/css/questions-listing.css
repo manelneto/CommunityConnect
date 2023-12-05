@@ -144,10 +144,6 @@ fieldset label {
   margin-left: 5px;
 }
 
-.question-upvotes {
-  color: var(--blue);
-}
-
 a.edit-question-button {
   background-color: #c6c6c6;
   margin-left: 10px;

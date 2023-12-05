@@ -68,4 +68,6 @@ Route::get('/admin', [UserController::class, 'index'])->name('admin');
 Route::get('api/questions', [QuestionController::class, 'search']);
 Route::get('api/users', [UserController::class, 'search']);
 Route::post('api/questions/vote', [QuestionVoteController::class, 'create']);
+Route::get('api/questions/vote', [QuestionVoteController::class, 'index']);
 Route::post('api/answers/vote', [AnswerVoteController::class, 'create']);
+Route::get('api/answers/vote', [AnswerVoteController::class, 'index']);

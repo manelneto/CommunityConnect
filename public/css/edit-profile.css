@@ -1,7 +1,5 @@
 
 #edit-profile{
-    background-color: #f4f4f4;
-    margin: 0;
     font-family: Arial, sans-serif;
     width: 85%;
     margin: 50px auto;
@@ -23,7 +21,6 @@
     margin: 0 auto 20px auto;
     display: block; 
 }
-    
 
 #edit-profile label {
     margin-bottom: 8px;
@@ -34,13 +31,18 @@
     display: block;
 }
 
-#edit-profile input {
+#edit-profile input:not(#photo) {
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+#photo {
+    display: block;
+    margin-bottom: 15px;
 }
 
 #edit-profile button {

@@ -1,16 +1,20 @@
+<script>
+    //! Isto funciona!
+    const answerId = @json($answer->id);
+</script>
 <form class="answer-container" method="post">
     @csrf
     <div class="left-content">
         <img class="member-pfp answer-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}"
             alt="User's profule picture" />
         <div class="answers-votes">
-            <span class="answer-upvotes">
+            <span class="answer-upvotes" id="answer-upvotes">
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.000244141 12L9.00024 0L18.0002 12H0.000244141Z" fill="#38B6FF" />
                 </svg>
             </span>
-            <span class="answer-vote-balance">{{ $answer->likes_count - $answer->dislikes_count }}</span>
-            <span class="answer-downvotes">
+            <span class="answer-vote-balance" id="balance-votes">{{ $answer->likes_count - $answer->dislikes_count }}</span>
+            <span class="answer-downvotes" id="answer-downvotes">
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.000244141 0L9.00024 12L18.0002 0H0.000244141Z" fill="#ABACB1" />

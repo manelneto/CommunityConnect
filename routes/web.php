@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\AnswerVoteController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuestionVoteController;
 use App\Http\Controllers\UserController;
@@ -67,3 +68,4 @@ Route::get('/admin', [UserController::class, 'index'])->name('admin');
 Route::get('api/questions', [QuestionController::class, 'search']);
 Route::get('api/users', [UserController::class, 'search']);
 Route::post('api/questions/vote', [QuestionVoteController::class, 'create']);
+Route::post('api/answers/vote', [AnswerVoteController::class, 'create']);

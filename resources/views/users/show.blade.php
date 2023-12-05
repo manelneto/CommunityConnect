@@ -15,7 +15,7 @@
                     @endif
                 </span>
                 <h2>{{ $user->email }}</h2>
-                <img class="member-pfp main-user-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profile picture" />
+                <img class="member-pfp main-user-pfp" src="{{ $user->getProfilePhoto() }}" alt="User's profile photo" />
                 <ul>
                     <li id="about-button">About</li>
                     <li id="questions-button">Questions</li>

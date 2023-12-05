@@ -8,7 +8,7 @@
             <form method="post" id="edit-profile" enctype="multipart/form-data">
                 @csrf
                 <h1><input type="text" name="username" value="{{ $user->username }}"></h1>
-                <img class="member-pfp question-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profile picture" />
+                <img class="member-pfp question-member-pfp" src="{{ $user->getProfilePhoto() }}" alt="User's profile picture" />
                 <label id="email-label" for="email">Email</label>
                 <input id="email" type="email" name="email" value="{{ $user->email }}">
                 <label id="photo-label" for="photo">Profile Photo</label>

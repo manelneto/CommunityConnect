@@ -11,8 +11,13 @@ class Community extends Model
     public $timestamps = false;
     protected $table = 'community';
 
-    public function users()
+    public function users() // followers
     {
         return $this->hasMany(UserFollowsCommunity::class, 'id_community');
+    }
+
+    public function participants()
+    {
+        return $this->belongsToMany(User::class, 'reputation', 'id_community', 'id_user')->withPivot('rating', 'expert');
     }
 }

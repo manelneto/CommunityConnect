@@ -10,23 +10,33 @@ async function handleVote(userId, questionId, vote){
             "X-CSRF-TOKEN": csrfToken,
         },
     });
-    return await response.json();
+    return await response;
 }
 
-const upvoteButton = document.querySelector(".question-upvotes");
-const downvoteButton = document.querySelector(".question-downvotes");
+const upvoteButton = document.getElementById("question-upvotes");
+const downvoteButton = document.getElementById("question-downvotes");
+const likesCount = document.getElementById("likes-count");
+const dislikesCount = document.getElementById("dislikes-count");
 
 if (upvoteButton){
     upvoteButton.addEventListener("click", async () => {
         const response = await handleVote(userId, questionId, true);
-        if (response.ok) upvoteButton.textContent = response.likes;
+        if (response.ok){
+            const data = await response.json();
+            likesCount.textContent = data.likes;
+            dislikesCount.textContent = data.dislikes;
+        }
     });
 }
 
 if (downvoteButton){
     downvoteButton.addEventListener("click", async () => {
         const response = await handleVote(userId, questionId, false);
-        if (response.ok) downvoteButton.textContent = response.dislikes;
+        if (response.ok){
+            const data = await response.json();
+            likesCount.textContent = data.likes;
+            dislikesCount.textContent = data.dislikes;
+        }
     });
 }
 

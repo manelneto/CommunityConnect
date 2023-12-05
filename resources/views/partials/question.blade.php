@@ -27,18 +27,18 @@
                             fill="#abacb1" />
                     </svg>{{ $question->answers_count }} Answers</button>
             @endif
-            <span class="question-upvotes">
+            <span class="question-upvotes" id="question-upvotes">
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.000244141 12L9.00024 0L18.0002 12H0.000244141Z" fill="#38B6FF" />
                 </svg>
-                {{ $question->likes_count }}</span>
-            <span class="question-downvotes">
+                <span id="likes-count">{{ $question->likes_count }}</span></span>
+            <span class="question-downvotes" id="question-downvotes">
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.000244141 0L9.00024 12L18.0002 0H0.000244141Z" fill="#ABACB1" />
                 </svg>
-                {{ $question->dislikes_count }}</span>
+                <span id="dislikes-count">{{ $question->dislikes_count }}</span></span>
             @if (Request::route()->getName() == 'question' or Request::route()->getName() == 'edit-question')
                 <ul class="question-tags">
                     @foreach ($question->tags as $tag)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FileController;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -30,19 +31,24 @@ class RegisterController extends Controller
         $request->validate([
             'username' => 'required|string|max:20|unique:users',
             'email' => 'required|email|max:250|unique:users',
-            'password' => 'required|min:8|confirmed'
+            'password' => 'required|min:8|confirmed',
+            'file' => 'image|mimes:png,jpg,jpeg|max:2048',
+            'type' => 'in:profile'
         ]);
 
-        User::create([
+        $id = User::create([
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+        ])->id;
+
+        $fileController = new FileController();
+        $fileController->upload($request, $id);
 
         $credentials = $request->only('username', 'password');
         Auth::attempt($credentials);
         $request->session()->regenerate();
-        return redirect()->route('communities')
-            ->withSuccess('You have successfully registered & logged in!');
+
+        return redirect()->route('communities')->withSuccess('You have successfully registered & logged in!');
     }
 }

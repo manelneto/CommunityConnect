@@ -145,8 +145,7 @@ function addQuestion(question) {
   const newQuestion = document.createElement("div");
   newQuestion.classList.add("question-container");
   newQuestion.innerHTML = `
-  <img class="member-pfp question-member-pfp" src="../assets/profile-images/test-profile-image.jpeg"
-       alt="User's profule picture" />
+  <img class="member-pfp question-member-pfp" src="../${question.user.image}" alt="User's profile picture" />
   <div class="content-right">
     <div class="question-details">
       <a href="../users/${question.user.id}" class="question-username">${question.user.username}</a>

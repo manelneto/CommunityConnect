@@ -28,7 +28,7 @@
                 Popular Questions
             </h2>
             <article class="popular-question">
-                <img class="user-profile-picture" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profule picture" />
+                <img class="user-profile-picture" src="{{ asset('profile/default.png') }}" alt="User's profile picture" />
                 <h3><a class="question-title" href="#">How do I cook rice without water?</a></h3>
                 <div class="popular-question-answers">
                     <svg width="12" height="12" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +38,7 @@
                 </div>
             </article>
             <article class="popular-question">
-                <img class="user-profile-picture" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profule picture" />
+                <img class="user-profile-picture" src="{{ asset('profile/default.png') }}" alt="User's profile picture" />
                 <h3><a class="question-title" href="#">How do I cook rice without water?</a></h3>
                 <div class="popular-question-answers">
                     <svg width="12" height="12" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +48,7 @@
                 </div>
             </article>
             <article class="popular-question">
-                <img class="user-profile-picture" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profule picture" />
+                <img class="user-profile-picture" src="{{ asset('profile/default.png') }}" alt="User's profile picture" />
                 <h3><a class="question-title" href="#">How do I cook rice without water?</a></h3>
                 <div class="popular-question-answers">
                     <svg width="12" height="12" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -68,17 +68,17 @@
                 Top Members
             </h2>
             <article class="top-member">
-                <img class="top-member-pfp member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profule picture" />
+                <img class="top-member-pfp member-pfp" src="{{ asset('profile/default.png') }}" alt="User's profile picture" />
                 <h3><a href="#" class="top-member-username">matildesimoes</a></h3>
                 <p class="top-member-score">120 score</p>
             </article>
             <article class="top-member">
-                <img class="top-member-pfp member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profule picture" />
+                <img class="top-member-pfp member-pfp" src="{{ asset('profile/default.png') }}" alt="User's profile picture" />
                 <h3><a href="#" class="top-member-username">matildesimoes</a></h3>
                 <p class="top-member-score">120 score</p>
             </article>
             <article class="top-member">
-                <img class="top-member-pfp member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profule picture" />
+                <img class="top-member-pfp member-pfp" src="{{ asset('profile/default.png') }}" alt="User's profile picture" />
                 <h3><a href="#" class="top-member-username">matildesimoes</a></h3>
                 <p class="top-member-score">120 score</p>
             </article>

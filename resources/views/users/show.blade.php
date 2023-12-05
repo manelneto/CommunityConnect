@@ -13,7 +13,7 @@
             @endif
         </section>
         <h2>{{ $user->email }}</h2>
-        <img class="member-pfp main-user-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profile picture" />
+        <img class="member-pfp main-user-pfp" src="{{ asset($user->image) }}" alt="User's profile photo" />
         <ul>
             <li id="about-button">About</li>
             <li id="questions-button">Questions</li>
@@ -27,12 +27,11 @@
                 <ul class="user-badges">
                     @foreach ($user->badges as $badge)
                         <li class="user-received-badge">
-                            <img src="{{ asset('assets/badge-images') . '/badge_' . $badge->id . '.png' }}"
-                                    alt="badge image">
+                            <img src="{{ asset('assets/badge-images') . '/badge_' . $badge->id . '.png' }}" alt="badge image">
                         </li>
                     @endforeach
-                    @endif
                 </ul>
+            @endif
                 <ul class="user-stats">
                     <li class="user-stats-questions">
                         <svg width="40" height="40" viewBox="0 0 60 60" fill="none"
@@ -56,7 +55,6 @@
                                     d="M29.072 46.1795L27.7168 48.4692C26.5088 50.51 23.4912 50.51 22.2832 48.4692L20.928 46.1795C19.8768 44.4035 19.3512 43.5158 18.507 43.0245C17.6627 42.5335 16.5998 42.5153 14.4739 42.4788C11.3355 42.4245 9.36722 42.2323 7.71645 41.5485C4.6536 40.2798 2.22017 37.8465 0.9515 34.7835C-7.45058e-08 32.4865 0 29.5742 0 23.75V21.25C0 13.0664 -1.49012e-07 8.97462 1.842 5.96877C2.8727 4.28682 4.28682 2.8727 5.96877 1.842C8.97462 -1.49012e-07 13.0664 0 21.25 0H28.75C36.9335 0 41.0252 -1.49012e-07 44.0312 1.842C45.7132 2.8727 47.1273 4.28682 48.158 5.96877C50 8.97462 50 13.0664 50 21.25V23.75C50 29.5742 50 32.4865 49.0485 34.7835C47.7798 37.8465 45.3465 40.2798 42.2835 41.5485C40.6328 42.2323 38.6645 42.4245 35.526 42.4788C33.4 42.5153 32.3373 42.5335 31.493 43.0245C30.6488 43.5155 30.123 44.4035 29.072 46.1795ZM15 24.375C13.9645 24.375 13.125 25.2145 13.125 26.25C13.125 27.2855 13.9645 28.125 15 28.125H28.75C29.7855 28.125 30.625 27.2855 30.625 26.25C30.625 25.2145 29.7855 24.375 28.75 24.375H15ZM13.125 17.5C13.125 16.4645 13.9645 15.625 15 15.625H35C36.0355 15.625 36.875 16.4645 36.875 17.5C36.875 18.5355 36.0355 19.375 35 19.375H15C13.9645 19.375 13.125 18.5355 13.125 17.5Z"
                                     fill="#BD2020" />
                         </svg>
-
                         <span class="user-stats-text"> <span class="user-stats-count">{{ count($answers) }} </span> <br>
                         Answers</span>
                     </li>

@@ -10,7 +10,7 @@
                 <form class="question-container question-edit-container" method="post">
                     @csrf
                     <div class="horizontal-wrapper horizontal-wrapper-edit">
-                        <img class="member-pfp question-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profule picture" />
+                        <img class="member-pfp question-member-pfp" src="{{ asset($user->image) }}" alt="User's profile picture" />
                         <div class="content-right">
                             <div class="question-details">
                                 <a href="#" class="question-username">{{ $question->user->username }}</a>

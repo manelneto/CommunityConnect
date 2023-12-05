@@ -1,7 +1,7 @@
 <form class="answer" method="post">
     @csrf
     <div class="content-left">
-        <img class="member-pfp answer-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profule picture" />
+        <img class="member-pfp answer-member-pfp" src="{{ asset($question->user->image) }}" alt="User's profile photo" />
         <div class="answers-votes">
             <span class="answer-upvotes">
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">

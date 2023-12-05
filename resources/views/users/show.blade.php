@@ -15,22 +15,19 @@
                     @endif
                 </span>
                 <h2>{{ $user->email }}</h2>
-                <img class="member-pfp main-user-pfp" src="{{ $user->getProfilePhoto() }}" alt="User's profile photo" />
+                <img class="member-pfp main-user-pfp" src="{{ asset($user->image) }}" alt="User's profile photo" />
                 <ul>
                     <li id="about-button">About</li>
                     <li id="questions-button">Questions</li>
                     <li id="answers-button">Answers</li>
                 </ul>
                 <section class="about-user">
-                    <p class="user-register-date">
-                        Member since {{ $user->register_date->format('Y-m-d') }}
-                    </p>
+                    <p class="user-register-date">Member since {{ $user->register_date->format('Y-m-d') }}</p>
                     @if (count($user->badges) > 0)
                         <ul class="user-badges">
                             @foreach ($user->badges as $badge)
                                 <li class="user-received-badge">
-                                    <img src="{{ asset('assets/badge-images') . '/badge_' . $badge->id . '.png' }}"
-                                         alt="badge image">
+                                    <img src="{{ asset('assets/badge-images') . '/badge_' . $badge->id . '.png' }}" alt="badge image">
                                 </li>
                             @endforeach
                             @endif

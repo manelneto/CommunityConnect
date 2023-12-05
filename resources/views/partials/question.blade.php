@@ -1,5 +1,5 @@
 <div class="question-container">
-    <img class="member-pfp question-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profule picture" />
+    <img class="member-pfp question-member-pfp" src="{{ asset($question->user->image) }}" alt="User's profile picture" />
     <div class="content-right">
         <div class="question-details">
             <a href="../users/{{ $question->id_user }}" class="question-username">{{ $question->user->username }}</a>

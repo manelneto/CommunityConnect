@@ -160,3 +160,26 @@ a.edit-profile {
 .selected-profile-tab {
   color: var(--blue) !important;
 }
+
+.card-rating {
+  display:flex;
+  text-align: center;     
+  width: 120px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #abacb1;
+}
+
+.rating-stars {
+  width: 50px;
+  height: 40px;
+}
+
+#rating-communities{
+  margin-top: 2rem;
+  display:flex;
+  justify-content: center;
+}

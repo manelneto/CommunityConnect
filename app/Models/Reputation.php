@@ -9,7 +9,7 @@ class Reputation extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    private $table = 'reputation';
+    protected $table = 'reputation';
 
     protected $primaryKey = ['id_user', 'id_community'];
 

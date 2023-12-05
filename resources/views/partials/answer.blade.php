@@ -1,15 +1,15 @@
 <form class="answer" method="post">
+    <a href="../questions/{{ $answer->id_question }}">HERE</a>
     @csrf
     <div class="content-left">
         <img class="member-pfp answer-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profule picture" />
         <div class="answers-votes">
-            <span class="answer-upvotes">
+            <span class="answer-upvotes">{{ $answer->likes_count}}
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.000244141 12L9.00024 0L18.0002 12H0.000244141Z" fill="#38B6FF" />
                 </svg>
             </span>
-            <span class="answer-vote-balance">{{ $answer->likes_count - $answer->dislikes_count }}</span>
-            <span class="answer-downvotes">
+            <span class="answer-downvotes">{{ $answer->dislikes_count }}
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.000244141 0L9.00024 12L18.0002 0H0.000244141Z" fill="#ABACB1" />
                 </svg>
@@ -20,6 +20,13 @@
         <header class="answer-info">
             <div class="answer-details">
                 <a class="username" href="../users/{{ $answer->id_user }}">{{ $answer->user->username }}</a>
+                @if (isset($answer->user->communitiesRating))
+                    @foreach ($answer->user->communitiesRating as $communityRating)
+                        @if ($communityRating->pivot->id_community == $answer->question->id_community)
+                            <p class="rating">{{ $communityRating->pivot->rating }} score</p>
+                        @endif
+                    @endforeach
+                @endif
                 <span class="date">Answer added {{ $answer->date }}</span>
             </div>
             @if ($answer->correct)

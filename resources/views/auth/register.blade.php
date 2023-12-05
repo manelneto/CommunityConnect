@@ -30,7 +30,7 @@
             <small>Password must contain at least 8 characters</small>
             <div class="form-group">
                 <label for="photo">Profile Photo</label>
-                <input id="photo" type="file" name="file" required>
+                <input id="photo" type="file" name="file" accept="image/png,image/jpg,image/jpeg">
                 <input type="hidden" name="type" value="profile">
             </div>
             <button type="submit">Sign Up</button>

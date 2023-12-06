@@ -20,7 +20,7 @@
                             <textarea class="question-description non-movable-textarea" name="content" rows="6" cols="56">{{ $question->content }}</textarea>
                             <div class="edit-question-tags">
                                 @foreach ($question->tags as $tag) 
-                                    <li class="question-tag margin-on-tags">
+                                    <li id="{{ $tag->id }}-{{ $question->id }}" class="question-tag margin-on-tags">
                                         {{ $tag->name }}
                                     </li>
                                 @endforeach

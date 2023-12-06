@@ -274,4 +274,21 @@ class QuestionController extends Controller
         }
         ;
     }
+
+    public function remove_tag(Request $request) 
+    {
+        $id_question = $request->get('questionId');
+        $question = Question::findOrFail($id_question);
+        $this->authorize('remove_tag', $question);
+
+        $id_tag = $request->get('tagId');
+
+        try {
+            $tag = Tag::findOrFail($id_tag);
+            $question->tags()->detach($tag->id);
+            return response('Tag removed from question');
+        } catch (ModelNotFoundException $e) {
+            return response('Question not found');
+        }
+    }
 }

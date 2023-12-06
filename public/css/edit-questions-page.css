@@ -62,3 +62,28 @@
   border-right: 1px solid #c6c6c6;
   border-left: 1px solid #c6c6c6;
 }
+
+#add-tag {
+  margin-left: 15px;
+}
+
+#add-tag:focus {
+  border: 2px solid var(--blue);
+}
+
+.margin-on-tags {
+  margin-right: 5px;
+}
+
+.margin-on-tags:hover {
+  background-color: var(--hover-red);
+  transition: 0.2s;
+}
+
+.margin-on-tags:last-of-type {
+  margin-right: 0;
+}
+
+.color-black {
+  color: black;
+}

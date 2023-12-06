@@ -160,7 +160,7 @@ button.mark-incorrect {
   position: relative;
 }
 
-.tag-tooltip-content {
+.tag-tooltip-content, .questions-tag-delete-info {
   content: attr(data-tooltip);
   background-color: #fff;
   position: absolute;
@@ -249,7 +249,7 @@ button.mark-incorrect {
   background-color: rgb(119, 119, 119, 0.8);
 }
 
-.question-tag:hover .tag-tooltip-content {
+.question-tag:hover .tag-tooltip-content, .question-tag:hover .questions-tag-delete-info {
   opacity: 1;
   visibility: visible;
   transition-delay: 0s;

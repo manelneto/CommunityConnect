@@ -10,6 +10,7 @@ use App\Models\QuestionComment;
 use App\Models\UserFollowsCommunity;
 use App\Models\UserFollowsQuestion;
 use App\Models\UserFollowsTag;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class QuestionController extends Controller
         $sort = $request->get('sort') == 'recent' ? 'date' : 'likes_count';
         $searchTerm = $request->get('text', '');
 
-        if ($community === 0 && count($communities) === 0 && (int) $request->get('community', 0) === 0  && (int) $request->get('communities', 0) === 0) {
+        if ($community === 0 && count($communities) === 0 && (int) $request->get('community', 0) === 0 && (int) $request->get('communities', 0) === 0) {
             // all questions
             $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
@@ -45,8 +46,8 @@ class QuestionController extends Controller
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->where(function ($query) use ($communities, $userQuestions, $after, $before) {
                     $query->whereBetween('date', [$after, $before])
-                          ->whereIn('id_community', $communities)
-                          ->orWhereIn('id', $userQuestions);
+                        ->whereIn('id_community', $communities)
+                        ->orWhereIn('id', $userQuestions);
                 })
                 ->orWhereHas('tags', function ($query) use ($userTags) {
                     $query->whereIn('id', $userTags);
@@ -96,7 +97,7 @@ class QuestionController extends Controller
     public function personalIndex(Request $request)
     {
         $this->authorize('personalIndex', Question::class);
-        
+
         $user = Auth::user()->id;
         $communities = UserFollowsCommunity::where('id_user', $user)->pluck('id_community')->toArray();
         $questions = json_decode($this->search($request, 0, $communities)->content());
@@ -192,6 +193,28 @@ class QuestionController extends Controller
         try {
             $question->title = $request->input(['title']);
             $question->content = $request->input(['content']);
+
+            $addTagName = $request->input('add-tag');
+
+            // add tag if field is filled
+            if (!empty($addTagName)) {
+
+                $tagName = $request->input('add-tag');
+                $tag = Tag::where('name', $tagName)->first();
+
+                // check if tag exists
+                if (!$tag) {
+                    return back()->withErrors(['tag' => "Tag doesn't exist."]);
+                }
+
+                // check if tag is already attached to the question
+                if ($question->tags->contains($tag->id)) {
+                    return back()->withErrors(['tag' => "Tag already attached."]);
+                }
+
+                $question->tags()->attach($tag->id);
+            }
+
             $question->save();
             return redirect('questions/' . $id);
         } catch (ModelNotFoundException $e) {
@@ -229,7 +252,8 @@ class QuestionController extends Controller
             return response('Followed Question');
         } catch (ModelNotFoundException $e) {
             return response('Question not found');
-        };
+        }
+        ;
     }
 
     public function unfollow(Request $request)
@@ -247,6 +271,24 @@ class QuestionController extends Controller
             return response('Unfollowed Question');
         } catch (ModelNotFoundException $e) {
             return response('Question not found');
-        };
+        }
+        ;
+    }
+
+    public function remove_tag(Request $request) 
+    {
+        $id_question = $request->get('questionId');
+        $question = Question::findOrFail($id_question);
+        $this->authorize('remove_tag', $question);
+
+        $id_tag = $request->get('tagId');
+
+        try {
+            $tag = Tag::findOrFail($id_tag);
+            $question->tags()->detach($tag->id);
+            return response('Tag removed from question');
+        } catch (ModelNotFoundException $e) {
+            return response('Question not found');
+        }
     }
 }

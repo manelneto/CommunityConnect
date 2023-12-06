@@ -22,6 +22,7 @@
                                 @foreach ($question->tags as $tag) 
                                     <li id="{{ $tag->id }}-{{ $question->id }}" class="question-tag margin-on-tags">
                                         {{ $tag->name }}
+                                        <div class="tag-tooltip-content color-black">Delete this tag.</div>
                                     </li>
                                 @endforeach
                                 <input id="add-tag" class="form-control" type="text" name="add-tag">

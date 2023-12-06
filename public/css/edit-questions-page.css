@@ -75,6 +75,15 @@
   margin-right: 5px;
 }
 
+.margin-on-tags:hover {
+  background-color: var(--hover-red);
+  transition: 0.2s;
+}
+
 .margin-on-tags:last-of-type {
   margin-right: 0;
+}
+
+.color-black {
+  color: black;
 }

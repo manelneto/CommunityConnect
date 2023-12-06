@@ -25,6 +25,9 @@
                         @if ($communityRating->pivot->id_community == $answer->question->id_community)
                             <p class="rating">{{ $communityRating->pivot->rating }} score</p>
                         @endif
+                        @if ($communityRating->pivot->id_community == $answer->question->id_community && $communityRating->pivot->expert)
+                            <img class=".experts-stars" src="{{ asset('assets/rating-images/star-expert.png') }}" alt="Expert">
+                        @endif
                     @endforeach
                 @endif
                 <span class="date">Answer added {{ $answer->date }}</span>

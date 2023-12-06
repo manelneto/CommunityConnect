@@ -8,6 +8,11 @@
   /* TODO */
 }
 
+.experts-stars{
+  width: 20px;
+  height: 20px;
+}
+
 .leave {
   display: flex;
   flex-direction: column;

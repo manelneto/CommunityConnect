@@ -142,6 +142,13 @@ async function fetchQuestions(after, before, community, communities, text, sort,
 }
 
 function addQuestion(question) {
+  let expert = "";
+  question.user.communities_rating.forEach ((rating) => {
+    if (rating.pivot.id_community === question.community.id && rating.pivot.expert) {
+      expert = `<img class="experts-stars" src="../assets/rating-images/star-expert.png" alt="Expert stars">`
+    }
+  });
+
   const newQuestion = document.createElement("div");
   newQuestion.classList.add("question-container");
   newQuestion.innerHTML = `
@@ -150,6 +157,7 @@ function addQuestion(question) {
   <div class="content-right">
     <div class="question-details">
       <a href="../users/${question.user.id}" class="question-username">${question.user.username}</a>
+      ${expert}
       <span class="question-asked-date">Asked: ${question.date}</span>
       <span class="question-community">In: ${question.community.name}</span>
     </div>

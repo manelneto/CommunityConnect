@@ -3,13 +3,11 @@
     <div class="content-right">
         <div class="question-details">
             <a href="../users/{{ $question->id_user }}" class="question-username">{{ $question->user->username }}</a>
-            @if (isset($question->user->communitiesRating))
-                @foreach ($question->user->communitiesRating as $communityRating)
-                    @if ($communityRating->pivot->id_community == $question->id_community and $communityRating->pivot->expert == true)
-                        <img class="experts-stars" src="{{ asset('assets/rating-images/star-expert.png') }}" alt="Expert stars">
-                    @endif
-                @endforeach
-            @endif
+            @foreach ($question->user->communities_rating as $rating)
+                @if ($rating->pivot->id_community == $question->id_community and $rating->pivot->expert == true)
+                    <img class="experts-stars" src="{{ asset('assets/rating-images/star-expert.png') }}" alt="Expert stars">
+                @endif
+            @endforeach
             <span class="question-asked-date">Asked: {{ $question->date }}</span>
             <span class="question-community">In: {{ $question->community->name }}</span>
             @if (Request::route()->getName() == 'question' && Auth::user())

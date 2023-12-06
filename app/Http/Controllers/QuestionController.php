@@ -25,13 +25,13 @@ class QuestionController extends Controller
 
         if ($community === 0 && count($communities) === 0 && (int) $request->get('community', 0) === 0  && (int) $request->get('communities', 0) === 0) {
             // all questions
-            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
+            $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->whereBetween('date', [$after, $before]);
         } else if ($community !== 0 || (int) $request->get('community', 0) !== 0) {
             // community page
             $id_community = $community !== 0 ? $community : $request->get('community');
-            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
+            $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->whereBetween('date', [$after, $before])
                 ->where('id_community', $id_community);
@@ -41,7 +41,7 @@ class QuestionController extends Controller
             $user = Auth::user()?->id;
             $userQuestions = UserFollowsQuestion::where('id_user', $user)->pluck('id_question')->toArray();
             $userTags = UserFollowsTag::where('id_user', $user)->pluck('id_tag')->toArray();
-            $questions = Question::with(['user', 'community', 'likes', 'dislikes', 'answers'])
+            $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->where(function ($query) use ($communities, $userQuestions, $after, $before) {
                     $query->whereBetween('date', [$after, $before])

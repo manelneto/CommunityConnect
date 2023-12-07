@@ -66,6 +66,29 @@
                     <button id="find-user" type="submit">Unblock</button>
                 </form>
             </details> 
+            <details>
+                <summary>Add new tag</summary>
+                <form action="../tags" method="post" class="form-admin">
+                    @csrf
+                    <label for="tag">Tag</label>
+                    <input type="text" id="tag" name="tag">
+                    <button id="find-user" type="submit">Add</button>
+                </form>
+            </details>
+            <details>
+                <summary>Delete tag</summary>
+                <form action="../tags/delete" method="post" class="form-admin">
+                    @csrf
+                    <label for="tag">Tag</label>
+                    <select id="tag" name="tag">
+                        <option value="0">None</option>
+                        @foreach ($tags as $tag)
+                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                        @endforeach
+                    </select>
+                    <button id="find-user" type="submit">Delete</button>
+                </form>
+            </details> 
         </section>
     </main>
 @endsection

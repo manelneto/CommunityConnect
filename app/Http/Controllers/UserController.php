@@ -6,6 +6,7 @@ use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Reputation;
 use App\Models\User;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class UserController extends Controller
     {
         $this->authorize('index', User::class);
         $users = User::all();
-        return view('pages.admin', ['users' => $users]);
+        $tags = Tag::all();
+        return view('pages.admin', ['users' => $users, 'tags' => $tags]);
     }
 
     /**

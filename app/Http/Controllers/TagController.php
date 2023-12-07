@@ -21,9 +21,9 @@ class TagController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -31,7 +31,13 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('store', Tag::class);
+
+        $tag = new Tag();
+        $tag->name = $request->tag;
+        $tag->save();
+
+        return redirect('admin');
     }
 
     /**
@@ -61,9 +67,16 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tag $tag)
+    public function destroy(Request $request)
     {
-        //
+        $tag = Tag::findOrFail($request->input('tag'));
+        $this->authorize('destroy', Tag::class);
+        try {
+            $tag->delete();
+            return redirect('admin');
+        } catch (ModelNotFoundException $e) {
+            return "Tag not found.";
+        }
     }
 
     public function follow(Request $request)

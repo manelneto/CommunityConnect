@@ -84,6 +84,8 @@ Route::controller(AnswerCommentController::class)->group(function() {
 Route::get('/admin', [UserController::class, 'index'])->name('admin');
 Route::post('/admin/block', [UserController::class, 'block_user'])->name('block-user');
 Route::post('/admin/unblock', [UserController::class, 'unblock_user'])->name('unblock-user');
+Route::post('/tags/delete', [TagController::class, 'destroy'])->name('delete-tag');
+Route::post('/tags', [TagController::class, 'store'])->name('create-tag');
 
 //Communities
 Route::get('/communities', [CommunityController::class, 'index'])->name('communities');

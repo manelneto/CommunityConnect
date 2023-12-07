@@ -164,8 +164,8 @@ a.edit-profile {
 .card-rating {
   display:flex;
   text-align: center;     
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   display: flex;
   flex-direction: column;
   justify-content: center;

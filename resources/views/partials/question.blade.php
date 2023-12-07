@@ -37,6 +37,9 @@
                 <a href="{{ route('edit-question', ['id' => $question->id]) }}" class="edit-question-button">Edit</a>
             @endif
         </p>
+        @if ($question->file)
+            <p class="file">Download file <a href="{{ asset($question->file) }}" target="_blank">here</a></p>
+        @endif
         <div class="answers-details">
             @if (Request::route()->getName() == 'questions')
                 <button class="question-answer-btn">

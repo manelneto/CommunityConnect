@@ -36,6 +36,21 @@
   margin-bottom: 20px;
 }
 
+.answer-details {
+  display: flex;
+  flex-direction: row;
+}
+
+.answer-details p.rating {
+  margin-left: 20px;
+}
+
+.experts-stars {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
 .leave > form > textarea:focus-visible,
 .non-movable-textarea:focus-visible {
   border: 2px solid var(--blue);

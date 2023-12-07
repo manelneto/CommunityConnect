@@ -22,15 +22,14 @@
                 <a class="username" href="../users/{{ $answer->id_user }}">{{ $answer->user->username }}</a>
                 @if (isset($answer->user->communitiesRating))
                     @foreach ($answer->user->communitiesRating as $communityRating)
+                        @if ($communityRating->pivot->id_community == $answer->question->id_community && $communityRating->pivot->expert)
+                            <img class="experts-stars" src="{{ asset('assets/rating-images/star-expert.png') }}" alt="Expert">
+                        @endif
                         @if ($communityRating->pivot->id_community == $answer->question->id_community)
                             <p class="rating">{{ $communityRating->pivot->rating }} score</p>
                         @endif
-                        @if ($communityRating->pivot->id_community == $answer->question->id_community && $communityRating->pivot->expert)
-                            <img class=".experts-stars" src="{{ asset('assets/rating-images/star-expert.png') }}" alt="Expert">
-                        @endif
                     @endforeach
                 @endif
-                <span class="date">Answer added {{ $answer->date }}</span>
             </div>
             @if ($answer->correct)
                 <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="40px" height="40px">
@@ -39,6 +38,7 @@
                 </svg>
             @endif
         </header>
+        <span class="date">Answer added {{ $answer->date }}</span>
         @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
             <textarea class="description non-movable-textarea" name="content" cols="40" rows="5">{{ $answer->content }}</textarea>
         @else

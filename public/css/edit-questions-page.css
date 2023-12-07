@@ -62,3 +62,13 @@
   border-right: 1px solid #c6c6c6;
   border-left: 1px solid #c6c6c6;
 }
+
+#question-edit h2 {
+  margin-top: 0;
+  display: inline;
+}
+
+.content-right {
+  display: flex;
+  flex-direction: column;
+}

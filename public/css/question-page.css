@@ -8,6 +8,11 @@
   /* TODO */
 }
 
+.experts-stars{
+  width: 20px;
+  height: 20px;
+}
+
 .leave {
   display: flex;
   flex-direction: column;
@@ -29,6 +34,21 @@
   border: 1px solid #c6c6c6;
   font-size: 18px;
   margin-bottom: 20px;
+}
+
+.answer-details {
+  display: flex;
+  flex-direction: row;
+}
+
+.answer-details p.rating {
+  margin-left: 20px;
+}
+
+.experts-stars {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
 }
 
 .leave > form > textarea:focus-visible,

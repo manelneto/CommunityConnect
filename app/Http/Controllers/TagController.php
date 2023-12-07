@@ -31,7 +31,7 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //$this->authorize('store', Tag::class);
+        $this->authorize('store', Tag::class);
 
         $tag = new Tag();
         $tag->name = $request->tag;
@@ -70,7 +70,7 @@ class TagController extends Controller
     public function destroy(Request $request)
     {
         $tag = Tag::findOrFail($request->input('tag'));
-        //$this->authorize('delete_tag', Tag::class);
+        $this->authorize('destroy', Tag::class);
         try {
             $tag->delete();
             return redirect('admin');

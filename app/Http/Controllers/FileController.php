@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ class FileController extends Controller
     static $disk = 'CommunityConnect';
     static $types = [
         'profile' => ['png', 'jpg', 'jpeg'],
+        'question' => ['doc', 'pdf', 'txt', 'png', 'jpg', 'jpeg'],
     ];
 
     function upload(Request $request, int $id)
@@ -38,6 +40,14 @@ class FileController extends Controller
             } catch (ModelNotFoundException $e) {
                 return "User not found";
             }
+        } else if ($type === 'question') {
+            try {
+                $question = Question::findOrFail($id);
+                $question->file = "question/$filename";
+                $question->save();
+            } catch (ModelNotFoundException $e) {
+                return "Question not found";
+            }
         } else {
             return false;
         }
@@ -48,14 +58,16 @@ class FileController extends Controller
 
     private static function delete(string $type, int $id)
     {
-        $filename = User::find($id)->image;
-        if ($filename) {
-            if ($type === 'profile' && $filename !== 'profile/default.png') {
-                Storage::disk(self::$disk)->delete($filename);
-                User::find($id)->image = 'profile/default.png';
-            } else {
-                return false;
-            }
+        if ($type === 'profile' && User::find($id)->image !== 'profile/default.png') {
+            $filename = User::find($id)->image;
+            Storage::disk(self::$disk)->delete($filename);
+            User::find($id)->image = 'profile/default.png';
+        } else if ($type === 'question' && Question::find($id)->file) {
+            $filename = Question::find($id)->file;
+            Storage::disk(self::$disk)->delete($filename);
+            Question::find($id)->file = null;
+        } else {
+            return false;
         }
         return true;
     }

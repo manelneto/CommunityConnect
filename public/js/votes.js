@@ -55,7 +55,7 @@ document.querySelectorAll(".question-upvotes").forEach(async function (element) 
         const response = await handleVoteQuestion(sessionUserId, questionId, true);
         if (response.ok) {
             const data = await response.json();
-            element.textContent = data.likes;
+            element.firstElementChild.textContent = data.likes;
             element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
             element.style.color = "#38B6FF";
         }
@@ -77,7 +77,7 @@ document.querySelectorAll(".question-downvotes").forEach(async function (element
         const response = await handleVoteQuestion(sessionUserId, questionId, false);
         if (response.ok) {
             const data = await response.json();
-            element.textContent = data.dislikes;
+            element.firstElementChild.textContent = data.dislikes;
             element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
             element.style.color = "#38B6FF";
         }

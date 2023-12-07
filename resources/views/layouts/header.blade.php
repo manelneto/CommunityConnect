@@ -1,6 +1,5 @@
 @section('header')
 <script>
-    //! Isto funciona!
     const sessionUserId = @json(Auth::user()?-> id);
 </script>
 <header class="website-header">

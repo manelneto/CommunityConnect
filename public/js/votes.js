@@ -1,6 +1,6 @@
-async function handleVoteQuestion(userId, questionId, vote) {
+async function handleVoteQuestion(sessionUserId, questionId, vote) {
     const url = "/api/questions/vote";
-    const data = { id_user: userId, id_question: questionId, vote: vote };
+    const data = { id_user: sessionUserId, id_question: questionId, vote: vote };
     const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
     const response = await fetch(url, {
         method: "POST",
@@ -13,9 +13,9 @@ async function handleVoteQuestion(userId, questionId, vote) {
     return await response;
 }
 
-async function handleVoteAnswer(userId, answerId, vote) {
+async function handleVoteAnswer(sessionUserId, answerId, vote) {
     const url = "/api/answers/vote";
-    const data = { id_user: userId, id_answer: answerId, vote: vote };
+    const data = { id_user: sessionUserId, id_answer: answerId, vote: vote };
     const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
     const response = await fetch(url, {
         method: "POST",
@@ -28,21 +28,21 @@ async function handleVoteAnswer(userId, answerId, vote) {
     return await response;
 }
 
-async function userHasVotedQuestion(userId, questionId) {
-    const url = '/api/questions/vote?' + encodeForAjax({ id_user: userId, id_question: questionId });
+async function userHasVotedQuestion(sessionUserId, questionId) {
+    const url = '/api/questions/vote?' + encodeForAjax({ id_user: sessionUserId, id_question: questionId });
     const response = await fetch(url);
     return await response;
 }
 
-async function userHasVotedAnswer(userId, answerId) {
-    const url = '/api/answers/vote?' + encodeForAjax({ id_user: userId, id_answer: answerId });
+async function userHasVotedAnswer(sessionUserId, answerId) {
+    const url = '/api/answers/vote?' + encodeForAjax({ id_user: sessionUserId, id_answer: answerId });
     const response = await fetch(url);
     return await response;
 }
 
 document.querySelectorAll(".question-upvotes").forEach(async function (element) {
     const questionId = element.getAttribute("data-question-id");
-    const checkVote = await userHasVotedQuestion(userId, questionId);
+    const checkVote = await userHasVotedQuestion(sessionUserId, questionId);
     if (checkVote.ok) {
         const data = await checkVote.json();
         console.log(data);
@@ -52,7 +52,7 @@ document.querySelectorAll(".question-upvotes").forEach(async function (element) 
         }
     }
     element.addEventListener("click", async () => {
-        const response = await handleVoteQuestion(userId, questionId, true);
+        const response = await handleVoteQuestion(sessionUserId, questionId, true);
         if (response.ok) {
             const data = await response.json();
             element.textContent = data.likes;
@@ -65,7 +65,7 @@ document.querySelectorAll(".question-upvotes").forEach(async function (element) 
 
 document.querySelectorAll(".question-downvotes").forEach(async function (element) {
     const questionId = element.getAttribute("data-question-id");
-    const checkVote = await userHasVotedQuestion(userId, questionId);
+    const checkVote = await userHasVotedQuestion(sessionUserId, questionId);
     if (checkVote.ok) {
         const data = await checkVote.json();
         if (data.hasVoted === true && data.vote === false) {
@@ -74,7 +74,7 @@ document.querySelectorAll(".question-downvotes").forEach(async function (element
         }
     }
     element.addEventListener("click", async () => {
-        const response = await handleVoteQuestion(userId, questionId, false);
+        const response = await handleVoteQuestion(sessionUserId, questionId, false);
         if (response.ok) {
             const data = await response.json();
             element.textContent = data.dislikes;
@@ -87,7 +87,7 @@ document.querySelectorAll(".question-downvotes").forEach(async function (element
 
 document.querySelectorAll(".answer-upvotes").forEach(async function (element) {
     const answerId = element.getAttribute("data-answer-id");
-    const checkVote = await userHasVotedAnswer(userId, answerId);
+    const checkVote = await userHasVotedAnswer(sessionUserId, answerId);
     if (checkVote.ok) {
         const data = await checkVote.json();
         if (data.hasVoted === true && data.vote === true) {
@@ -96,7 +96,7 @@ document.querySelectorAll(".answer-upvotes").forEach(async function (element) {
         }
     }
     element.addEventListener("click", async () => {
-        const response = await handleVoteAnswer(userId, answerId, true);
+        const response = await handleVoteAnswer(sessionUserId, answerId, true);
         if (response.ok) {
             const data = await response.json();
             element.nextElementSibling.textContent = data.balance;
@@ -109,7 +109,7 @@ document.querySelectorAll(".answer-upvotes").forEach(async function (element) {
 
 document.querySelectorAll(".answer-downvotes").forEach(async function (element) {
     const answerId = element.getAttribute("data-answer-id");
-    const checkVote = await userHasVotedAnswer(userId, answerId);
+    const checkVote = await userHasVotedAnswer(sessionUserId, answerId);
     if (checkVote.ok) {
         const data = await checkVote.json();
         if (data.hasVoted === true && data.vote === false) {
@@ -118,7 +118,7 @@ document.querySelectorAll(".answer-downvotes").forEach(async function (element) 
         }
     }
     element.addEventListener("click", async () => {
-        const response = await handleVoteAnswer(userId, answerId, false);
+        const response = await handleVoteAnswer(sessionUserId, answerId, false);
         if (response.ok) {
             const data = await response.json();
             element.previousElementSibling.textContent = data.balance;

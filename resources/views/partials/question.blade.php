@@ -1,8 +1,5 @@
 <div class="question-container">
-    <script>
-        //! Isto funciona!
-        const userId = @json(Auth::user()?->id);
-    </script>
+
     <img class="member-pfp question-member-pfp" src="{{ asset('assets/profile-images/test-profile-image.jpeg') }}" alt="User's profule picture" />
     <div class="content-right">
         <div class="question-details">
@@ -26,12 +23,12 @@
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.000244141 12L9.00024 0L18.0002 12H0.000244141Z" fill="#ABACB1" />
                 </svg>
-                {{ $question->likes_count }}</span>
+                <span class="likes">{{ $question->likes_count }}</span></span>
             <span class="question-downvotes" data-question-id="{{ $question->id }}">
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.000244141 0L9.00024 12L18.0002 0H0.000244141Z" fill="#ABACB1" />
                 </svg>
-                {{ $question->dislikes_count }}</span>
+                <span class="dislikes">{{ $question->dislikes_count }}</span></span>
             @if (Request::route()->getName() == 'question' or Request::route()->getName() == 'edit-question')
             <ul class="question-tags">
                 @foreach ($question->tags as $tag)

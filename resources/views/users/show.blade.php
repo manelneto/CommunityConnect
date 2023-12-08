@@ -4,6 +4,19 @@
     <main id="profile-info">
         <section id="edit-profile-a">
             <h1>{{ $user->username }}</h1>
+            <img class="notifications-icon" src="{{ asset('assets/notifications.png') }}" alt="Notifications-icon"/>
+            <p class="notifications-number">{{ count($notifications) }}</p>
+            <!--
+            <ul class="notifications">
+                @foreach ($notifications as $notification)
+                    <li class="notification">
+                        <a href="">
+                            <p class="notification-text">{{ $notification->text }}</p>
+                            <p class="notification-date">{{ $notification->date }}</p>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>-->
             @if (Auth::user()?->id === $user->id || Auth::user()?->administrator)
                 <a class="edit-profile" href="{{ route('edit-user', $user->id) }}">Edit</a>
                 <form action="../users/{{ $user->id }}/delete" method="post">

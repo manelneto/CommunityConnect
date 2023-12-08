@@ -56,7 +56,7 @@ channel.bind('answer', function(notification) {
     p.innerHTML = notification.message;
     
     const a = document.createElement('a');
-    a.href = `/questions/${notification.id_question}`;
+    a.href = `/questions/${notification.id_question}`;d
     a.innerHTML = 'Here';
 
     article.appendChild(h3);

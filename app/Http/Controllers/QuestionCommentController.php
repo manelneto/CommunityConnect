@@ -27,6 +27,10 @@ class QuestionCommentController extends Controller {
 
         $comment->save();
 
+        $question = Question::findOrFail($comment->id_question);
+
+        event(new CommentQuestionEvent($answer->id_question, $question->title, $question->id_user));
+
         return redirect('questions/' . $comment->id_question)->withSuccess('Comment posted successfully!');
     }
 

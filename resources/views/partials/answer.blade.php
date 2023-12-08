@@ -1,4 +1,4 @@
-<form class="answer" method="post">
+<form class="answer" method="post" enctype="multipart/form-data">
     <a href="../questions/{{ $answer->id_question }}">HERE</a>
     @csrf
     <div class="content-left">
@@ -40,9 +40,16 @@
         </header>
         <span class="date">Answer added {{ $answer->date }}</span>
         @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
-            <textarea class="description non-movable-textarea" name="content" cols="40" rows="5">{{ $answer->content }}</textarea>
+            <label for="content">Content</label>
+            <textarea id="content" class="description non-movable-textarea" name="content" cols="40" rows="5">{{ $answer->content }}</textarea>
+            <label for="file">File</label>
+            <input id="file" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt" value="{{ asset($answer->file) }}">
+            <input type="hidden" name="type" value="answer">
         @else
             <p class="description">{{ $answer->content }}</p>
+            @if ($answer->file)
+                <p class="file">Download file <a href="{{ asset($answer->file) }}" target="_blank">here</a></p>
+            @endif
         @endif
         @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
             @if ($answer->correct)

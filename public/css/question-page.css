@@ -274,3 +274,7 @@ button.mark-incorrect {
   visibility: visible;
   transition-delay: 0s;
 }
+
+.file a {
+  color: black;
+}

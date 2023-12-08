@@ -125,6 +125,8 @@ class QuestionController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string|max:1000',
             'id_community' => 'required|integer',
+            'file' => 'max:2048',
+            'type' => 'in:question'
         ]);
 
         $question = new Question();
@@ -134,6 +136,9 @@ class QuestionController extends Controller
         $question->id_user = Auth::user()->id;
 
         $question->save();
+
+        $fileController = new FileController();
+        $fileController->upload($request, $question->id);
 
         return redirect()->route('questions')->withSuccess('Question posted successfully!');
     }
@@ -171,7 +176,8 @@ class QuestionController extends Controller
         try {
             $question = Question::with('tags')->withCount(['likes', 'dislikes'])->findOrFail($id);
             $this->authorize('edit', $question);
-            return view('questions.edit', ['question' => $question]);
+            $communities = Community::all();
+            return view('questions.edit', ['question' => $question, 'communities' => $communities]);
         } catch (ModelNotFoundException $e) {
             return "Question not found.";
         }
@@ -187,12 +193,21 @@ class QuestionController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string|max:1000'
+            'content' => 'required|string|max:1000',
+            'id_community' => 'required|integer',
+            'file' => 'max:2048',
+            'type' => 'in:question'
         ]);
 
         try {
             $question->title = $request->input(['title']);
             $question->content = $request->input(['content']);
+
+            $question->id_community = $request['id_community'];
+            $question->id_user = Auth::user()->id;
+
+            $fileController = new FileController();
+            $fileController->upload($request, $question->id);
 
             $addTagName = $request->input('add-tag');
 
@@ -214,7 +229,7 @@ class QuestionController extends Controller
 
                 $question->tags()->attach($tag->id);
             }
-
+            
             $question->save();
             return redirect('questions/' . $id);
         } catch (ModelNotFoundException $e) {

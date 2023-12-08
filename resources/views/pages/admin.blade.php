@@ -24,13 +24,13 @@
                 <form action="../../users" method="post" class="form-admin">
                     @csrf
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username">
+                    <input type="text" id="username" name="username" placeholder="Enter username here">
                     <label for="email">Email</label>
-                    <input type="text" id="email" name="email">
+                    <input type="text" id="email" name="email" placeholder="Enter email here">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password">
+                    <input type="password" id="password" name="password" placeholder="Enter password here">
                     <label for="password_confirmation">Confirm Password</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation">
+                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm password here">
                     <button id="create-user" type="submit">Create User</button>
                 </form>
             </details>
@@ -71,7 +71,7 @@
                 <form action="../tags" method="post" class="form-admin">
                     @csrf
                     <label for="tag">Tag</label>
-                    <input type="text" id="tag" name="tag">
+                    <input type="text" id="tag" name="tag" placeholder="Enter tag name here">
                     <button id="find-user" type="submit">Add</button>
                 </form>
             </details>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\QuestionComment;
+use App\Models\Question;
+use App\Events\CommentQuestionEvent;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +31,7 @@ class QuestionCommentController extends Controller {
 
         $question = Question::findOrFail($comment->id_question);
 
-        event(new CommentQuestionEvent($answer->id_question, $question->title, $question->id_user));
+        event(new CommentQuestionEvent($comment->id_question, $question->title, $question->id_user));
 
         return redirect('questions/' . $comment->id_question)->withSuccess('Comment posted successfully!');
     }

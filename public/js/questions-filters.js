@@ -143,6 +143,7 @@ async function fetchQuestions(after, before, community, communities, text, sort,
 
 function addQuestion(question) {
   let expert = "";
+  console.log(question.user)
   question.user.communities_rating.forEach ((rating) => {
     if (rating.pivot.id_community === question.community.id && rating.pivot.expert) {
       expert = `<img class="experts-stars" src="../assets/rating-images/star-expert.png" alt="Expert stars">`

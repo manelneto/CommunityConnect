@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Question;
+use App\Events\AnswerEvent;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +28,10 @@ class AnswerController extends Controller {
         $answer->id_user = Auth::user()->id;
 
         $answer->save();
+
+        $question = Question::findOrFail($answer->id_question);
+
+        event(new AnswerEvent($answer->id_question, $question->title, $question->id_user));
 
         return redirect('questions/' . $answer->id_question)->withSuccess('Answer posted successfully!');
     }

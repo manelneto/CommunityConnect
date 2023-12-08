@@ -35,6 +35,7 @@
         <link href="{{ asset('css/main-features.css') }}" rel="stylesheet">
 
         <!-- JavaScript -->
+        <script src="https://js.pusher.com/7.0/pusher.min.js" defer></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/side-bar-responsive.js') }}" defer></script>
         <script src="{{ asset('js/password.js') }}" defer></script>
@@ -71,6 +72,7 @@
         </aside>
         </div>
         @endif
+        <section id="notifications"></section>
         <footer class="main-footer">
             @yield('footer')
         </footer>

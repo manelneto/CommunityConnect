@@ -20,6 +20,8 @@ class AnswerController extends Controller {
         $request->validate([
             'content' => 'required|string|max:1000',
             'id_question' => 'required|integer',
+            'file' => 'max:2048',
+            'type' => 'in:answer'
         ]);
 
         $answer = new Answer();
@@ -32,6 +34,9 @@ class AnswerController extends Controller {
         $question = Question::findOrFail($answer->id_question);
 
         event(new AnswerEvent($answer->id_question, $question->title, $question->id_user));
+
+        $fileController = new FileController();
+        $fileController->upload($request, $answer->id);
 
         return redirect('questions/' . $answer->id_question)->withSuccess('Answer posted successfully!');
     }
@@ -60,12 +65,18 @@ class AnswerController extends Controller {
         $this->authorize('update', $answer);
 
         $request->validate([
-            'content' => 'required|string|max:1000'
+            'content' => 'required|string|max:1000',
+            'file' => 'max:2048',
+            'type' => 'in:answer'
         ]);
 
         try {
             $answer->content = $request->input('content');
             $answer->save();
+
+            $fileController = new FileController();
+            $fileController->upload($request, $answer->id);
+
             return redirect('questions/' . $answer->id_question);
         }
         catch (ModelNotFoundException $e) {

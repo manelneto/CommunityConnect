@@ -23,10 +23,14 @@
         @auth
             <article class="leave">
                 <h2 class="leave-answer-text">Leave an Answer</h2>
-                <form action="/answers" method="post">
+                <form action="/answers" method="post" enctype="multipart/form-data">
                     @csrf
-                    <textarea name="content" rows="6" cols="60"></textarea>
+                    <label for="content">Content</label>
+                    <textarea id="content" name="content" rows="6" cols="60"></textarea>
                     <input type="hidden" name="id_question" value="{{ $question->id }}">
+                    <label for="file">File</label>
+                    <input id="file" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt">
+                    <input type="hidden" name="type" value="answer">
                     <button type="submit">Post Answer</button>
                 </form>
             </article>

@@ -2,7 +2,7 @@
     <a href="../questions/{{ $answer->id_question }}">HERE</a>
     @csrf
     <div class="content-left">
-        <img class="member-pfp answer-member-pfp" src="{{ asset($question->user->image) }}" alt="User's profile photo" />
+        <img class="member-pfp answer-member-pfp" src="{{ asset($answer->user->image) }}" alt="User's profile photo" />
         <div class="answers-votes">
             <span class="answer-upvotes">{{ $answer->likes_count}}
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">

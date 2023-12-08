@@ -255,6 +255,6 @@ button.mark-incorrect {
   transition-delay: 0s;
 }
 
-.question-container .file a {
+.file a {
   color: black;
 }

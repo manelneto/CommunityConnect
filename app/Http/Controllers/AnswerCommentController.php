@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Question;
+use App\Events\CommentAnswerEvent;
 use App\Models\AnswerComment;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -28,9 +30,13 @@ class AnswerCommentController extends Controller {
 
         $comment->save();
 
-        // $answer = Answer::findOrFail($comment->id_answer);
+        $answer = Answer::findOrFail($comment->id_answer);
 
-        return redirect('questions/' . $comment->answer->id_question)->withSuccess('Comment posted successfully!');
+        $question = Question::findOrFail($answer->id_question);
+
+        event(new CommentAnswerEvent($question->id, $question->title, $answer->id_user));
+
+        return redirect('questions/' . $question->id)->withSuccess('Comment posted successfully!');
     }
 
     /**

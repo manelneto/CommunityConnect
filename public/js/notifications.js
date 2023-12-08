@@ -60,26 +60,26 @@ channel.bind('commentQuestion', function(notification) {
   }
 });
 
-channel.bind('commentQuestion', function(notification) {
-  if (getUserId() === notification.id_user) {
-    const article = document.createElement('article');
-    article.classList.add('notification');
+channel.bind('commentAnswer', function(notification) {
+    if (getUserId() === notification.id_user) {
+        const article = document.createElement('article');
+        article.classList.add('notification');
 
-    const h3 = document.createElement('h3');
-    h3.innerHTML = 'New comment on your question';
+        const h3 = document.createElement('h3');
+        h3.innerHTML = 'New comment on your answer';
 
-    const p = document.createElement('p');
-    p.innerHTML = notification.message;
-    
-    const a = document.createElement('a');
-    a.href = `/questions/${notification.id_question}`;
-    a.innerHTML = 'Here';
+        const p = document.createElement('p');
+        p.innerHTML = notification.message;
+        
+        const a = document.createElement('a');
+        a.href = `/questions/${notification.id_question}`;
+        a.innerHTML = 'Here';
 
-    article.appendChild(h3);
-    article.appendChild(p);
-    article.appendChild(a);
+        article.appendChild(h3);
+        article.appendChild(p);
+        article.appendChild(a);
 
-    const notifications = document.getElementById('notifications');
-    notifications.appendChild(article);
-  }
+        const notifications = document.getElementById('notifications');
+        notifications.appendChild(article);
+    }
 });

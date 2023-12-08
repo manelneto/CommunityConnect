@@ -36,6 +36,7 @@
 
         <!-- JavaScript -->
         <script src="https://js.pusher.com/7.0/pusher.min.js" defer></script>
+        <script src="{{ asset('js/notifications.js') }}" defer></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/side-bar-responsive.js') }}" defer></script>
         <script src="{{ asset('js/password.js') }}" defer></script>

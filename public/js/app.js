@@ -23,7 +23,6 @@ function hide(element) {
 }
 
 function toggle(element) {
-  console.log(element.style.display);
   if (element.style.display === 'none' || !element.style.display) {
     element.style.display = 'flex';
   } else {

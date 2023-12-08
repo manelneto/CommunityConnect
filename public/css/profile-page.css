@@ -90,6 +90,12 @@ a.edit-profile {
   background-color: var(--hover-red);
 }
 
+.view-icon{
+  width: 25px;
+  height: 25px;
+  align-items: end;
+}
+
 .notifications-icon {
   margin-left: 370px;
   width: 35px;
@@ -109,6 +115,27 @@ a.edit-profile {
   height: 20px; 
   line-height: 20px;
   padding: 0;
+}
+
+.notifications-container {
+  display: none;
+  width: 470px;
+  position:absolute;
+  top: 185px;
+  left: 650px;
+  flex-direction: column;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+
+
+.notification {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
 }
 
 #my-questions,

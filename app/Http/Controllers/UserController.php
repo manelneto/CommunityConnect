@@ -6,6 +6,7 @@ use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Reputation;
 use App\Models\User;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class UserController extends Controller
     {
         $this->authorize('index', User::class);
         $users = User::all();
-        return view('pages.admin', ['users' => $users]);
+        $tags = Tag::all();
+        return view('pages.admin', ['users' => $users, 'tags' => $tags]);
     }
 
     /**
@@ -74,7 +76,7 @@ class UserController extends Controller
         try {
             $user = User::with('badges')->findOrFail($id);
             $questions = Question::with(['user', 'community', 'likes', 'dislikes'])->where('id_user', $id)->get();
-            $answers = Answer::with(['user', 'question', 'likes', 'dislikes'])->where('id_user', $id)->get();
+            $answers = Answer::with(['user.communitiesRating', 'question', 'likes', 'dislikes'])->where('id_user', $id)->get();
             $reputations = Reputation::with(['user', 'community'])->where('id_user', $id)->get();
             return view('users.show', [
                 'user' => $user,

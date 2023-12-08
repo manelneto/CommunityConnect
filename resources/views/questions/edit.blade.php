@@ -5,7 +5,6 @@
     <main id="question-edit">
         <div class="main-content">
             <section class="main-info">
-                @yield('errors')
                 <span class="edit-question-text">Edit Question</span>
                 <form class="question-container question-edit-container" method="post" enctype="multipart/form-data">
                     @csrf
@@ -33,6 +32,20 @@
                             <label for="file">File</label>
                             <input id="file" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt" value="{{ asset($question->file) }}">
                             <input type="hidden" name="type" value="question">
+                            <div class="edit-question-tags">
+                                @foreach ($question->tags as $tag) 
+                                    <li id="{{ $tag->id }}-{{ $question->id }}" class="question-tag margin-on-tags">
+                                        {{ $tag->name }}
+                                        <div class="tag-tooltip-content color-black">Delete this tag.</div>
+                                    </li>
+                                @endforeach
+                                <input id="add-tag" class="form-control" type="text" name="add-tag">
+                                @error('tag')
+                                    <span class="error-message-tag-add">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                     <div class="edit-buttons">

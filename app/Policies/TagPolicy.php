@@ -53,17 +53,17 @@ class TagPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Tag $tag): bool
+    public function store(User $user): bool
     {
-        //
+        return Auth::user()->administrator;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Tag $tag): bool
+    public function destroy(User $user): bool
     {
-        //
+        return Auth::user()->administrator;
     }
 
     public function follow(User $user): bool

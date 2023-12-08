@@ -51,4 +51,9 @@ class QuestionPolicy {
     {
         return Auth::check();
     }
+
+    public function remove_tag(User $user, Question $question) : bool
+    {
+        return ($user->id === Auth::user()->id) && ($question->id_user === $user->id || Auth::user()->administrator);
+    }
 }

@@ -84,6 +84,8 @@ Route::controller(AnswerCommentController::class)->group(function() {
 Route::get('/admin', [UserController::class, 'index'])->name('admin');
 Route::post('/admin/block', [UserController::class, 'block_user'])->name('block-user');
 Route::post('/admin/unblock', [UserController::class, 'unblock_user'])->name('unblock-user');
+Route::post('/tags/delete', [TagController::class, 'destroy'])->name('delete-tag');
+Route::post('/tags', [TagController::class, 'store'])->name('create-tag');
 
 //Communities
 Route::get('/communities', [CommunityController::class, 'index'])->name('communities');
@@ -99,6 +101,7 @@ Route::post('api/questions/{id}/follow', [QuestionController::class, 'follow']);
 Route::post('api/questions/{id}/unfollow', [QuestionController::class, 'unfollow']);
 Route::post('api/tags/follow', [TagController::class, 'follow']);
 Route::post('api/tags/unfollow', [TagController::class, 'unfollow']);
+Route::post('api/questions/edit/remove-tag/{questionId}/{tagId}', [QuestionController::class, 'remove_tag']);
 
 // Static info pages
 Route::view('/about-contact-us', 'pages.about-contact-us')->name('about-contact-us');

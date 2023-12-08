@@ -10,3 +10,8 @@
 .sign-page-right-content .forgot-password:hover {
   text-decoration: underline;
 }
+
+::placeholder {
+  color: #c7c7c7;
+  font-size: smaller;
+}

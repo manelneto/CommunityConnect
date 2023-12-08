@@ -17,15 +17,27 @@ class QuestionVoteController extends Controller
                 'vote' => 'required|boolean',
             ]);
 
-            
             $alreadyVoted = QuestionVote::where('id_question', $request->id_question)
-            ->where('id_user', $request->id_user)
-            ->exists();
+            ->where('id_user', $request->id_user)->first();
             
+            $type = 'create';
+
             if ($alreadyVoted) {
-                return response()->json([
-                    'message' => 'You have already voted for this question',
-                ], 400);
+                $currentVote = $alreadyVoted->likes;
+                QuestionVote::where('id_question', $request->id_question)->where('id_user', $request->id_user)->delete();
+
+                if ($currentVote == $request->vote){
+                    $question = Question::withCount(['likes', 'dislikes'])->findOrFail($request->id_question);
+                    return response()->json([
+                        'message' => 'Vote deleted successfully',
+                        'type' => 'delete',
+                        'likes' => $question->likes_count,
+                        'dislikes' => $question->dislikes_count,
+                    ], 200);
+                }
+                else{
+                    $type = 'update';
+                }
             }
             $newvote = new QuestionVote();
             $newvote->id_question = $request->id_question;
@@ -44,6 +56,7 @@ class QuestionVoteController extends Controller
 
             return response()->json([
                 'message' => 'Vote created successfully',
+                'type' => $type,
                 'likes' => $question->likes_count,
                 'dislikes' => $question->dislikes_count,
             ], 200);

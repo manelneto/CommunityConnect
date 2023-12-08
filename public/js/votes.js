@@ -1,3 +1,5 @@
+//TODO: add delete and update support for votes
+
 async function handleVoteQuestion(sessionUserId, questionId, vote) {
     const url = "/api/questions/vote";
     const data = { id_user: sessionUserId, id_question: questionId, vote: vote };
@@ -45,19 +47,24 @@ document.querySelectorAll(".question-upvotes").forEach(async function (element) 
     const checkVote = await userHasVotedQuestion(sessionUserId, questionId);
     if (checkVote.ok) {
         const data = await checkVote.json();
-        console.log(data);
         if (data.hasVoted === true && data.vote === true) {
             element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
-            element.style.color = "#38B6FF";
         }
     }
     element.addEventListener("click", async () => {
         const response = await handleVoteQuestion(sessionUserId, questionId, true);
         if (response.ok) {
             const data = await response.json();
-            element.firstElementChild.textContent = data.likes;
-            element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
-            element.style.color = "#38B6FF";
+            element.lastElementChild.textContent = data.likes;
+            if (data.type === "create")
+                element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
+            else if (data.type === "delete")
+                element.firstElementChild.firstElementChild.setAttribute("fill", "#ABACB1");
+            else if (data.type === "update"){
+                element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
+                element.nextElementSibling.firstElementChild.firstElementChild.setAttribute("fill", "#ABACB1");
+                element.nextElementSibling.lastElementChild.textContent = data.dislikes;
+            }
         }
 
     });
@@ -70,16 +77,22 @@ document.querySelectorAll(".question-downvotes").forEach(async function (element
         const data = await checkVote.json();
         if (data.hasVoted === true && data.vote === false) {
             element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
-            element.style.color = "#38B6FF";
         }
     }
     element.addEventListener("click", async () => {
         const response = await handleVoteQuestion(sessionUserId, questionId, false);
         if (response.ok) {
             const data = await response.json();
-            element.firstElementChild.textContent = data.dislikes;
-            element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
-            element.style.color = "#38B6FF";
+            element.lastElementChild.textContent = data.dislikes;
+            if (data.type === "create")
+                element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
+            else if (data.type === "delete")
+                element.firstElementChild.firstElementChild.setAttribute("fill", "#ABACB1");
+            else if (data.type === "update"){
+                element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
+                element.previousElementSibling.firstElementChild.firstElementChild.setAttribute("fill", "#ABACB1");
+                element.previousElementSibling.lastElementChild.textContent = data.likes;
+            }
         }
 
     });
@@ -92,7 +105,6 @@ document.querySelectorAll(".answer-upvotes").forEach(async function (element) {
         const data = await checkVote.json();
         if (data.hasVoted === true && data.vote === true) {
             element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
-            element.style.color = "#38B6FF";
         }
     }
     element.addEventListener("click", async () => {
@@ -100,10 +112,15 @@ document.querySelectorAll(".answer-upvotes").forEach(async function (element) {
         if (response.ok) {
             const data = await response.json();
             element.nextElementSibling.textContent = data.balance;
-            element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
-            element.style.color = "#38B6FF";
+            if (data.type === "create")
+                element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
+            else if (data.type === "delete")
+                element.firstElementChild.firstElementChild.setAttribute("fill", "#ABACB1");
+            else if (data.type === "update"){
+                element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
+                element.nextElementSibling.nextElementSibling.firstElementChild.firstElementChild.setAttribute("fill", "#ABACB1");
+            }
         }
-
     });
 });
 
@@ -114,7 +131,6 @@ document.querySelectorAll(".answer-downvotes").forEach(async function (element) 
         const data = await checkVote.json();
         if (data.hasVoted === true && data.vote === false) {
             element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
-            element.style.color = "#38B6FF";
         }
     }
     element.addEventListener("click", async () => {
@@ -122,8 +138,14 @@ document.querySelectorAll(".answer-downvotes").forEach(async function (element) 
         if (response.ok) {
             const data = await response.json();
             element.previousElementSibling.textContent = data.balance;
-            element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
-            element.style.color = "#38B6FF";
+            if (data.type === "create")
+                element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
+            else if (data.type === "delete")
+                element.firstElementChild.firstElementChild.setAttribute("fill", "#ABACB1");
+            else if (data.type === "update"){
+                element.firstElementChild.firstElementChild.setAttribute("fill", "#38B6FF");
+                element.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.setAttribute("fill", "#ABACB1");
+            }
         }
 
     });

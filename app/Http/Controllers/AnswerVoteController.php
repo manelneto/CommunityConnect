@@ -18,12 +18,24 @@ class AnswerVoteController extends Controller
                 'vote' => 'required|boolean',
             ]);
 
-            $alreadyVoted = AnswerVote::where('id_answer', $request->id_answer)->where('id_user', $request->id_user)->exists();
+            $type = 'create';
+
+            $alreadyVoted = AnswerVote::where('id_answer', $request->id_answer)->where('id_user', $request->id_user)->first();
 
             if ($alreadyVoted) {
-                return response()->json([
-                    'message' => 'You have already voted for this answer',
-                ], 400);
+                $currentVote = $alreadyVoted->likes;
+                AnswerVote::where('id_answer', $request->id_answer)->where('id_user', $request->id_user)->delete();
+                if ($currentVote == $request->vote){
+                    $answer = Answer::withCount(['likes', 'dislikes'])->findOrFail($request->id_answer);
+                    return response()->json([
+                        'message' => 'Vote deleted successfully',
+                        'type' => 'delete',
+                        'balance' => $answer->likes_count - $answer->dislikes_count,
+                    ], 200);
+                }
+                else{
+                    $type = 'update';
+                }
             }
 
             $answer = Answer::findOrFail($request->id_answer);
@@ -45,6 +57,7 @@ class AnswerVoteController extends Controller
 
             return response()->json([
                 'message' => 'Vote created successfully',
+                'type' => $type,
                 'balance' => $answer->likes_count - $answer->dislikes_count,
             ], 200);
         } catch (\Exception $e) {

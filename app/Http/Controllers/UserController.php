@@ -74,15 +74,17 @@ class UserController extends Controller
     public function show(int $id)
     {
         try {
-            $user = User::with('badges')->findOrFail($id);
+            $user = User::with(['badges', 'moderatorCommunities'])->findOrFail($id);
             $questions = Question::with(['user', 'community', 'likes', 'dislikes'])->where('id_user', $id)->get();
             $answers = Answer::with(['user.communitiesRating', 'question', 'likes', 'dislikes'])->where('id_user', $id)->get();
             $reputations = Reputation::with(['user', 'community'])->where('id_user', $id)->get();
+            $moderatorCommunities = $user->moderatorCommunities;
             return view('users.show', [
                 'user' => $user,
                 'questions' => $questions,
                 'answers' => $answers,
-                'reputations' => $reputations
+                'reputations' => $reputations,
+                'moderatorCommunities' => $moderatorCommunities
             ]);
         } catch (ModelNotFoundException $e) {
             return "User not found.";

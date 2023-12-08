@@ -13,19 +13,19 @@
             @csrf
             <div class="form-group">
                 <label for="username">Username *</label>
-                <input id="username"  type="text" name="username" required>
+                <input id="username"  type="text" name="username" required placeholder="Enter username here">
             </div>
             <div class="form-group">
                 <label for="email">Email *</label>
-                <input id="email" type="email" name="email" required>
+                <input id="email" type="email" name="email" required placeholder="Enter email here">
             </div>
             <div class="form-group">
                 <label for="password">Password *</label>
-                <input id="password" type="password" name="password" required>
+                <input id="password" type="password" name="password" required placeholder="Enter password here">
             </div>
             <div class="form-group">
                 <label for="password_confirmation">Confirm Password *</label>
-                <input id="password_confirmation" type="password" name="password_confirmation" required>
+                <input id="password_confirmation" type="password" name="password_confirmation" required placeholder="Confirm password here">
             </div>
             <small>Password must contain at least 8 characters</small>
             <div class="form-group">

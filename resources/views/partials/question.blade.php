@@ -5,6 +5,9 @@
             <a href="../users/{{ $question->id_user }}" class="question-username">{{ $question->user->username }}</a>
             <span class="question-asked-date">Asked: {{ $question->date }}</span>
             <span class="question-community">In: {{ $question->community->name }}</span>
+            @if( $question->last_edited != null)
+                <p class="question-edited-date">Edited: {{ $question->last_edited }}</p>
+            @endif
             @if (Request::route()->getName() == 'question' && Auth::user())
                 @if (Auth::user()?->followedQuestions->contains($question->id))
                     <button id="{{ $question->id }}" class="unfollow-question-button">

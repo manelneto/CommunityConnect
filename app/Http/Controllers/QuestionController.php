@@ -236,6 +236,8 @@ class QuestionController extends Controller
 
             $question->tags()->attach($tag->id);
         }
+
+        $question->last_edited = now();
         
         $question->save();
         return redirect('questions/' . $id);

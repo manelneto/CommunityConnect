@@ -12,6 +12,18 @@ class QuestionCommentPolicy {
 
     use HandlesAuthorization;
 
+    private function isModeratorOfCommunity($comment): bool
+    {
+        if (!Auth::check()) {
+            return false;
+        }
+
+        return in_array(
+            $comment->question->id_community,
+            Auth::user()->moderatorCommunities->pluck('id')->toArray()
+        );
+    }
+
     public function store(User $user): bool
     {
         return Auth::check();
@@ -19,16 +31,16 @@ class QuestionCommentPolicy {
 
     public function edit(User $user, QuestionComment $comment): bool
     {
-        return Auth::check() && ($user->id === Auth::user()->id) && ($comment->id_user === $user->id || Auth::user()->administrator);
+        return Auth::check() && ($user->id === Auth::user()->id) && (($comment->id_user === $user->id || Auth::user()->administrator) || $this->isModeratorOfCommunity($comment));
     }
 
     public function update(User $user, QuestionComment $comment): bool
     {
-        return Auth::check() && ($user->id === Auth::user()->id) && ($comment->id_user === $user->id || Auth::user()->administrator);
+        return Auth::check() && ($user->id === Auth::user()->id) && (($comment->id_user === $user->id || Auth::user()->administrator) || $this->isModeratorOfCommunity($comment));
     }
 
     public function destroy(User $user, QuestionComment $comment): bool
     {
-        return Auth::check() && ($user->id === Auth::user()->id) && ($comment->id_user === $user->id || Auth::user()->administrator);
+        return Auth::check() && ($user->id === Auth::user()->id) && (($comment->id_user === $user->id || Auth::user()->administrator) || $this->isModeratorOfCommunity($comment));
     }
 }

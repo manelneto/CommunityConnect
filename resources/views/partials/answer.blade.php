@@ -1,3 +1,7 @@
+@php
+    $isModerator = in_array($answer->question->id_community, Auth::user()?->moderatorCommunities->pluck('id')->toArray());
+@endphp
+
 <form class="answer" method="post" enctype="multipart/form-data">
     <a href="../questions/{{ $answer->id_question }}">HERE</a>
     @csrf
@@ -58,7 +62,7 @@
             @endif
         </header>
         <span class="date">Answer added {{ $answer->date }}</span>
-        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
+        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || $isModerator)
             <label for="content">Content</label>
             <textarea id="content" class="description non-movable-textarea" name="content" cols="40" rows="5" placeholder="Type in your answer here">{{ $answer->content }}</textarea>
             <label for="file">File</label>
@@ -70,7 +74,7 @@
                 <p class="file">Download file <a href="{{ asset($answer->file) }}" target="_blank">here</a></p>
             @endif
         @endif
-        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
+        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || $isModerator)
             @if ($answer->correct)
                 <button class="mark-incorrect" formaction="../../answers/{{ $answer->id }}/incorrect">Remove correct mark</button>
             @else

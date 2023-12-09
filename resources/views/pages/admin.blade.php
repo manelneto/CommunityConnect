@@ -24,13 +24,13 @@
                 <form action="../../users" method="post" class="form-admin">
                     @csrf
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username" placeholder="Enter username here">
+                    <input type="text" id="username" name="username" placeholder="Enter username here" class="user-details-input">
                     <label for="email">Email</label>
-                    <input type="text" id="email" name="email" placeholder="Enter email here">
+                    <input type="text" id="email" name="email" placeholder="Enter email here" class="user-details-input">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter password here">
+                    <input type="password" id="password" name="password" placeholder="Enter password here" class="user-details-input">
                     <label for="password_confirmation">Confirm Password</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm password here">
+                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm password here" class="user-details-input">
                     <button id="create-user" type="submit">Create User</button>
                 </form>
             </details>

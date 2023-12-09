@@ -31,8 +31,8 @@ const error_map = new Map();
 
 document.querySelectorAll('.user-details-input').forEach(async (input) => {
     error_map.set(input.id, false);
-    input.addEventListener('input', async () => {
-        if (input.id === 'username_or_email') { //login
+    if (input.id === 'username_or_email') { //login
+        input.addEventListener('blur', async () => {
             if (input.value !== '' && (validateUsernamePattern(input.value) || validateEmailPattern(input.value))) {
                 await checkUsernameOrEmailExists(input.value).then((response) => {
                     if (response.user === true || response.email === true) {
@@ -47,8 +47,12 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
                     }
                 });
             }
-        }
-        else if (input.id === 'username') { //register
+            submitButton.disabled = checkToEnableSubmitButton(error_map);
+
+        });
+    }
+    else if (input.id === 'username') { //register or user edit
+        input.addEventListener('blur', async () => {
             if (input.value !== '') {
                 if (!validateUsernamePattern(input.value)) {
                     input.style.border = '2px solid red';
@@ -74,8 +78,12 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
                     });
                 }
             }
-        }
-        else if (input.id === 'email') {
+            submitButton.disabled = checkToEnableSubmitButton(error_map);
+
+        })
+    }
+    else if (input.id === 'email') {
+        input.addEventListener('blur', async () => {
             if (input.value !== '') {
                 if (!validateEmailPattern(input.value)) {
                     input.style.border = '2px solid red';
@@ -99,8 +107,11 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
                     });
                 }
             }
-        }
-        else if (input.id === 'password') {
+            submitButton.disabled = checkToEnableSubmitButton(error_map);
+        })
+    }
+    else if (input.id === 'password') {
+        input.addEventListener('input', () => {
             if (input.value !== '') {
                 if (input.value.length >= 8) {
                     input.style.border = '2px solid green';
@@ -122,8 +133,12 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
                     error_map.set(input.id, true);
                 }
             }
-        }
-        else if (input.id === 'password_confirmation') {
+            submitButton.disabled = checkToEnableSubmitButton(error_map);
+
+        })
+    }
+    else if (input.id === 'password_confirmation') {
+        input.addEventListener('input', () => {
             if (input.value !== '') {
                 if (input.value === document.querySelector('#password').value) {
                     input.style.border = '2px solid green';
@@ -136,7 +151,9 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
                     error_map.set(input.id, true);
                 }
             }
-        }
-        submitButton.disabled = checkToEnableSubmitButton(error_map);
-    });
+            submitButton.disabled = checkToEnableSubmitButton(error_map);
+
+        })
+    }
 });
+

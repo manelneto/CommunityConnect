@@ -80,12 +80,14 @@ class UserController extends Controller
             $answers = Answer::with(['user.communitiesRating', 'question', 'likes', 'dislikes'])->where('id_user', $id)->get();
             $reputations = Reputation::with(['user', 'community'])->where('id_user', $id)->get();
             $notifications = Notification::with('user')->where('id_user', $id)->get();
+            $unread = Notification::with('user')->where('id_user', $id)->where('read', false)->get();
             return view('users.show', [
                 'user' => $user,
                 'questions' => $questions,
                 'answers' => $answers,
                 'reputations' => $reputations,
-                'notifications' => $notifications
+                'notifications' => $notifications,
+                'unread' => $unread
             ]);
         } catch (ModelNotFoundException $e) {
             return "User not found.";

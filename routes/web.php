@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\QuestionCommentController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TagController;
@@ -102,6 +103,7 @@ Route::post('api/questions/{id}/unfollow', [QuestionController::class, 'unfollow
 Route::post('api/tags/follow', [TagController::class, 'follow']);
 Route::post('api/tags/unfollow', [TagController::class, 'unfollow']);
 Route::post('api/questions/edit/remove-tag/{questionId}/{tagId}', [QuestionController::class, 'remove_tag']);
+Route::post('api/notifications/read', [NotificationController::class, 'read']);
 
 // Static info pages
 Route::view('/about-contact-us', 'pages.about-contact-us')->name('about-contact-us');

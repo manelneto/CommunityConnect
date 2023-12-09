@@ -64,6 +64,7 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
         });
     }
     else if (input.id === 'username') { //register or user edit
+        const initialValue = input.value;
         input.addEventListener('blur', async () => {
             if (input.value !== '') {
                 if (!validateUsernamePattern(input.value)) {
@@ -75,7 +76,7 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
                 }
                 else {
                     await checkUsernameOrEmailExists(input.value).then((response) => {
-                        if (response.user === false) {
+                        if (response.user === false || input.value === initialValue) {
                             input.style.border = '2px solid green';
                             document.querySelector('.username-error').style.display = 'none';
                             error_map.set(input.id, false);
@@ -95,6 +96,7 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
         })
     }
     else if (input.id === 'email') {
+        const initialValue = input.value;
         input.addEventListener('blur', async () => {
             if (input.value !== '') {
                 if (!validateEmailPattern(input.value)) {
@@ -105,7 +107,7 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
                 }
                 else {
                     await checkUsernameOrEmailExists(input.value).then((response) => {
-                        if (response.email === false) {
+                        if (response.email === false || input.value === initialValue) {
                             input.style.border = '2px solid green';
                             document.querySelector('.email-error').style.display = 'none';
                             error_map.set(input.id, false);

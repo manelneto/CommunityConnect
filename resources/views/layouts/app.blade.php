@@ -48,6 +48,7 @@
         <script src="{{ asset('js/follow-question.js') }} " defer></script>
         <script src="{{ asset('js/follow-tag.js') }} " defer></script>
         <script src="{{ asset('js/remove-tag-from-question.js') }} " defer></script>
+        <script src="{{ asset('js/errors.js') }} " defer></script>
     </head>
 
     <body>

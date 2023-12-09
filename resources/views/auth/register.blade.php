@@ -13,21 +13,24 @@
             @csrf
             <div class="form-group">
                 <label for="username">Username *</label>
-                <input id="username"  type="text" name="username" required placeholder="Enter username here">
+                <input id="username"  type="text" name="username" required placeholder="Enter username here" class="user-details-input">
+                <span class="username-error">Username is already taken</span>
             </div>
             <div class="form-group">
                 <label for="email">Email *</label>
-                <input id="email" type="email" name="email" required placeholder="Enter email here">
+                <input id="email" type="email" name="email" required placeholder="Enter email here" class="user-details-input">
+                <span class="email-error">Email is already taken</span>
             </div>
             <div class="form-group">
                 <label for="password">Password *</label>
-                <input id="password" type="password" name="password" required placeholder="Enter password here">
+                <input id="password" type="password" name="password" required placeholder="Enter password here" class="user-details-input">
+                <span class="password-error">Password needs to be at least 8 characters long </span>
             </div>
             <div class="form-group">
                 <label for="password_confirmation">Confirm Password *</label>
-                <input id="password_confirmation" type="password" name="password_confirmation" required placeholder="Retype password here">
+                <input id="password_confirmation" type="password" name="password_confirmation" required placeholder="Retype password here" class="user-details-input">
+                <span class="password-confirmation-error">Passwords do not match</span>
             </div>
-            <small>Password must contain at least 8 characters</small>
             <div class="form-group">
                 <label for="photo">Profile Photo</label>
                 <input id="photo" type="file" name="file" accept="image/png,image/jpg,image/jpeg">

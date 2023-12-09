@@ -101,6 +101,8 @@ Route::get('/feed', [QuestionController::class, 'personalIndex'])->name('feed');
 // API
 Route::get('api/questions', [QuestionController::class, 'search']);
 Route::get('api/users', [UserController::class, 'search']);
+Route::get('api/users/check-username-email-exists', [UserController::class, 'checkUsernameOrEmailExists']);
+Route::get('api/tags/exist', [TagController::class, 'checkTagExists']);
 Route::get('api/tags', [TagController::class, 'search']);
 Route::post('api/communities/follow', [CommunityController::class, 'follow']);
 Route::post('api/communities/unfollow', [CommunityController::class, 'unfollow']);

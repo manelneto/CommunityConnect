@@ -1,5 +1,4 @@
-
-#edit-profile{
+#edit-profile {
     font-family: Arial, sans-serif;
     width: 85%;
     margin: 50px auto;
@@ -10,7 +9,7 @@
 }
 
 #edit-profile h1 {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     font-size: 24px;
 }
 
@@ -19,7 +18,7 @@
     height: 200px;
     border-radius: 50%;
     margin: 0 auto 20px auto;
-    display: block; 
+    display: block;
 }
 
 #edit-profile label {
@@ -34,7 +33,7 @@
 #edit-profile input:not(#photo) {
     width: 100%;
     padding: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 1px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -60,6 +59,17 @@
     background-color: var(--dark-blue);
 }
 
+#edit-profile button:disabled {
+    background-color: #777;
+    opacity: 0.3;
+    transition: 0.2s;
+}
+
 #edit-profile .edit-password {
     display: none;
+}
+
+#edit-profile span{
+    margin-bottom: 10px;
+    padding: 0px;
 }

@@ -1,16 +1,25 @@
-#admin{
+#admin {
     background-color: white;
 }
 
-input[type=text], input[type=password], select {
+input[type=text],
+input[type=password],
+select {
     padding: 12px 20px;
     margin: 8px 0;
+    margin-bottom: 0px;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+<<<<<<< 98ad873dcbcd5d2569a3a8ab4796d4ed89aafaad
+
+#find-user,
+#create-user {
+=======
  
 .admin-button {
+>>>>>>> 330b2bd91279ea9fdd49b32a072e71e03fc79a40
     background-color: var(--blue);
     color: white;
     padding: 10px;
@@ -19,18 +28,30 @@ input[type=text], input[type=password], select {
     border: none;
     cursor: pointer;
 }
- 
+
+.submit:disabled {
+    background-color: #777;
+    opacity: 0.3;
+    transition: 0.2s;
+}
+
+.tag-error {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+
 summary {
     margin-top: 2rem;
     margin-left: 2rem;
-    width:80%;
+    width: 80%;
     font-size: 1.2em;
     font-weight: bold;
     color: #333;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    background-color:var(--light-gray);
+    background-color: var(--light-gray);
 }
 
 summary:hover {
@@ -40,8 +61,8 @@ summary:hover {
 summary::-webkit-details-marker {
     display: none;
 }
-  
-.form-admin{
+
+.form-admin {
     display: flex;
     flex-direction: column;
     margin-left: 2rem;
@@ -58,4 +79,12 @@ summary::-webkit-details-marker {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form span{
+    margin-bottom: 5px;
+}
+
+.form-admin label{
+    margin-top: 8px;
 }

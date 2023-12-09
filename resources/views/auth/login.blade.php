@@ -15,18 +15,27 @@
                 @csrf
                 <div class="form-group">
                     <label for="username_or_email">Username or Email*</label>
-                    <input type="text" id="username_or_email" name="username_or_email" required placeholder="Enter username or email here">
+                    <input type="text" id="username_or_email" name="username_or_email" required placeholder="Enter username or email here" class="user-details-input">
+                    <span class="username-or-email-error">Username or Email does <b>not</b> exist</span>
                 </div>
                 <div id="password-group" class="form-group">
                     <label for="password">Password *</label>
-                    <input type="password" id="password" name="password" required placeholder="Enter password here">
+                    <input type="password" id="password" name="password" required placeholder="Enter password here" class="user-details-input">
+                    <span class="password-error">Password needs to be at least 8 characters long</span>
                 </div>
+<<<<<<< 98ad873dcbcd5d2569a3a8ab4796d4ed89aafaad
+                <input type="checkbox" id="remember-me" name="remember-me">
+                <label for="remember-me">Remember Me</label>
+                <a href="#" class="forgot-password">Forgot Password?</a>
+                <button type="submit" id="submit">Sign In</button>
+=======
                 <div id="remember-me-group">
                     <input type="checkbox" id="remember-me" name="remember-me">
                     <label for="remember-me">Remember Me</label>
                 </div>
                 <a id="forgot-password" href="{{ route('login') }}">Forgot Password?</a>
                 <button type="submit">Sign In</button>
+>>>>>>> 330b2bd91279ea9fdd49b32a072e71e03fc79a40
             </form>
         </div>
     </main>

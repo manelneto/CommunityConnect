@@ -17,7 +17,7 @@
                                 <span class="question-community">In: {{ $question->community->name }}</span>
                             </div>
                             <label for="title">Title</label>
-                            <h2 class="question-title"><input id="title" class="question-title-edit" type="text" name="title" required value="{{ $question->title }}"></h2>
+                            <h2 class="question-title"><input id="title" class="question-title-edit" type="text" name="title" required value="{{ $question->title }}" placeholder="Enter the question's title here"></h2>
                             <label for="community">Community</label>
                             <select id="community" class="form-control" name="id_community" required>
                                 <option value="{{ $question->id_community }}">{{ $question->community->name }}</option>
@@ -28,7 +28,7 @@
                                 @endforeach
                             </select>
                             <label id="content-label" for="content">Content</label>
-                            <textarea id="content" class="question-description non-movable-textarea" name="content" rows="6" cols="56">{{ $question->content }}</textarea>
+                            <textarea id="content" class="question-description non-movable-textarea" name="content" rows="6" cols="56" placeholder="Elaborate your question">{{ $question->content }}</textarea>
                             <label for="file">File</label>
                             <input id="file" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt" value="{{ asset($question->file) }}">
                             <input type="hidden" name="type" value="question">
@@ -39,7 +39,7 @@
                                         <div class="tag-tooltip-content color-black">Delete this tag.</div>
                                     </li>
                                 @endforeach
-                                <input id="add-tag" class="form-control" type="text" name="add-tag">
+                                <input id="add-tag" class="form-control" type="text" name="add-tag" placeholder="Enter the tag's name here">
                                 @error('tag')
                                     <span class="error-message-tag-add">
                                         {{ $message }}

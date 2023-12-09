@@ -36,7 +36,7 @@
                 <input id="photo" type="file" name="file" accept="image/png,image/jpg,image/jpeg">
                 <input type="hidden" name="type" value="profile">
             </div>
-            <button type="submit">Sign Up</button>
+            <button type="submit" id="submit">Sign Up</button>
         </form>
     </main>
 @endsection

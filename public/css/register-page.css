@@ -93,3 +93,9 @@
   background-color: #777;
   transition: 0.2s;
 }
+
+.sign-page-right-content button[type="submit"]:disabled {
+  background-color: #777;
+  opacity: 0.3;
+  transition: 0.2s;
+}

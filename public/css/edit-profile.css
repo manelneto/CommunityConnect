@@ -1,5 +1,4 @@
-
-#edit-profile{
+#edit-profile {
     font-family: Arial, sans-serif;
     width: 85%;
     margin: 50px auto;
@@ -19,7 +18,7 @@
     height: 200px;
     border-radius: 50%;
     margin: 0 auto 20px auto;
-    display: block; 
+    display: block;
 }
 
 #edit-profile label {
@@ -58,6 +57,12 @@
 
 #edit-profile button:hover {
     background-color: var(--dark-blue);
+}
+
+#edit-profile button:disabled {
+    background-color: #777;
+    opacity: 0.3;
+    transition: 0.2s;
 }
 
 #edit-profile .edit-password {

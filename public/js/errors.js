@@ -42,6 +42,7 @@ const error_map = new Map();
 
 document.querySelectorAll('.user-details-input').forEach(async (input) => {
     error_map.set(input.id, false);
+    console.log(input.id);
     if (input.id === 'username_or_email') { //login
         input.addEventListener('blur', async () => {
             if (input.value !== '' && (validateUsernamePattern(input.value) || validateEmailPattern(input.value))) {
@@ -134,6 +135,11 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
                             document.querySelector('.password-confirmation-error').style.display = 'block';
                             error_map.set('password_confirmation', true);
                         }
+                        else {
+                            document.querySelector('#password_confirmation').style.border = '2px solid green';
+                            document.querySelector('.password-confirmation-error').style.display = 'none';
+                            error_map.set('password_confirmation', false);
+                        }
                     }
 
                     error_map.set(input.id, false);
@@ -149,6 +155,7 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
         })
     }
     else if (input.id === 'password_confirmation') {
+        console.log('here');
         input.addEventListener('input', () => {
             if (input.value !== '') {
                 if (input.value === document.querySelector('#password').value) {
@@ -186,4 +193,59 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
         })
     }
 });
+
+// this is only for edit profile, which has its own class for the password inputs due to the fact that they are optional
+document.querySelectorAll('.edit-password').forEach((input) => {
+    error_map.set(input.id, false);
+    if (input.id === 'password') {
+        input.addEventListener('input', () => {
+            if (input.value !== '') {
+                if (input.value.length >= 8) {
+                    input.style.border = '2px solid green';
+                    document.querySelector('.password-error').style.display = 'none';
+
+                    if (document.querySelector('#password_confirmation')) {
+                        if (input.value !== document.querySelector('#password_confirmation').value) {
+                            document.querySelector('#password_confirmation').style.border = '2px solid red';
+                            document.querySelector('.password-confirmation-error').style.display = 'block';
+                            error_map.set('password_confirmation', true);
+                        }
+                        else {
+                            document.querySelector('#password_confirmation').style.border = '2px solid green';
+                            document.querySelector('.password-confirmation-error').style.display = 'none';
+                            error_map.set('password_confirmation', false);
+                        }
+                    }
+
+                    error_map.set(input.id, false);
+                }
+                else {
+                    input.style.border = '2px solid red';
+                    document.querySelector('.password-error').style.display = 'block';
+                    error_map.set(input.id, true);
+                }
+            }
+            submitButton.disabled = checkToEnableSubmitButton(error_map);
+        })
+    }
+    else if (input.id === 'password_confirmation') {
+        console.log('here');
+        input.addEventListener('input', () => {
+            if (input.value !== '') {
+                if (input.value === document.querySelector('#password').value) {
+                    input.style.border = '2px solid green';
+                    document.querySelector('.password-confirmation-error').style.display = 'none';
+                    error_map.set(input.id, false);
+                }
+                else {
+                    input.style.border = '2px solid red';
+                    document.querySelector('.password-confirmation-error').style.display = 'block';
+                    error_map.set(input.id, true);
+                }
+            }
+            submitButton.disabled = checkToEnableSubmitButton(error_map);
+        })
+    };
+});
+
 

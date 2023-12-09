@@ -88,7 +88,7 @@ class UserController extends Controller
                 'answers' => $answers,
                 'reputations' => $reputations,
                 'notifications' => $notifications,
-                'unread' => $unread
+                'unread' => $unread,
                 'moderatorCommunities' => $moderatorCommunities
             ]);
         } catch (ModelNotFoundException $e) {

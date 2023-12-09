@@ -26,9 +26,18 @@
         <h2 class="question-title"><a href="../questions/{{ $question->id }}">{{ $question->title }}</a></h2>
         <p class="question-description">
             {{ $question->content }}
-            @if (Request::route()->getName() == 'question' and ($question->id_user == Auth::user()?->id or Auth::user()?->administrator))
-                <a href="{{ route('edit-question', ['id' => $question->id]) }}" class="edit-question-button">Edit</a>
+
+            <!-- Edit Question Button -->
+
+            @if (Request::route()->getName() == 'question' && 
+            (
+                $question->id_user == Auth::user()?->id ||
+                Auth::user()?->administrator ||
+                in_array($question->id_community, Auth::user()?->moderatorCommunities->pluck('id')->toArray() ?? [])
+            ))
+            <a href="{{ route('edit-question', ['id' => $question->id]) }}" class="edit-question-button">Edit</a>
             @endif
+
         </p>
         @if ($question->file)
             <p class="file">Download file <a href="{{ asset($question->file) }}" target="_blank">here</a></p>

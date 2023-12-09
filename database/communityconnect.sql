@@ -1,7 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS lbaw23114;
 SET search_path TO lbaw23114;
 
-
 DROP TABLE IF EXISTS answer_comment CASCADE;
 DROP TABLE IF EXISTS answer_vote CASCADE;
 DROP TABLE IF EXISTS answer CASCADE;
@@ -1730,6 +1729,7 @@ INSERT INTO users (username, email, password, register_date, administrator, bloc
 INSERT INTO users (username, email, password, register_date, administrator, blocked) VALUES ('kimberly58', 'aguerrero@yahoo.com', '$2b$12$f3EK7IU7Ibu1xJv.rrX3/OmKLglViaGwbvTj.dy9pCO1gLGh7WbyS', '2022-11-15', FALSE, FALSE);
 INSERT INTO users (username, email, password, register_date, administrator, blocked) VALUES ('annbrennan', 'angel30@yahoo.com', '$2b$12$rnMPy4lrBPsI/PNFRGVJNuffJavOAm0BVemclNyS/vtwl2a9Ihr5q', '2019-06-26', FALSE, FALSE);
 INSERT INTO users (username, email, password, register_date, administrator, blocked) VALUES ('colepadilla', 'caseydennis@jones.info', '$2b$12$gFnCUJXm1j4Gwqj/tpdG9.ZrBMqgMp383KXvChVmxlftQaVoGwG9e', '2022-11-05', FALSE, FALSE);
+INSERT INTO users (username, email, password, register_date, administrator, blocked) VALUES ('johnmod', 'johnmod@gmail.com', '$2y$10$ync9m86ksDUzFFguGY4uhuMRlX4fOwMpW19G429A29aIeG32YrSdG', '2022-11-04', FALSE, FALSE);
 
 insert into badge (name) values ('First Question');
 insert into badge (name) values ('First Answer');
@@ -2982,6 +2982,8 @@ insert into user_moderates_community (id_user, id_community) values (948, 17);
 insert into user_moderates_community (id_user, id_community) values (784, 18);
 insert into user_moderates_community (id_user, id_community) values (469, 19);
 insert into user_moderates_community (id_user, id_community) values (87, 20);
+insert into user_moderates_community (id_user, id_community) values (1002, 1);
+insert into user_moderates_community (id_user, id_community) values (1002, 2);
 
 insert into question (content, date, file, last_edited, title, id_user, id_community) values ('It seems like public education systems worldwide face many challenges. Im interested in hearing thoughts...', '2023-10-30', null, null, 'How Can We Improve Public Education Systems?', 33, 16);
 insert into question (content, date, file, last_edited, title, id_user, id_community) values ('Universal Basic Income (UBI) is a hot topic. What are its potential benefits and drawbacks, especially regarding the economy and social welfare?', '2023-11-13', null, null, 'What Are the Pros and Cons of Universal Basic Income?', 178, 11);

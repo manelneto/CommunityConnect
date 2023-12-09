@@ -25,13 +25,17 @@
                     @csrf
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" placeholder="Enter username here" class="user-details-input">
+                    <span class="username-error">Username is already taken</span>
                     <label for="email">Email</label>
                     <input type="text" id="email" name="email" placeholder="Enter email here" class="user-details-input">
+                    <span class="email-error">Email is already taken</span>
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Enter password here" class="user-details-input">
+                    <span class="password-error">Password needs to be at least 8 characters long </span>
                     <label for="password_confirmation">Confirm Password</label>
                     <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm password here" class="user-details-input">
-                    <button id="create-user" type="submit">Create User</button>
+                    <span class="password-confirmation-error">Passwords do not match</span>
+                    <button id="create-user" type="submit" class="submit">Create User</button>
                 </form>
             </details>
             <details>
@@ -71,8 +75,9 @@
                 <form action="../tags" method="post" class="form-admin">
                     @csrf
                     <label for="tag">Tag</label>
-                    <input type="text" id="tag" name="tag" placeholder="Enter tag name here">
-                    <button id="find-user" type="submit">Add</button>
+                    <input type="text" id="tag" name="tag" placeholder="Enter tag name here" class="user-details-input">
+                    <span class="tag-error">Tag already exists</span>
+                    <button id="find-user" type="submit" class="submit">Add</button>
                 </form>
             </details>
             <details>

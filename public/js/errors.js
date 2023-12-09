@@ -6,13 +6,21 @@ async function checkUsernameOrEmailExists(usernameOrEmail) {
     return await response.json();
 }
 
+async function checkTagExists(tag) {
+    const url = '/api/tags/exist?' + encodeForAjax({
+        tag: tag,
+    });
+    const response = await fetch(url);
+    return await response.json();
+}
+
 function validateUsernamePattern(username) {
-    const regex = /^[a-zA-Z0-9_]+$/;
+    const regex = /^[a-zA-Z0-9_]+$/; // aceita letras, números e underscore
     return regex.test(username);
 }
 
 function validateEmailPattern(email) {
-    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$/;
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$/; // aceita letras, números, underscore, ponto e hífen
     return regex.test(email);
 }
 
@@ -26,7 +34,10 @@ function checkToEnableSubmitButton(error_map) {
     return error;
 }
 
-const submitButton = document.querySelector('#submit');
+let submitButton = document.querySelector('#submit');
+if (!submitButton) submitButton = document.querySelector('.submit');
+
+
 const error_map = new Map();
 
 document.querySelectorAll('.user-details-input').forEach(async (input) => {
@@ -153,6 +164,25 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
             }
             submitButton.disabled = checkToEnableSubmitButton(error_map);
 
+        })
+    }
+    else if (input.id === 'tag') {
+        input.addEventListener('blur', async () => {
+            if (input.value !== '') {
+                await checkTagExists(input.value).then((response) => {
+                    if (response.exists === false) {
+                        input.style.border = '2px solid green';
+                        document.querySelector('.tag-error').style.display = 'none';
+                        error_map.set(input.id, false);
+                    }
+                    else {
+                        input.style.border = '2px solid red';
+                        document.querySelector('.tag-error').style.display = 'block';
+                        error_map.set(input.id, true);
+                    }
+                });
+            }
+            submitButton.disabled = checkToEnableSubmitButton(error_map);
         })
     }
 });

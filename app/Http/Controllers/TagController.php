@@ -33,6 +33,12 @@ class TagController extends Controller
     {
         $this->authorize('store', Tag::class);
 
+        $alreadyExists = Tag::where('name', $request->tag)->exists();
+
+        if ($alreadyExists) {
+            return redirect('admin')->with('error', 'Tag already exists.');
+        }
+
         $tag = new Tag();
         $tag->name = $request->tag;
         $tag->save();
@@ -113,5 +119,11 @@ class TagController extends Controller
         } catch (ModelNotFoundException $e) {
             return response('Tag not found');
         };
+    }
+    
+    public function checkTagExists(Request $request)
+    {
+        $tag = Tag::where('name', $request->tag)->exists();
+        return response()->json(['exists' => $tag]);
     }
 }

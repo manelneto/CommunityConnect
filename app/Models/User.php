@@ -44,7 +44,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Question::class, 'user_follows_question', 'id_user', 'id_question');
     }
 
-
     public function communitiesRating()
     {
         return $this->belongsToMany(Community::class, 'reputation', 'id_user', 'id_community')->withPivot('rating', 'expert');
@@ -53,5 +52,10 @@ class User extends Authenticatable
     public function followedTags()
     {
         return $this->belongsToMany(Tag::class, 'user_follows_tag', 'id_user', 'id_tag');
+    }
+
+    public function moderatorCommunities() // communities that the user moderates
+    {
+        return $this->belongsToMany(Community::class, 'user_moderates_community', 'id_user', 'id_community');
     }
 }

@@ -183,3 +183,22 @@ a.edit-profile {
   display:flex;
   justify-content: center;
 }
+
+#rating-communities div {
+  margin-right: 10px;
+}
+
+#rating-communities div:last-of-type {
+  margin-right: 0;
+}
+
+.svg-and-text {
+  display: flex;
+  align-items: center;
+  color: #43DB1D;
+  font-weight: bold;
+}
+
+.svg-and-text svg {
+  margin-right: 5px;
+}

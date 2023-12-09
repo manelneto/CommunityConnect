@@ -278,3 +278,7 @@ button.mark-incorrect {
 .file a {
   color: black;
 }
+
+.moderator-badge-answer {
+  margin-left: 5px !important;
+}

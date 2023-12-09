@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label for="password_confirmation">Confirm Password *</label>
-                <input id="password_confirmation" type="password" name="password_confirmation" required placeholder="Confirm password here">
+                <input id="password_confirmation" type="password" name="password_confirmation" required placeholder="Retype password here">
             </div>
             <small>Password must contain at least 8 characters</small>
             <div class="form-group">

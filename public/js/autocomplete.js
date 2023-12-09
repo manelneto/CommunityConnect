@@ -62,3 +62,29 @@ if (inputBlock) {
 
     });
 }
+
+const inputUnblock = document.querySelector('#unblock-user');
+if (inputUnblock) {
+    let matchingTags = [];
+    let index = 0;
+    
+    inputUnblock.addEventListener('input', function (event) {
+        const username = inputUnblock.value.toUpperCase();
+    
+        if (username === '') return;
+    
+        matchingTags = blocked.filter(user => user && user.toUpperCase().startsWith(username)).filter(Boolean);
+    });
+
+    inputUnblock.addEventListener('keydown', async function (event) {
+        console.log('keydown');
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            if (matchingTags.length > 0) {
+                inputUnblock.value = matchingTags[index];
+                index = (index + 1) % matchingTags.length;
+            }
+        }
+
+    });
+}

@@ -188,54 +188,62 @@ class QuestionController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $question = Question::findOrFail($id);
-        $this->authorize('update', $question);
+    $question = Question::findOrFail($id);
+    $this->authorize('update', $question);
 
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string|max:1000',
-            'id_community' => 'required|integer',
-            'file' => 'max:2048',
-            'type' => 'in:question'
-        ]);
+    $request->validate([
+        'content' => 'required|string|max:1000',
+        'file' => 'max:2048',
+        'type' => 'in:question'
+    ]);
 
-        try {
-            $question->title = $request->input(['title']);
-            $question->content = $request->input(['content']);
+    try {
+        $isModerator = in_array($question->id_community, Auth::user()?->moderatorCommunities->pluck('id')->toArray());
+        $ownsQuestion = $question->user->id == Auth::user()->id;
 
-            $question->id_community = $request['id_community'];
-            $question->id_user = Auth::user()->id;
+        // Only non-moderators can update the title and id_community
+        if (!$isModerator or ($isModerator and $ownsQuestion)) {
+            $request->validate([
+                'title' => 'required|string|max:255',
+                'id_community' => 'required|integer'
+            ]);
 
-            $fileController = new FileController();
-            $fileController->upload($request, $question->id);
-
-            $addTagName = $request->input('add-tag');
-
-            // add tag if field is filled
-            if (!empty($addTagName)) {
-
-                $tagName = $request->input('add-tag');
-                $tag = Tag::where('name', $tagName)->first();
-
-                // check if tag exists
-                if (!$tag) {
-                    return back()->withErrors(['tag' => "Tag doesn't exist."]);
-                }
-
-                // check if tag is already attached to the question
-                if ($question->tags->contains($tag->id)) {
-                    return back()->withErrors(['tag' => "Tag already attached."]);
-                }
-
-                $question->tags()->attach($tag->id);
-            }
-            
-            $question->save();
-            return redirect('questions/' . $id);
-        } catch (ModelNotFoundException $e) {
-            return "Question not found.";
+            $question->title = $request->input('title');
+            $question->id_community = $request->input('id_community');
         }
+
+        $question->content = $request->input('content');
+
+        $fileController = new FileController();
+        $fileController->upload($request, $question->id);
+
+        $addTagName = $request->input('add-tag');
+
+        // Add tag if field is filled
+        if (!empty($addTagName)) {
+            $tagName = $request->input('add-tag');
+            $tag = Tag::where('name', $tagName)->first();
+
+            // Check if tag exists
+            if (!$tag) {
+                return back()->withErrors(['tag' => "Tag doesn't exist."]);
+            }
+
+            // Check if tag is already attached to the question
+            if ($question->tags->contains($tag->id)) {
+                return back()->withErrors(['tag' => "Tag already attached."]);
+            }
+
+            $question->tags()->attach($tag->id);
+        }
+        
+        $question->save();
+        return redirect('questions/' . $id);
+    } catch (ModelNotFoundException $e) {
+        return "Question not found.";
     }
+}
+
 
     /**
      * Remove the specified resource from storage.

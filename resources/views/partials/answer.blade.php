@@ -30,6 +30,9 @@
                         @endif
                     @endforeach
                 @endif
+
+                <!-- Moderator Badge -->
+
                 @if (in_array($answer->question->id_community, $answer->user->moderatorCommunities->pluck('id')->toArray()))
                     <svg class="moderator-badge-answer" width="23" height="23" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_378_1879)">
@@ -42,6 +45,7 @@
                         </defs>
                     </svg>
                 @endif
+                
             </div>
             @if ($answer->correct)
                 <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="40px" height="40px">

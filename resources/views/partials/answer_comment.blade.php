@@ -2,7 +2,7 @@
     <form class="comment" method="post">
         @csrf
         <label>Content
-            <textarea class="description non-movable-textarea" name="content">{{ $comment->content }}</textarea>
+            <textarea class="description non-movable-textarea" name="content" placeholder="Type your comment in here">{{ $comment->content }}</textarea>
         </label>
         <a class="username" href="../users/{{ $comment->id_user }}">{{ $comment->user->username }}</a>
         <p class="date">{{ $comment->date }}</p>

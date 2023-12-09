@@ -14,7 +14,7 @@
                 <h2>Leave a Comment</h2>
                 <form action="/question-comments" method="post">
                     @csrf
-                    <textarea name="content" rows="6" cols="60"></textarea>
+                    <textarea name="content" rows="6" cols="60" placeholder="Type in your comment here"></textarea>
                     <input type="hidden" name="id_question" value="{{ $question->id }}">
                     <button type="submit">Post Comment</button>
                 </form>
@@ -26,7 +26,7 @@
                 <form action="/answers" method="post" enctype="multipart/form-data">
                     @csrf
                     <label for="content">Content</label>
-                    <textarea id="content" name="content" rows="6" cols="60"></textarea>
+                    <textarea id="content" name="content" rows="6" cols="60" placeholder="Enter your answer here"></textarea>
                     <input type="hidden" name="id_question" value="{{ $question->id }}">
                     <label for="file">File</label>
                     <input id="file" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt">
@@ -48,7 +48,7 @@
                         <h2>Leave a Comment</h2>
                         <form action="/answer-comments" method="post">
                             @csrf
-                            <textarea name="content" rows="6" cols="60"></textarea>
+                            <textarea name="content" rows="6" cols="60" placeholder="Type in your comment here"></textarea>
                             <input type="hidden" name="id_answer" value="{{ $answer->id }}">
                             <button type="submit">Post Comment</button>
                         </form>

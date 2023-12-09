@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AnswerCommentController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\QuestionCommentController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\QuestionController;
@@ -36,6 +38,11 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/login', 'authenticate');
     Route::get('/logout', 'logout')->name('logout');
 });
+
+// Password
+Route::post('/mail', [MailController::class, 'send']);
+Route::get('/password/{username}/{token}', [PasswordController::class, 'show'])->name('password');
+Route::post('/password', [PasswordController::class, 'update'])->name('update-password');
 
 // Profile
 Route::controller(UserController::class)->group(function () {

@@ -16,24 +16,35 @@ function validateEmailPattern(email) {
     return regex.test(email);
 }
 
+function checkToEnableSubmitButton(error_map){
+    let error = false;
+    error_map.forEach((value, key) => {
+        if (value) {
+            error = true;
+        }
+    });
+    return error;
+}
+
 const submitButton = document.querySelector('#submit');
+const error_map = new Map();
 
 document.querySelectorAll('.user-details-input').forEach(async (input) => {
-    input.addEventListener('input', () => {
+    error_map.set(input.id, false);
+    input.addEventListener('input', async () => {
         if (input.id === 'username_or_email') { //login
             if (input.value !== '' && (validateUsernamePattern(input.value) || validateEmailPattern(input.value))) {
-                checkUsernameOrEmailExists(input.value).then((response) => {
+                await checkUsernameOrEmailExists(input.value).then((response) => {
                     if (response.user === true || response.email === true) {
                         input.style.border = '2px solid green';
                         document.querySelector('.username-or-email-error').style.display = 'none';
-                        submitButton.disabled = false;
+                        error_map.set(input.id, false);
                     }
                     else {
                         input.style.border = '2px solid red';
                         document.querySelector('.username-or-email-error').style.display = 'block';
-                        submitButton.disabled = true;
+                        error_map.set(input.id, true);
                     }
-
                 });
             }
         }
@@ -43,20 +54,21 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
                     input.style.border = '2px solid red';
                     document.querySelector('.username-error').textContent = 'Username can only contain letters, numbers and underscores';
                     document.querySelector('.username-error').style.display = 'block';
-                    submitButton.disabled = true;
+                    error_map.set(input.id, true);
+
                 }
                 else {
-                    checkUsernameOrEmailExists(input.value).then((response) => {
+                    await checkUsernameOrEmailExists(input.value).then((response) => {
                         if (response.user === false) {
                             input.style.border = '2px solid green';
                             document.querySelector('.username-error').style.display = 'none';
-                            submitButton.disabled = false;
+                            error_map.set(input.id, false);
                         }
                         else {
                             input.style.border = '2px solid red';
                             document.querySelector('.username-error').textContent = 'Username is already taken';
                             document.querySelector('.username-error').style.display = 'block';
-                            submitButton.disabled = true;
+                            error_map.set(input.id, true);
                         }
 
                     });
@@ -69,20 +81,20 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
                     input.style.border = '2px solid red';
                     document.querySelector('.email-error').textContent = 'Invalid email format';
                     document.querySelector('.email-error').style.display = 'block';
-                    submitButton.disabled = true;
+                    error_map.set(input.id, true);
                 }
                 else {
-                    checkUsernameOrEmailExists(input.value).then((response) => {
+                    await checkUsernameOrEmailExists(input.value).then((response) => {
                         if (response.email === false) {
                             input.style.border = '2px solid green';
                             document.querySelector('.email-error').style.display = 'none';
-                            submitButton.disabled = false;
+                            error_map.set(input.id, false);
                         }
                         else {
                             input.style.border = '2px solid red';
                             document.querySelector('.email-error').textContent = 'Email is already taken';
                             document.querySelector('.email-error').style.display = 'block';
-                            submitButton.disabled = true;
+                            error_map.set(input.id, true);
                         }
                     });
                 }
@@ -93,12 +105,19 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
                 if (input.value.length >= 8) {
                     input.style.border = '2px solid green';
                     document.querySelector('.password-error').style.display = 'none';
-                    submitButton.disabled = false;
+
+                    if (input.value !== document.querySelector('#password_confirmation').value){
+                        document.querySelector('#password_confirmation').style.border = '2px solid red';
+                        document.querySelector('.password-confirmation-error').style.display = 'block';
+                        error_map.set('password_confirmation', true);
+                    }
+                    
+                    error_map.set(input.id, false);
                 }
                 else {
                     input.style.border = '2px solid red';
                     document.querySelector('.password-error').style.display = 'block';
-                    submitButton.disabled = true;
+                    error_map.set(input.id, true);
                 }
             }
         }
@@ -107,14 +126,15 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
                 if (input.value === document.querySelector('#password').value) {
                     input.style.border = '2px solid green';
                     document.querySelector('.password-confirmation-error').style.display = 'none';
-                    submitButton.disabled = false;
+                    error_map.set(input.id, false);
                 }
                 else {
                     input.style.border = '2px solid red';
                     document.querySelector('.password-confirmation-error').style.display = 'block';
-                    submitButton.disabled = true;
+                    error_map.set(input.id, true);
                 }
             }
         }
+        submitButton.disabled = checkToEnableSubmitButton(error_map);
     });
 });

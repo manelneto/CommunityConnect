@@ -25,7 +25,6 @@ if (inputUser) {
     });
 
     inputUser.addEventListener('keydown', async function (event) {
-        console.log('keydown');
         if (event.key === 'Tab') {
             event.preventDefault();
             if (matchingTags.length > 0) {
@@ -51,7 +50,6 @@ if (inputBlock) {
     });
 
     inputBlock.addEventListener('keydown', async function (event) {
-        console.log('keydown');
         if (event.key === 'Tab') {
             event.preventDefault();
             if (matchingTags.length > 0) {
@@ -77,7 +75,6 @@ if (inputUnblock) {
     });
 
     inputUnblock.addEventListener('keydown', async function (event) {
-        console.log('keydown');
         if (event.key === 'Tab') {
             event.preventDefault();
             if (matchingTags.length > 0) {

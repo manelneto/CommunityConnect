@@ -58,7 +58,13 @@ class QuestionPolicy
 
     public function destroy(User $user, Question $question): bool
     {
-        return ($user->id === Auth::user()->id) && ($question->id_user === $user->id || Auth::user()->administrator);
+        $isModeratorOfCommunity = in_array(
+            $question->id_community,
+            Auth::user()->moderatorCommunities->pluck('id')->toArray()
+        );
+
+        return ($user->id === Auth::user()->id) &&
+            ($question->id_user === $user->id || Auth::user()->administrator || $isModeratorOfCommunity);
     }
 
     public function follow(User $user): bool

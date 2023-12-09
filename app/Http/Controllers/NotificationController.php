@@ -12,9 +12,10 @@ class NotificationController extends Controller
     public function read(Request $request)
     {
         $id = $request->get('id');
-        try {
-            $notification = Notification::findOrFail($id);
+        $notification = Notification::findOrFail($id);
+        $this->authorize('read', $notification);
 
+        try {
             $notification->read = true;
             $notification->save();
 

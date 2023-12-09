@@ -55,7 +55,7 @@
                 
             </div>
             @if ($answer->correct)
-                <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="40px" height="40px">
+                <svg class="icon-correct" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="40px" height="40px">
                     <path fill="#c8e6c9" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"/>
                     <path fill="#4caf50" d="M34.586,14.586l-13.57,13.586l-5.602-5.586l-2.828,2.828l8.434,8.414l16.395-16.414L34.586,14.586z"/>
                 </svg>
@@ -76,9 +76,9 @@
         @endif
         @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || $isModerator)
             @if ($answer->correct)
-                <button class="mark-incorrect" formaction="../../answers/{{ $answer->id }}/incorrect">Remove correct mark</button>
+                <button data-id="{{ $answer->id }}" class="mark mark-incorrect" formaction="../../answers/{{ $answer->id }}/incorrect">Remove correct mark</button>
             @else
-                <button class="mark-correct" formaction="../../answers/{{ $answer->id }}/correct">Mark as correct</button>
+                <button data-id="{{ $answer->id }}" class="mark mark-correct" formaction="../../answers/{{ $answer->id }}/correct">Mark as correct</button>
             @endif
             <button class="edit" formaction="../../answers/{{ $answer->id }}">Edit</button>
             <button class="delete" formaction="../../answers/{{ $answer->id }}/delete">Delete</button>

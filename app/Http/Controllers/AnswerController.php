@@ -100,31 +100,34 @@ class AnswerController extends Controller {
         }
     }
 
-    public function markCorrect(int $id)
+    public function markCorrect(Request $request)
     {
+        $id = $request->get('id');
         $answer = Answer::findOrFail($id);
         $this->authorize('correct', $answer);
         try {
             $answer->correct = true;
             $answer->save();
-            return redirect('questions/' . $answer->id_question);
+            return response('Answer marked as correct!');
         }
         catch (ModelNotFoundException $e) {
-            return "Answer not found.";
+            return response("Answer not found.");
         }
     }
 
-    public function markIncorrect(int $id)
+    public function markIncorrect(Request $request)
     {
+        $id = $request->get('id');
         $answer = Answer::findOrFail($id);
         $this->authorize('correct', $answer);
         try {
             $answer->correct = false;
             $answer->save();
-            return redirect('questions/' . $answer->id_question);
+            return response('Delete answer mark!');
         }
         catch (ModelNotFoundException $e) {
-            return "Answer not found.";
+            return response("Answer not found.");
         }
     }
 }
+

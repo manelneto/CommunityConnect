@@ -44,7 +44,7 @@
                                         <div class="tag-tooltip-content color-black">Delete this tag.</div>
                                     </li>
                                 @endforeach
-                                <input id="add-tag" class="form-control" type="text" name="add-tag">
+                                <input id="add-tag" class="form-control" type="text" name="add-tag" placeholder="Add a tag">
                                 @error('tag')
                                     <span class="error-message-tag-add">
                                         {{ $message }}

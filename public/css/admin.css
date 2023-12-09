@@ -7,6 +7,7 @@ input[type=password],
 select {
     padding: 12px 20px;
     margin: 8px 0;
+    margin-bottom: 0px;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
@@ -73,4 +74,12 @@ summary::-webkit-details-marker {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form span{
+    margin-bottom: 5px;
+}
+
+.form-admin label{
+    margin-top: 8px;
 }

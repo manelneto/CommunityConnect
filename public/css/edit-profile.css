@@ -9,7 +9,7 @@
 }
 
 #edit-profile h1 {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     font-size: 24px;
 }
 
@@ -33,7 +33,7 @@
 #edit-profile input:not(#photo) {
     width: 100%;
     padding: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 1px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -67,4 +67,9 @@
 
 #edit-profile .edit-password {
     display: none;
+}
+
+#edit-profile span{
+    margin-bottom: 10px;
+    padding: 0px;
 }

@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <label for="username_or_email">Username or Email*</label>
                     <input type="text" id="username_or_email" name="username_or_email" required placeholder="Enter username or email here" class="user-details-input">
-                    <span class="username-or-email-error">Username or Email does not exist</span>
+                    <span class="username-or-email-error">Username or Email does <b>not</b> exist</span>
                 </div>
                 <div class="form-group">
                     <label for="password">Password *</label>

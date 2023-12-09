@@ -2,12 +2,12 @@
   padding: 200px 0;
 }
 
-.sign-page-right-content .forgot-password {
+.sign-page-right-content #forgot-password {
   font-size: 12px;
   color: var(--dark-blue);
 }
 
-.sign-page-right-content .forgot-password:hover {
+.sign-page-right-content #forgot-password:hover {
   text-decoration: underline;
 }
 

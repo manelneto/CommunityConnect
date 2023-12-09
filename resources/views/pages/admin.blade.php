@@ -9,13 +9,8 @@
                 <form action="../../users/" method="get" class="form-admin">
                     @csrf
                     <label for="user">Username</label>
-                    <select id="user" name="user">
-                        <option value="0">None</option>
-                        @foreach ($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->username }}</option>
-                        @endforeach
-                    </select>
-                    <button id="find-user" type="submit">Visit</button>
+                    <input type="text" id="user" name="user" placeholder="Enter username here and click Tab for autocomplete">
+                    <button class="admin-button" type="submit">Visit</button>
                 </form>
             </details>
             @yield('errors')
@@ -35,7 +30,7 @@
                     <label for="password_confirmation">Confirm Password</label>
                     <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm password here" class="user-details-input">
                     <span class="password-confirmation-error">Passwords do not match</span>
-                    <button id="create-user" type="submit" class="submit">Create User</button>
+                    <button id="admin-button" type="submit" class="submit">Create User</button>
                 </form>
             </details>
             <details>
@@ -43,15 +38,8 @@
                 <form action="../admin/block" method="post" class="form-admin">
                     @csrf
                     <label for="user">Username</label>
-                    <select id="user" name="user">
-                        <option value="0">None</option>
-                        @foreach ($users as $user)
-                            @if ($user->blocked === false)
-                                <option value="{{ $user->id }}">{{ $user->username }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    <button id="find-user" type="submit">Block</button>
+                    <input type="text" id="block-user" name="user" placeholder="Enter username here and click Tab for autocomplete">
+                    <button class="admin-button" type="submit">Block</button>
                 </form>
             </details>
             <details>
@@ -59,15 +47,8 @@
                 <form action="../admin/unblock" method="post" class="form-admin">
                     @csrf
                     <label for="user">Username</label>
-                    <select id="user" name="user">
-                        <option value="0">None</option>
-                        @foreach ($users as $user)
-                            @if ($user->blocked === true)
-                                <option value="{{ $user->id }}">{{ $user->username }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    <button id="find-user" type="submit">Unblock</button>
+                    <input type="text" id="unblock-user" name="user" placeholder="Enter username here and click Tab for autocomplete">
+                    <button class="admin-button" type="submit">Unblock</button>
                 </form>
             </details> 
             <details>
@@ -75,9 +56,14 @@
                 <form action="../tags" method="post" class="form-admin">
                     @csrf
                     <label for="tag">Tag</label>
+<<<<<<< resources/views/pages/admin.blade.php
                     <input type="text" id="tag" name="tag" placeholder="Enter tag name here" class="user-details-input">
                     <span class="tag-error">Tag already exists</span>
                     <button id="find-user" type="submit" class="submit">Add</button>
+=======
+                    <input type="text" id="add-tag" name="tag" placeholder="Enter tag name here">
+                    <button class="admin-button" type="submit">Add</button>
+>>>>>>> resources/views/pages/admin.blade.php
                 </form>
             </details>
             <details>
@@ -85,13 +71,8 @@
                 <form action="../tags/delete" method="post" class="form-admin">
                     @csrf
                     <label for="tag">Tag</label>
-                    <select id="tag" name="tag">
-                        <option value="0">None</option>
-                        @foreach ($tags as $tag)
-                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                        @endforeach
-                    </select>
-                    <button id="find-user" type="submit">Delete</button>
+                    <input type="text" id="delete-tag" name="tag" placeholder="Enter tag name here and click Tab for autocomplete">
+                    <button class="admin-button" type="submit">Delete</button>
                 </form>
             </details> 
         </section>

@@ -47,15 +47,20 @@
         <script src="{{ asset('js/follow-community.js') }} " defer></script>
         <script src="{{ asset('js/follow-question.js') }} " defer></script>
         <script src="{{ asset('js/follow-tag.js') }} " defer></script>
+        <script src="{{ asset('js/forgot-password.js') }} " defer></script>
         <script src="{{ asset('js/remove-tag-from-question.js') }} " defer></script>
         <script src="{{ asset('js/errors.js') }} " defer></script>
+        <script src="{{ asset('js/show-notifications.js') }} " defer></script>
+        <script src="{{ asset('js/check-view-notifications.js') }} " defer></script>
+        <script src="{{ asset('js/mark-answer.js') }} " defer></script>
+        <script src="{{ asset('js/autocomplete.js') }} " defer></script>
     </head>
 
     <body>
         <header class="website-header">
             @yield('header')
         </header>
-        @if (Request::route()->getName() == 'login' || Request::route()->getName() == 'register') <!-- TODO -->
+        @if (Request::route()->getName() === 'login' || Request::route()->getName() === 'register' || Request::route()->getName() === 'password') <!-- TODO -->
             @yield('main')
         @else
         <div id="page-info">

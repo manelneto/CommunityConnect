@@ -12,9 +12,14 @@ select {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+<<<<<<< 98ad873dcbcd5d2569a3a8ab4796d4ed89aafaad
 
 #find-user,
 #create-user {
+=======
+ 
+.admin-button {
+>>>>>>> 330b2bd91279ea9fdd49b32a072e71e03fc79a40
     background-color: var(--blue);
     color: white;
     padding: 10px;

@@ -6,7 +6,7 @@
         <article class="sign-page-left-content">
             <h1 class="title-text">Join the Community</h1>
             <h3 class="subtitle-text">Sign Up to Community Connect to ask <br> questions, answer people's questions, and <br> connect with others. </h3>
-            <a class="go-to-sign-in" href="/login">Have an Account? Sign In</a>
+            <a class="go-to-sign-in" href="/login">Have an account? Sign In</a>
         </article>
         @yield('errors')
         <form class="sign-page-right-content" action="{{ route('register') }}" method="post" enctype="multipart/form-data">

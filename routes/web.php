@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\AnswerCommentController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\QuestionCommentController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TagController;
@@ -35,6 +38,11 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/login', 'authenticate');
     Route::get('/logout', 'logout')->name('logout');
 });
+
+// Password
+Route::post('/mail', [MailController::class, 'send']);
+Route::get('/password/{username}/{token}', [PasswordController::class, 'show'])->name('password');
+Route::post('/password', [PasswordController::class, 'update'])->name('update-password');
 
 // Profile
 Route::controller(UserController::class)->group(function () {
@@ -69,8 +77,6 @@ Route::controller(AnswerController::class)->group(function () {
     Route::post('/answers', 'store');
     Route::post('/answers/{id}', 'update');
     Route::post('/answers/{id}/delete', 'destroy');
-    Route::post('/answers/{id}/correct', 'markCorrect');
-    Route::post('/answers/{id}/incorrect', 'markIncorrect');
 });
 
 // Answer Comments
@@ -97,6 +103,7 @@ Route::get('api/questions', [QuestionController::class, 'search']);
 Route::get('api/users', [UserController::class, 'search']);
 Route::get('api/users/check-username-email-exists', [UserController::class, 'checkUsernameOrEmailExists']);
 Route::get('api/tags/exist', [TagController::class, 'checkTagExists']);
+Route::get('api/tags', [TagController::class, 'search']);
 Route::post('api/communities/follow', [CommunityController::class, 'follow']);
 Route::post('api/communities/unfollow', [CommunityController::class, 'unfollow']);
 Route::post('api/questions/{id}/follow', [QuestionController::class, 'follow']);
@@ -104,6 +111,9 @@ Route::post('api/questions/{id}/unfollow', [QuestionController::class, 'unfollow
 Route::post('api/tags/follow', [TagController::class, 'follow']);
 Route::post('api/tags/unfollow', [TagController::class, 'unfollow']);
 Route::post('api/questions/edit/remove-tag/{questionId}/{tagId}', [QuestionController::class, 'remove_tag']);
+Route::post('api/notifications/read', [NotificationController::class, 'read']);
+Route::post('api/answers/{id}/correct', [AnswerController::class, 'markCorrect']);
+Route::post('api/answers/{id}/incorrect', [AnswerController::class, 'markIncorrect']);
 
 // Static info pages
 Route::view('/about-contact-us', 'pages.about-contact-us')->name('about-contact-us');

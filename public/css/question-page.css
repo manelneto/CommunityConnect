@@ -113,6 +113,12 @@
   color: #abacb1;
 }
 
+.question-of-answer{
+  display: flex;
+  align-items: center;
+  color:#000;
+}
+
 button.edit {
   margin-right: 8px;
   background-color: var(--blue);
@@ -277,4 +283,8 @@ button.mark-incorrect {
 
 .file a {
   color: black;
+}
+
+.moderator-badge-answer {
+  margin-left: 5px !important;
 }

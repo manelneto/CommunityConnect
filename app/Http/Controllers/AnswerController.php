@@ -107,10 +107,10 @@ class AnswerController extends Controller {
         try {
             $answer->correct = true;
             $answer->save();
-            return redirect('questions/' . $answer->id_question);
+            return response('Answer marked as correct!');
         }
         catch (ModelNotFoundException $e) {
-            return "Answer not found.";
+            return response("Answer not found.");
         }
     }
 
@@ -121,10 +121,11 @@ class AnswerController extends Controller {
         try {
             $answer->correct = false;
             $answer->save();
-            return redirect('questions/' . $answer->id_question);
+            return response('Delete answer mark!');
         }
         catch (ModelNotFoundException $e) {
-            return "Answer not found.";
+            return response("Answer not found.");
         }
     }
 }
+

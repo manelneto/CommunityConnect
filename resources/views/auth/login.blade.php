@@ -21,6 +21,7 @@
                 <div class="form-group">
                     <label for="password">Password *</label>
                     <input type="password" id="password" name="password" required placeholder="Enter password here" class="user-details-input">
+                    <span class="password-error">Password needs to be at least 8 characters long</span>
                 </div>
                 <input type="checkbox" id="remember-me" name="remember-me">
                 <label for="remember-me">Remember Me</label>

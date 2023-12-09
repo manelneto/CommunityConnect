@@ -16,7 +16,7 @@ function validateEmailPattern(email) {
     return regex.test(email);
 }
 
-function checkToEnableSubmitButton(error_map){
+function checkToEnableSubmitButton(error_map) {
     let error = false;
     error_map.forEach((value, key) => {
         if (value) {
@@ -106,12 +106,14 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
                     input.style.border = '2px solid green';
                     document.querySelector('.password-error').style.display = 'none';
 
-                    if (input.value !== document.querySelector('#password_confirmation').value){
-                        document.querySelector('#password_confirmation').style.border = '2px solid red';
-                        document.querySelector('.password-confirmation-error').style.display = 'block';
-                        error_map.set('password_confirmation', true);
+                    if (document.querySelector('#password_confirmation')) {
+                        if (input.value !== document.querySelector('#password_confirmation').value) {
+                            document.querySelector('#password_confirmation').style.border = '2px solid red';
+                            document.querySelector('.password-confirmation-error').style.display = 'block';
+                            error_map.set('password_confirmation', true);
+                        }
                     }
-                    
+
                     error_map.set(input.id, false);
                 }
                 else {

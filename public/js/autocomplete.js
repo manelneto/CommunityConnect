@@ -1,6 +1,7 @@
 let users = [];
 let blocked = [];
 let unblocked = [];
+let tagsAdmin = [];
 
 window.onload = async () => {
     const url = '../api/users';
@@ -9,6 +10,11 @@ window.onload = async () => {
     users = allUsers.map(user => user.username).filter(Boolean);
     blocked = allUsers.map(user => user.username).filter(user => user.blocked);
     unblocked = allUsers.map(user => user.username).filter(user => !user.blocked);
+
+    const urlTags = '../api/tags';
+    const responseTags = await fetch(urlTags);
+    const allTags = await responseTags.json();
+    tagsAdmin = allTags.map(tag => tag.name).filter(Boolean);
 };
 
 const inputUser = document.querySelector('#user');
@@ -79,6 +85,31 @@ if (inputUnblock) {
             event.preventDefault();
             if (matchingTags.length > 0) {
                 inputUnblock.value = matchingTags[index];
+                index = (index + 1) % matchingTags.length;
+            }
+        }
+
+    });
+}
+
+const inputTags = document.querySelector('#delete-tag');
+if (inputTags) {
+    let matchingTags = [];
+    let index = 0;
+    
+    inputTags.addEventListener('input', function (event) {
+        const tagName = inputTags.value.toUpperCase();
+    
+        if (tagName === '') return;
+    
+        matchingTags = tagsAdmin.filter(tag => tag && tag.toUpperCase().startsWith(tagName)).filter(Boolean);
+    });
+
+    inputTags.addEventListener('keydown', async function (event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            if (matchingTags.length > 0) {
+                inputTags.value = matchingTags[index];
                 index = (index + 1) % matchingTags.length;
             }
         }

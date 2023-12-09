@@ -10,7 +10,7 @@
                     @csrf
                     <label for="user">Username</label>
                     <input type="text" id="user" name="user" placeholder="Enter username here and click Tab for autocomplete">
-                    <button class="find-user" type="submit">Visit</button>
+                    <button class="admin-button" type="submit">Visit</button>
                 </form>
             </details>
             @yield('errors')
@@ -26,7 +26,7 @@
                     <input type="password" id="password" name="password" placeholder="Enter password here">
                     <label for="password_confirmation">Confirm Password</label>
                     <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm password here">
-                    <button class="create-user" type="submit">Create User</button>
+                    <button class="admin-button" type="submit">Create User</button>
                 </form>
             </details>
             <details>
@@ -35,7 +35,7 @@
                     @csrf
                     <label for="user">Username</label>
                     <input type="text" id="block-user" name="user" placeholder="Enter username here and click Tab for autocomplete">
-                    <button id="find-user" type="submit">Block</button>
+                    <button class="admin-button" type="submit">Block</button>
                 </form>
             </details>
             <details>
@@ -44,7 +44,7 @@
                     @csrf
                     <label for="user">Username</label>
                     <input type="text" id="unblock-user" name="user" placeholder="Enter username here and click Tab for autocomplete">
-                    <button class="find-user" type="submit">Unblock</button>
+                    <button class="admin-button" type="submit">Unblock</button>
                 </form>
             </details> 
             <details>
@@ -52,8 +52,8 @@
                 <form action="../tags" method="post" class="form-admin">
                     @csrf
                     <label for="tag">Tag</label>
-                    <input type="text" id="tag" name="tag" placeholder="Enter tag name here">
-                    <button class="find-user" type="submit">Add</button>
+                    <input type="text" id="add-tag" name="tag" placeholder="Enter tag name here">
+                    <button class="admin-button" type="submit">Add</button>
                 </form>
             </details>
             <details>
@@ -61,13 +61,8 @@
                 <form action="../tags/delete" method="post" class="form-admin">
                     @csrf
                     <label for="tag">Tag</label>
-                    <select id="tag" name="tag">
-                        <option value="0">None</option>
-                        @foreach ($tags as $tag)
-                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                        @endforeach
-                    </select>
-                    <button class="find-user" type="submit">Delete</button>
+                    <input type="text" id="delete-tag" name="tag" placeholder="Enter tag name here and click Tab for autocomplete">
+                    <button class="admin-button" type="submit">Delete</button>
                 </form>
             </details> 
         </section>

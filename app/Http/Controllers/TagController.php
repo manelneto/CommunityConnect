@@ -11,9 +11,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class TagController extends Controller
 {
 
-    public function search()
+    public function search(Request $request)
     {
-        
+        $tag = ($request->has('tag') && $request->get('tag') !== '') ? $request->get('tag') : '';
+        $tags = Tag::where('name', 'ILIKE', '%' . $tag . '%')->get();
+        return response()->json($tags);
     }
 
     public function store(Request $request)

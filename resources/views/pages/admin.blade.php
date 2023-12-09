@@ -9,7 +9,7 @@
                 <form action="../../users/" method="get" class="form-admin">
                     @csrf
                     <label for="user">Username</label>
-                    <input type="text" id="user" name="user" placeholder="Enter username here">
+                    <input type="text" id="user" name="user" placeholder="Enter username here and click Tab for autocomplete">
                     <button class="find-user" type="submit">Visit</button>
                 </form>
             </details>
@@ -34,14 +34,7 @@
                 <form action="../admin/block" method="post" class="form-admin">
                     @csrf
                     <label for="user">Username</label>
-                    <select id="block-user" name="user">
-                        <option value="0">None</option>
-                        @foreach ($users as $user)
-                            @if ($user->blocked === false)
-                                <option value="{{ $user->id }}">{{ $user->username }}</option>
-                            @endif
-                        @endforeach
-                    </select>
+                    <input type="text" id="block-user" name="user" placeholder="Enter username here and click Tab for autocomplete">
                     <button id="find-user" type="submit">Block</button>
                 </form>
             </details>
@@ -50,14 +43,7 @@
                 <form action="../admin/unblock" method="post" class="form-admin">
                     @csrf
                     <label for="user">Username</label>
-                    <select id="unblock-user" name="user">
-                        <option value="0">None</option>
-                        @foreach ($users as $user)
-                            @if ($user->blocked === true)
-                                <option value="{{ $user->id }}">{{ $user->username }}</option>
-                            @endif
-                        @endforeach
-                    </select>
+                    <input type="text" id="unblock-user" name="user" placeholder="Enter username here and click Tab for autocomplete">
                     <button class="find-user" type="submit">Unblock</button>
                 </form>
             </details> 

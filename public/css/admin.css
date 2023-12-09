@@ -10,7 +10,7 @@ input[type=text], input[type=password], select {
     box-sizing: border-box;
 }
  
-#find-user, #create-user {
+.find-user, .create-user {
     background-color: var(--blue);
     color: white;
     padding: 10px;

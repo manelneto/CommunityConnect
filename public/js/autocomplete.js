@@ -1,36 +1,64 @@
-    let dbtags = [];
+let users = [];
+let blocked = [];
+let unblocked = [];
 
-    window.onload = async () => {
-        const url = '../api/users';
-        const response = await fetch(url);
-        const allTags = await response.json();
-        dbtags = allTags.map(tag => tag.username).filter(Boolean);
-        console.log(dbtags);
-    };
+window.onload = async () => {
+    const url = '../api/users';
+    const response = await fetch(url);
+    const allUsers = await response.json();
+    users = allUsers.map(user => user.username).filter(Boolean);
+    blocked = allUsers.map(user => user.username).filter(user => user.blocked);
+    unblocked = allUsers.map(user => user.username).filter(user => !user.blocked);
+};
 
-    const input = document.querySelector('#user');
-    if (input) {
-        let matchingTags = [];
-        let index = 0;
-        
-        input.addEventListener('input', function (event) {
-            console.log('input');
-            const tag = input.value.toUpperCase();
-        
-            if (tag === '') return;
-        
-            matchingTags = dbtags.filter(dbtag => dbtag && dbtag.toUpperCase().startsWith(tag)).filter(Boolean);
-        });
+const inputUser = document.querySelector('#user');
+if (inputUser) {
+    let matchingTags = [];
+    let index = 0;
+    
+    inputUser.addEventListener('input', function (event) {
+        const username = inputUser.value.toUpperCase();
+    
+        if (username === '') return;
+    
+        matchingTags = users.filter(user => user && user.toUpperCase().startsWith(username)).filter(Boolean);
+    });
 
-        input.addEventListener('keydown', async function (event) {
-            console.log('keydown');
-            if (event.key === 'Tab') {
-                event.preventDefault();
-                if (matchingTags.length > 0) {
-                    input.value = matchingTags[index];
-                    index = (index + 1) % matchingTags.length;
-                }
+    inputUser.addEventListener('keydown', async function (event) {
+        console.log('keydown');
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            if (matchingTags.length > 0) {
+                inputUser.value = matchingTags[index];
+                index = (index + 1) % matchingTags.length;
             }
+        }
 
-        });
-    }
+    });
+}
+
+const inputBlock = document.querySelector('#block-user');
+if (inputBlock) {
+    let matchingTags = [];
+    let index = 0;
+    
+    inputBlock.addEventListener('input', function (event) {
+        const username = inputBlock.value.toUpperCase();
+    
+        if (username === '') return;
+    
+        matchingTags = unblocked.filter(user => user && user.toUpperCase().startsWith(username)).filter(Boolean);
+    });
+
+    inputBlock.addEventListener('keydown', async function (event) {
+        console.log('keydown');
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            if (matchingTags.length > 0) {
+                inputBlock.value = matchingTags[index];
+                index = (index + 1) % matchingTags.length;
+            }
+        }
+
+    });
+}

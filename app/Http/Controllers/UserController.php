@@ -6,6 +6,7 @@ use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Reputation;
 use App\Models\User;
+use App\Models\Notification;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -78,12 +79,16 @@ class UserController extends Controller
             $questions = Question::with(['user', 'community', 'likes', 'dislikes'])->where('id_user', $id)->get();
             $answers = Answer::with(['user.communitiesRating', 'question', 'likes', 'dislikes'])->where('id_user', $id)->get();
             $reputations = Reputation::with(['user', 'community'])->where('id_user', $id)->get();
+            $notifications = Notification::with('user')->where('id_user', $id)->get();
+            $unread = Notification::with('user')->where('id_user', $id)->where('read', false)->get();
             $moderatorCommunities = $user->moderatorCommunities;
             return view('users.show', [
                 'user' => $user,
                 'questions' => $questions,
                 'answers' => $answers,
                 'reputations' => $reputations,
+                'notifications' => $notifications,
+                'unread' => $unread
                 'moderatorCommunities' => $moderatorCommunities
             ]);
         } catch (ModelNotFoundException $e) {

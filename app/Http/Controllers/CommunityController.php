@@ -26,7 +26,6 @@ class CommunityController extends Controller
         $this->authorize('follow', Community::class);
 
         $id = $request->get('id');
-        error_log($id);
         try {
             $community = Community::findOrFail($id);
             $user = Auth::user()->id;

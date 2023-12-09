@@ -111,6 +111,8 @@ Route::post('api/tags/follow', [TagController::class, 'follow']);
 Route::post('api/tags/unfollow', [TagController::class, 'unfollow']);
 Route::post('api/questions/edit/remove-tag/{questionId}/{tagId}', [QuestionController::class, 'remove_tag']);
 Route::post('api/notifications/read', [NotificationController::class, 'read']);
+Route::post('api/answers/{id}/correct', 'markCorrect');
+Route::post('api/answers/{id}/incorrect', 'markIncorrect');
 
 // Static info pages
 Route::view('/about-contact-us', 'pages.about-contact-us')->name('about-contact-us');

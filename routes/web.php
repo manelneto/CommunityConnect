@@ -77,8 +77,6 @@ Route::controller(AnswerController::class)->group(function () {
     Route::post('/answers', 'store');
     Route::post('/answers/{id}', 'update');
     Route::post('/answers/{id}/delete', 'destroy');
-    Route::post('/answers/{id}/correct', 'markCorrect');
-    Route::post('/answers/{id}/incorrect', 'markIncorrect');
 });
 
 // Answer Comments
@@ -111,8 +109,8 @@ Route::post('api/tags/follow', [TagController::class, 'follow']);
 Route::post('api/tags/unfollow', [TagController::class, 'unfollow']);
 Route::post('api/questions/edit/remove-tag/{questionId}/{tagId}', [QuestionController::class, 'remove_tag']);
 Route::post('api/notifications/read', [NotificationController::class, 'read']);
-Route::post('api/answers/{id}/correct', 'markCorrect');
-Route::post('api/answers/{id}/incorrect', 'markIncorrect');
+Route::post('api/answers/{id}/correct', [AnswerController::class, 'markCorrect']);
+Route::post('api/answers/{id}/incorrect', [AnswerController::class, 'markIncorrect']);
 
 // Static info pages
 Route::view('/about-contact-us', 'pages.about-contact-us')->name('about-contact-us');

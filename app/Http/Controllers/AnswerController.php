@@ -100,8 +100,9 @@ class AnswerController extends Controller {
         }
     }
 
-    public function markCorrect(int $id)
+    public function markCorrect(Request $request)
     {
+        $id = $request->get('id');
         $answer = Answer::findOrFail($id);
         $this->authorize('correct', $answer);
         try {
@@ -114,8 +115,9 @@ class AnswerController extends Controller {
         }
     }
 
-    public function markIncorrect(int $id)
+    public function markIncorrect(Request $request)
     {
+        $id = $request->get('id');
         $answer = Answer::findOrFail($id);
         $this->authorize('correct', $answer);
         try {

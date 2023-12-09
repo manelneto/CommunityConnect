@@ -72,9 +72,9 @@
         @endif
         @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
             @if ($answer->correct)
-                <button data-id="{{ $answer->id }}" class="mark-incorrect" formaction="../../answers/{{ $answer->id }}/incorrect">Remove correct mark</button>
+                <button data-id="{{ $answer->id }}" class="mark mark-incorrect" formaction="../../answers/{{ $answer->id }}/incorrect">Remove correct mark</button>
             @else
-                <button data-id="{{ $answer->id }}" class="mark-correct" formaction="../../answers/{{ $answer->id }}/correct">Mark as correct</button>
+                <button data-id="{{ $answer->id }}" class="mark mark-correct" formaction="../../answers/{{ $answer->id }}/correct">Mark as correct</button>
             @endif
             <button class="edit" formaction="../../answers/{{ $answer->id }}">Edit</button>
             <button class="delete" formaction="../../answers/{{ $answer->id }}/delete">Delete</button>

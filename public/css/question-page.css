@@ -113,6 +113,12 @@
   color: #abacb1;
 }
 
+.question-of-answer{
+  display: flex;
+  align-items: center;
+  color:#000;
+}
+
 button.edit {
   margin-right: 8px;
   background-color: var(--blue);

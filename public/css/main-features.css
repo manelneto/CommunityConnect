@@ -1,15 +1,24 @@
-#main-features-content{
+#main-features-page{
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 50px auto;
-    width: 89%;
 }
 
 .feature-section h3{
     margin-top:20px;
     font-size: 20px;
+}
+
+#title-main-features {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.feature-section {
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+#feature-section-final{
+    margin-bottom: 2rem;
 }
 
 .feature-section ul li{

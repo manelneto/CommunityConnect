@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('main')
-    <main>
+    <main id="main-features-page">
         <section id="main-features-content">
             <h1 id="title-main-features">Main Features</h1>
             <article class="feature-section">
@@ -71,7 +71,7 @@
                     <li>Edit tags of questions</li>
                 </ul>
             </article>
-            <article class="feature-section">
+            <article class="feature-section" id="feature-section-final">
                 <h3>If you are an administrator, you can:</h3>
                 <ul> 
                     <li>Manage user accounts</li>

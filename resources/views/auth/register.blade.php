@@ -14,22 +14,22 @@
             <div class="form-group">
                 <label for="username">Username *</label>
                 <input id="username"  type="text" name="username" required placeholder="Enter username here" class="user-details-input">
-                <span class="username-error">Username is already taken</span>
+                <p class="username-error">Username is already taken</p>
             </div>
             <div class="form-group">
                 <label for="email">Email *</label>
                 <input id="email" type="email" name="email" required placeholder="Enter email here" class="user-details-input">
-                <span class="email-error">Email is already taken</span>
+                <p class="email-error">Email is already taken</p>
             </div>
             <div class="form-group">
                 <label for="password">Password *</label>
                 <input id="password" type="password" name="password" required placeholder="Enter password here" class="user-details-input">
-                <span class="password-error">Password needs to be at least 8 characters long </span>
+                <p class="password-error">Password needs to be at least 8 characters long </p>
             </div>
             <div class="form-group">
                 <label for="password_confirmation">Confirm Password *</label>
                 <input id="password_confirmation" type="password" name="password_confirmation" required placeholder="Retype password here" class="user-details-input">
-                <span class="password-confirmation-error">Passwords do not match</span>
+                <p class="password-confirmation-error">Passwords do not match</p>
             </div>
             <div class="form-group">
                 <label for="photo">Profile Photo</label>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AnswerVoteEvent;
 use App\Models\Answer;
 use App\Models\AnswerVote;
 use Exception;
@@ -23,6 +24,11 @@ class AnswerVoteController extends Controller {
                 'id_answer' => $id,
                 'likes' => $vote,
             ]);
+
+            $question = Answer::findOrFail($answer->id_question);
+
+            event(New AnswerVoteEvent($id, $question->title, $user, $vote));
+
             return response('Vote added');
         } catch (Exception $e) {
             return response($e->getMessage(), 201);

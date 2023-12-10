@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\QuestionVoteEvent;
 use App\Models\Question;
 use App\Models\QuestionVote;
 use Exception;
@@ -23,6 +24,9 @@ class QuestionVoteController extends Controller {
                 'id_question' => $id,
                 'likes' => $vote,
             ]);
+
+            event(New QuestionVoteEvent($id, $question->title, $user, $vote));
+
             return response('Vote added');
         } catch (Exception $e) {
             return response($e->getMessage(), 201);

@@ -2,8 +2,9 @@
 @include ('layouts.errors')
 
 @section('main')
-    <main>
+    <main id="admin-page">
         <section id="admin">
+            <h1 id="admin-title">Administration</h1>
             <details>
                 <summary>Find a user</summary>
                 <form action="../../users/" method="get" class="form-admin">
@@ -20,17 +21,17 @@
                     @csrf
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" placeholder="Enter username here" class="user-details-input">
-                    <span class="username-error">Username is already taken</span>
+                    <p class="username-error">Username is already taken</p>
                     <label for="email">Email</label>
                     <input type="text" id="email" name="email" placeholder="Enter email here" class="user-details-input">
-                    <span class="email-error">Email is already taken</span>
+                    <p class="email-error">Email is already taken</p>
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Enter password here" class="user-details-input">
-                    <span class="password-error">Password needs to be at least 8 characters long </span>
+                    <p class="password-error">Password needs to be at least 8 characters long </p>
                     <label for="password_confirmation">Confirm Password</label>
                     <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm password here" class="user-details-input">
-                    <span class="password-confirmation-error">Passwords do not match</span>
-                    <button id="admin-button" type="submit" class="submit">Create User</button>
+                    <p class="password-confirmation-error">Passwords do not match</p>
+                    <button class="admin-button" type="submit" class="submit">Create User</button>
                 </form>
             </details>
             <details>
@@ -56,14 +57,9 @@
                 <form action="../tags" method="post" class="form-admin">
                     @csrf
                     <label for="tag">Tag</label>
-<<<<<<< resources/views/pages/admin.blade.php
-                    <input type="text" id="tag" name="tag" placeholder="Enter tag name here" class="user-details-input">
-                    <span class="tag-error">Tag already exists</span>
-                    <button id="find-user" type="submit" class="submit">Add</button>
-=======
-                    <input type="text" id="add-tag" name="tag" placeholder="Enter tag name here">
+                    <input type="text" id="add-tag-admin" name="tag" placeholder="Enter tag name here" class="user-details-input">
+                    <p class="tag-error">Tag already exists</p>
                     <button class="admin-button" type="submit">Add</button>
->>>>>>> resources/views/pages/admin.blade.php
                 </form>
             </details>
             <details>

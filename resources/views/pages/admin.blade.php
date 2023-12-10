@@ -56,14 +56,9 @@
                 <form action="../tags" method="post" class="form-admin">
                     @csrf
                     <label for="tag">Tag</label>
-<<<<<<< resources/views/pages/admin.blade.php
-                    <input type="text" id="tag" name="tag" placeholder="Enter tag name here" class="user-details-input">
+                    <input type="text" id="add-tag" name="tag" placeholder="Enter tag name here" class="user-details-input">
                     <span class="tag-error">Tag already exists</span>
-                    <button id="find-user" type="submit" class="submit">Add</button>
-=======
-                    <input type="text" id="add-tag" name="tag" placeholder="Enter tag name here">
                     <button class="admin-button" type="submit">Add</button>
->>>>>>> resources/views/pages/admin.blade.php
                 </form>
             </details>
             <details>

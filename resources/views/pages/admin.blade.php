@@ -57,7 +57,7 @@
                 <form action="../tags" method="post" class="form-admin">
                     @csrf
                     <label for="tag">Tag</label>
-                    <input type="text" id="add-tag" name="tag" placeholder="Enter tag name here" class="user-details-input">
+                    <input type="text" id="add-tag-admin" name="tag" placeholder="Enter tag name here" class="user-details-input">
                     <p class="tag-error">Tag already exists</p>
                     <button class="admin-button" type="submit">Add</button>
                 </form>

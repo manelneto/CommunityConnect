@@ -118,3 +118,4 @@ Route::post('api/answers/{id}/incorrect', [AnswerController::class, 'markIncorre
 // Static info pages
 Route::view('/about-contact-us', 'pages.about-contact-us')->name('about-contact-us');
 Route::view('/main-features', 'pages.main-features')->name('main-features');
+Route::view('/faq', 'pages.faq')->name('faq');

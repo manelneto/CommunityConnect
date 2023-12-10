@@ -1,13 +1,18 @@
-section.about-us {
+#about-us-page {
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 50px auto;
-  width: 89%;
 }
 
-.about-us-title {
+#about-us {
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+#about-us-title {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+#about-us-title {
   text-align: center;
   font-size: 25px;
 }
@@ -18,18 +23,18 @@ section.about-us {
   text-align: justify;
 }
 
-#about-us .made-by-list {
+#about-us #made-by-list {
   margin-top: 30px;
   margin-left: 20px;
   font-size: 18px;
   list-style: circle;
 }
 
-#about-us .made-by-list li {
+#about-us #made-by-list li {
   margin-top: 10px;
 }
 
-#about-us .made-by-list li a {
+#about-us #made-by-list li a {
   color: var(--blue);
   font-size: 18px;
 }

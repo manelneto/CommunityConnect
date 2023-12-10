@@ -18,27 +18,15 @@
         </details>
         <details>
             <summary>Como faço para fazer uma pergunta?</summary>
-            <p>Clique no botão "Nova Pergunta" ou algo semelhante. Insira o título da sua pergunta e os detalhes relevantes. Lembre-se de seguir as regras da comunidade ao fazer perguntas.</p>
+            <p>Clique no botão "Ask a Question". Insira o título, o conteúdo e a comunidade que quer inserir a sua pergunta.</p>
         </details>
         <details>
-            <summary>Posso votar em respostas e perguntas?</summary>
-            <p>Sim, a plataforma incentiva a interação dos usuários por meio de votos positivos e negativos em perguntas e respostas. Isso ajuda a destacar o conteúdo mais relevante e útil.</p>
+            <summary>Posso votar em perguntas e respostas?</summary>
+            <p>Sim, a plataforma incentiva a interação dos utilizadores autenticados colocando like/dislike em perguntas e respostas. Isso ajuda a destacar as perguntas e respostas mais relevantes e úteis.</p>
         </details>
         <details>
-            <summary>Como são moderadas as comunidades?</summary>
-            <p>Cada comunidade é moderada por administradores que garantem que as regras sejam seguidas. Se você encontrar conteúdo inadequado, pode denunciá-lo para a equipe de moderação.</p>
-        </details>
-        <details>
-            <summary>O que são "gostos" e "ratings"?</summary>
-            <p>Os "gostos" são uma maneira de os usuários expressarem apreço por perguntas, respostas ou comentários. Os "ratings" podem ser usados para avaliar a qualidade do conteúdo. Ambos ajudam a destacar o material mais valioso.</p>
-        </details>
-        <details>
-            <summary>Posso compartilhar links e mídia nas minhas postagens?</summary>
-            <p>Sim, você pode compartilhar links e incorporar mídia em suas postagens, desde que siga as diretrizes da comunidade em relação a conteúdo permitido.</p>
-        </details>
-        <details>
-            <summary>Como faço para relatar comportamento inadequado?</summary>
-            <p>Se você encontrar comportamento inadequado, clique no botão de denúncia ou entre em contato com a equipe de suporte. Eles analisarão a situação e tomarão as medidas apropriadas.</p>
+            <summary>Como é calculado o rating de um utilizador autenticado?</summary>
+            <p>Os ratings são calculados usando os likes e dislikes das respostas de um utilizador dentro de cada comunidade.</p>
         </details>
         </section>
     </main>

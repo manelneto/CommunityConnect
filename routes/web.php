@@ -79,8 +79,6 @@ Route::controller(AnswerController::class)->group(function () {
     Route::post('/answers', 'store');
     Route::post('/answers/{id}', 'update');
     Route::post('/answers/{id}/delete', 'destroy');
-    Route::post('/answers/{id}/correct', 'markCorrect');
-    Route::post('/answers/{id}/incorrect', 'markIncorrect');
 });
 
 // Answer Comments
@@ -105,6 +103,9 @@ Route::get('/feed', [QuestionController::class, 'personalIndex'])->name('feed');
 // API
 Route::get('api/questions', [QuestionController::class, 'search']);
 Route::get('api/users', [UserController::class, 'search']);
+Route::get('api/users/check-username-email-exists', [UserController::class, 'checkUsernameOrEmailExists']);
+Route::get('api/tags/exist', [TagController::class, 'checkTagExists']);
+Route::get('api/tags', [TagController::class, 'search']);
 Route::post('api/communities/follow', [CommunityController::class, 'follow']);
 Route::post('api/communities/unfollow', [CommunityController::class, 'unfollow']);
 Route::post('api/questions/{id}/follow', [QuestionController::class, 'follow']);
@@ -117,8 +118,10 @@ Route::post('api/questions/vote', [QuestionVoteController::class, 'vote']);
 Route::post('api/questions/unvote', [QuestionVoteController::class, 'unvote']);
 Route::post('api/answers/vote', [AnswerVoteController::class, 'vote']);
 Route::post('api/answers/unvote', [AnswerVoteController::class, 'unvote']);
-
+Route::post('api/answers/{id}/correct', [AnswerController::class, 'markCorrect']);
+Route::post('api/answers/{id}/incorrect', [AnswerController::class, 'markIncorrect']);
 
 // Static info pages
 Route::view('/about-contact-us', 'pages.about-contact-us')->name('about-contact-us');
 Route::view('/main-features', 'pages.main-features')->name('main-features');
+Route::view('/faq', 'pages.faq')->name('faq');

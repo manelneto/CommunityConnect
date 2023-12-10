@@ -1,4 +1,8 @@
-@if (Auth::user()?->id === $comment->id_user || Auth::user()?->administrator)
+@php
+    $isModerator = in_array($comment->question->id_community, Auth::user()?->moderatorCommunities->pluck('id')->toArray());
+@endphp
+
+@if (Auth::user()?->id === $comment->id_user || Auth::user()?->administrator || $isModerator)
     <form class="comment" method="post">
         @csrf
         <textarea class="description non-movable-textarea" name="content" placeholder="Type your comment in here">{{ $comment->content }}</textarea>

@@ -13,6 +13,18 @@ class QuestionPolicy
 
     use HandlesAuthorization;
 
+    private function isModeratorOfCommunity($question): bool
+    {
+        if (!Auth::check()) {
+            return false;
+        }
+
+        return in_array(
+            $question->id_community,
+            Auth::user()->moderatorCommunities->pluck('id')->toArray()
+        );
+    }
+
     public function personalIndex(User $user): bool
     {
         return Auth::check();
@@ -35,30 +47,18 @@ class QuestionPolicy
 
     public function edit(User $user, Question $question): bool
     {
-        $isModeratorOfCommunity = in_array(
-            $question->id_community,
-            Auth::user()->moderatorCommunities->pluck('id')->toArray()
-        );
-
-        return ($user->id === Auth::user()->id) &&
-            ($question->id_user === $user->id || Auth::user()->administrator || $isModeratorOfCommunity);
+        return ($user->id === Auth::user()->id) && ($question->id_user === $user->id || Auth::user()->administrator || $this->isModeratorOfCommunity($question));
     }
 
 
     public function update(User $user, Question $question): bool
     {
-        $isModeratorOfCommunity = in_array(
-            $question->id_community,
-            Auth::user()->moderatorCommunities->pluck('id')->toArray()
-        );
-
-        return ($user->id === Auth::user()->id) &&
-            ($question->id_user === $user->id || Auth::user()->administrator || $isModeratorOfCommunity);
+        return ($user->id === Auth::user()->id) && ($question->id_user === $user->id || Auth::user()->administrator || $this->isModeratorOfCommunity($question));
     }
 
     public function destroy(User $user, Question $question): bool
     {
-        return ($user->id === Auth::user()->id) && ($question->id_user === $user->id || Auth::user()->administrator);
+        return ($user->id === Auth::user()->id) && ($question->id_user === $user->id || Auth::user()->administrator || $this->isModeratorOfCommunity($question));
     }
 
     public function follow(User $user): bool
@@ -73,12 +73,6 @@ class QuestionPolicy
 
     public function remove_tag(User $user, Question $question): bool
     {
-        $isModeratorOfCommunity = in_array(
-            $question->id_community,
-            Auth::user()->moderatorCommunities->pluck('id')->toArray()
-        );
-
-        return ($user->id === Auth::user()->id) &&
-            ($question->id_user === $user->id || Auth::user()->administrator || $isModeratorOfCommunity);
+        return ($user->id === Auth::user()->id) && ($question->id_user === $user->id || Auth::user()->administrator || $this->isModeratorOfCommunity($question));
     }
 }

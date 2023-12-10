@@ -1,3 +1,7 @@
+@php
+    $isModerator = in_array($answer->question->id_community, Auth::user()?->moderatorCommunities->pluck('id')->toArray());
+@endphp
+
 <form class="answer" method="post" enctype="multipart/form-data">
     <a href="../questions/{{ $answer->id_question }}">HERE</a>
     @csrf
@@ -30,6 +34,9 @@
     </div>
     <article class="content-right">
         <header class="answer-info">
+            @if( Request::route()->getName() == 'profile')
+                <a class="question-of-answer" href="../questions/{{ $answer->id_question }}">Question: {{ $answer->question->title }}</a>
+            @endif
             <div class="answer-details">
                 <a class="username" href="../users/{{ $answer->id_user }}">{{ $answer->user->username }}</a>
                 @if (isset($answer->user->communitiesRating))
@@ -60,14 +67,14 @@
                 
             </div>
             @if ($answer->correct)
-                <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="40px" height="40px">
+                <svg class="icon-correct" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="40px" height="40px">
                     <path fill="#c8e6c9" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"/>
                     <path fill="#4caf50" d="M34.586,14.586l-13.57,13.586l-5.602-5.586l-2.828,2.828l8.434,8.414l16.395-16.414L34.586,14.586z"/>
                 </svg>
             @endif
         </header>
         <span class="date">Answer added {{ $answer->date }}</span>
-        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
+        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || $isModerator)
             <label for="content">Content</label>
             <textarea id="content" class="description non-movable-textarea" name="content" cols="40" rows="5" placeholder="Type in your answer here">{{ $answer->content }}</textarea>
             <label for="file">File</label>
@@ -79,11 +86,11 @@
                 <p class="file">Download file <a href="{{ asset($answer->file) }}" target="_blank">here</a></p>
             @endif
         @endif
-        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator)
+        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || $isModerator)
             @if ($answer->correct)
-                <button class="mark-incorrect" formaction="../../answers/{{ $answer->id }}/incorrect">Remove correct mark</button>
+                <button data-id="{{ $answer->id }}" class="mark mark-incorrect" formaction="../../answers/{{ $answer->id }}/incorrect">Remove correct mark</button>
             @else
-                <button class="mark-correct" formaction="../../answers/{{ $answer->id }}/correct">Mark as correct</button>
+                <button data-id="{{ $answer->id }}" class="mark mark-correct" formaction="../../answers/{{ $answer->id }}/correct">Mark as correct</button>
             @endif
             <button class="edit" formaction="../../answers/{{ $answer->id }}">Edit</button>
             <button class="delete" formaction="../../answers/{{ $answer->id }}/delete">Delete</button>

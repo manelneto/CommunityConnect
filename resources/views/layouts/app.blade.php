@@ -53,6 +53,8 @@
         <script src="{{ asset('js/check-view-notifications.js') }} " defer></script>
         <script src="{{ asset('js/question-votes.js') }} " defer></script>
         <script src="{{ asset('js/answer-votes.js') }} " defer></script>
+        <script src="{{ asset('js/mark-answer.js') }} " defer></script>
+        <script src="{{ asset('js/autocomplete.js') }} " defer></script>
     </head>
 
     <body>

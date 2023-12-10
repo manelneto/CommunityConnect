@@ -2,20 +2,16 @@
 @include ('layouts.errors')
 
 @section('main')
-    <main>
+    <main id="admin-page">
         <section id="admin">
+            <h1 id="admin-title">Administration</h1>
             <details>
                 <summary>Find a user</summary>
                 <form action="../../users/" method="get" class="form-admin">
                     @csrf
                     <label for="user">Username</label>
-                    <select id="user" name="user">
-                        <option value="0">None</option>
-                        @foreach ($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->username }}</option>
-                        @endforeach
-                    </select>
-                    <button id="find-user" type="submit">Visit</button>
+                    <input type="text" id="user" name="user" placeholder="Enter username here and click Tab for autocomplete">
+                    <button class="admin-button" type="submit">Visit</button>
                 </form>
             </details>
             @yield('errors')
@@ -24,14 +20,18 @@
                 <form action="../../users" method="post" class="form-admin">
                     @csrf
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username" placeholder="Enter username here">
+                    <input type="text" id="username" name="username" placeholder="Enter username here" class="user-details-input">
+                    <p class="username-error">Username is already taken</p>
                     <label for="email">Email</label>
-                    <input type="text" id="email" name="email" placeholder="Enter email here">
+                    <input type="text" id="email" name="email" placeholder="Enter email here" class="user-details-input">
+                    <p class="email-error">Email is already taken</p>
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter password here">
+                    <input type="password" id="password" name="password" placeholder="Enter password here" class="user-details-input">
+                    <p class="password-error">Password needs to be at least 8 characters long </p>
                     <label for="password_confirmation">Confirm Password</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm password here">
-                    <button id="create-user" type="submit">Create User</button>
+                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm password here" class="user-details-input">
+                    <p class="password-confirmation-error">Passwords do not match</p>
+                    <button class="admin-button" type="submit" class="submit">Create User</button>
                 </form>
             </details>
             <details>
@@ -39,15 +39,8 @@
                 <form action="../admin/block" method="post" class="form-admin">
                     @csrf
                     <label for="user">Username</label>
-                    <select id="user" name="user">
-                        <option value="0">None</option>
-                        @foreach ($users as $user)
-                            @if ($user->blocked === false)
-                                <option value="{{ $user->id }}">{{ $user->username }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    <button id="find-user" type="submit">Block</button>
+                    <input type="text" id="block-user" name="user" placeholder="Enter username here and click Tab for autocomplete">
+                    <button class="admin-button" type="submit">Block</button>
                 </form>
             </details>
             <details>
@@ -55,15 +48,8 @@
                 <form action="../admin/unblock" method="post" class="form-admin">
                     @csrf
                     <label for="user">Username</label>
-                    <select id="user" name="user">
-                        <option value="0">None</option>
-                        @foreach ($users as $user)
-                            @if ($user->blocked === true)
-                                <option value="{{ $user->id }}">{{ $user->username }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    <button id="find-user" type="submit">Unblock</button>
+                    <input type="text" id="unblock-user" name="user" placeholder="Enter username here and click Tab for autocomplete">
+                    <button class="admin-button" type="submit">Unblock</button>
                 </form>
             </details> 
             <details>
@@ -71,8 +57,9 @@
                 <form action="../tags" method="post" class="form-admin">
                     @csrf
                     <label for="tag">Tag</label>
-                    <input type="text" id="tag" name="tag" placeholder="Enter tag name here">
-                    <button id="find-user" type="submit">Add</button>
+                    <input type="text" id="add-tag-admin" name="tag" placeholder="Enter tag name here" class="user-details-input">
+                    <p class="tag-error">Tag already exists</p>
+                    <button class="admin-button" type="submit">Add</button>
                 </form>
             </details>
             <details>
@@ -80,13 +67,8 @@
                 <form action="../tags/delete" method="post" class="form-admin">
                     @csrf
                     <label for="tag">Tag</label>
-                    <select id="tag" name="tag">
-                        <option value="0">None</option>
-                        @foreach ($tags as $tag)
-                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                        @endforeach
-                    </select>
-                    <button id="find-user" type="submit">Delete</button>
+                    <input type="text" id="delete-tag" name="tag" placeholder="Enter tag name here and click Tab for autocomplete">
+                    <button class="admin-button" type="submit">Delete</button>
                 </form>
             </details> 
         </section>

@@ -2,8 +2,9 @@
 @include ('layouts.errors')
 
 @section('main')
-    <main>
+    <main id="admin-page">
         <section id="admin">
+            <h1 id="admin-title">Administration</h1>
             <details>
                 <summary>Find a user</summary>
                 <form action="../../users/" method="get" class="form-admin">

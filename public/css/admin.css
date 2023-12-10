@@ -1,4 +1,4 @@
-#admin {
+#admin-page, #faq-page {
     background-color: white;
 }
 
@@ -35,47 +35,48 @@ select {
     display: none;
 }
 
+#admin-title, #faq-title {
+    margin-top: 2rem;
+    text-align: center;
+}
+
 summary {
     margin-top: 2rem;
-    margin-left: 2rem;
+    margin-left: 4rem;
     width: 80%;
     font-size: 1.2em;
     font-weight: bold;
     color: #333;
     padding: 10px;
-    border-radius: 5px;
     cursor: pointer;
     background-color: var(--light-gray);
 }
 
-summary:hover {
-    background-color: var(--blue);
+summary {
+    list-style-type: none;
 }
 
-summary::-webkit-details-marker {
+summary::marker {
+    color: var(--dark-blue); 
+    font-size: 1.5em;
     display: none;
 }
 
-.form-admin {
+summary::before {
+    content: "\25BC"; 
+    margin-right: 0.5em; 
+}
+
+.form-admin, .form-faq{
     display: flex;
     flex-direction: column;
-    margin-left: 2rem;
+    margin-left: 4rem;
     width: 80%;
     padding: 10px;
     background-color: var(--light-gray);
 }
 
-#admin {
-    background-color: white;
-    margin: 0;
-    margin: 50px auto;
-    width: 89%;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-form span{
+form p{
     margin-bottom: 5px;
 }
 

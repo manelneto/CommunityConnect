@@ -1,32 +1,32 @@
 @extends('layouts.app')
 
 @section('main')
-    <main id="about-us">
+    <main id="faq-page">
         <section id="faq">
         <h1 id="faq-title">Frequently Asked Questions</h1>
         <details>
-            <summary>Qual é o propósito do Community Connect?</summary>
-            <p>Community Connect é um sistema de informação web-based que permite aos utilizadores partilharem perguntas e obterem respostas sobre diversos temas, tendo como intuito fornecer respostas para problemas comuns, num ambiente de interajuda solidária.</p>
+            <summary>What is the purpose of Community Connect?</summary>
+            <p class="form-faq">Community Connect is a web-based information system that allows users to share questions and get answers on various topics, aiming to provide solutions to common problems in a collaborative help-oriented environment.</p>
         </details>
         <details>
-            <summary>Como posso participar?</summary>
-            <p>Para participar, basta criar uma conta gratuita. Clique no botão de Sign Up, preencha as informações necessárias e comece a explorar e interagir com as comunidades.</p>
-        </details>  
-        <details>
-            <summary>Posso participar em várias comunidades ao mesmo tempo?</summary>
-            <p>Sim, os utilizadores autênticados podem participar de várias comunidades em simultâneo. Isso permite que criar um feed pessoal personalizado.</p>
+            <summary>How can I participate?</summary>
+            <p class="form-faq">To participate, simply create a free account. Click on the Sign Up button, fill in the necessary information, and start exploring and interacting with communities.</p>
         </details>
         <details>
-            <summary>Como faço para fazer uma pergunta?</summary>
-            <p>Clique no botão "Ask a Question". Insira o título, o conteúdo e a comunidade que quer inserir a sua pergunta.</p>
+            <summary>Can I participate in multiple communities simultaneously?</summary>
+            <p class="form-faq">Yes, authenticated users can participate in multiple communities simultaneously. This allows you to create a personalized feed.</p>
         </details>
         <details>
-            <summary>Posso votar em perguntas e respostas?</summary>
-            <p>Sim, a plataforma incentiva a interação dos utilizadores autenticados colocando like/dislike em perguntas e respostas. Isso ajuda a destacar as perguntas e respostas mais relevantes e úteis.</p>
+            <summary>How do I ask a question?</summary>
+            <p class="form-faq">Click on the "Ask a Question" button. Enter the title, content, and choose the community where you want to post your question.</p>
         </details>
         <details>
-            <summary>Como é calculado o rating de um utilizador autenticado?</summary>
-            <p>Os ratings são calculados usando os likes e dislikes das respostas de um utilizador dentro de cada comunidade.</p>
+            <summary>Can I vote on questions and answers?</summary>
+            <p class="form-faq">Yes, the platform encourages interaction from authenticated users by allowing them to like/dislike questions and answers. This helps highlight the most relevant and helpful content.</p>
+        </details>
+        <details>
+            <summary>How is the rating of an authenticated user calculated?</summary>
+            <p class="form-faq">Ratings are calculated based on the likes and dislikes received by a user's answers within each community.</p>
         </details>
         </section>
     </main>

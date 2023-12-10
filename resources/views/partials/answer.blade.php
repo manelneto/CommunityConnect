@@ -4,15 +4,27 @@
     <div class="content-left">
         <img class="member-pfp answer-member-pfp" src="{{ asset($answer->user->image) }}" alt="User's profile photo" />
         <div class="answers-votes">
-            <span class="answer-upvotes">{{ $answer->likes_count}}
-                <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.000244141 12L9.00024 0L18.0002 12H0.000244141Z" fill="#38B6FF" />
-                </svg>
+            <span class="answer-upvotes" data-id="{{ $answer->id }}">{{ $answer->likes_count}}
+                @if (array_search(Auth::user()?->id, array_column($answer->likes()->get()->toArray(), 'id_user')))
+                    <svg class="voted" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.000244141 12L9.00024 0L18.0002 12H0.000244141Z" fill="#38B6FF" />
+                    </svg>
+                @else
+                    <svg class="unvoted" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.000244141 12L9.00024 0L18.0002 12H0.000244141Z" fill="#ABACB1" />
+                    </svg>
+                @endif
             </span>
-            <span class="answer-downvotes">{{ $answer->dislikes_count }}
-                <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.000244141 0L9.00024 12L18.0002 0H0.000244141Z" fill="#ABACB1" />
-                </svg>
+            <span class="answer-downvotes" data-id="{{ $answer->id }}">{{ $answer->dislikes_count }}
+                @if (array_search(Auth::user()?->id, array_column($answer->dislikes()->get()->toArray(), 'id_user')))
+                    <svg class="voted" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.000244141 0L9.00024 12L18.0002 0H0.000244141Z" fill="#38B6FF" />
+                    </svg>
+                @else
+                    <svg class="unvoted" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.000244141 0L9.00024 12L18.0002 0H0.000244141Z" fill="#ABACB1" />
+                    </svg>
+                @endif
             </span>
         </div>
     </div>

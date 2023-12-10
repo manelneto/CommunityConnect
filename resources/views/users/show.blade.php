@@ -9,7 +9,7 @@
             <article class="notifications-container">
                 <ul class="notifications">
                     @foreach ($notifications as $notification)
-                    <li class="notification">
+                    <li class="profile notification">
                         <p class="notification-text">{{ $notification->content }}</p>
                         <p class="notification-date">{{ $notification->date }}</p>
                         @if (!$notification->read)
@@ -30,9 +30,9 @@
         <h2>{{ $user->email }}</h2>
         <img class="member-pfp main-user-pfp" src="{{ asset($user->image) }}" alt="User's profile photo" />
         <ul>
-            <li id="about-button">About</li>
-            <li id="questions-button">Questions</li>
-            <li id="answers-button">Answers</li>
+            <li class="profile" id="about-button">About</li>
+            <li class="profile" id="questions-button">Questions</li>
+            <li class="profile" id="answers-button">Answers</li>
         </ul>
         <section class="about-user">
             <p class="user-register-date">
@@ -41,14 +41,14 @@
             @if (count($user->badges) > 0)
                 <ul class="user-badges">
                     @foreach ($user->badges as $badge)
-                        <li class="user-received-badge">
+                        <li class="profile user-received-badge">
                             <img src="{{ asset('assets/badge-images') . '/badge_' . $badge->id . '.png' }}" alt="badge image">
                         </li>
                     @endforeach
                 </ul>
             @endif
                 <ul class="user-stats">
-                    <li class="user-stats-questions">
+                    <li class="profile user-stats-questions">
                         <svg width="40" height="40" viewBox="0 0 60 60" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -63,7 +63,7 @@
                         <br>
                         Questions</span>
                     </li>
-                    <li class="user-stats-answers">
+                    <li class="profile user-stats-answers">
                         <svg width="35" height="35" viewBox="0 0 50 50" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"

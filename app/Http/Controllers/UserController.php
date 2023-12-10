@@ -76,8 +76,8 @@ class UserController extends Controller
     {
         try {
             $user = User::with(['badges', 'moderatorCommunities'])->findOrFail($id);
-            $questions = Question::with(['user', 'community', 'likes', 'dislikes'])->where('id_user', $id)->get();
-            $answers = Answer::with(['user.communitiesRating', 'question', 'likes', 'dislikes'])->where('id_user', $id)->get();
+            $questions = Question::with(['user', 'community', 'likes', 'dislikes'])->withCount(['answers', 'likes', 'dislikes'])->where('id_user', $id)->get();
+            $answers = Answer::with(['user.communitiesRating', 'question', 'likes', 'dislikes'])->withCount(['likes', 'dislikes'])->where('id_user', $id)->get();
             $reputations = Reputation::with(['user', 'community'])->where('id_user', $id)->get();
             $notifications = Notification::with('user')->where('id_user', $id)->get();
             $unread = Notification::with('user')->where('id_user', $id)->where('read', false)->get();

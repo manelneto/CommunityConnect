@@ -78,7 +78,7 @@
         @else
             <p class="description">{{ $answer->content }}</p>
             @if ($answer->file)
-                <p class="file">Download file <a href="{{ asset($answer->file) }}" target="_blank">here</a></p>
+                <p class="file"><a href="{{ asset($answer->file) }}" target="_blank">Download file here</a></p>
             @endif
         @endif
         @if (Auth::user()?->id === $answer->question->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))

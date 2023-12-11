@@ -43,7 +43,7 @@
 
         </p>
         @if ($question->file)
-            <p class="file">Download file <a href="{{ asset($question->file) }}" target="_blank">here</a></p>
+            <p class="file"><a href="{{ asset($question->file) }}" target="_blank">Download file here</a></p>
         @endif
         <div class="answers-details">
             <button class="question-answer-btn">

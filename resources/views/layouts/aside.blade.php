@@ -1,6 +1,6 @@
 @section ('aside')
         @auth
-            <button class="ask-a-question-button" onclick="window.location='{{ route('create-question') }}'">Ask a Question</button><!-- TODO -->
+            <a class="ask-a-question-button" href="{{ route('create-question') }}">Ask a Question</a><!-- TODO -->
         @endauth
         <section class="right-bar-stats">
             <article class="left-top-square">

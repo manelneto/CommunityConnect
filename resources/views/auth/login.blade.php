@@ -22,10 +22,6 @@
                     <input type="password" id="password" name="password" required placeholder="Enter password here" class="user-details-input">
                     <p class="password-error">Password needs to be at least 8 characters long</p>
                 </div>
-                <div id="remember-me-group">
-                    <input type="checkbox" id="remember-me" name="remember-me">
-                    <label for="remember-me">Remember Me</label>
-                </div>
                 <a id="forgot-password" href="{{ route('login') }}">Forgot Password?</a>
                 <button type="submit">Sign In</button>
             </form>

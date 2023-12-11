@@ -533,7 +533,7 @@ footer.main-footer {
   display: grid;
   grid-template-columns: 2.5fr 1.5fr 1.5fr;
   background-color: var(--dark-blue);
-  padding: 50px 100px;
+  padding-left: 100px;
 }
 
 .footer-link {

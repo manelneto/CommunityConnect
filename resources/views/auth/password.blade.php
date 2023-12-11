@@ -4,7 +4,7 @@
 @section('main')
     <main class="sign-page-main-content">
         <article class="sign-page-left-content">
-            <h1 class="title-text">Reset your password</h1>
+            <h1 class="title-text">Reset your Password</h1>
             <h3 class="subtitle-text">Reset your Community Connect password to ask <br> questions, answer people's questions, and <br> connect with others.</h3>
         </article>
         @yield('errors')

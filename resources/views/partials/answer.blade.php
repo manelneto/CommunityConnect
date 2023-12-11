@@ -30,7 +30,7 @@
     <article class="content-right">
         <header class="answer-info">
             @if( Request::route()->getName() == 'profile')
-                <a class="question-of-answer" href="../questions/{{ $answer->id_question }}">Question: {{ $answer->question->title }}</a>
+                <a class="question-of-answer" href="{{ route('question', ['id' => $answer->id_question]) }}">Question: {{ $answer->question->title }}</a>
             @endif
             <div class="answer-details">
                 <a class="username" href="../users/{{ $answer->id_user }}">{{ $answer->user->username }}</a>

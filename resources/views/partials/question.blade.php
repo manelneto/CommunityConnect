@@ -26,7 +26,7 @@
                 @endif
             @endif             
         </div>
-        <h2 class="question-title"><a href="../questions/{{ $question->id }}">{{ $question->title }}</a></h2>
+        <h2 class="question-title"><a href="{{ route('question', ['id' => $question->id]) }}">{{ $question->title }}</a></h2>
         <p class="question-description">
             {{ $question->content }}
 

@@ -1,5 +1,4 @@
 <form class="answer" method="post" enctype="multipart/form-data">
-    <a href="../questions/{{ $answer->id_question }}">HERE</a>
     @csrf
     <div class="content-left">
         <img class="member-pfp answer-member-pfp" src="{{ asset($answer->user->image) }}" alt="User's profile photo" />

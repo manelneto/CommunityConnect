@@ -2,7 +2,7 @@
 @include ('layouts.errors')
 
 @section('main')
-    <main class="main-content">
+    <main id="create-question-page">
         @yield('errors')
         <section id="create-question">
             <h1>Ask a Question</h1>
@@ -12,12 +12,13 @@
                 <input id="title" class="form-control" type="text" name="title" required placeholder="Enter the question's title">
                 <label for="community">Choose a community</label>
                 <select id="community" class="form-control" name="id_community" required>
+                    <!-- TODO -->
                     @foreach ($communities as $community)
                         <option value="{{ $community->id }}">{{ $community->name }}</option>
                     @endforeach
                 </select>
                 <label for="content">Content</label>
-                <textarea id="content" class="form-control" name="content"  placeholder="Elaborate your question" required></textarea>
+                <textarea id="content" class="form-control" name="content" placeholder="Elaborate your question" required></textarea>
                 <label for="file">File</label>
                 <input id="file" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt">
                 <input type="hidden" name="type" value="question">

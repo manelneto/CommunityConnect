@@ -10,19 +10,22 @@
             @foreach ($question->comments as $comment)
                 @include('partials.question_comment', ['comment' => $comment])
             @endforeach
-            <article class="leave">
-                <h2>Leave a Comment</h2>
-                <form action="/question-comments" method="post">
-                    @csrf
-                    <textarea name="content" rows="6" cols="60" placeholder="Type in your comment here"></textarea>
-                    <input type="hidden" name="id_question" value="{{ $question->id }}">
-                    <button type="submit">Post Comment</button>
-                </form>
-            </article>
+            @auth
+                <article class="leave">
+                    <h2>Leave a Comment</h2>
+                    <form action="/question-comments" method="post">
+                        @csrf
+                        <label for="question-comment">Content</label>
+                        <textarea id="question-comment" name="content" rows="6" cols="60" placeholder="Type in your comment here"></textarea>
+                        <input type="hidden" name="id_question" value="{{ $question->id }}">
+                        <button type="submit">Post Comment</button>
+                    </form>
+                </article>
+            @endauth
         </details>
         @auth
             <article class="leave">
-                <h2 class="leave-answer-text">Leave an Answer</h2>
+                <h2>Leave an Answer</h2>
                 <form action="/answers" method="post" enctype="multipart/form-data">
                     @csrf
                     <label for="content">Content</label>
@@ -36,7 +39,7 @@
             </article>
         @endauth
         <section id="answers">
-            <h2> {{ $question->answers_count }} Answers</h2>
+            <h2>{{ $question->answers_count }} Answers</h2>
             @foreach ($answers as $answer)
                 @include('partials.answer', ['answer' => $answer])
                 <details class="comments">
@@ -44,15 +47,18 @@
                     @foreach($answer->comments as $comment)
                         @include('partials.answer_comment', ['comment' => $comment])
                     @endforeach
-                    <article class="leave">
-                        <h2>Leave a Comment</h2>
-                        <form action="/answer-comments" method="post">
-                            @csrf
-                            <textarea name="content" rows="6" cols="60" placeholder="Type in your comment here"></textarea>
-                            <input type="hidden" name="id_answer" value="{{ $answer->id }}">
-                            <button type="submit">Post Comment</button>
-                        </form>
-                    </article>
+                    @auth
+                        <article class="leave">
+                            <h2>Leave a Comment</h2>
+                            <form action="/answer-comments" method="post">
+                                @csrf
+                                <label for="answer-comment">Content</label>
+                                <textarea id="answer-comment" name="content" rows="6" cols="60" placeholder="Type in your comment here"></textarea>
+                                <input type="hidden" name="id_answer" value="{{ $answer->id }}">
+                                <button type="submit">Post Comment</button>
+                            </form>
+                        </article>
+                    @endauth
                 </details>
             @endforeach
         </section>

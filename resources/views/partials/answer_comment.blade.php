@@ -1,8 +1,4 @@
-@php
-    $isModerator = in_array($comment->answer->question->id_community, Auth::user()?->moderatorCommunities->pluck('id')->toArray());
-@endphp
-
-@if (Auth::user()?->id === $comment->id_user || Auth::user()?->administrator || $isModerator)
+@if (Auth::user()?->id === $comment->id_user || Auth::user()?->administrator || Auth::user()?->moderates($comment->answer->question->id_community))
     <form class="comment" method="post">
         @csrf
         <label>Content

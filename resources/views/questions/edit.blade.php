@@ -1,10 +1,6 @@
 @extends('layouts.app')
 @include ('layouts.errors')
 
-@php
-    $disableTextArea = (in_array($question->id_community, Auth::user()?->moderatorCommunities->pluck('id')->toArray()) && $question->user->id != Auth::user()?->id );
-@endphp
-
 @section('main')
     <main id="question-edit">
         <div class="main-content">
@@ -21,9 +17,9 @@
                                 <span class="question-community">In: {{ $question->community->name }}</span>
                             </div>
                             <label for="title">Title</label>
-                            <h2 class="question-title"><input id="title" class="question-title-edit" type="text" name="title" {{ $disableTextArea ? 'disabled' : '' }} value="{{ $question->title }}" placeholder="Enter the question's title here"></h2>
+                            <h2 class="question-title"><input id="title" class="question-title-edit" type="text" name="title" {{ Auth::user()?->moderates($question->id_community) ? 'disabled' : '' }} value="{{ $question->title }}" placeholder="Enter the question's title here"></h2>
                             <label for="community">Community</label>
-                            <select id="community" class="form-control" name="id_community" {{ $disableTextArea ? 'disabled' : '' }}>
+                            <select id="community" class="form-control" name="id_community" {{ Auth::user()->moderates($question->id_community) ? 'disabled' : '' }}>
                                 <option value="{{ $question->id_community }}">{{ $question->community->name }}</option>
                                 @foreach ($communities as $community)
                                     @if ($community->id !== $question->id_community)

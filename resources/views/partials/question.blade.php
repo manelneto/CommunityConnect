@@ -53,7 +53,7 @@
                 {{ $question->answers_count }} Answers
             </button>
             <span class="question-upvotes" data-id="{{ $question->id }}">
-                @if (((Request::route()->getName() === 'question' || Request::route()->getName() === 'profile') && array_search(Auth::user()?->id, array_column($question->likes()->get()->toArray(), 'id_user'))) || (Request::route()->getName() !== 'question' && Request::route()->getName() !== 'profile' && array_search(Auth::user()?->id, array_column($question->likes, 'id_user'))))
+                @if (((Request::route()->getName() === 'question' || Request::route()->getName() === 'profile') && array_search(Auth::user()?->id, array_column($question->likes()->get()->toArray(), 'id_user')) !== false) || (Request::route()->getName() !== 'question' && Request::route()->getName() !== 'profile' && array_search(Auth::user()?->id, array_column($question->likes, 'id_user')) !== false))
                     <svg class="voted" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.000244141 12L9.00024 0L18.0002 12H0.000244141Z" fill="#38B6FF" />
                     </svg>
@@ -65,7 +65,7 @@
                 {{ $question->likes_count }}
             </span>
             <span class="question-downvotes" data-id="{{ $question->id }}">
-                @if (((Request::route()->getName() === 'question' || Request::route()->getName() === 'profile') && array_search(Auth::user()?->id, array_column($question->dislikes()->get()->toArray(), 'id_user'))) || (Request::route()->getName() !== 'question' && Request::route()->getName() !== 'profile' && array_search(Auth::user()?->id, array_column($question->dislikes, 'id_user'))))
+                @if (((Request::route()->getName() === 'question' || Request::route()->getName() === 'profile') && array_search(Auth::user()?->id, array_column($question->dislikes()->get()->toArray(), 'id_user')) !== false) || (Request::route()->getName() !== 'question' && Request::route()->getName() !== 'profile' && array_search(Auth::user()?->id, array_column($question->dislikes, 'id_user')) !== false))
                     <svg class="voted" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.000244141 0L9.00024 12L18.0002 0H0.000244141Z" fill="#38B6FF" />
                     </svg>

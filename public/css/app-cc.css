@@ -91,11 +91,6 @@ input.live-search {
   white-space: nowrap;
 }
 
-.group-buttons a:hover {
-  background-color: var(--hover-red);
-  transition: 0.2s;
-}
-
 .sign-in-button {
   background-color: var(--blue);
   margin-right: 20px;
@@ -644,11 +639,11 @@ ul.social-links li:hover svg {
   }
 
   .main-info {
-    grid-column: 1; /* Places this element in the first column */
+    grid-column: 1; 
   }
 
   .right-bar {
-    grid-column: 2; /* Places this element in the second column (200px wide) */
+    grid-column: 2; 
   }
 
   .side-bar-icon,

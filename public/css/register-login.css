@@ -2,16 +2,16 @@
   padding: 200px 0;
 }
 
-.sign-page-right-content #forgot-password {
+#sign-page-right-content #forgot-password {
   font-size: 12px;
   color: var(--dark-blue);
 }
 
-.sign-page-left-content h3 {
+#sign-page-left-content h3 {
   width: 400px;
 }
 
-.sign-page-right-content #forgot-password:hover {
+#sign-page-right-content #forgot-password:hover {
   text-decoration: underline;
 }
 
@@ -26,7 +26,7 @@
   display: none;
 }
 
-.sign-page-main-content {
+#sign-page-main-content {
   background-color: var(--light-gray);
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -37,34 +37,29 @@
   color: var(--dark-blue);
 }
 
-.sign-page-main-content .sign-page-left-content {
+#sign-page-main-content #sign-page-left-content {
   grid-column: 1;
   margin: auto;
 }
 
-.sign-page-main-content .sign-page-left-content .title-text {
+#sign-page-main-content #sign-page-left-content #title-text {
   font-size: 48px;
   margin-bottom: 25px;
 }
 
-.sign-page-main-content .sign-page-left-content .subtitle-text {
+#sign-page-main-content #sign-page-left-content #subtitle-text {
   font-size: 22px;
-  margin-bottom: 100px;
+  margin-bottom: 45px;
 }
 
-.sign-page-main-content .sign-page-left-content .go-to-sign-in {
+#sign-page-main-content #sign-page-left-content #go-to-sign-in {
   background-color: black;
   font-size: 18px;
   padding: 10px 40px;
   border-radius: 5px;
 }
 
-.sign-page-main-content .sign-page-left-content .go-to-sign-in:hover {
-  background-color: var(--blue);
-  transition: 0.2s;
-}
-
-.sign-page-main-content .sign-page-right-content {
+#sign-page-main-content #sign-page-right-content {
   grid-column: 2;
   margin: auto;
   background-color: white;
@@ -73,25 +68,25 @@
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.sign-page-right-content .form-group {
+#sign-page-right-content .form-group {
   margin-top: 20px;
 }
 
-.sign-page-right-content .form-group:first-of-type {
+#sign-page-right-content .form-group:first-of-type {
   margin-top: 0;
 }
 
-.sign-page-right-content .form-group:last-of-type {
+#sign-page-right-content .form-group:last-of-type {
   margin-bottom: 10px;
 }
 
-.sign-page-right-content .form-group label {
+#sign-page-right-content .form-group label {
   display: block;
   font-size: 18px;
   font-weight: bold;
 }
 
-.sign-page-right-content .form-group input:not(#photo) {
+#sign-page-right-content .form-group input:not(#photo) {
   width: 100%;
   padding: 10px;
   border: 1px solid var(--dark-blue);
@@ -106,7 +101,7 @@
   margin-top: 5px
 }
 
-.sign-page-right-content button[type="submit"] {
+#sign-page-right-content button[type="submit"] {
   display: block;
   padding: 10px 30px;
   color: #fff;
@@ -117,12 +112,7 @@
   margin: 30px auto 0 auto;
 }
 
-.sign-page-right-content button[type="submit"]:hover {
-  background-color: #777;
-  transition: 0.2s;
-}
-
-.sign-page-right-content button[type="submit"]:disabled {
+#sign-page-right-content button[type="submit"]:disabled {
   background-color: #777;
   opacity: 0.3;
   transition: 0.2s;

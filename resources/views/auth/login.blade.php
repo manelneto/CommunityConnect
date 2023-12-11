@@ -4,10 +4,10 @@
 @section('main')
     <main class="sign-page-main">
         <section class="sign-page-main-content sign-page-main-content-login">
-            <article class="sign-page-left-content">
-                <h1 class="title-text">Sign In</h1>
-                <h3 class="subtitle-text">Log In to Community Connect to ask questions, answer people's questions, and connect with others.</h3>
-                <a class="go-to-sign-in" href="/register">Don't have an account? Sign Up</a>
+            <article id="sign-page-left-content">
+                <h1 id="title-text">Sign In</h1>
+                <h3 id="subtitle-text">Log In to Community Connect to ask questions, answer people's questions, and connect with others.</h3>
+                <a id="go-to-sign-in" href="/register">Don't have an account? Sign Up</a>
             </article>
             @yield('errors')
             <form class="sign-page-right-content" action="{{ route('login') }}" method="post">

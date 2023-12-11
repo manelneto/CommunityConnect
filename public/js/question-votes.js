@@ -118,7 +118,7 @@ async function dislikeEventListener(event, dislike) {
     } else if (!disliked && liked) {
         const unvoteResponse = await unvoteQuestion(id, true);
         if (unvoteResponse.status === 200) {
-            likeSVG.classList.relace('voted', 'unvoted');
+            likeSVG.classList.replace('voted', 'unvoted');
             likeSVGpath.setAttribute('fill', '#ABACB1');
             likeSVG.nextSibling.textContent = ` ${likesNumber - 1}`;
         }

@@ -70,10 +70,10 @@
         </header>
         <span class="date">Answer added {{ $answer->date }}</span>
         @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
-            <label for="content">Content</label>
-            <textarea id="content" class="description non-movable-textarea" name="content" cols="40" rows="5" placeholder="Type in your answer here">{{ $answer->content }}</textarea>
-            <label for="file">File</label>
-            <input id="file" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt" value="{{ asset($answer->file) }}">
+            <label for="content-{{ $answer->id }}">Content</label>
+            <textarea id="content-{{ $answer->id }}" class="description non-movable-textarea" name="content" cols="40" rows="5" placeholder="Type in your answer here">{{ $answer->content }}</textarea>
+            <label for="file-{{ $answer->id }}">File</label>
+            <input id="file-{{ $answer->id }}" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt" value="{{ asset($answer->file) }}">
             <input type="hidden" name="type" value="answer">
         @else
             <p class="description">{{ $answer->content }}</p>

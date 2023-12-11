@@ -28,7 +28,7 @@ class AnswerVoteController extends Controller {
 
             $question = Question::findOrFail($answer->id_question);
 
-            event(New AnswerVoteEvent($id, $question->title, $user, $vote));
+            event(New AnswerVoteEvent($question->id, $question->title, $answer->id_user, $vote));
 
             return response('Vote added');
         } catch (Exception $e) {

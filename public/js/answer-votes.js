@@ -51,7 +51,7 @@ if (answerLikes) {
             } else if (liked && !disliked) {
                 const unvoteResponse = await unvoteAnswer(id, true);
                 if (unvoteResponse.status === 200) {
-                    likeSVG.classList.remove('voted', 'unvoted');
+                    likeSVG.classList.replace('voted', 'unvoted');
                     likeSVGpath.setAttribute('fill', '#ABACB1');
                     likeSVG.previousSibling.textContent = `${likesNumber - 1} `;
                 } else {
@@ -61,14 +61,14 @@ if (answerLikes) {
             } else if (!liked && disliked) {
                 const unvoteResponse = await unvoteAnswer(id, false);
                 if (unvoteResponse.status === 200) {
-                    dislikeSVG.classList.remove('voted', 'unvoted');
+                    dislikeSVG.classList.replace('voted', 'unvoted');
                     dislikeSVGpath.setAttribute('fill', '#ABACB1');
                     dislikeSVG.previousSibling.textContent = `${dislikesNumber - 1} `;
                 }
 
                 const voteResponse = await voteAnswer(id, true);
                 if (voteResponse.status === 200) {
-                    likeSVG.classList.remove('unvoted', 'voted');
+                    likeSVG.classList.replace('unvoted', 'voted');
                     likeSVGpath.setAttribute('fill', '#38B6FF');
                     likeSVG.previousSibling.textContent = `${likesNumber + 1} `;
                 } else {

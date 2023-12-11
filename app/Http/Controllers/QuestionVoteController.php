@@ -25,7 +25,7 @@ class QuestionVoteController extends Controller {
                 'likes' => $vote,
             ]);
 
-            event(New QuestionVoteEvent($id, $question->title, $user, $vote));
+            event(New QuestionVoteEvent($id, $question->title, $question->id_user, $vote));
 
             return response('Vote added');
         } catch (Exception $e) {

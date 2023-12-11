@@ -104,7 +104,7 @@ channel.bind('voteAnswer', function(notification) {
       const h3 = document.createElement('h3');
       h3.innerHTML = 'New vote on your answer';
 
-      const p = document.createElement('a');
+      const a = document.createElement('a');
       a.href = `/questions/${notification.id_question}`;
       a.innerHTML = notification.message;
       a.style.color = 'black';

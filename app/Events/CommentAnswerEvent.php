@@ -19,7 +19,7 @@ class CommentAnswerEvent implements ShouldBroadcast
 
     public function __construct(int $id_question, string $title, string $id_user)
     {
-        $this->message = 'You received a new comment on your answer to the question: ' . $title . '!';
+        $this->message = 'You received a new comment on your answer to the question: "' . $title . '"!';
         $this->id_question = $id_question;
         $this->id_user = $id_user;
     }

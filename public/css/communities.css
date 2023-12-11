@@ -12,6 +12,10 @@
     padding-left: 2rem;
 }
 
+#communities-listing h3 {
+    display:none;
+}
+
 #svg-communities {
     padding-left: 2rem;
 }

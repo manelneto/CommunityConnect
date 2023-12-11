@@ -7,6 +7,10 @@
   color: var(--dark-blue);
 }
 
+.sign-page-left-content h3 {
+  width: 400px;
+}
+
 .sign-page-right-content #forgot-password:hover {
   text-decoration: underline;
 }

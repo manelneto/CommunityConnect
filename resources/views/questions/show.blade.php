@@ -6,12 +6,12 @@
         @yield('errors')
         @include('partials.question', ['question' => $question])
         <details class="comments">
-            <summary>Question Comments</summary>
+            <summary class="summary-comments">Question Comments</summary>
             @foreach ($question->comments as $comment)
                 @include('partials.question_comment', ['comment' => $comment])
             @endforeach
             @auth
-                <article class="leave">
+                <article class="leave leave-comment">
                     <h2>Leave a Comment</h2>
                     <form action="/question-comments" method="post">
                         @csrf
@@ -48,7 +48,7 @@
                         @include('partials.answer_comment', ['comment' => $comment])
                     @endforeach
                     @auth
-                        <article class="leave">
+                        <article class="leave leave-comment">
                             <h2>Leave a Comment</h2>
                             <form action="/answer-comments" method="post">
                                 @csrf

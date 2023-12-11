@@ -104,7 +104,9 @@ class AnswerController extends Controller {
     {
         $id = $request->get('id');
         $answer = Answer::findOrFail($id);
-        $this->authorize('correct', $answer);
+        $question = Question::findOrFail($answer->id_question);
+
+        $this->authorize('correct', $question);
         try {
             $answer->correct = true;
             $answer->save();

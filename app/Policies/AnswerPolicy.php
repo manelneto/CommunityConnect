@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Answer;
+use App\Models\Question;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
@@ -45,14 +45,14 @@ class AnswerPolicy {
 
     }
 
-    public function correct(User $user, Answer $answer): bool
+    public function correct(User $user, Question $question): bool
     {
-        return ($user->id === Auth::user()->id) && (($answer->id_user === $user->id || Auth::user()->administrator) || $this->isModeratorOfCommunity($answer));
+        return ($user->id === Auth::user()->id) && (($question->id_user === $user->id || Auth::user()->administrator) || $this->isModeratorOfCommunity($question));
 
     }
 
-    public function incorrect(User $user, Answer $answer): bool
+    public function incorrect(User $user, Question $question): bool
     {
-        return ($user->id === Auth::user()->id) && (($answer->id_user === $user->id || Auth::user()->administrator) || $this->isModeratorOfCommunity($answer));
+        return ($user->id === Auth::user()->id) && (($question->id_user === $user->id || Auth::user()->administrator) || $this->isModeratorOfCommunity($question));
     }
 }

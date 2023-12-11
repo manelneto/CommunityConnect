@@ -106,32 +106,33 @@ class AnswerController extends Controller {
 
     public function markCorrect(Request $request)
     {
-        $id = $request->get('id');
-        $answer = Answer::findOrFail($id);
-        $question = Question::findOrFail($answer->id_question);
-
-        $this->authorize('correct', $question);
         try {
+            $id = $request->get('id');
+            $answer = Answer::findOrFail($id);
+            $question = Question::findOrFail($answer->id_question);
+            $this->authorize('correct', [Answer::class, $question]);
+
             $answer->correct = true;
             $answer->save();
             return response('Answer marked as correct!');
-        }
-        catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return response("Answer not found.");
         }
     }
 
     public function markIncorrect(Request $request)
     {
-        $id = $request->get('id');
-        $answer = Answer::findOrFail($id);
-        $this->authorize('correct', $answer);
         try {
+            $id = $request->get('id');
+            $answer = Answer::findOrFail($id);
+            $question = Question::findOrFail($answer->id_question);
+
+            $this->authorize('correct', [Answer::class, $question]);
+
             $answer->correct = false;
             $answer->save();
-            return response('Delete answer mark!');
-        }
-        catch (ModelNotFoundException $e) {
+            return response('Deleted answer mark!');
+        } catch (ModelNotFoundException $e) {
             return response("Answer not found.");
         }
     }

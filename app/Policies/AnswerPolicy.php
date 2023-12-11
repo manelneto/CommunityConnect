@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Answer;
 use App\Models\User;
 use App\Models\Question;
 
@@ -45,14 +46,13 @@ class AnswerPolicy {
 
     }
 
-    public function correct(User $user, Question $question): bool
+    public function correct(User $user, Question $question)
     {
-        return ($user->id === Auth::user()->id) && (($question->id_user === $user->id || Auth::user()->administrator) || $this->isModeratorOfCommunity($question));
-
+        return ($user->id === Auth::user()->id) && ($question->id_user === $user->id || Auth::user()->administrator || $this->isModeratorOfCommunity($question));
     }
 
     public function incorrect(User $user, Question $question): bool
     {
-        return ($user->id === Auth::user()->id) && (($question->id_user === $user->id || Auth::user()->administrator) || $this->isModeratorOfCommunity($question));
+        return ($user->id === Auth::user()->id) && ($question->id_user === $user->id || Auth::user()->administrator || $this->isModeratorOfCommunity($question));
     }
 }

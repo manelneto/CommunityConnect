@@ -83,9 +83,9 @@
         @endif
         @if (Auth::user()?->id === $answer->question->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
             @if ($answer->correct)
-                <button data-id="{{ $answer->id }}" class="mark mark-incorrect" formaction="../../answers/{{ $answer->id }}/incorrect">Remove correct mark</button>
+                <button data-id="{{ $answer->id }}" class="mark mark-incorrect">Remove correct mark</button>
             @else
-                <button data-id="{{ $answer->id }}" class="mark mark-correct" formaction="../../answers/{{ $answer->id }}/correct">Mark as correct</button>
+                <button data-id="{{ $answer->id }}" class="mark mark-correct">Mark as correct</button>
             @endif
         @endif
         @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))

@@ -62,7 +62,7 @@
                     <button class="admin-button" type="submit">Add</button>
                 </form>
             </details>
-            <details>
+            <details id="last-tag">
                 <summary>Delete tag</summary>
                 <form action="../tags/delete" method="post" class="form-admin">
                     @csrf

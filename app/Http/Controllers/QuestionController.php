@@ -256,6 +256,10 @@ class QuestionController extends Controller
         $this->authorize('destroy', $question);
         try {
             $question->delete();
+
+            $fileController = new FileController();
+            $fileController->delete('question', $id);
+
             return redirect('questions/');
         } catch (ModelNotFoundException $e) {
             return "Question not found.";

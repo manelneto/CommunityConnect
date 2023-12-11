@@ -4,14 +4,14 @@ let unblocked = [];
 let tagsAdmin = [];
 
 window.onload = async () => {
-    const url = '../api/users';
+    const url = '../../api/users';
     const response = await fetch(url);
     const allUsers = await response.json();
     users = allUsers.map(user => user.username).filter(Boolean);
     blocked = allUsers.map(user => user.username).filter(user => user.blocked);
     unblocked = allUsers.map(user => user.username).filter(user => !user.blocked);
 
-    const urlTags = '../api/tags';
+    const urlTags = '../../api/tags';
     const responseTags = await fetch(urlTags);
     const allTags = await responseTags.json();
     tagsAdmin = allTags.map(tag => tag.name).filter(Boolean);
@@ -110,6 +110,31 @@ if (inputTags) {
             event.preventDefault();
             if (matchingTags.length > 0) {
                 inputTags.value = matchingTags[index];
+                index = (index + 1) % matchingTags.length;
+            }
+        }
+
+    });
+}
+
+const questionTags = document.querySelector('#add-tag');
+if (questionTags) {
+    let matchingTags = [];
+    let index = 0;
+
+    questionTags.addEventListener('input', function (event) {
+        const tagName = questionTags.value.toUpperCase();
+
+        if (tagName === '') return;
+
+        matchingTags = tagsAdmin.filter(tag => tag && tag.toUpperCase().startsWith(tagName)).filter(Boolean);
+    });
+
+    questionTags.addEventListener('keydown', async function (event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            if (matchingTags.length > 0) {
+                questionTags.value = matchingTags[index];
                 index = (index + 1) % matchingTags.length;
             }
         }

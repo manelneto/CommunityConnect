@@ -1,12 +1,12 @@
 let currentPage = 1;
 let isFetching = false;
 
-const filterButton = document.querySelector(".filters-button");
+const filterButton = document.querySelector("#filters-button");
 
 if (filterButton) {
   filterButton.addEventListener("click", function (event) {
     event.preventDefault();
-    const questionsFilters = document.querySelector(".questions-filters");
+    const questionsFilters = document.querySelector("#questions-filters");
     if (questionsFilters) {
       questionsFilters.toggleAttribute("hidden");
     }

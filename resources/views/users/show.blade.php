@@ -12,7 +12,7 @@
                     @foreach ($notifications as $notification)
                     <li class="profile notification">
                         <p class="notification-text">{{ $notification->content }}</p>
-                        <p class="notification-date">{{ $notification->date }}</p>
+                        <p class="notification-date">{{ $notification->date->format('Y-m-d') }}</p>
                         @if (!$notification->read)
                             <img id="{{ $notification->id }}" class="view-icon" src="{{ asset('assets/view.png') }}" alt="View-icon"/>
                         @endif

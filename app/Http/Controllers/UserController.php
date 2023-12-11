@@ -79,7 +79,7 @@ class UserController extends Controller
             $questions = Question::with(['user', 'community', 'likes', 'dislikes'])->withCount(['answers', 'likes', 'dislikes'])->where('id_user', $id)->get();
             $answers = Answer::with(['user.communitiesRating', 'question', 'likes', 'dislikes'])->withCount(['likes', 'dislikes'])->where('id_user', $id)->get();
             $reputations = Reputation::with(['user', 'community'])->where('id_user', $id)->get();
-            $notifications = Notification::with('user')->where('id_user', $id)->get();
+            $notifications = Notification::with('user')->where('id_user', $id)->orderBy('date', 'desc')->get();
             $unread = Notification::with('user')->where('id_user', $id)->where('read', false)->get();
             $moderatorCommunities = $user->moderatorCommunities;
             return view('users.show', [

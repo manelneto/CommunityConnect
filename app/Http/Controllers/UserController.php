@@ -194,6 +194,10 @@ class UserController extends Controller
 
         try {
             $user->delete();
+
+            $fileController = new FileController();
+            $fileController->delete('profile', $id);
+
             if (Auth::user()->administrator) {
                 return redirect('users/' . $id);
             }

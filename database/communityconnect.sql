@@ -335,7 +335,7 @@ CREATE TRIGGER prevent_self_vote_on_answer
 CREATE OR REPLACE FUNCTION update_content_on_user_deletion() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-    UPDATE users SET username = CONCAT('anonymous', OLD.id), email = CONCAT('anonymous', OLD.id), password = 'anonymous', image = 'profile/default.png' WHERE id = OLD.id;
+    UPDATE users SET username = CONCAT('anonymous', OLD.id), email = CONCAT('anonymous', OLD.id), password = 'anonymous' WHERE id = OLD.id;
     RETURN NULL;
 END
 $BODY$

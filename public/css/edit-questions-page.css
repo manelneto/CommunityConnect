@@ -68,6 +68,10 @@
   display: inline;
 }
 
+#question input {
+  width: 100%;
+}
+
 .content-right {
   display: flex;
   flex-direction: column;

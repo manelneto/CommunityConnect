@@ -5,7 +5,7 @@
         <section id="questions-info">
             <h2>Showing</h2>
             <article id="questions-stats">
-                <h3>{{ $questions->total }} questions</h3>
+                <h3 id="questions-number">{{ $questions->total }} questions</h3>
                 <button id="filters-button">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="16" height="16" viewBox="0 0 256 256" xml:space="preserve">
                         <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">

@@ -6,7 +6,7 @@
         <section class="sign-page-main-content sign-page-main-content-login">
             <article class="sign-page-left-content">
                 <h1 class="title-text">Sign In</h1>
-                <h3 class="subtitle-text">Log In to Community Connect to ask <br> questions, answer people's questions, and <br> connect with others.</h3>
+                <h3 class="subtitle-text">Log In to Community Connect to ask questions, answer people's questions, and connect with others.</h3>
                 <a class="go-to-sign-in" href="/register">Don't have an account? Sign Up</a>
             </article>
             @yield('errors')
@@ -15,12 +15,12 @@
                 <div class="form-group">
                     <label for="username_or_email">Username or Email*</label>
                     <input type="text" id="username_or_email" name="username_or_email" required placeholder="Enter username or email here" class="user-details-input">
-                    <span class="username-or-email-error">Username or Email does <b>not</b> exist</span>
+                    <p class="username-or-email-error">Username or Email does <b>not</b> exist</p>
                 </div>
                 <div id="password-group" class="form-group">
                     <label for="password">Password *</label>
                     <input type="password" id="password" name="password" required placeholder="Enter password here" class="user-details-input">
-                    <span class="password-error">Password needs to be at least 8 characters long</span>
+                    <p class="password-error">Password needs to be at least 8 characters long</p>
                 </div>
                 <div id="remember-me-group">
                     <input type="checkbox" id="remember-me" name="remember-me">

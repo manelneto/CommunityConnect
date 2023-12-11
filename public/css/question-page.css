@@ -30,10 +30,20 @@
 
 .leave > form > textarea,
 .non-movable-textarea {
+  display: flex;
   resize: none;
   border: 1px solid #c6c6c6;
   font-size: 18px;
   margin-bottom: 20px;
+}
+
+.leave > form > input {
+  margin-bottom: 1rem;
+}
+
+.leave > form > label {
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
 .answer-details {

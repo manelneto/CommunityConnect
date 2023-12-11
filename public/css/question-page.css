@@ -5,7 +5,15 @@
 }
 
 .comments {
-  /* TODO */
+
+}
+
+.summary-comments{
+  background-color: white;
+}
+
+.leave.leave-comment {
+  border-top:none;
 }
 
 .experts-stars{

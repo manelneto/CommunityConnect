@@ -92,11 +92,9 @@ class AnswerController extends Controller {
         $answer = Answer::findOrFail($id);
         $this->authorize('destroy', $answer);
         try {
-            $answer->delete();
-
             $fileController = new FileController();
             $fileController->delete('answer', $id);
-
+            $answer->delete();
             return redirect('questions/' . $answer->id_question);
         }
         catch (ModelNotFoundException $e) {

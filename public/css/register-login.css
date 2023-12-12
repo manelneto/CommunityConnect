@@ -1,13 +1,13 @@
-#sign-page-right-content #forgot-password {
+#sign-page-form #forgot-password{
   font-size: 12px;
   color: var(--dark-blue);
 }
 
-#sign-page-left-content h3 {
+#sign-page-content h3, #register-content h3{
   width: 470px;
 }
 
-#sign-page-right-content #forgot-password:hover {
+#sign-page-form #forgot-password:hover {
   text-decoration: underline;
 }
 
@@ -26,35 +26,38 @@
   background-color: var(--light-gray);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 10% 0;
   justify-content: center;
-  margin: auto;
   color: var(--dark-blue);
 }
 
-#sign-page-main-content #sign-page-left-content {
+#sign-page-content {
   grid-column: 1;
-  margin: auto;
+  margin-top: 8rem;
 }
 
-#sign-page-main-content #sign-page-left-content #title-text {
+#register-content {
+  grid-column: 1;
+  margin-top: 12rem;
+}
+
+#sign-page-main-content #sign-page-content #title-text, #sign-page-main-content #register-content #title-text{
   font-size: 48px;
   margin-bottom: 25px;
 }
 
-#sign-page-main-content #sign-page-left-content #subtitle-text {
+#sign-page-main-content #sign-page-content #subtitle-text, #sign-page-main-content #register-content #subtitle-text {
   font-size: 22px;
   margin-bottom: 45px;
 }
 
-#sign-page-main-content #sign-page-left-content #go-to-sign-in {
+#sign-page-main-content #sign-page-content #go-to-sign-in,#sign-page-main-content #register-content #go-to-sign-in  {
   background-color: black;
   font-size: 18px;
   padding: 10px 40px;
   border-radius: 5px;
 }
 
-#sign-page-main-content #sign-page-right-content {
+#sign-page-form, #register-page-form {
   grid-column: 2;
   margin: auto;
   background-color: white;
@@ -63,25 +66,34 @@
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-#sign-page-right-content .form-group {
+#register-page-form{
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+#sign-page-form{
+  margin-top: 5rem;
+}
+
+#sign-page-form .form-group, #register-page-form .form-group{
   margin-top: 20px;
 }
 
-#sign-page-right-content .form-group:first-of-type {
+#sign-page-form .form-group:first-of-type, #register-page-form .form-group:first-of-type{
   margin-top: 0;
 }
 
-#sign-page-right-content .form-group:last-of-type {
+#sign-page-form .form-group:last-of-type, #register-page-form .form-group:last-of-type {
   margin-bottom: 10px;
 }
 
-#sign-page-right-content .form-group label {
+#sign-page-form .form-group label, #register-page-form .form-group label{
   display: block;
   font-size: 18px;
   font-weight: bold;
 }
 
-#sign-page-right-content .form-group input:not(#photo) {
+#sign-page-form .form-group input:not(#photo), #register-page-form .form-group input:not(#photo){
   width: 100%;
   padding: 10px;
   border: 1px solid var(--dark-blue);
@@ -96,7 +108,7 @@
   margin-top: 5px
 }
 
-#sign-page-right-content button[type="submit"] {
+#sign-page-form button[type="submit"], #register-page-form button[type="submit"]{
   display: block;
   padding: 10px 30px;
   color: #fff;
@@ -107,7 +119,7 @@
   margin: 30px auto 0 auto;
 }
 
-#sign-page-right-content button[type="submit"]:disabled {
+#sign-page-form button[type="submit"]:disabled, #register-page-form button[type="submit"]:disabled{
   background-color: #777;
   opacity: 0.3;
   transition: 0.2s;

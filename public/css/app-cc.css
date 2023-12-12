@@ -12,10 +12,11 @@
 
 body {
   font-family: "Lato", sans-serif;
+  height: 100vh;
   background-color: var(--light-gray);
   display:grid;
-  grid-template-rows: [body-initial] 80px[body-medium1] auto [body-medium2] 70px [body-end];
-  grid-template-columns: [body-col-initial] 20% [body-col-medium1] auto [body-col-medium2] 17% [body-col-end];
+  grid-template-rows: [body-initial] 80px [body-medium1] auto [body-medium2] 70px [body-end];
+  grid-template-columns: [body-col-initial] 20% [body-col-medium1] 63% [body-col-medium2] 17% [body-col-end];
 }
 
 .website-header {
@@ -27,8 +28,11 @@ body {
 main {
   grid-column: body-col-medium1 / body-col-medium2;
   grid-row: body-medium1 / body-medium2;
-  border-right: 1px solid #c6c6c6;
   background-color: white;
+}
+
+.registers{
+  background-color: var(--light-gray);
 }
 
 .menu-nav {
@@ -46,6 +50,7 @@ main {
 .right-bar {
   grid-column: body-col-medium2 / body-col-end;
   grid-row: body-medium1 / body-medium2;
+  border-left: 1px solid #c6c6c6;
 }
 
 a {

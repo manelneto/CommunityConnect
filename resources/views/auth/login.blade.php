@@ -2,15 +2,15 @@
 @include ('layouts.errors')
 
 @section('main')
-    <main>
+    <main class="registers">
         <section id="sign-page-main-content" class="sign-page-main-content-login">
-            <article id="sign-page-left-content">
+            <article id="sign-page-content">
                 <h1 id="title-text">Sign In</h1>
                 <h3 id="subtitle-text">Log In to Community Connect to ask questions, answer people's questions, and connect with others.</h3>
                 <a id="go-to-sign-in" href="/register">Don't have an account? Sign Up</a>
             </article>
             @yield('errors')
-            <form id="sign-page-right-content" action="{{ route('login') }}" method="post">
+            <form id="sign-page-form" action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="form-group">
                     <label for="username_or_email">Username or Email*</label>

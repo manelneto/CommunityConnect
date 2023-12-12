@@ -633,7 +633,7 @@ CREATE TRIGGER new_badge_notification
 CREATE OR REPLACE FUNCTION award_badge_on_first_question() RETURNS TRIGGER AS 
 $BODY$
 BEGIN
-    IF (SELECT COUNT(*) FROM question WHERE id_user = NEW.id_user) = 1 THEN
+    IF (SELECT COUNT(*) FROM question WHERE id_user = NEW.id_user) = 1 AND NOT EXISTS (SELECT * FROM user_earns_badge WHERE id_user = NEW.id_user AND id_badge = 1) THEN
         INSERT INTO user_earns_badge (id_user, id_badge) VALUES (NEW.id_user, 1);
     END IF;
     RETURN NEW;
@@ -649,7 +649,7 @@ CREATE TRIGGER award_badge_on_first_question
 CREATE OR REPLACE FUNCTION award_badge_on_first_answer() RETURNS TRIGGER AS 
 $BODY$
 BEGIN
-    IF (SELECT COUNT(*) FROM answer WHERE id_user = NEW.id_user) = 1 THEN
+    IF (SELECT COUNT(*) FROM answer WHERE id_user = NEW.id_user) = 1 AND NOT EXISTS (SELECT * FROM user_earns_badge WHERE id_user = NEW.id_user AND id_badge = 2) THEN
         INSERT INTO user_earns_badge (id_user, id_badge) VALUES (NEW.id_user, 2);
     END IF;
     RETURN NEW;
@@ -665,7 +665,7 @@ CREATE TRIGGER award_badge_on_first_answer
 CREATE OR REPLACE FUNCTION award_badge_on_first_comment_question() RETURNS TRIGGER AS 
 $BODY$
 BEGIN
-    IF (SELECT COUNT(*) FROM question_comment WHERE id_user = NEW.id_user) = 1 THEN
+    IF (SELECT COUNT(*) FROM question_comment WHERE id_user = NEW.id_user) = 1 AND NOT EXISTS (SELECT * FROM user_earns_badge WHERE id_user = NEW.id_user AND id_badge = 3) THEN
         INSERT INTO user_earns_badge (id_user, id_badge) VALUES (NEW.id_user, 3);
     END IF;
     RETURN NEW;
@@ -681,7 +681,7 @@ CREATE TRIGGER award_badge_on_first_comment_question
 CREATE OR REPLACE FUNCTION award_badge_on_first_comment_answer() RETURNS TRIGGER AS 
 $BODY$
 BEGIN
-    IF (SELECT COUNT(*) FROM answer_comment WHERE id_user = NEW.id_user) = 1 THEN
+    IF (SELECT COUNT(*) FROM answer_comment WHERE id_user = NEW.id_user) = 1 AND NOT EXISTS (SELECT * FROM user_earns_badge WHERE id_user = NEW.id_user AND id_badge = 4) THEN
         INSERT INTO user_earns_badge (id_user, id_badge) VALUES (NEW.id_user, 4);
     END IF;
     RETURN NEW;
@@ -697,7 +697,7 @@ CREATE TRIGGER award_badge_on_first_comment_answer
 CREATE OR REPLACE FUNCTION award_badge_on_first_100_question() RETURNS TRIGGER AS 
 $BODY$
 BEGIN
-    IF (SELECT COUNT(*) FROM question WHERE id_user = NEW.id_user) = 100 THEN
+    IF (SELECT COUNT(*) FROM question WHERE id_user = NEW.id_user) = 100 AND NOT EXISTS (SELECT * FROM user_earns_badge WHERE id_user = NEW.id_user AND id_badge = 5) THEN
         INSERT INTO user_earns_badge (id_user, id_badge) VALUES (NEW.id_user, 5);
     END IF;
     RETURN NEW;
@@ -713,7 +713,7 @@ CREATE TRIGGER award_badge_on_first_100_question
 CREATE OR REPLACE FUNCTION award_badge_on_first_100_answer() RETURNS TRIGGER AS 
 $BODY$
 BEGIN
-    IF (SELECT COUNT(*) FROM answer WHERE id_user = NEW.id_user) = 100 THEN
+    IF (SELECT COUNT(*) FROM answer WHERE id_user = NEW.id_user) = 100 AND NOT EXISTS (SELECT * FROM user_earns_badge WHERE id_user = NEW.id_user AND id_badge = 6) THEN
         INSERT INTO user_earns_badge (id_user, id_badge) VALUES (NEW.id_user, 6);
     END IF;
     RETURN NEW;

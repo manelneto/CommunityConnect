@@ -24,7 +24,7 @@
                 <summary>Can I vote on questions and answers?</summary>
                 <p class="form-faq">Yes, the platform encourages interaction from authenticated users by allowing them to like/dislike questions and answers. This helps highlight the most relevant and helpful content.</p>
             </details>
-            <details>
+            <details id="last-faq">
                 <summary>How is the rating of an authenticated user calculated?</summary>
                 <p class="form-faq">Ratings are calculated based on the likes and dislikes received by a user's answers within each community.</p>
             </details>

@@ -167,7 +167,7 @@ class UserController extends Controller
         $this->authorize('block_user', User::class);
 
         try{
-            $user->blocked = !$user->blocked;
+            $user->blocked = true;
             $user->save();
             return redirect('admin');
         } catch (ModelNotFoundException $e) {
@@ -180,7 +180,7 @@ class UserController extends Controller
         $this->authorize('unblock_user', User::class);
 
         try{
-            $user->blocked = !$user->blocked;
+            $user->blocked = false;
             $user->save();
             return redirect('admin');
         } catch (ModelNotFoundException $e) {

@@ -7,9 +7,9 @@ window.onload = async () => {
     const url = '../../api/users';
     const response = await fetch(url);
     const allUsers = await response.json();
-    users = allUsers.map(user => user.username).filter(Boolean);
-    blocked = allUsers.map(user => user.username).filter(user => user.blocked);
-    unblocked = allUsers.map(user => user.username).filter(user => !user.blocked);
+    users = allUsers.map(user => [user.username, user.id]).filter(Boolean);
+    blocked = allUsers.filter(user => user.blocked).map(user => [user.username, user.id]);
+    unblocked = allUsers.filter(user => !user.blocked).map(user => [user.username, user.id]);
 
     const urlTags = '../../api/tags';
     const responseTags = await fetch(urlTags);
@@ -19,23 +19,24 @@ window.onload = async () => {
 
 const inputUser = document.querySelector('#user');
 if (inputUser) {
-    let matchingTags = [];
+    let matchingUsers = [];
     let index = 0;
     
     inputUser.addEventListener('input', function (event) {
         const username = inputUser.value.toUpperCase();
     
         if (username === '') return;
-    
-        matchingTags = users.filter(user => user && user.toUpperCase().startsWith(username)).filter(Boolean);
+
+        matchingUsers = users.filter(user => user && user[0].toUpperCase().startsWith(username)).filter(Boolean);
     });
 
     inputUser.addEventListener('keydown', async function (event) {
         if (event.key === 'Tab') {
             event.preventDefault();
-            if (matchingTags.length > 0) {
-                inputUser.value = matchingTags[index];
-                index = (index + 1) % matchingTags.length;
+            if (matchingUsers.length > 0) {
+                index = (index + 1) % matchingUsers.length;
+                inputUser.value = matchingUsers[index][0];
+                inputUser.setAttribute('value', matchingUsers[index][1]);
             }
         }
 
@@ -44,23 +45,25 @@ if (inputUser) {
 
 const inputBlock = document.querySelector('#block-user');
 if (inputBlock) {
-    let matchingTags = [];
+    let matchingUsers = [];
     let index = 0;
     
     inputBlock.addEventListener('input', function (event) {
         const username = inputBlock.value.toUpperCase();
     
         if (username === '') return;
-    
-        matchingTags = unblocked.filter(user => user && user.toUpperCase().startsWith(username)).filter(Boolean);
+
+        matchingUsers = unblocked.filter(user => user && user[0].toUpperCase().startsWith(username)).filter(Boolean);
     });
 
     inputBlock.addEventListener('keydown', async function (event) {
+        const user = document.querySelector('#block-user + input');
         if (event.key === 'Tab') {
             event.preventDefault();
-            if (matchingTags.length > 0) {
-                inputBlock.value = matchingTags[index];
-                index = (index + 1) % matchingTags.length;
+            if (matchingUsers.length > 0) {
+                index = (index + 1) % matchingUsers.length;
+                inputBlock.value = matchingUsers[index][0];
+                user.value = matchingUsers[index][1];
             }
         }
 
@@ -69,23 +72,26 @@ if (inputBlock) {
 
 const inputUnblock = document.querySelector('#unblock-user');
 if (inputUnblock) {
-    let matchingTags = [];
+    let matchingUsers = [];
     let index = 0;
     
     inputUnblock.addEventListener('input', function (event) {
         const username = inputUnblock.value.toUpperCase();
     
         if (username === '') return;
-    
-        matchingTags = blocked.filter(user => user && user.toUpperCase().startsWith(username)).filter(Boolean);
+
+        matchingUsers = blocked.filter(user => user && user[0].toUpperCase().startsWith(username)).filter(Boolean);
     });
 
     inputUnblock.addEventListener('keydown', async function (event) {
+        const user = document.querySelector('#unblock-user + input');
         if (event.key === 'Tab') {
             event.preventDefault();
-            if (matchingTags.length > 0) {
-                inputUnblock.value = matchingTags[index];
-                index = (index + 1) % matchingTags.length;
+            if (matchingUsers.length > 0) {
+                index = (index + 1) % matchingUsers.length;
+                inputUnblock.value = matchingUsers[index][0];
+                inputUnblock.setAttribute('value', matchingUsers[index][1]);
+                user.value = matchingUsers[index][1];
             }
         }
 

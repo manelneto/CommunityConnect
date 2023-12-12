@@ -55,9 +55,6 @@ summary {
     padding: 10px;
     cursor: pointer;
     background-color: var(--light-gray);
-}
-
-summary {
     list-style-type: none;
 }
 

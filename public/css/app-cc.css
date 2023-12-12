@@ -110,17 +110,6 @@ fieldset {
   height: 80px;
 }
 
-div.group-buttons {
-  color: white;
-  height: 80px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  left: 50%;
-  transform: translate(-50%);
-}
-
 .main-search-button {
   position: absolute;
   margin-top: 25px;
@@ -188,9 +177,6 @@ input.live-search {
 .sign-in-button {
   background-color: var(--blue);
   margin-right: 20px;
-}
-
-.sign-up-button {
   background-color: #777;
 }
 
@@ -217,13 +203,18 @@ input.live-search {
 
 .main-info {
   background-color: white;
-
 }
 
 .group-buttons {
   display: flex;
   align-items: center;
   flex-direction: row;
+  color: white;
+  height: 80px;
+  position: relative;
+  justify-content: center;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 /* navigation bar */
@@ -237,26 +228,6 @@ input.live-search {
   display: flex;
   justify-content: center;
   padding-left: 1rem;
-}
-
-.main-search {
-  left: 50%;
-  transform: translate(-50%);
-  position: relative;
-  display: inline-block;
-  height: 100%;
-}
-
-.main-search-button {
-  position: absolute;
-  margin-top: 25px;
-  right: 5px;
-  padding-left: 0px;
-  cursor: pointer;
-}
-
-.main-search-button img {
-  width: 30px;
 }
 
 /* Nav Bar */

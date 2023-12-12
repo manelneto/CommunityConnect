@@ -4,10 +4,6 @@
   border-left: 1px solid #c6c6c6;
 }
 
-.comments {
-
-}
-
 .summary-comments{
   background-color: white;
 }
@@ -17,6 +13,8 @@
 }
 
 .experts-stars{
+  margin-left: 0;
+  margin-right: 10px;
   width: 20px;
   height: 20px;
 }

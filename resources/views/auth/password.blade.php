@@ -2,13 +2,13 @@
 @include ('layouts.errors')
 
 @section('main')
-    <main class="sign-page-main-content">
-        <article class="sign-page-left-content">
-            <h1 class="title-text">Reset your Password</h1>
-            <h3 class="subtitle-text">Reset your Community Connect password to ask <br> questions, answer people's questions, and <br> connect with others.</h3>
+    <main id="sign-page-main-content">
+        <article id="sign-page-left-content">
+            <h1 id="title-text">Reset your Password</h1>
+            <h3 id="subtitle-text">Reset your Community Connect password to ask questions, answer people's questions, and connect with others.</h3>
         </article>
         @yield('errors')
-        <form class="sign-page-right-content" action="{{ route('update-password') }}" method="post">
+        <form id="sign-page-right-content" action="{{ route('update-password') }}" method="post">
             @csrf
             <input type="hidden" name="token" value="{{ $token }}">
             <input type="hidden" name="username" value="{{ $username }}">

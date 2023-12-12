@@ -30,14 +30,19 @@
   color: var(--dark-blue);
 }
 
+.registers{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 #sign-page-content {
   grid-column: 1;
-  margin-top: 8rem;
+  margin-top: 2rem;
 }
 
 #register-content {
   grid-column: 1;
-  margin-top: 12rem;
 }
 
 #sign-page-main-content #sign-page-content #title-text, #sign-page-main-content #register-content #title-text{
@@ -67,12 +72,9 @@
 }
 
 #register-page-form{
+  height: 470px;
   margin-top: 3rem;
-  margin-bottom: 3rem;
-}
-
-#sign-page-form{
-  margin-top: 5rem;
+  margin-bottom:3rem;
 }
 
 #sign-page-form .form-group, #register-page-form .form-group{
@@ -116,7 +118,7 @@
   border-radius: 5px;
   font-size: 18px;
   font-weight: bold;
-  margin: 30px auto 0 auto;
+  margin: 30px auto 10px auto;
 }
 
 #sign-page-form button[type="submit"]:disabled, #register-page-form button[type="submit"]:disabled{

@@ -1,11 +1,5 @@
-#edit-profile {
-    font-family: Arial, sans-serif;
-    width: 85%;
-    margin: 50px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+form#edit-profile {
+    margin: 2rem;
 }
 
 #edit-profile h1 {

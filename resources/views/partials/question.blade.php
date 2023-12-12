@@ -27,23 +27,21 @@
             @endif             
         </div>
         <h2 class="question-title"><a href="{{ route('question', ['id' => $question->id]) }}">{{ $question->title }}</a></h2>
-        <p class="question-description">
-            {{ $question->content }}
-
-            <!-- Edit Question Button -->
-
-            @if (Request::route()->getName() == 'question' && 
-            (
-                $question->id_user == Auth::user()?->id ||
-                Auth::user()?->administrator ||
-                in_array($question->id_community, Auth::user()?->moderatorCommunities->pluck('id')->toArray() ?? [])
-            ))
-            <a href="{{ route('edit-question', ['id' => $question->id]) }}" class="edit-question-button">Edit</a>
-            @endif
-
-        </p>
+        @foreach(explode(PHP_EOL, $question->content) as $paragraph)
+            <p class="question-description">{{ $paragraph }}</p>
+        @endforeach
         @if ($question->file)
             <p class="file"><a href="{{ asset($question->file) }}" target="_blank">Download file here</a></p>
+        @endif
+        <!-- Edit Question Button -->
+
+        @if (Request::route()->getName() == 'question' &&
+        (
+            $question->id_user == Auth::user()?->id ||
+            Auth::user()?->administrator ||
+            in_array($question->id_community, Auth::user()?->moderatorCommunities->pluck('id')->toArray() ?? [])
+        ))
+            <a href="{{ route('edit-question', ['id' => $question->id]) }}" class="edit-question-button">Edit</a>
         @endif
         <div class="answers-details">
             <a href="{{ route('question', ['id' => $question->id]) . '#answers' }}" class="question-answer-btn">

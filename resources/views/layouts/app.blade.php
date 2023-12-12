@@ -56,7 +56,6 @@
         <script src="{{ asset('js/autocomplete.js') }} " defer></script>
         <script src="{{ asset('js/errors.js') }} " defer></script>
     </head>
-
     <body>
         <header class="website-header">
             @yield('header')
@@ -64,7 +63,6 @@
         @if (Request::route()->getName() === 'login' || Request::route()->getName() === 'register' || Request::route()->getName() === 'password') <!-- TODO -->
             @yield('main')
         @else
-        <div id="page-info">
         <nav class="menu-nav">
             @yield('nav')
         </nav>
@@ -78,9 +76,8 @@
         <aside class="right-bar">
             @yield('aside')
         </aside>
-        </div>
         @endif
-        <section id="notifications"></section>
+        <!--<section id="notifications"></section>-->
         <footer class="main-footer">
             @yield('footer')
         </footer>

@@ -67,7 +67,7 @@ form#edit-profile {
     display: none;
 }
 
-#edit-profile span{
+#edit-profile p{
     margin-bottom: 10px;
     padding: 0px;
 }

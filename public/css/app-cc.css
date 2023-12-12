@@ -14,13 +14,14 @@ body {
   font-family: "Lato", sans-serif;
   background-color: var(--light-gray);
   display:grid;
-  grid-template-rows: [body-initial] 80px [body-medium1] auto [body-medium2] 60px [body-end];
+  grid-template-rows: [body-initial] 80px[body-medium1] auto [body-medium2] 70px [body-end];
   grid-template-columns: [body-col-initial] 20% [body-col-medium1] auto [body-col-medium2] 17% [body-col-end];
 }
 
 .website-header {
   grid-column: body-col-initial / body-col-end;
   grid-row: body-initial / body-medium1;
+  background-color: var(--dark-blue);
 }
 
 main {
@@ -46,8 +47,6 @@ main {
   grid-column: body-col-medium2 / body-col-end;
   grid-row: body-medium1 / body-medium2;
 }
-
-
 
 a {
   text-decoration: none;
@@ -135,7 +134,6 @@ input:focus {
 }
 
 header.website-header {
-  background-color: var(--dark-blue);
   height: 80px;
 }
 
@@ -584,7 +582,7 @@ input.live-search {
 }
 
 .footer-links{
-  margin-top: 20px;
+  margin-top: 25px;
   margin-left: 30rem;
   color: var()
 }

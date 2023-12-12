@@ -20,7 +20,7 @@ class AnswerEvent implements ShouldBroadcast
 
     public function __construct(int $id_question, string $title, string $id_user)
     {
-        $this->message = 'You received a new answer to your question: ' . $title . '!';
+        $this->message = 'You received a new answer to your question: "' . $title . '"!';
         $this->id_question = $id_question;
         $this->id_user = $id_user;
     }

@@ -79,7 +79,7 @@ class UserController extends Controller
             $questions = Question::with(['user', 'community', 'likes', 'dislikes'])->withCount(['answers', 'likes', 'dislikes'])->where('id_user', $id)->get();
             $answers = Answer::with(['user.communitiesRating', 'question', 'likes', 'dislikes'])->withCount(['likes', 'dislikes'])->where('id_user', $id)->get();
             $reputations = Reputation::with(['user', 'community'])->where('id_user', $id)->get();
-            $notifications = Notification::with('user')->where('id_user', $id)->get();
+            $notifications = Notification::with('user')->where('id_user', $id)->orderBy('date', 'desc')->get();
             $unread = Notification::with('user')->where('id_user', $id)->where('read', false)->get();
             $moderatorCommunities = $user->moderatorCommunities;
             return view('users.show', [
@@ -167,7 +167,7 @@ class UserController extends Controller
         $this->authorize('block_user', User::class);
 
         try{
-            $user->blocked = !$user->blocked;
+            $user->blocked = true;
             $user->save();
             return redirect('admin');
         } catch (ModelNotFoundException $e) {
@@ -180,7 +180,7 @@ class UserController extends Controller
         $this->authorize('unblock_user', User::class);
 
         try{
-            $user->blocked = !$user->blocked;
+            $user->blocked = false;
             $user->save();
             return redirect('admin');
         } catch (ModelNotFoundException $e) {
@@ -194,6 +194,10 @@ class UserController extends Controller
 
         try {
             $user->delete();
+
+            $fileController = new FileController();
+            $fileController->delete('profile', $id);
+
             if (Auth::user()->administrator) {
                 return redirect('users/' . $id);
             }

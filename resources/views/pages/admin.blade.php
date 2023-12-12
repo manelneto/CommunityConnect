@@ -7,11 +7,11 @@
             <h1 id="admin-title">Administration</h1>
             <details>
                 <summary>Find a user</summary>
-                <form action="../../users/" method="get" class="form-admin">
+                <form action="#" method="get" class="form-admin">
                     @csrf
                     <label for="user">Username</label>
                     <input type="text" id="user" name="user" placeholder="Enter username here and click Tab for autocomplete">
-                    <button class="admin-button" type="submit">Visit</button>
+                    <button id="find-user" class="admin-button" type="submit">Visit</button>
                 </form>
             </details>
             @yield('errors')
@@ -31,15 +31,16 @@
                     <label for="password_confirmation">Confirm Password</label>
                     <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm password here" class="user-details-input">
                     <p class="password-confirmation-error">Passwords do not match</p>
-                    <button class="admin-button" type="submit" class="submit">Create User</button>
+                    <button class="admin-button submit" type="submit">Create User</button>
                 </form>
             </details>
             <details>
                 <summary>Block a user</summary>
                 <form action="../admin/block" method="post" class="form-admin">
                     @csrf
-                    <label for="user">Username</label>
-                    <input type="text" id="block-user" name="user" placeholder="Enter username here and click Tab for autocomplete">
+                    <label for="block-user">Username</label>
+                    <input type="text" id="block-user" name="block-user" placeholder="Enter username here and click Tab for autocomplete">
+                    <input type="hidden" name="user" value="">
                     <button class="admin-button" type="submit">Block</button>
                 </form>
             </details>
@@ -47,8 +48,9 @@
                 <summary>Unblock a user</summary>
                 <form action="../admin/unblock" method="post" class="form-admin">
                     @csrf
-                    <label for="user">Username</label>
-                    <input type="text" id="unblock-user" name="user" placeholder="Enter username here and click Tab for autocomplete">
+                    <label for="unblock-user">Username</label>
+                    <input type="text" id="unblock-user" name="unblock-user" placeholder="Enter username here and click Tab for autocomplete">
+                    <input type="hidden" name="user" value="">
                     <button class="admin-button" type="submit">Unblock</button>
                 </form>
             </details> 
@@ -56,7 +58,7 @@
                 <summary>Add new tag</summary>
                 <form action="../tags" method="post" class="form-admin">
                     @csrf
-                    <label for="tag">Tag</label>
+                    <label for="add-tag-admin">Tag</label>
                     <input type="text" id="add-tag-admin" name="tag" placeholder="Enter tag name here" class="user-details-input">
                     <p class="tag-error">Tag already exists</p>
                     <button class="admin-button" type="submit">Add</button>
@@ -66,8 +68,9 @@
                 <summary>Delete tag</summary>
                 <form action="../tags/delete" method="post" class="form-admin">
                     @csrf
-                    <label for="tag">Tag</label>
+                    <label for="delete-tag">Tag</label>
                     <input type="text" id="delete-tag" name="tag" placeholder="Enter tag name here and click Tab for autocomplete">
+                    <input type="hidden" name="tag" value="">
                     <button class="admin-button" type="submit">Delete</button>
                 </form>
             </details> 

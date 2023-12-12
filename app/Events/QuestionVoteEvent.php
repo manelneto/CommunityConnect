@@ -21,7 +21,11 @@ class QuestionVoteEvent implements ShouldBroadcast
 
     public function __construct(int $id_question, string $title, string $id_user, string $vote)
     {
-        $this->message = 'Your question: ' . $title . ' was voted ' . $vote . '!';
+        if ($vote === 'true') {
+            $this->message = 'Your question: "' . $title . '" was liked!';
+        } else {
+            $this->message = 'Your question: "' . $title . '" was disliked!';
+        }
         $this->id_question = $id_question;
         $this->id_user = $id_user;
         $this->vote = $vote;

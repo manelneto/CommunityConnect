@@ -62,7 +62,7 @@ if (applyButton) {
       currentPage
     );
 
-    const questionsCountElement = document.querySelector(".questions-number");
+    const questionsCountElement = document.querySelector("#questions-number");
 
     if (questionsCountElement) {
       questionsCountElement.textContent = `${questions.total} questions`;

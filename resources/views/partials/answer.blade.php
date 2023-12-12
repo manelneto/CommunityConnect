@@ -1,15 +1,10 @@
-@php
-    $isModerator = in_array($answer->question->id_community, Auth::user()?->moderatorCommunities->pluck('id')->toArray());
-@endphp
-
 <form class="answer" method="post" enctype="multipart/form-data">
-    <a href="../questions/{{ $answer->id_question }}">HERE</a>
     @csrf
     <div class="content-left">
         <img class="member-pfp answer-member-pfp" src="{{ asset($answer->user->image) }}" alt="User's profile photo" />
         <div class="answers-votes">
             <span class="answer-upvotes" data-id="{{ $answer->id }}">{{ $answer->likes_count}}
-                @if (array_search(Auth::user()?->id, array_column($answer->likes()->get()->toArray(), 'id_user')))
+                @if (array_search(Auth::user()?->id, array_column($answer->likes()->get()->toArray(), 'id_user')) !== false)
                     <svg class="voted" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.000244141 12L9.00024 0L18.0002 12H0.000244141Z" fill="#38B6FF" />
                     </svg>
@@ -20,7 +15,7 @@
                 @endif
             </span>
             <span class="answer-downvotes" data-id="{{ $answer->id }}">{{ $answer->dislikes_count }}
-                @if (array_search(Auth::user()?->id, array_column($answer->dislikes()->get()->toArray(), 'id_user')))
+                @if (array_search(Auth::user()?->id, array_column($answer->dislikes()->get()->toArray(), 'id_user')) !== false)
                     <svg class="voted" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.000244141 0L9.00024 12L18.0002 0H0.000244141Z" fill="#38B6FF" />
                     </svg>
@@ -35,7 +30,7 @@
     <article class="content-right">
         <header class="answer-info">
             @if( Request::route()->getName() == 'profile')
-                <a class="question-of-answer" href="../questions/{{ $answer->id_question }}">Question: {{ $answer->question->title }}</a>
+                <a class="question-of-answer" href="{{ route('question', ['id' => $answer->id_question]) }}">Question: {{ $answer->question->title }}</a>
             @endif
             <div class="answer-details">
                 <a class="username" href="../users/{{ $answer->id_user }}">{{ $answer->user->username }}</a>
@@ -74,24 +69,26 @@
             @endif
         </header>
         <span class="date">Answer added {{ $answer->date }}</span>
-        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || $isModerator)
-            <label for="content">Content</label>
-            <textarea id="content" class="description non-movable-textarea" name="content" cols="40" rows="5" placeholder="Type in your answer here">{{ $answer->content }}</textarea>
-            <label for="file">File</label>
-            <input id="file" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt" value="{{ asset($answer->file) }}">
+        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
+            <label for="content-{{ $answer->id }}">Content</label>
+            <textarea id="content-{{ $answer->id }}" class="description non-movable-textarea" name="content" cols="40" rows="5" placeholder="Type in your answer here">{{ $answer->content }}</textarea>
+            <label for="file-{{ $answer->id }}">File</label>
+            <input id="file-{{ $answer->id }}" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt" value="{{ asset($answer->file) }}">
             <input type="hidden" name="type" value="answer">
         @else
             <p class="description">{{ $answer->content }}</p>
             @if ($answer->file)
-                <p class="file">Download file <a href="{{ asset($answer->file) }}" target="_blank">here</a></p>
+                <p class="file"><a href="{{ asset($answer->file) }}" target="_blank">Download file here</a></p>
             @endif
         @endif
-        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || $isModerator)
+        @if (Auth::user()?->id === $answer->question->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
             @if ($answer->correct)
-                <button data-id="{{ $answer->id }}" class="mark mark-incorrect" formaction="../../answers/{{ $answer->id }}/incorrect">Remove correct mark</button>
+                <button data-id="{{ $answer->id }}" class="mark mark-incorrect">Remove correct mark</button>
             @else
-                <button data-id="{{ $answer->id }}" class="mark mark-correct" formaction="../../answers/{{ $answer->id }}/correct">Mark as correct</button>
+                <button data-id="{{ $answer->id }}" class="mark mark-correct">Mark as correct</button>
             @endif
+        @endif
+        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
             <button class="edit" formaction="../../answers/{{ $answer->id }}">Edit</button>
             <button class="delete" formaction="../../answers/{{ $answer->id }}/delete">Delete</button>
         @endif

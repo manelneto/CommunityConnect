@@ -42,7 +42,6 @@ const error_map = new Map();
 
 document.querySelectorAll('.user-details-input').forEach(async (input) => {
     error_map.set(input.id, false);
-    console.log(input.id);
     if (input.id === 'username_or_email') { //login
         input.addEventListener('blur', async () => {
             if (input.value !== '' && (validateUsernamePattern(input.value) || validateEmailPattern(input.value))) {
@@ -157,7 +156,6 @@ document.querySelectorAll('.user-details-input').forEach(async (input) => {
         })
     }
     else if (input.id === 'password_confirmation') {
-        console.log('here');
         input.addEventListener('input', () => {
             if (input.value !== '') {
                 if (input.value === document.querySelector('#password').value) {
@@ -231,7 +229,6 @@ document.querySelectorAll('.edit-password').forEach((input) => {
         })
     }
     else if (input.id === 'password_confirmation') {
-        console.log('here');
         input.addEventListener('input', () => {
             if (input.value !== '') {
                 if (input.value === document.querySelector('#password').value) {

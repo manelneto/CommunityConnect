@@ -70,7 +70,7 @@ class FileController extends Controller
         return true;
     }
 
-    private static function delete(string $type, int $id)
+    public function delete(string $type, int $id)
     {
         try {
             if ($type === 'profile' && User::findOrFail($id)?->image !== 'profile/default.png') {

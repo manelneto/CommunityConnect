@@ -255,6 +255,8 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
         $this->authorize('destroy', $question);
         try {
+            $fileController = new FileController();
+            $fileController->delete('question', $id);
             $question->delete();
             return redirect('questions/');
         } catch (ModelNotFoundException $e) {
@@ -297,7 +299,6 @@ class QuestionController extends Controller
         } catch (ModelNotFoundException $e) {
             return response('Question not found');
         }
-        ;
     }
 
     public function remove_tag(Request $request) 

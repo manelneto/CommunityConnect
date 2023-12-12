@@ -58,4 +58,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Community::class, 'user_moderates_community', 'id_user', 'id_community');
     }
+
+    public function moderates($id) {
+        return $this->moderatorCommunities()->where('id_community', $id)->exists();
+    }
 }

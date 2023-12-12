@@ -3,9 +3,8 @@ const findButton = document.getElementById('find-user');
 if (findButton) {
     findButton.addEventListener('click', (event) => {
         event.preventDefault();
-        const selectElement = document.getElementById('user');
-        const id = selectElement.value;
-        const url = `../../users/${id}`;
-        window.location.href = url;
+        const user = document.getElementById('user');
+        const id = user.getAttribute('value');
+        window.location.href = `../../users/${id}`;
     });
 }

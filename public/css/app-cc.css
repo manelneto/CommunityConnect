@@ -27,6 +27,7 @@ main {
   grid-column: body-col-medium1 / body-col-medium2;
   grid-row: body-medium1 / body-medium2;
   border-right: 1px solid #c6c6c6;
+  background-color: white;
 }
 
 .menu-nav {
@@ -76,6 +77,15 @@ fieldset {
   justify-content: center;
   max-width: 1600px;
   margin: 0 auto;
+}
+
+.logout-button {
+  background-color: var(--hover-red);
+  border: none;
+  cursor: pointer;
+  color: white;
+  margin-left: 0.5rem;
+  margin-right:0.5rem;
 }
 
 .mid-header {

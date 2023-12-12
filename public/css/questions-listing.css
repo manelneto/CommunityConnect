@@ -13,11 +13,6 @@
   font-size: 20px;
 }
 
-#questions-stats > #filters-button:hover {
-  background-color: var(--hover-red);
-  transition: 0.2s;
-}
-
 #questions-stats > #filters-button svg {
   margin-right: 5px;
 }
@@ -62,11 +57,6 @@ fieldset {
   font-size: 18px;
 }
 
-#apply-button:hover {
-  background-color: var(--hover-red);
-  transition: 0.2s;
-}
-
 fieldset label {
   margin-left: 20px;
   font-weight: bold;
@@ -74,7 +64,7 @@ fieldset label {
 
 .question-username {
   color: var(--blue);
-  margin-right: 15px;
+  margin-right: 10px;
   font-size: 20px;
 }
 

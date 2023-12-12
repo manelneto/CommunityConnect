@@ -1,5 +1,13 @@
+#edit-profile-title{
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 20px;
+}
+
 form#edit-profile {
-    margin: 2rem;
+    margin-right: 4rem;
+    margin-left: 4rem;
+    margin-top:1rem;
 }
 
 #edit-profile h1 {
@@ -27,7 +35,7 @@ form#edit-profile {
 #edit-profile input:not(#photo) {
     width: 100%;
     padding: 8px;
-    margin-bottom: 1px;
+    margin-bottom: 1rem;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -47,10 +55,6 @@ form#edit-profile {
     cursor: pointer;
     font-size: 16px;
     margin-bottom: 20px;
-}
-
-#edit-profile button:hover {
-    background-color: var(--dark-blue);
 }
 
 #edit-profile button:disabled {

@@ -58,7 +58,7 @@
                 <summary>Add new tag</summary>
                 <form action="../tags" method="post" class="form-admin">
                     @csrf
-                    <label for="tag">Tag</label>
+                    <label for="add-tag-admin">Tag</label>
                     <input type="text" id="add-tag-admin" name="tag" placeholder="Enter tag name here" class="user-details-input">
                     <p class="tag-error">Tag already exists</p>
                     <button class="admin-button" type="submit">Add</button>
@@ -68,8 +68,9 @@
                 <summary>Delete tag</summary>
                 <form action="../tags/delete" method="post" class="form-admin">
                     @csrf
-                    <label for="tag">Tag</label>
+                    <label for="delete-tag">Tag</label>
                     <input type="text" id="delete-tag" name="tag" placeholder="Enter tag name here and click Tab for autocomplete">
+                    <input type="hidden" name="tag" value="">
                     <button class="admin-button" type="submit">Delete</button>
                 </form>
             </details> 

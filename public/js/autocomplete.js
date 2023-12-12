@@ -14,7 +14,7 @@ window.onload = async () => {
     const urlTags = '../../api/tags';
     const responseTags = await fetch(urlTags);
     const allTags = await responseTags.json();
-    tagsAdmin = allTags.map(tag => tag.name).filter(Boolean);
+    tagsAdmin = allTags.map(tag => [tag.name, tag.id]).filter(Boolean);
 };
 
 const inputUser = document.querySelector('#user');
@@ -108,15 +108,18 @@ if (inputTags) {
     
         if (tagName === '') return;
     
-        matchingTags = tagsAdmin.filter(tag => tag && tag.toUpperCase().startsWith(tagName)).filter(Boolean);
+        matchingTags = tagsAdmin.filter(tag => tag && tag[0].toUpperCase().startsWith(tagName)).filter(Boolean);
     });
 
     inputTags.addEventListener('keydown', async function (event) {
+        const tag = document.querySelector('#delete-tag + input');
         if (event.key === 'Tab') {
             event.preventDefault();
             if (matchingTags.length > 0) {
-                inputTags.value = matchingTags[index];
                 index = (index + 1) % matchingTags.length;
+                inputTags.value = matchingTags[index][0];
+                inputTags.setAttribute('value', matchingTags[index][1]);
+                tag.value = matchingTags[index][1];
             }
         }
 

@@ -71,7 +71,7 @@ class QuestionController extends Controller
                 });
             } else {
                 // full-text-search
-                $formattedTerm = str_replace(' ', ' | ', $searchTerm);
+                $formattedTerm = addslashes(str_replace(' ', ' | ', $searchTerm));
                 $questions->whereRaw("tsvectors @@ to_tsquery('english', ?)", [$formattedTerm]);
             }
         }

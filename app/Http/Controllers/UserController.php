@@ -198,7 +198,7 @@ class UserController extends Controller
             $fileController = new FileController();
             $fileController->delete('profile', $id);
 
-            if (Auth::user()->administrator) {
+            if (Auth::user()->administrator && $id !== Auth::user()->id) {
                 return redirect('users/' . $id);
             }
             else {

@@ -4,17 +4,23 @@ let unblocked = [];
 let tagsAdmin = [];
 
 window.onload = async () => {
-    const url = '../../api/users';
-    const response = await fetch(url);
-    const allUsers = await response.json();
-    users = allUsers.map(user => [user.username, user.id]).filter(Boolean);
-    blocked = allUsers.filter(user => user.blocked).map(user => [user.username, user.id]);
-    unblocked = allUsers.filter(user => !user.blocked).map(user => [user.username, user.id]);
+    const admin = document.querySelector('#admin-page');
+    if (admin) {
+        const url = '../../api/users';
+        const response = await fetch(url);
+        const allUsers = await response.json();
+        users = allUsers.map(user => [user.username, user.id]).filter(Boolean);
+        blocked = allUsers.filter(user => user.blocked).map(user => [user.username, user.id]);
+        unblocked = allUsers.filter(user => !user.blocked).map(user => [user.username, user.id]);
+    }
 
-    const urlTags = '../../api/tags';
-    const responseTags = await fetch(urlTags);
-    const allTags = await responseTags.json();
-    tagsAdmin = allTags.map(tag => [tag.name, tag.id]).filter(Boolean);
+    const editQuestion = document.querySelector('#question-edit');
+    if (admin || editQuestion) {
+        const urlTags = '../../api/tags';
+        const responseTags = await fetch(urlTags);
+        const allTags = await responseTags.json();
+        tagsAdmin = allTags.map(tag => [tag.name, tag.id]).filter(Boolean);
+    }
 };
 
 const inputUser = document.querySelector('#user');
@@ -136,15 +142,15 @@ if (questionTags) {
 
         if (tagName === '') return;
 
-        matchingTags = tagsAdmin.filter(tag => tag && tag.toUpperCase().startsWith(tagName)).filter(Boolean);
+        matchingTags = tagsAdmin.filter(tag => tag && tag[0].toUpperCase().startsWith(tagName)).filter(Boolean);
     });
 
     questionTags.addEventListener('keydown', async function (event) {
         if (event.key === 'Tab') {
             event.preventDefault();
             if (matchingTags.length > 0) {
-                questionTags.value = matchingTags[index];
                 index = (index + 1) % matchingTags.length;
+                questionTags.value = matchingTags[index][0];
             }
         }
 

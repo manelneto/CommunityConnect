@@ -5,29 +5,31 @@
         <section id="edit-profile-a">
             <h1>{{ $user->username }}</h1>
             @if (Auth::user()?->id === $user->id)
-            <img class="notifications-icon" src="{{ asset('assets/notifications.png') }}" alt="Notifications-icon"/>
-            <p class="notifications-number">{{ count($unread) }}</p>
-            <article class="notifications-container">
-                <ul class="notifications">
-                    @foreach ($notifications as $notification)
-                    <li class="profile notification">
-                        <p class="notification-text">{{ $notification->content }}</p>
-                        <p class="notification-date">{{ $notification->date->format('Y-m-d') }}</p>
-                        @if (!$notification->read)
-                            <img id="{{ $notification->id }}" class="view-icon" src="{{ asset('assets/view.png') }}" alt="View-icon"/>
-                        @endif
-                    </li>
-                    @endforeach
-                </ul>
-            </article>
-            @endif
-            @if (Auth::user()?->id === $user->id || Auth::user()?->administrator)
-                <a class="edit-profile" href="{{ route('edit-user', $user->id) }}">Edit</a>
-                <form action="../users/{{ $user->id }}/delete" method="post">
-                    @csrf
-                    <button id="delete-account" type="submit"> Delete account </button>
-                </form>
-            @endif
+            <div id="profile-buttons">
+                <img class="notifications-icon" src="{{ asset('assets/notifications.png') }}" alt="Notifications-icon"/>
+                <p class="notifications-number">{{ count($unread) }}</p>
+                <article class="notifications-container">
+                    <ul class="notifications">
+                        @foreach ($notifications as $notification)
+                        <li class="profile notification">
+                            <p class="notification-text">{{ $notification->content }}</p>
+                            <p class="notification-date">{{ $notification->date->format('Y-m-d') }}</p>
+                            @if (!$notification->read)
+                                <img id="{{ $notification->id }}" class="view-icon" src="{{ asset('assets/view.png') }}" alt="View-icon"/>
+                            @endif
+                        </li>
+                        @endforeach
+                    </ul>
+                </article>
+                @endif
+                @if (Auth::user()?->id === $user->id || Auth::user()?->administrator)
+                    <a class="edit-profile" href="{{ route('edit-user', $user->id) }}">Edit</a>
+                    <form action="../users/{{ $user->id }}/delete" method="post">
+                        @csrf
+                        <button id="delete-account" type="submit"> Delete account </button>
+                    </form>
+                @endif
+            </div>
         </section>
         <h2>{{ $user->email }}</h2>
         <img class="member-pfp main-user-pfp" src="{{ asset($user->image) }}" alt="User's profile photo" />

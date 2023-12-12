@@ -288,18 +288,6 @@ input.live-search {
   fill: var(--dark-blue);
 }
 
-.menu-nav ul li a:hover,
-.mobile-aside-bar ul li a:hover {
-  color: var(--blue);
-  transition: 0.2s;
-}
-
-.menu-nav ul li a:hover svg,
-.mobile-aside-bar ul li a:hover svg {
-  fill: var(--blue);
-  transition: 0.2s;
-}
-
 .menu-nav ul li img,
 .menu-nav ul li svg,
 .mobile-aside-bar ul li img,
@@ -357,11 +345,6 @@ input.live-search {
   margin: 10px 5%;
   display: block;
   text-align: center;
-}
-
-.ask-a-question-button:hover {
-  background-color: grey;
-  transition: 0.2s;
 }
 
 .right-bar-stats {

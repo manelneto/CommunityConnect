@@ -1,12 +1,18 @@
 #create-question h1 {
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
  }
  
  #create-question form {
-    display: flex;
-    flex-direction: column;
+   display: flex;
+   flex-direction: column;
+   margin-left: 4rem;
+   margin-right:4rem;
+ }
+
+ input#file{
+      padding:0rem;
  }
  
  #create-question button {
@@ -19,10 +25,6 @@
     border-radius: 5px;
     width: 40%;
     margin: auto; 
- }
-
- #create-question button:hover {
-    background-color: var(--dark-blue);
  }
 
  #create-question label{
@@ -45,12 +47,15 @@
    width: 85%;
 }
 
+textarea#content.form-control{
+   padding:10px;
+}
+
  #create-question input,
  #create-question textarea,
  #create-question select {
     display: flex;
     flex-direction: column;
-    padding: 10px;
     border-radius: 4px;
     margin-left: 2rem;
     margin-bottom: 1rem;

@@ -44,8 +44,8 @@ if (answers) {
                     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
                     svg.classList.add('icon-correct');
                     svg.setAttribute('viewBox', '0 0 48 48');
-                    svg.setAttribute('width', '40px');
-                    svg.setAttribute('height', '40px');
+                    svg.setAttribute('width', '25px');
+                    svg.setAttribute('height', '25px');
 
                     svg.appendChild(path1);
                     svg.appendChild(path2);

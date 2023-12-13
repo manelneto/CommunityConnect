@@ -196,6 +196,12 @@ button.mark-incorrect {
   border-radius: 5px;
 }
 
+.answer-buttons{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
 .question-tags,
 .question-tag {
   display: inline;

@@ -11,7 +11,7 @@
                 <article class="notifications-container">
                     <ul class="notifications">
                         @foreach ($notifications as $notification)
-                        <li class="profile notification">
+                        <li class="profile-notification">
                             <p class="notification-text">{{ $notification->content }}</p>
                             <p class="notification-date">{{ $notification->date->format('Y-m-d') }}</p>
                             @if (!$notification->read)
@@ -31,7 +31,7 @@
                 @endif
             </div>
         </section>
-        <h2>{{ $user->email }}</h2>
+        <h2 class="profile-email">{{ $user->email }}</h2>
         <img class="member-pfp main-user-pfp" src="{{ asset($user->image) }}" alt="User's profile photo" />
         <ul>
             <li class="profile" id="about-button">About</li>

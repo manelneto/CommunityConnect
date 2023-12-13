@@ -4,8 +4,8 @@
     <main id="profile-info">
         <section id="edit-profile-a">
             <h1>{{ $user->username }}</h1>
-            @if (Auth::user()?->id === $user->id)
             <div id="profile-buttons">
+                @if (Auth::user()?->id === $user->id)
                 <img class="notifications-icon" src="{{ asset('assets/notifications.png') }}" alt="Notifications-icon"/>
                 <p class="notifications-number">{{ count($unread) }}</p>
                 <article class="notifications-container">

@@ -57,6 +57,11 @@
   flex-direction: row;
 }
 
+.answer-details p.date{
+  margin-left: 1rem;
+  margin-top: 1px;
+}
+
 .answer-details p.rating {
   margin-left: 20px;
 }
@@ -112,9 +117,13 @@
 }
 
 .answer > .content-right > .description, .comment > .description {
-  margin-top: 15px;
+  margin-top: 4px;
   font-size: 18px;
   display: block;
+}
+
+.label-content{
+  margin-top: 10px;
 }
 
 .answer > .content-right > .username, .comment > .username {
@@ -130,9 +139,12 @@
 }
 
 .question-of-answer{
-  display: flex;
-  align-items: center;
+  margin-bottom: 1rem;
   color:#000;
+}
+
+.question-of-answer:hover{
+  color: var(--blue);
 }
 
 button.edit {
@@ -299,6 +311,10 @@ button.mark-incorrect {
 
 .file a {
   color: black;
+}
+
+.label-file{
+  margin-bottom: 4px;
 }
 
 .moderator-badge-answer {

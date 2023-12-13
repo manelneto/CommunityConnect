@@ -28,10 +28,10 @@
         </div>
     </div>
     <article class="content-right">
-        <header class="answer-info">
             @if( Request::route()->getName() == 'profile')
-                <a class="question-of-answer" href="{{ route('question', ['id' => $answer->id_question]) }}">Question: {{ $answer->question->title }}</a>
+                <a class="question-of-answer" href="{{ route('question', ['id' => $answer->id_question]) }}"><b>Question:</b> {{ $answer->question->title }}</a>
             @endif
+        <header class="answer-info">
             <div class="answer-details">
                 <a class="username" href="../users/{{ $answer->id_user }}">{{ $answer->user->username }}</a>
                 @if (isset($answer->user->communitiesRating))
@@ -59,7 +59,7 @@
                         </defs>
                     </svg>
                 @endif
-                
+                <p class="date">Answer added {{ $answer->date }}</p>
             </div>
             @if ($answer->correct)
                 <svg class="icon-correct" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="40px" height="40px">
@@ -68,11 +68,10 @@
                 </svg>
             @endif
         </header>
-        <span class="date">Answer added {{ $answer->date }}</span>
         @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
-            <label for="content-{{ $answer->id }}">Content</label>
+            <label for="content-{{ $answer->id }}" class="label-content">Content</label>
             <textarea id="content-{{ $answer->id }}" class="description non-movable-textarea" name="content" cols="40" rows="5" placeholder="Type in your answer here">{{ $answer->content }}</textarea>
-            <label for="file-{{ $answer->id }}">File</label>
+            <label for="file-{{ $answer->id }}" class="label-file">File</label>
             <input id="file-{{ $answer->id }}" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt" value="{{ asset($answer->file) }}">
             <input type="hidden" name="type" value="answer">
         @else

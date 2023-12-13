@@ -174,8 +174,12 @@ input.live-search {
   white-space: nowrap;
 }
 
-.sign-in-button {
+a.sign-in-button {
   background-color: var(--blue);
+  margin-right: 20px;
+}
+
+a.sign-up-button {
   margin-right: 20px;
   background-color: #777;
 }

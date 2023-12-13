@@ -77,7 +77,7 @@
             @yield('aside')
         </aside>
         @endif
-        <!--<section id="notifications"></section>-->
+        <section id="notifications"></section>
         <footer class="main-footer">
             @yield('footer')
         </footer>

@@ -13,6 +13,9 @@ main#profile-info {
   font-size: 18px;
   color: #555;
   margin-bottom: 20px;
+}
+
+.profile-email{
   margin-left:4rem;
 }
 
@@ -115,11 +118,11 @@ a.edit-profile {
   padding: 0;
 }
 
-.notifications-container {
+.notifications {
   display: none;
-  width: 470px;
+  width: 550px;
   position:absolute;
-  top: 160px;
+  top: 145px;
   left: 700px;
   flex-direction: column;
   right: 0;
@@ -129,8 +132,12 @@ a.edit-profile {
   z-index: 1000;
 }
 
-.notification {
-  padding: 10px;
+.profile-notification{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1rem;
+  justify-content: space-around;
   border-bottom: 1px solid #eee;
 }
 

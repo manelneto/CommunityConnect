@@ -535,9 +535,17 @@ a.sign-up-button {
 /* Footer */
 /*        */
 
-/*section.notifications{ -------------------------------TODO
-  grid-column: body-col-medium/body-col-end;
-}*/
+section#notifications article.notification{
+    /*position: fixed;
+    bottom: 20px; 
+    right: 20px;
+    padding: 10px;
+    background-color: #3498db; 
+    color: #ffffff; 
+    border-radius: 5px;
+    z-index: 1000;*/
+    background-color: red;
+}
 
 .main-footer, .footer-links {
   display:flex;

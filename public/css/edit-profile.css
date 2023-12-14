@@ -71,3 +71,9 @@ form#edit-profile {
     margin-bottom: 10px;
     padding: 0px;
 }
+
+#user-edit-profile svg{
+    width: 15px;
+    height: 15px;
+    margin-bottom: 20px;
+}

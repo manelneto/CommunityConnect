@@ -22,6 +22,7 @@
 
 #communities h1 {
     padding-left:0.5rem;
+    font-size: 1.5em;
 }
 
 .community h2 a {
@@ -98,6 +99,7 @@
 .unfollow-community {
     background-color: var(--hover-red); 
 }
+
 
 
 

@@ -327,3 +327,11 @@ button.mark-incorrect {
 .moderator-badge-answer {
   margin-left: 5px !important;
 }
+
+.add-tooltip > h2{
+  font-size: 20px;
+}
+
+.add-tooltip > h2.ignore-tooltip-h2-changes{
+  font-size: 1.5em;
+}

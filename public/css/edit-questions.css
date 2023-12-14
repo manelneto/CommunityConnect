@@ -24,8 +24,8 @@
 }
 
 .edit-question-text {
-  margin: 20px auto;
   display: block;
+  margin: 20px 0;
   width: fit-content;
   font-size: 22px;
   font-weight: bold;

@@ -33,17 +33,17 @@
     font-weight: 600;
  }
 
- #create-question input{
-    width: 85%;
- }
+#create-question button:hover {
+   background-color: var(--dark-blue);
+}
 
- #create-question textarea{
-    width: 82%;
-    height: 80px;
-    resize: none;
- }
+#create-question label {
+   margin-left: 2rem;
+   margin-bottom: 0.5rem;
+   font-weight: 600;
+}
 
-#create-question select{
+#create-question input {
    width: 85%;
 }
 
@@ -61,5 +61,6 @@ textarea#content.form-control{
     margin-bottom: 1rem;
  }
 
-
- 
+ #add-question-tooltip-section{
+   justify-content: center;
+}

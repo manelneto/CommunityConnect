@@ -43,10 +43,6 @@
    font-weight: 600;
 }
 
-#create-question input {
-   width: 85%;
-}
-
 textarea#content.form-control{
    padding:10px;
 }
@@ -59,6 +55,7 @@ textarea#content.form-control{
     border-radius: 4px;
     margin-left: 2rem;
     margin-bottom: 1rem;
+    margin-right:4rem;
  }
 
  #add-question-tooltip-section{

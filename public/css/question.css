@@ -99,22 +99,32 @@ section#answers form.answer {
   display: flex;
   align-items: flex-start;
   padding: 35px 50px;
-  border-bottom: 1px solid #c6c6c6;
+  border-bottom: 0;
 }
 
-.answer{
+.answer {
   padding: 35px 50px;
   border-bottom: 1px solid #c6c6c6;
 }
 
 .comment {
-  padding: 0 50px;
+  margin: 0 50px;
   border-bottom: 1px solid #c6c6c6;
 }
 
 article.comment:first-of-type {
   border-top: 1px solid #c6c6c6;
   margin-top: 1.5rem;
+}
+
+article.answer-comment:first-of-type {
+  margin-top: 0;
+}
+
+article.answer-comment:last-of-type {
+  margin: 0;
+  padding: 0 50px;
+  border-bottom: 0;
 }
 
 .comment > h3 {
@@ -373,18 +383,20 @@ button.mark-incorrect {
   color: #adadad;
 }
 
-.add-question-comment-tap {
+.add-question-comment-tap,
+.add-answer-comment-tap {
   padding: 10px 60px;
   color: #adadad;
 }
 
-.add-question-comment-tap:hover {
+.add-question-comment-tap:hover,
+.add-answer-comment-tap:hover {
   color: var(--blue);
   transition: 0.2s;
   cursor: pointer;
 }
 
-#question-comment {
+#question-comment, #answer-comment {
   width: 500px;
   font-size: 16px;
   border: 2px solid #c6c6c6;
@@ -401,4 +413,12 @@ button.mark-incorrect {
 
 textarea#content::placeholder {
   font-size: 16px;
+}
+
+.answer-container {
+  border-bottom: 1px solid #c6c6c6;
+}
+
+.answer-container:first-of-type {
+  border-top: 1px solid #c6c6c6;
 }

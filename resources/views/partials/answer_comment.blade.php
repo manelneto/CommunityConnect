@@ -26,7 +26,7 @@
         <button class="delete" formaction="../../answer-comments/{{ $comment->id }}/delete">Delete</button>
     </form>
 @else
-    <article class="comment">
+    <article class="comment answer-comment">
         <p class="description">{{ $comment->content }} -
             <a class="username" href="../users/{{ $comment->id_user }}">{{ $comment->user->username }}</a>
             

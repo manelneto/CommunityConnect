@@ -1,11 +1,18 @@
-const leaveAnswerCommentForm = document.querySelector(".leave-comment-question");
-const leaveAnswerCommentButton = document.querySelector(".add-question-comment-tap")
+const leaveQuestionCommentForm = document.querySelector(".leave-comment-question");
+const leaveQuestionCommentButton = document.querySelector(".add-question-comment-tap");
 
-if (leaveAnswerCommentForm && leaveAnswerCommentButton) {
-  leaveAnswerCommentButton.addEventListener("click", () => {
-    leaveAnswerCommentForm.classList.toggle("hidden");
+if (leaveQuestionCommentForm && leaveQuestionCommentButton) {
+  leaveQuestionCommentButton.addEventListener("click", () => {
+    leaveQuestionCommentForm.classList.toggle("hidden");
   });
 }
 
+const addCommentButtons = document.querySelectorAll('.add-answer-comment-tap');
 
-
+addCommentButtons.forEach((button) => {
+  button.addEventListener('click', function() {
+    const commentsContainer = this.closest('.comments');
+    const form = commentsContainer.querySelector('.leave-answer-comment');
+    form.classList.toggle('hidden');
+  });
+});

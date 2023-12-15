@@ -15,7 +15,8 @@ window.onload = async () => {
     }
 
     const editQuestion = document.querySelector('#question-edit');
-    if (admin || editQuestion) {
+    const createQuestion = document.querySelector('#create-question');
+    if (admin || editQuestion || createQuestion) {
         const urlTags = '../../api/tags';
         const responseTags = await fetch(urlTags);
         const allTags = await responseTags.json();
@@ -151,6 +152,51 @@ if (questionTags) {
             if (matchingTags.length > 0) {
                 index = (index + 1) % matchingTags.length;
                 questionTags.value = matchingTags[index][0];
+            }
+        }
+
+    });
+}
+
+const tagAskQuestion = document.querySelector('#tag-ask-question');
+if (tagAskQuestion) {
+    let matchingTags = [];
+    let index = 0;
+
+    tagAskQuestion.addEventListener('input', function (event) {
+        const tagName = tagAskQuestion.value.toUpperCase();
+
+        if (tagName === '') return;
+
+        matchingTags = tagsAdmin.filter(tag => tag && tag[0].toUpperCase().startsWith(tagName)).filter(Boolean);
+    });
+
+    tagAskQuestion.addEventListener('keydown', async function (event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            if (matchingTags.length > 0) {
+                index = (index + 1) % matchingTags.length;
+                tagAskQuestion.value = matchingTags[index][0];
+            }
+        }
+
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const tagName = input.value;
+
+            if (document.querySelector('#' + tagName)) {
+                input.value = "";
+            } else {
+                const button = document.createElement('button');
+                button.classList.add('all-tags');
+                button.name = 'name';
+                button.textContent = tagName;
+                button.id = tagName;
+
+                const section = document.querySelector('#property-tag');
+                section.insertBefore(button, input);
+
+                input.value = "";
             }
         }
 

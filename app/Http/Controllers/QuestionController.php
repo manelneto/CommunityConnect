@@ -111,7 +111,8 @@ class QuestionController extends Controller
     {
         $this->authorize('create', Question::class);
         $communities = Community::all();
-        return view('questions.create', ['communities' => $communities]);
+        $tags = Tag::all();
+        return view('questions.create', ['communities' => $communities, 'tags' => $tags]);
     }
 
     /**

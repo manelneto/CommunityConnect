@@ -25,12 +25,17 @@
                 <label for="title">Title</label>
                 <input id="title" class="form-control" type="text" name="title" required placeholder="Enter the question's title">
                 <label for="community">Choose a community</label>
-                <select id="community" class="form-control" name="id_community" required>
+                <select id="community" class="form-control" name="id_community">
                     <!-- TODO -->
                     @foreach ($communities as $community)
                         <option value="{{ $community->id }}">{{ $community->name }}</option>
                     @endforeach
                 </select>
+                <label for="tag-ask-question">Tags</label>
+                <input id="tag-ask-question" class="form-control" type="text" name="tag-ask-question" required placeholder="Enter the tag's title, click Tab for autocomplete and Enter to add more tags">
+                <section id="property-tags">
+                    
+                </section>  
                 <label for="content">Content</label>
                 <textarea id="content" class="form-control" name="content" placeholder="Elaborate your question" required></textarea>
                 <label for="file">File</label>

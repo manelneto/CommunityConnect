@@ -28,8 +28,8 @@
  }
 
  #create-question label{
+   margin-top: 0.5rem;
     margin-left: 2rem;
-    margin-bottom: 0.5rem;
     font-weight: 600;
  }
 

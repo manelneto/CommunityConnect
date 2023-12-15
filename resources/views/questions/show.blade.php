@@ -77,7 +77,7 @@
         @foreach ($answers as $answer)
         @include('partials.answer', ['answer' => $answer])
         <details class="comments">
-            <summary>Answer Comments</summary>
+            <summary class="answer-comments">Answer Comments</summary>
             @foreach($answer->comments as $comment)
             @include('partials.answer_comment', ['comment' => $comment])
             @endforeach

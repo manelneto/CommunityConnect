@@ -4,15 +4,15 @@
   border-left: 1px solid #c6c6c6;
 }
 
-.summary-comments{
+.summary-comments {
   background-color: white;
 }
 
 .leave.leave-comment {
-  border-top:none;
+  border-top: none;
 }
 
-.experts-stars{
+.experts-stars {
   margin-left: 0;
   margin-right: 10px;
   width: 20px;
@@ -57,7 +57,7 @@
   flex-direction: row;
 }
 
-.answer-details p.date{
+.answer-details p.date {
   margin-left: 1rem;
   margin-top: 1px;
 }
@@ -94,12 +94,26 @@
   transition: 0.2s;
 }
 
-.answer,
-.comment {
+section#answers form.answer {
   display: flex;
   align-items: flex-start;
   padding: 35px 50px;
   border-bottom: 1px solid #c6c6c6;
+}
+
+.answer{
+  padding: 35px 50px;
+  border-bottom: 1px solid #c6c6c6;
+}
+
+.comment {
+  padding: 0 50px;
+  border-bottom: 1px solid #c6c6c6;
+}
+
+article.comment:first-of-type {
+  border-top: 1px solid #c6c6c6;
+  margin-top: 1.5rem;
 }
 
 .comment > h3 {
@@ -116,35 +130,42 @@
   margin-left: 20px;
 }
 
-.answer > .content-right > .description, .comment > .description {
+.answer > .content-right > .description,
+.comment > .description {
   padding: 10px;
   margin-top: 4px;
   font-size: 18px;
   display: block;
 }
 
-.label-content{
+.comment > .description {
+  margin-top: 0;
+}
+
+.label-content {
   margin-top: 10px;
 }
 
-.answer > .content-right > .username, .comment > .username {
+.answer > .content-right > .username,
+.comment > .username {
   color: var(--blue);
   display: block;
   font-size: 20px;
   margin-bottom: 15px;
 }
 
-.content-right > .answer > .date, .comment > .date {
+.content-right > .answer > .date,
+.comment > .date {
   font-size: 14px;
   color: #abacb1;
 }
 
-.question-of-answer{
+.question-of-answer {
   margin-bottom: 1rem;
-  color:#000;
+  color: #000;
 }
 
-.question-of-answer:hover{
+.question-of-answer:hover {
   color: var(--blue);
 }
 
@@ -163,16 +184,17 @@ button.delete {
   border-radius: 5px;
 }
 
-.username, .date{
-  display:block;
+.username,
+.date {
+  display: block;
 }
 
-.answer-info{
+.answer-info {
   display: flex;
   align-items: center;
 }
 
-.username{
+.username {
   color: var(--blue);
   font-size: 19px;
 }
@@ -184,7 +206,7 @@ button.delete {
 button.mark-correct {
   background-color: green;
   padding: 4px 10px;
-  margin-right:8px;
+  margin-right: 8px;
   color: #fff;
   border-radius: 5px;
 }
@@ -192,12 +214,12 @@ button.mark-correct {
 button.mark-incorrect {
   background-color: var(--hover-red);
   padding: 4px 10px;
-  margin-right:8px;
+  margin-right: 8px;
   color: #fff;
   border-radius: 5px;
 }
 
-.answer-buttons{
+.answer-buttons {
   margin-top: 1rem;
   display: flex;
   flex-direction: row;
@@ -221,14 +243,15 @@ button.mark-incorrect {
   position: relative;
 }
 
-.tag-tooltip-content, .questions-tag-delete-info {
+.tag-tooltip-content,
+.questions-tag-delete-info {
   content: attr(data-tooltip);
   background-color: #fff;
   position: absolute;
   white-space: nowrap;
   left: 50%;
   top: 35px;
-  transform: translateX(-50%); 
+  transform: translateX(-50%);
   border: 1px solid #adadad;
   color: #fff;
   padding: 20px;
@@ -242,7 +265,8 @@ button.mark-incorrect {
   opacity: 0;
 }
 
-.tag-tooltip-content button, .tag-tooltip-content a {
+.tag-tooltip-content button,
+.tag-tooltip-content a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -270,7 +294,8 @@ button.mark-incorrect {
   fill: #fff;
 }
 
-.tag-tooltip-content button svg, .tag-tooltip-content a svg {
+.tag-tooltip-content button svg,
+.tag-tooltip-content a svg {
   margin-right: 4px;
 }
 
@@ -310,7 +335,8 @@ button.mark-incorrect {
   background-color: rgb(119, 119, 119, 0.8);
 }
 
-.question-tag:hover .tag-tooltip-content, .question-tag:hover .questions-tag-delete-info {
+.question-tag:hover .tag-tooltip-content,
+.question-tag:hover .questions-tag-delete-info {
   opacity: 1;
   visibility: visible;
   transition-delay: 0s;
@@ -320,7 +346,7 @@ button.mark-incorrect {
   color: black;
 }
 
-.label-file{
+.label-file {
   margin-bottom: 4px;
 }
 
@@ -328,10 +354,20 @@ button.mark-incorrect {
   margin-left: 5px !important;
 }
 
-.add-tooltip > h2{
+.add-tooltip > h2 {
   font-size: 20px;
 }
 
-.add-tooltip > h2.ignore-tooltip-h2-changes{
+.add-tooltip > h2.ignore-tooltip-h2-changes {
   font-size: 1.5em;
+}
+
+.comment .description .username,
+.comment .description .date {
+  display: inline;
+}
+
+.comment .description .date {
+  font-size: 14px;
+  color: #adadad;
 }

@@ -22,6 +22,17 @@ if (filterButton) {
   });
 }
 
+// load more questions if the user is at the end of the screen
+window.addEventListener("scroll", () => {
+  if (
+    // user is at the end of the screen
+    Math.ceil(window.innerHeight + window.scrollY) >= document.body.scrollHeight &&
+  !isFetching
+  ) {
+    loadMoreQuestions();
+  }
+});
+
 const applyButton = document.querySelector("#apply-button");
 
 if (applyButton) {

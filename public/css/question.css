@@ -422,3 +422,24 @@ textarea#content::placeholder {
 .answer-container:first-of-type {
   border-top: 1px solid #c6c6c6;
 }
+
+#answers .add-tooltip {
+  padding: 30px;
+}
+
+.edit-answer-comment-content {
+  display: inline !important;
+}
+
+.edit-answer-comment-username {
+  display: inline !important;
+}
+
+.edit-answer-comment-date {
+  display: inline !important;
+  margin-right: 10px;
+}
+
+.edit-answer-comment {
+  margin-top: 20px;
+}

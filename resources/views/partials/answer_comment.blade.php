@@ -1,10 +1,8 @@
 @if (Auth::user()?->id === $comment->id_user || Auth::user()?->administrator || Auth::user()?->moderates($comment->answer->question->id_community))
-    <form class="comment" method="post">
+    <form class="comment edit-answer-comment" method="post">
         @csrf
-        <label>Content
-            <textarea class="description non-movable-textarea" name="content" placeholder="Type your comment in here">{{ $comment->content }}</textarea>
-        </label>
-        <a class="username" href="../users/{{ $comment->id_user }}">{{ $comment->user->username }}</a>
+        <input class="description non-movable-textarea edit-answer-comment-content" name="content" value="{{ $comment->content }}">
+        <a class="username edit-answer-comment-username" href="../users/{{ $comment->id_user }}">{{ $comment->user->username }}</a>
         
         <!-- Moderator Badge -->
 
@@ -21,7 +19,7 @@
             </svg>
         @endif
         
-        <p class="date">{{ $comment->date }}</p>
+        <p class="date edit-answer-comment-date">{{ $comment->date }}</p>
         <button class="edit" formaction="../../answer-comments/{{ $comment->id }}">Edit</button>
         <button class="delete" formaction="../../answer-comments/{{ $comment->id }}/delete">Delete</button>
     </form>

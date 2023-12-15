@@ -61,3 +61,7 @@ textarea#content.form-control{
  #add-question-tooltip-section{
    justify-content: center;
 }
+
+#create-question .tooltip-icon{
+   margin-bottom: 5px;
+}

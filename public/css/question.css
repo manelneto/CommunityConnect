@@ -38,9 +38,10 @@
 .non-movable-textarea {
   display: flex;
   resize: none;
-  border: 1px solid #c6c6c6;
-  font-size: 18px;
+  border: 2px solid #c6c6c6;
+  font-size: 16px;
   margin-bottom: 20px;
+  padding: 5px;
 }
 
 .leave > form > input {
@@ -370,4 +371,34 @@ button.mark-incorrect {
 .comment .description .date {
   font-size: 14px;
   color: #adadad;
+}
+
+.add-question-comment-tap {
+  padding: 10px 60px;
+  color: #adadad;
+}
+
+.add-question-comment-tap:hover {
+  color: var(--blue);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+#question-comment {
+  width: 500px;
+  font-size: 16px;
+  border: 2px solid #c6c6c6;
+  padding: 5px;
+}
+
+#question-comment:focus {
+  border: 2px solid var(--blue);
+}
+
+#question-comment::placeholder {
+  font-size: 16px;
+}
+
+textarea#content::placeholder {
+  font-size: 16px;
 }

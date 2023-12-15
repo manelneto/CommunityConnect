@@ -427,19 +427,19 @@ textarea#content::placeholder {
   padding: 30px;
 }
 
-.edit-answer-comment-content {
+.edit-answer-comment-content, .edit-question-comment-content{
   display: inline !important;
 }
 
-.edit-answer-comment-username {
+.edit-answer-comment-username, .edit-question-comment-username {
   display: inline !important;
 }
 
-.edit-answer-comment-date {
+.edit-answer-comment-date, .edit-question-comment-date {
   display: inline !important;
   margin-right: 10px;
 }
 
-.edit-answer-comment {
+.edit-answer-comment, .edit-question-comment {
   margin-top: 20px;
 }

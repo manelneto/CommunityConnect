@@ -182,10 +182,10 @@ if (tagAskQuestion) {
 
         if (event.key === 'Enter') {
             event.preventDefault();
-            const tagName = input.value;
+            const tagName = tagAskQuestion.value;
 
             if (document.querySelector('#' + tagName)) {
-                input.value = "";
+                tagAskQuestion.value = "";
             } else {
                 const button = document.createElement('button');
                 button.classList.add('all-tags');
@@ -193,10 +193,11 @@ if (tagAskQuestion) {
                 button.textContent = tagName;
                 button.id = tagName;
 
-                const section = document.querySelector('#property-tag');
-                section.insertBefore(button, input);
+                console.log(button);
+                const section = document.querySelector('#property-tags');
+                section.appendChild(button);
 
-                input.value = "";
+                tagAskQuestion.value = "";
             }
         }
 

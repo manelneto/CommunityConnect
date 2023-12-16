@@ -375,7 +375,7 @@ BEGIN
         RETURN NEW;
     END IF;
 
-    IF EXISTS (SELECT id_user FROM reputation WHERE id_user = id_author) THEN
+    IF EXISTS (SELECT id_user FROM reputation WHERE id_user = id_author AND id_community = id_c) THEN
         UPDATE reputation
         SET rating = 1000 * total_likes / (total_likes + total_dislikes)
         WHERE id_user = id_author AND id_community = id_c;

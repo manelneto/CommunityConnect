@@ -355,14 +355,22 @@ DECLARE
     total_dislikes INTEGER;
     id_author INTEGER;
     id_c INTEGER;
+    id_answer INTEGER;
 BEGIN
+    -- Determine the id_answer based on the operation type
+    IF TG_OP = 'DELETE' THEN
+        id_answer := OLD.id_answer;
+    ELSE
+        id_answer := NEW.id_answer;
+    END IF;
+
     SELECT id_user INTO id_author
     FROM answer
-    WHERE answer.id = NEW.id_answer;
+    WHERE answer.id = id_answer;
 
     SELECT id_community INTO id_c
     FROM answer JOIN question ON answer.id_question = question.id
-    WHERE answer.id = NEW.id_answer;
+    WHERE answer.id = id_answer;
 
     SELECT COUNT(*) INTO total_likes
     FROM question JOIN answer ON question.id = answer.id_question JOIN answer_vote ON answer_vote.id_answer = answer.id 
@@ -371,8 +379,11 @@ BEGIN
     SELECT COUNT(*) INTO total_dislikes
     FROM question JOIN answer ON question.id = answer.id_question JOIN answer_vote ON answer_vote.id_answer = answer.id 
     WHERE answer.id_user = id_author AND question.id_community = id_c AND answer_vote.likes = FALSE;
+
     IF total_likes + total_dislikes = 0 THEN
-        -- não deveria ser set rating = 0??
+        UPDATE reputation
+        SET rating = 0
+        WHERE id_user = id_author AND id_community = id_c;
         RETURN NEW;
     END IF;
 
@@ -391,7 +402,7 @@ $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER calculate_user_rating
-    AFTER INSERT OR UPDATE ON answer_vote
+    AFTER INSERT OR UPDATE OR DELETE ON answer_vote
     FOR EACH ROW
     EXECUTE PROCEDURE calculate_user_rating();
 

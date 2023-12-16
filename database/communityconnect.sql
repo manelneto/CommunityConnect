@@ -43,6 +43,7 @@ DROP FUNCTION IF EXISTS calculate_user_rating CASCADE;
 DROP FUNCTION IF EXISTS update_content_on_user_deletion CASCADE;
 DROP FUNCTION IF EXISTS prevent_self_vote_on_answer CASCADE;
 DROP FUNCTION IF EXISTS prevent_self_vote_on_question CASCADE;
+DROP FUNCTION IF EXISTS first_question_on_community CASCADE;
 
 
 -- Tabelas
@@ -738,7 +739,33 @@ CREATE TRIGGER award_badge_on_first_100_answer
     FOR EACH ROW
     EXECUTE PROCEDURE award_badge_on_first_100_answer();
 
-SET search_path TO lbaw23114;
+CREATE OR REPLACE FUNCTION first_answer_on_community() RETURNS TRIGGER AS
+$BODY$
+DECLARE
+    id_c INTEGER;
+BEGIN
+    SELECT id_community INTO id_c
+    FROM question
+    WHERE id = NEW.id_question;
+
+    IF (NOT EXISTS (SELECT * FROM reputation WHERE id_user = NEW.id_user AND id_community = id_c)) THEN
+        INSERT INTO reputation (id_user, id_community)
+        VALUES (NEW.id_user, id_c);
+    END IF;
+
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER first_answer_on_community
+    AFTER INSERT ON answer
+    FOR EACH ROW
+    EXECUTE PROCEDURE first_answer_on_community();
+
+
+-- População
+
 
 INSERT INTO users (username, email, password, register_date, administrator, blocked) VALUES ('admin', 'admin@email.com', '$2y$12$/boh21q7KMYjCbBJVOTbruDDtoQGqC8KBRoBWOPxyiWc.yxy1Imc6', '2023-11-20', TRUE, FALSE);
 INSERT INTO users (username, email, password, register_date, administrator, blocked) VALUES ('user', 'user@email.com', '$2y$12$FLF80tXFTUHBpeFop0/Lv.nTGNIyVfuMmb1l2XdjdHPc.P6aXV7fe', '2023-09-20', FALSE, FALSE);

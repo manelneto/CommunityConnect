@@ -1,5 +1,4 @@
-<form class="answer" method="post" enctype="multipart/form-data">
-    @csrf
+<article class="answer">
     <div class="content-left">
         <img class="member-pfp answer-member-pfp" src="{{ asset($answer->user->image) }}" alt="User's profile photo" />
         <div class="answers-votes">
@@ -28,9 +27,9 @@
         </div>
     </div>
     <article class="content-right">
-            @if( Request::route()->getName() == 'profile')
-                <a class="question-of-answer" href="{{ route('question', ['id' => $answer->id_question]) }}"><b>Question:</b> {{ $answer->question->title }}</a>
-            @endif
+        @if( Request::route()->getName() == 'profile')
+            <a class="question-of-answer" href="{{ route('question', ['id' => $answer->id_question]) }}"><b>Question:</b> {{ $answer->question->title }}</a>
+        @endif
         <header class="answer-info">
             <div class="answer-details">
                 <a class="username" href="../users/{{ $answer->id_user }}">{{ $answer->user->username }}</a>
@@ -71,30 +70,29 @@
                 </svg>
             @endif
         </header>
-        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
-            <label for="content-{{ $answer->id }}" class="label-content">Content</label>
-            <textarea id="content-{{ $answer->id }}" class="description non-movable-textarea" name="content" cols="40" rows="5" placeholder="Type in your answer here">{{ $answer->content }}</textarea>
-            <label for="file-{{ $answer->id }}" class="label-file">File</label>
-            <input id="file-{{ $answer->id }}" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt" value="{{ asset($answer->file) }}">
-            <input type="hidden" name="type" value="answer">
-        @else
-            <p class="description">{{ $answer->content }}</p>
-            @if ($answer->file)
-                <p class="file"><a href="{{ asset($answer->file) }}" target="_blank">Download file here</a></p>
-            @endif
+        @foreach(explode(PHP_EOL, $answer->content) as $paragraph)
+            <p class="description">{{ $paragraph }}</p>
+        @endforeach
+        @if ($answer->file)
+            <p class="file"><a href="{{ asset($answer->file) }}" target="_blank">Download file here</a></p>
         @endif
-        <div class="answer-buttons">
-            @if (Auth::user()?->id === $answer->question->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
-                @if ($answer->correct)
-                    <button data-id="{{ $answer->id }}" class="mark mark-incorrect">Remove correct mark</button>
-                @else
-                    <button data-id="{{ $answer->id }}" class="mark mark-correct">Mark as correct</button>
-                @endif
+            @if(Request::route()->getName() !== 'profile')
+                <form method="post">
+                    <div class="answer-buttons">
+                        @if (Auth::user()?->id === $answer->question->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
+                            @if ($answer->correct)
+                                <button data-id="{{ $answer->id }}" class="mark mark-incorrect">Remove correct mark</button>
+                            @else
+                                <button data-id="{{ $answer->id }}" class="mark mark-correct">Mark as correct</button>
+                            @endif
+                        @endif
+                        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
+                            @csrf
+                            <button data-id="{{ $answer->id }}" class="edit">Edit</button>
+                            <button class="delete" formaction="../../answers/{{ $answer->id }}/delete">Delete</button>
+                        @endif
+                    </div>
+                </form>
             @endif
-            @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
-                <button class="edit" formaction="../../answers/{{ $answer->id }}">Edit</button>
-                <button class="delete" formaction="../../answers/{{ $answer->id }}/delete">Delete</button>
-            @endif
-        </div>
     </article>
-</form>
+</article>

@@ -56,6 +56,7 @@
         <script src="{{ asset('js/autocomplete.js') }} " defer></script>
         <script src="{{ asset('js/errors.js') }} " defer></script>
         <script src="{{ asset('js/edit-answer.js') }} " defer></script>
+        <script src="{{ asset('js/comments.js') }} " defer></script>
     </head>
     <body>
         <header class="website-header">

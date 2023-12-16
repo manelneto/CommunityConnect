@@ -15,7 +15,7 @@
                         To post a question, write a title describing it in the <b>Title</b> field.
                         Then, choose a community from the <b>Choose a community</b> dropdown menu.
                         Finally, elaborate your question in the <b>Content</b> field.
-                        You can also add a file to your question by clicking on the <b>File</b> button and selecting one.
+                        You can also attach a file to your question by clicking on the <b>File</b> button and selecting one.
                         When you're done, click on the <b>Submit</b> button.
                     </p>
                 </div>

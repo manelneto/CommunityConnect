@@ -391,6 +391,8 @@ button.mark-incorrect {
 
 .question-details .tooltip-icon:hover .tooltip-text {
   visibility: visible;
+}
+
 .comment .description .username,
 .comment .description .date {
   display: inline;

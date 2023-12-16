@@ -34,16 +34,19 @@
         <header class="answer-info">
             <div class="answer-details">
                 <a class="username" href="../users/{{ $answer->id_user }}">{{ $answer->user->username }}</a>
-                @if (isset($answer->user->communitiesRating))
+                @if (isset($answer->user->communitiesRating) && $answer->user->communitiesRating->where('pivot.id_community', $answer->question->id_community)->count())
                     @foreach ($answer->user->communitiesRating as $communityRating)
-                        @if ($communityRating->pivot->id_community == $answer->question->id_community && $communityRating->pivot->expert)
-                            <img class="experts-stars" src="{{ asset('assets/rating-images/star-expert.png') }}" alt="Expert">
-                        @endif
                         @if ($communityRating->pivot->id_community == $answer->question->id_community)
+                            @if ($communityRating->pivot->expert)
+                                <img class="experts-stars" src="{{ asset('assets/rating-images/star-expert.png') }}" alt="Expert">
+                            @endif
                             <p class="rating">{{ $communityRating->pivot->rating }} score</p>
                         @endif
                     @endforeach
+                @else
+                    <p class="rating">0 score</p>
                 @endif
+
 
                 <!-- Moderator Badge -->
 

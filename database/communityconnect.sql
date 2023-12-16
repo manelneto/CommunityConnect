@@ -372,6 +372,7 @@ BEGIN
     FROM question JOIN answer ON question.id = answer.id_question JOIN answer_vote ON answer_vote.id_answer = answer.id 
     WHERE answer.id_user = id_author AND question.id_community = id_c AND answer_vote.likes = FALSE;
     IF total_likes + total_dislikes = 0 THEN
+        -- não deveria ser set rating = 0??
         RETURN NEW;
     END IF;
 

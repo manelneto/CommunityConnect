@@ -1,5 +1,4 @@
 <article class="answer">
-    @csrf
     <div class="content-left">
         <img class="member-pfp answer-member-pfp" src="{{ asset($answer->user->image) }}" alt="User's profile photo" />
         <div class="answers-votes">
@@ -68,22 +67,29 @@
                 </svg>
             @endif
         </header>
-        <p class="description">{{ $answer->content }}</p>
+        @foreach(explode(PHP_EOL, $answer->content) as $paragraph)
+            <p class="description">{{ $paragraph }}</p>
+        @endforeach
         @if ($answer->file)
             <p class="file"><a href="{{ asset($answer->file) }}" target="_blank">Download file here</a></p>
         @endif
-        <div class="answer-buttons">
-            @if (Auth::user()?->id === $answer->question->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
-                @if ($answer->correct)
-                    <button data-id="{{ $answer->id }}" class="mark mark-incorrect">Remove correct mark</button>
-                @else
-                    <button data-id="{{ $answer->id }}" class="mark mark-correct">Mark as correct</button>
-                @endif
+            @if(Request::route()->getName() !== 'profile')
+                <form method="post">
+                    <div class="answer-buttons">
+                        @if (Auth::user()?->id === $answer->question->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
+                            @if ($answer->correct)
+                                <button data-id="{{ $answer->id }}" class="mark mark-incorrect">Remove correct mark</button>
+                            @else
+                                <button data-id="{{ $answer->id }}" class="mark mark-correct">Mark as correct</button>
+                            @endif
+                        @endif
+                        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
+                            @csrf
+                            <button data-id="{{ $answer->id }}" class="edit">Edit</button>
+                            <button class="delete" formaction="../../answers/{{ $answer->id }}/delete">Delete</button>
+                        @endif
+                    </div>
+                </form>
             @endif
-            @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
-                <button class="edit" formaction="../../answers/{{ $answer->id }}">Edit</button>
-                <button class="delete" formmethod="post" formaction="../../answers/{{ $answer->id }}/delete">Delete</button>
-            @endif
-        </div>
     </article>
 </article>

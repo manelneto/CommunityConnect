@@ -44,7 +44,6 @@
                     @endforeach
                 @endif
 
-
                 <!-- Moderator Badge -->
 
                 @if (in_array($answer->question->id_community, $answer->user->moderatorCommunities->pluck('id')->toArray()))
@@ -76,19 +75,23 @@
         @endif
             @if(Request::route()->getName() !== 'profile')
                 <form method="post">
+                    @csrf
                     <div class="answer-buttons">
-                        @if (Auth::user()?->id === $answer->question->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
-                            @if ($answer->correct)
+                        @if ($answer->correct)
+                            @can ('incorrect', $answer)
                                 <button data-id="{{ $answer->id }}" class="mark mark-incorrect">Remove correct mark</button>
-                            @else
+                            @endcan
+                        @else
+                            @can ('correct', $answer)
                                 <button data-id="{{ $answer->id }}" class="mark mark-correct">Mark as correct</button>
-                            @endif
+                            @endcan
                         @endif
-                        @if (Auth::user()?->id === $answer->id_user || Auth::user()?->administrator || Auth::user()?->moderates($answer->question->id_community))
-                            @csrf
+                        @can ('edit', $answer)
                             <button data-id="{{ $answer->id }}" class="edit">Edit</button>
+                        @endcan
+                        @can ('destroy', $answer)
                             <button class="delete" formaction="../../answers/{{ $answer->id }}/delete">Delete</button>
-                        @endif
+                        @endcan
                     </div>
                 </form>
             @endif

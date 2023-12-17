@@ -1,5 +1,5 @@
 @section ('aside')
-        @auth
+        @can('create', App\Models\Question::class)
             <a class="ask-a-question-button" href="{{ route('create-question') }}">Ask a Question</a><!-- TODO -->
         @endauth
         <section class="right-bar-stats">

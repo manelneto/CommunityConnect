@@ -3,22 +3,23 @@
 namespace App\Policies;
 
 use App\Models\User;
-
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
 
-class AnswerVotePolicy {
+class AnswerVotePolicy
+{
 
     use HandlesAuthorization;
 
     public function vote(User $user): bool
     {
-        return Auth::check();
+        return $user->id === Auth::user()->id
+            && !$user->blocked;
     }
 
     public function unvote(User $user): bool
     {
-        return Auth::check();
+        return $user->id === Auth::user()->id
+            && !$user->blocked;
     }
-
 }

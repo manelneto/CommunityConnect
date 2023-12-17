@@ -3,22 +3,23 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Community;
-
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
 
-class CommunityPolicy {
+class CommunityPolicy
+{
 
     use HandlesAuthorization;
 
     public function follow(User $user): bool
     {
-        return Auth::check();
+        return $user->id === Auth::user()->id
+            && !$user->blocked;
     }
 
     public function unfollow(User $user): bool
     {
-        return Auth::check();
+        return $user->id === Auth::user()->id
+            && !$user->blocked;
     }
 }

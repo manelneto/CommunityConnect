@@ -281,10 +281,42 @@ a.sign-up-button {
   margin-left:3rem;
 }
 
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutToLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+
 .mobile-aside-bar {
   position: absolute;
-  top: 80px;
-  background-color: white;
+  background-color: var(--light-gray);
+  height: 100%;
+  width: 400px;
+  padding: 20px;
+  animation: 0.5s ease-out 0s 1 slideInFromLeft;
+}
+
+.nav-bar-hidden {
+  animation: 0.5s ease-out 0s 1 slideOutToLeft forwards;
+}
+
+.nav-bar-hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.5s, opacity 0.5s linear;
 }
 
 .menu-nav ul li,
@@ -653,5 +685,9 @@ section#notifications article.notification{
 
   .question-details {
     position: static !important;
+  }
+
+  .tooltip-icon {
+    position: static;
   }
 }

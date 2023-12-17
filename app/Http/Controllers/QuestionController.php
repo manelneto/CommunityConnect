@@ -24,12 +24,12 @@ class QuestionController extends Controller
         $sort = $request->get('sort') == 'recent' ? 'date' : 'likes_count';
         $searchTerm = $request->get('text', '');
 
-        if ($community === 0 && count($communities) === 0 && (int) $request->get('community', 0) === 0 && (int) $request->get('communities', 0) === 0) {
+        if ($request->routeIs('questions')) {
             // all questions
             $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->whereBetween('date', [$after, $before]);
-        } else if ($community !== 0 || (int) $request->get('community', 0) !== 0) {
+        } else if ($request->routeIs('community')) {
             // community page
             $id_community = $community !== 0 ? $community : $request->get('community');
             $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
@@ -42,17 +42,35 @@ class QuestionController extends Controller
             $user = Auth::user()?->id;
             $userQuestions = UserFollowsQuestion::where('id_user', $user)->pluck('id_question')->toArray();
             $userTags = UserFollowsTag::where('id_user', $user)->pluck('id_tag')->toArray();
+
+            // Start the base question query
             $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
-                ->where(function ($query) use ($communities, $userQuestions, $after, $before) {
-                    $query->whereBetween('date', [$after, $before])
-                        ->whereIn('id_community', $communities)
-                        ->orWhereIn('id', $userQuestions);
-                })
-                ->orWhereHas('tags', function ($query) use ($userTags) {
+                ->whereBetween('date', [$after, $before]);
+
+            // Flag to check if any 'where' condition is applied
+            $conditionApplied = false;
+
+            // Apply community filter if communities are provided
+            if (isset($communities[0]) && $communities[0] !== '') {
+                $questions = $questions->whereIn('id_community', $communities);
+                $conditionApplied = true;
+            }
+
+            // Apply user questions filter if user questions are provided
+            if (!empty($userQuestions)) {
+                $method = $conditionApplied ? 'orWhereIn' : 'whereIn';
+                $questions = $questions->$method('id', $userQuestions);
+                $conditionApplied = true;
+            }
+
+            // Apply tags filter if user tags are provided
+            if (!empty($userTags)) {
+                $method = $conditionApplied ? 'orWhereHas' : 'whereHas';
+                $questions = $questions->$method('tags', function ($query) use ($userTags) {
                     $query->whereIn('id', $userTags);
                 });
-
+            }
         }
 
         if ($searchTerm != '') {
@@ -94,10 +112,9 @@ class QuestionController extends Controller
         return view('questions.index', ['questions' => $questions]);
     }
 
-    public function personalIndex(Request $request)
-    {
+    public function personalIndex(Request $request) {
         $this->authorize('personalIndex', Question::class);
-
+        
         $user = Auth::user()->id;
         $communities = UserFollowsCommunity::where('id_user', $user)->pluck('id_community')->toArray();
         $questions = json_decode($this->search($request, 0, $communities)->content());

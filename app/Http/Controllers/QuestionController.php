@@ -14,6 +14,7 @@ use App\Models\Tag;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class QuestionController extends Controller
 {
@@ -29,7 +30,7 @@ class QuestionController extends Controller
             $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->whereBetween('date', [$after, $before]);
-        } else if ($community !== 0 || (int) $request->get('community', 0) !== 0) {
+        } else if ($community > 0 || (int) $request->get('community', 0) > 0) {
             // community page
             $id_community = $community !== 0 ? $community : $request->get('community');
             $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
@@ -38,21 +39,30 @@ class QuestionController extends Controller
                 ->where('id_community', $id_community);
         } else {
             // personal feed -> questions from communities that user follows AND questions that user follows AND questions from tags that user follows
-            $communities = $communities !== [] ? $communities : explode(',', $request->get('communities'));
+            $communities = $communities !== [] ? $communities : explode(',', $request->get('communities', ''));
             $user = Auth::user()?->id;
             $userQuestions = UserFollowsQuestion::where('id_user', $user)->pluck('id_question')->toArray();
             $userTags = UserFollowsTag::where('id_user', $user)->pluck('id_tag')->toArray();
-            $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
-                ->withCount(['likes', 'dislikes', 'answers'])
-                ->where(function ($query) use ($communities, $userQuestions, $after, $before) {
-                    $query->whereBetween('date', [$after, $before])
-                        ->whereIn('id_community', $communities)
-                        ->orWhereIn('id', $userQuestions);
-                })
-                ->orWhereHas('tags', function ($query) use ($userTags) {
-                    $query->whereIn('id', $userTags);
-                });
 
+            $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
+                ->withCount(['likes', 'dislikes', 'answers']);
+
+            $questions = $questions->where(function ($query) use ($communities, $userQuestions, $userTags, $after, $before) {
+                $query->whereBetween('date', [$after, $before])
+                    ->where(function ($query) use ($communities, $userQuestions, $userTags) {
+                        $query->when(isset($communities[0]) && $communities[0] !== '', function ($query) use ($communities) {
+                            $query->whereIn('id_community', $communities);
+                        })
+                        ->when(!empty($userQuestions), function ($query) use ($userQuestions) {
+                            $query->orWhereIn('id', $userQuestions);
+                        })
+                        ->when(!empty($userTags), function ($query) use ($userTags) {
+                            $query->orWhereHas('tags', function ($query) use ($userTags) {
+                                $query->whereIn('id', $userTags);
+                            });
+                        });
+                    });
+            });
         }
 
         if ($searchTerm != '') {
@@ -94,13 +104,12 @@ class QuestionController extends Controller
         return view('questions.index', ['questions' => $questions]);
     }
 
-    public function personalIndex(Request $request)
-    {
+    public function personalIndex(Request $request) {
         $this->authorize('personalIndex', Question::class);
 
         $user = Auth::user()->id;
         $communities = UserFollowsCommunity::where('id_user', $user)->pluck('id_community')->toArray();
-        $questions = json_decode($this->search($request, 0, $communities)->content());
+        $questions = json_decode($this->search($request, -1, $communities)->content()); 
         return view('questions.index', ['questions' => $questions]);
     }
 

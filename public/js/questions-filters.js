@@ -47,7 +47,7 @@ if (applyButton) {
       community = 0;
       communities = 0;
     } else if (community === 'feed') {
-      community = 0;
+      community = -1;
     }
     
     const text = document.querySelector(".live-search").value;
@@ -100,7 +100,7 @@ async function loadMoreQuestions() {
     community = 0;
     communities = 0;
   } else if (community === 'feed') {
-    community = 0;
+    community = -1;
   }
 
   const text = document.querySelector(".live-search").value;

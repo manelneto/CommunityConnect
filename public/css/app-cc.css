@@ -214,6 +214,10 @@ input.live-search {
   white-space: nowrap;
 }
 
+.logged a {
+  padding: 10px;
+}
+
 a.sign-in-button {
   background-color: var(--blue);
   margin-right: 20px;

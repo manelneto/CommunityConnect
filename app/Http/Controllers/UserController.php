@@ -72,7 +72,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show($id)
     {
         try {
             $user = User::with(['badges', 'moderatorCommunities'])->findOrFail($id);
@@ -92,7 +92,7 @@ class UserController extends Controller
                 'moderatorCommunities' => $moderatorCommunities
             ]);
         } catch (ModelNotFoundException $e) {
-            return "User not found.";
+            return redirect()->back()->withErrors('User not found');
         }
     }
 
@@ -162,29 +162,27 @@ class UserController extends Controller
         }
     }
 
-    public function block_user(Request $request) {
-        $user = User::findOrFail($request->input('user'));
-        $this->authorize('block_user', User::class);
-
-        try{
+    public function block(Request $request) {
+        try {
+            $user = User::findOrFail($request->input('user'));
+            $this->authorize('block', User::class);
             $user->blocked = true;
             $user->save();
             return redirect('admin');
         } catch (ModelNotFoundException $e) {
-            return "User not found.";
+            return redirect()->back()->withErrors('User not found');
         }        
     }
 
-    public function unblock_user(Request $request) {
-        $user = User::findOrFail($request->input('user'));
-        $this->authorize('unblock_user', User::class);
-
-        try{
+    public function unblock(Request $request) {
+        try {
+            $user = User::findOrFail($request->input('user'));
+            $this->authorize('unblock', User::class);
             $user->blocked = false;
             $user->save();
             return redirect('admin');
         } catch (ModelNotFoundException $e) {
-            return "User not found.";
+            return redirect()->back()->withErrors('User not found');
         }
     }
 

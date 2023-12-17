@@ -75,7 +75,7 @@
                     </div>
                 </section>
                 <input type="text" id="block-user" name="block-user" placeholder="Enter username here and click Tab for autocomplete">
-                    <input type="hidden" name="user" value="">
+                <input type="hidden" name="user" value="0">
                 <button class="admin-button" type="submit">Block</button>
             </form>
         </details>
@@ -96,7 +96,7 @@
                     </div>
                 </section>
                 <input type="text" id="unblock-user" name="unblock-user" placeholder="Enter username here and click Tab for autocomplete">
-                    <input type="hidden" name="user" value="">
+                <input type="hidden" name="user" value="0">
                 <button class="admin-button" type="submit">Unblock</button>
             </form>
         </details>

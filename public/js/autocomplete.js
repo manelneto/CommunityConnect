@@ -184,22 +184,33 @@ if (tagAskQuestion) {
             event.preventDefault();
             const tagName = tagAskQuestion.value;
 
-            if (document.querySelector('#' + tagName)) {
-                tagAskQuestion.value = "";
-            } else {
                 const button = document.createElement('button');
-                button.classList.add('all-tags');
-                button.name = 'name';
-                button.textContent = tagName;
-                button.id = tagName;
+                button.classList.add('all-buttons');
+                button.textContent = 'X';
 
-                console.log(button);
+                button.style.width = '20px';
+                button.style.padding = '0';
+
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const tag = event.target.parentNode;
+                    tag.remove();
+                });
+
+                const p = document.createElement('div');
+                p.classList.add('all-tags');
+                p.textContent = tagName;
+                p.id = tagName;
+
+                p.insertBefore(button, p.firstChild);
+
                 const section = document.querySelector('#property-tags');
-                section.appendChild(button);
+                section.appendChild(p);
 
                 tagAskQuestion.value = "";
             }
         }
-
-    });
+    );
 }
+
+

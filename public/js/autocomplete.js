@@ -33,6 +33,13 @@ if (inputUser) {
     
         if (username === '') return;
 
+        const match = users.find((element) => element[0].toUpperCase() === username);
+        if (match) {
+            inputUser.setAttribute('value', match[1]);
+        } else {
+            inputUser.setAttribute('value', '0');
+        }
+
         matchingUsers = users.filter(user => user && user[0].toUpperCase().startsWith(username)).filter(Boolean);
     });
 
@@ -53,17 +60,25 @@ const inputBlock = document.querySelector('#block-user');
 if (inputBlock) {
     let matchingUsers = [];
     let index = 0;
-    
+
+    const user = document.querySelector('#block-user + input');
+
     inputBlock.addEventListener('input', function (event) {
         const username = inputBlock.value.toUpperCase();
     
         if (username === '') return;
 
+        const match = users.find((element) => element[0].toUpperCase() === username);
+        if (match) {
+            user.setAttribute('value', match[1]);
+        } else {
+            user.setAttribute('value', '0');
+        }
+
         matchingUsers = unblocked.filter(user => user && user[0].toUpperCase().startsWith(username)).filter(Boolean);
     });
 
     inputBlock.addEventListener('keydown', async function (event) {
-        const user = document.querySelector('#block-user + input');
         if (event.key === 'Tab') {
             event.preventDefault();
             if (matchingUsers.length > 0) {
@@ -80,17 +95,26 @@ const inputUnblock = document.querySelector('#unblock-user');
 if (inputUnblock) {
     let matchingUsers = [];
     let index = 0;
-    
+
+    const user = document.querySelector('#unblock-user + input');
+
     inputUnblock.addEventListener('input', function (event) {
         const username = inputUnblock.value.toUpperCase();
     
         if (username === '') return;
 
+        const match = users.find((element) => element[0].toUpperCase() === username);
+        if (match) {
+            user.setAttribute('value', match[1]);
+        } else {
+            user.setAttribute('value', '0');
+        }
+
         matchingUsers = blocked.filter(user => user && user[0].toUpperCase().startsWith(username)).filter(Boolean);
     });
 
     inputUnblock.addEventListener('keydown', async function (event) {
-        const user = document.querySelector('#unblock-user + input');
+
         if (event.key === 'Tab') {
             event.preventDefault();
             if (matchingUsers.length > 0) {

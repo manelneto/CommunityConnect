@@ -47,13 +47,10 @@
         @endif
         <!-- Edit Question Button -->
 
-        @if (Request::route()->getName() == 'question' &&
-        (
-            $question->id_user == Auth::user()?->id ||
-            Auth::user()?->administrator ||
-            in_array($question->id_community, Auth::user()?->moderatorCommunities->pluck('id')->toArray() ?? [])
-        ))
-            <a href="{{ route('edit-question', ['id' => $question->id]) }}" class="edit-question-button">Edit</a>
+        @if (Request::route()->getName() == 'question')
+            @can ('edit', $question)
+                <a href="{{ route('edit-question', ['id' => $question->id]) }}" class="edit-question-button">Edit</a>
+            @endcan
         @endif
         <div class="answers-details">
             <a href="{{ route('question', ['id' => $question->id]) . '#answers' }}" class="question-answer-btn">

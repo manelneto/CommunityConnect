@@ -6,29 +6,31 @@
             <h1>{{ $user->username }}</h1>
             <div id="profile-buttons">
                 @if (Auth::user()?->id === $user->id)
-                <img class="notifications-icon" src="{{ asset('assets/notifications.png') }}" alt="Notifications-icon"/>
-                <p class="notifications-number">{{ count($unread) }}</p>
-                <article class="notifications-container">
-                    <ul class="notifications">
-                        @foreach ($notifications as $notification)
-                        <li class="profile-notification">
-                            <p class="notification-text">{{ $notification->content }}</p>
-                            <p class="notification-date">{{ $notification->date->format('Y-m-d') }}</p>
-                            @if (!$notification->read)
-                                <img id="{{ $notification->id }}" class="view-icon" src="{{ asset('assets/view.png') }}" alt="View-icon"/>
-                            @endif
-                        </li>
-                        @endforeach
-                    </ul>
-                </article>
+                    <img class="notifications-icon" src="{{ asset('assets/notifications.png') }}" alt="Notifications-icon"/>
+                    <p class="notifications-number">{{ count($unread) }}</p>
+                    <article class="notifications-container">
+                        <ul class="notifications">
+                            @foreach ($notifications as $notification)
+                            <li class="profile-notification">
+                                <p class="notification-text">{{ $notification->content }}</p>
+                                <p class="notification-date">{{ $notification->date->format('Y-m-d') }}</p>
+                                @if (!$notification->read)
+                                    <img id="{{ $notification->id }}" class="view-icon" src="{{ asset('assets/view.png') }}" alt="View-icon"/>
+                                @endif
+                            </li>
+                            @endforeach
+                        </ul>
+                    </article>
                 @endif
-                @if (Auth::user()?->id === $user->id || Auth::user()?->administrator)
+                @can ('edit', $user)
                     <a class="edit-profile" href="{{ route('edit-user', $user->id) }}">Edit</a>
+                @endcan
+                @can ('destroy', $user)
                     <form action="../users/{{ $user->id }}/delete" method="post">
                         @csrf
                         <button id="delete-account" type="submit"> Delete account </button>
                     </form>
-                @endif
+                @endcan
             </div>
         </section>
         <h2 class="profile-email">{{ $user->email }}</h2>

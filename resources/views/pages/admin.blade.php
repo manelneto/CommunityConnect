@@ -38,9 +38,8 @@
                             <path d="M356.004,61.156c-81.37-81.47-213.377-81.551-294.848-0.182c-81.47,81.371-81.552,213.379-0.181,294.85 c81.369,81.47,213.378,81.551,294.849,0.181C437.293,274.636,437.375,142.626,356.004,61.156z M237.6,340.786 c0,3.217-2.607,5.822-5.822,5.822h-46.576c-3.215,0-5.822-2.605-5.822-5.822V167.885c0-3.217,2.607-5.822,5.822-5.822h46.576 c3.215,0,5.822,2.604,5.822,5.822V340.786z M208.49,137.901c-18.618,0-33.766-15.146-33.766-33.765 c0-18.617,15.147-33.766,33.766-33.766c18.619,0,33.766,15.148,33.766,33.766C242.256,122.755,227.107,137.901,208.49,137.901z" />
                         </svg>
                         <p class="tooltip-text">
-                            You can block a user by entering their username in the respective field.
-                            By blocking a user, you remove their capabilities to interact with the website in any way apart from viewing content.
-                            When you're done, click on the <b>Block</b> button.
+                            You can create a user by entering their user details in the respective fields.
+                            When you're done, click on the <b>Create User</b> button.
                         </p>
                     </div>
                 </section>

@@ -49,10 +49,10 @@ Route::post('/password', [PasswordController::class, 'update'])->name('update-pa
 // Profile
 Route::controller(UserController::class)->group(function () {
     Route::post('/users', 'store');
-    Route::get('/users/{id}', 'show')->name('profile');
-    Route::get('/users/{id}/edit', 'edit')->name('edit-user');
-    Route::post('/users/{id}', 'update');
-    Route::post('/users/{id}/delete', 'destroy');
+    Route::get('/users/{id}', 'show')->where('id', '[0-9]+')->name('profile');
+    Route::get('/users/{id}/edit', 'edit')->where('id', '[0-9]+')->name('edit-user');
+    Route::post('/users/{id}', 'update')->where('id', '[0-9]+');
+    Route::post('/users/{id}/delete', 'destroy')->where('id', '[0-9]+');
 });
 
 // Questions
@@ -60,32 +60,32 @@ Route::controller(QuestionController::class)->group(function () {
     Route::get('/questions', 'index')->name('questions');
     Route::get('/questions/create', 'create')->name('create-question');
     Route::post('/questions', 'store');
-    Route::get('/questions/{id}', 'show')->name('question');
-    Route::get('/questions/{id}/edit', 'edit')->name('edit-question');
-    Route::post('/questions/{id}', 'update');
-    Route::post('/questions/{id}/delete', 'destroy');
+    Route::get('/questions/{id}', 'show')->where('id', '[0-9]+')->name('question');
+    Route::get('/questions/{id}/edit', 'edit')->where('id', '[0-9]+')->name('edit-question');
+    Route::post('/questions/{id}', 'update')->where('id', '[0-9]+');
+    Route::post('/questions/{id}/delete', 'destroy')->where('id', '[0-9]+');
 });
 
 // Question Comments
 Route::controller(QuestionCommentController::class)->group(function() {
     Route::post('/question-comments', 'store');
-    Route::post('/question-comments/{id}', 'update');
-    Route::post('/question-comments/{id}/delete', 'destroy');
+    Route::post('/question-comments/{id}', 'update')->where('id', '[0-9]+');
+    Route::post('/question-comments/{id}/delete', 'destroy')->where('id', '[0-9]+');
 });
 
 // Answers
 Route::controller(AnswerController::class)->group(function () {
-    Route::get('/answers/{id}/edit', 'edit')->name('edit-answer');
+    Route::get('/answers/{id}/edit', 'edit')->where('id', '[0-9]+')->name('edit-answer');
     Route::post('/answers', 'store');
-    Route::post('/answers/{id}', 'update');
-    Route::post('/answers/{id}/delete', 'destroy');
+    Route::post('/answers/{id}', 'update')->where('id', '[0-9]+');
+    Route::post('/answers/{id}/delete', 'destroy')->where('id', '[0-9]+');
 });
 
 // Answer Comments
 Route::controller(AnswerCommentController::class)->group(function() {
     Route::post('/answer-comments', 'store');
-    Route::post('/answer-comments/{id}', 'update');
-    Route::post('/answer-comments/{id}/delete', 'destroy');
+    Route::post('/answer-comments/{id}', 'update')->where('id', '[0-9]+');
+    Route::post('/answer-comments/{id}/delete', 'destroy')->where('id', '[0-9]+');
 });
 
 // Admin
@@ -97,7 +97,7 @@ Route::post('/tags', [TagController::class, 'store'])->name('create-tag');
 
 //Communities
 Route::get('/communities', [CommunityController::class, 'index'])->name('communities');
-Route::get('/communities/{id}', [QuestionController::class, 'communityIndex'])->name('community');
+Route::get('/communities/{id}', [QuestionController::class, 'communityIndex'])->where('id', '[0-9]+')->name('community');
 Route::get('/feed', [QuestionController::class, 'personalIndex'])->name('feed');
 
 // API

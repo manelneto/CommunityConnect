@@ -107,8 +107,8 @@ class AnswerController extends Controller {
         try {
             $id = $request->get('id');
             $answer = Answer::findOrFail($id);
-            $question = Question::findOrFail($answer->id_question);
-            $this->authorize('correct', [Answer::class, $question]);
+
+            $this->authorize('correct', $answer);
 
             $answer->correct = true;
             $answer->save();
@@ -123,9 +123,8 @@ class AnswerController extends Controller {
         try {
             $id = $request->get('id');
             $answer = Answer::findOrFail($id);
-            $question = Question::findOrFail($answer->id_question);
 
-            $this->authorize('correct', [Answer::class, $question]);
+            $this->authorize('correct', $answer);
 
             $answer->correct = false;
             $answer->save();
@@ -135,4 +134,3 @@ class AnswerController extends Controller {
         }
     }
 }
-

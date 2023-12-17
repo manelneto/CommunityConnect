@@ -1,18 +1,16 @@
-window.onload = function () {
-  var navBarMobile = document.querySelector(".mobile-aside-bar");
-  var openButton = document.querySelector(".side-bar-icon");
-  var closeButton = document.querySelector(".close-mobile-bar");
+var navBarMobile = document.querySelector(".mobile-aside-bar");
+var openButton = document.querySelector(".side-bar-icon");
+var closeButton = document.querySelector(".close-mobile-bar");
 
-  if (closeButton) {
- 
-    closeButton.addEventListener("click", function () {
-      navBarMobile.classList.toggle("hidden");
-    });
-  }
+if (closeButton) {
 
-  if (openButton) {
-    openButton.addEventListener("click", function () {
-      navBarMobile.classList.toggle("hidden");
-    });
-  }
-};
+  closeButton.addEventListener("click", function () {
+    navBarMobile.classList.toggle("hidden");
+  });
+}
+
+if (openButton) {
+  openButton.addEventListener("click", function () {
+    navBarMobile.classList.toggle("hidden");
+  });
+}

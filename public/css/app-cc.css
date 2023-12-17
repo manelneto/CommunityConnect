@@ -179,9 +179,8 @@ header.website-header {
 }
 
 .side-bar-icon {
-  margin-right: 10px;
-  margin-left: 30px;
   display: none;
+  flex-shrink: 0;
 }
 
 input.live-search {
@@ -280,6 +279,12 @@ a.sign-up-button {
 .main-nav-list {
   margin-top: 40px;
   margin-left:3rem;
+}
+
+.mobile-aside-bar {
+  position: absolute;
+  top: 80px;
+  background-color: white;
 }
 
 .menu-nav ul li,
@@ -612,10 +617,6 @@ section#notifications article.notification{
     display: none;
   }
 
-  .header-content {
-    grid-template-columns: 1fr 240px;
-  }
-
   .header-content .cc-logo-with-text {
     grid-column: 1;
   }
@@ -624,20 +625,12 @@ section#notifications article.notification{
     display: none;
   }
 
-  .header-content .right-header {
-    grid-column: 2;
-  }
-
   .main-content {
     grid-template-columns: 1fr 240px;
   }
 
   .main-info {
     grid-column: 1; 
-  }
-
-  .right-bar {
-    /* grid-column: 2;  */
   }
 
   #notifications {
@@ -651,5 +644,14 @@ section#notifications article.notification{
 
   main {
     grid-column: body-col-initial / body-col-medium2;
+  }
+
+  .image-and-side-bar-icon {
+    border-right: none;
+    margin-left: 25px;
+  }
+
+  .question-details {
+    position: static !important;
   }
 }

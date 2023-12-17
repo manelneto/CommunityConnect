@@ -74,7 +74,7 @@ textarea#content.form-control{
 }
 
 #create-question .tooltip-icon{
-   margin-bottom: 12px;
+   height: 50px;
 }
 
 textarea#content.form-control::placeholder {

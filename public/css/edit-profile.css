@@ -97,3 +97,14 @@ form#edit-profile {
 #edit-profile #user-edit-profile:hover .tooltip-text{
     visibility: visible;
 }
+
+.add-tooltip-edit-profile{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.add-tooltip-edit-profile .tooltip-icon{
+    margin-left: 5px;
+    margin-top: 2.4rem;
+}

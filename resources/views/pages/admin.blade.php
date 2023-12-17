@@ -9,7 +9,7 @@
             <summary>Find a user</summary>
             <form action="#" method="get" class="form-admin">
                 @csrf
-                <section class="add-tooltip">
+                <section class="add-tooltip-admin">
                     <label for="user">Username</label>
                     <div class="tooltip-icon">
                         <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 416.979 416.979" xml:space="preserve">
@@ -31,7 +31,7 @@
             <summary>Create a user</summary>
             <form action="../../users" method="post" class="form-admin">
                 @csrf
-                <section class="add-tooltip">
+                <section class="add-tooltip-admin">
                     <label for="block-user">Username</label>
                     <div class="tooltip-icon">
                         <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 416.979 416.979" xml:space="preserve">
@@ -61,7 +61,7 @@
             <summary>Block a user</summary>
             <form action="../admin/block" method="post" class="form-admin">
                 @csrf
-                <section class="add-tooltip">
+                <section class="add-tooltip-admin">
                     <label for="block-user">Username</label>
                     <div class="tooltip-icon">
                         <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 416.979 416.979" xml:space="preserve">
@@ -83,7 +83,7 @@
             <summary>Unblock a user</summary>
             <form action="../admin/unblock" method="post" class="form-admin">
                 @csrf
-                <section class="add-tooltip">
+                <section class="add-tooltip-admin">
                     <label for="unblock-user">Username</label>
                     <div class="tooltip-icon">
                         <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 416.979 416.979" xml:space="preserve">
@@ -104,7 +104,7 @@
             <summary>Add new tag</summary>
             <form action="../tags" method="post" class="form-admin">
                 @csrf
-                <section class="add-tooltip">
+                <section class="add-tooltip-admin">
                     <label for="add-tag-admin">Tag</label>
                     <div class="tooltip-icon">
                         <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 416.979 416.979" xml:space="preserve">
@@ -126,7 +126,7 @@
             <summary>Delete tag</summary>
             <form action="../tags/delete" method="post" class="form-admin">
                 @csrf
-                <section class="add-tooltip">
+                <section class="add-tooltip-admin">
                     <label for="delete-tag">Tag</label>
                     <div class="tooltip-icon">
                         <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 416.979 416.979" xml:space="preserve">

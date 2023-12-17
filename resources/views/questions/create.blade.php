@@ -32,7 +32,7 @@
                     @endforeach
                 </select>
                 <label for="tag-ask-question">Tags</label>
-                <input id="tag-ask-question" class="form-control" type="text" name="tag-ask-question" required placeholder="Enter the tag's title, click Tab for autocomplete and Enter to add more tags">
+                <input id="tag-ask-question" class="form-control" type="text" name="tag-ask-question" placeholder="Enter the tag's title, click Tab for autocomplete and Enter to add more tags">
                 <section id="property-tags"></section>  
                 <label for="content">Content</label>
                 <textarea id="content" class="form-control" name="content" placeholder="Elaborate your question" required></textarea>

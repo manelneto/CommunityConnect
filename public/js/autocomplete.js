@@ -177,40 +177,47 @@ if (tagAskQuestion) {
             if (matchingTags.length > 0) {
                 index = (index + 1) % matchingTags.length;
                 tagAskQuestion.value = matchingTags[index][0];
+                tagAskQuestion.setAttribute('value', matchingTags[index][1]);
             }
         }
 
         if (event.key === 'Enter') {
             event.preventDefault();
             const tagName = tagAskQuestion.value;
+            const tagId = tagAskQuestion.getAttribute('value');
 
-                const button = document.createElement('button');
-                button.classList.add('all-buttons');
-                button.textContent = 'X';
+            const button = document.createElement('button');
+            button.classList.add('all-buttons');
+            button.textContent = 'X';
 
-                button.style.width = '20px';
-                button.style.padding = '0';
+            button.style.width = '20px';
+            button.style.padding = '0';
 
-                button.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const tag = event.target.parentNode;
-                    tag.remove();
-                });
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                const tag = event.target.parentNode;
+                tag.remove();
+            });
 
-                const p = document.createElement('div');
-                p.classList.add('all-tags');
-                p.textContent = tagName;
-                p.id = tagName;
+            const p = document.createElement('div');
+            p.classList.add('all-tags');
+            p.textContent = tagName;
+            p.id = tagId;
 
-                p.insertBefore(button, p.firstChild);
+            p.insertBefore(button, p.firstChild);
 
-                const section = document.querySelector('#property-tags');
-                section.appendChild(p);
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = `tags-${tagId}`;
+            input.value = tagId;
 
-                tagAskQuestion.value = "";
+            p.appendChild(input);
+
+            const section = document.querySelector('#property-tags');
+            section.appendChild(p);
+
+            tagAskQuestion.value = "";
             }
         }
     );
 }
-
-

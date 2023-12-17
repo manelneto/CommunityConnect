@@ -138,6 +138,15 @@ class QuestionController extends Controller
 
         $question->save();
 
+        foreach ($request->all() as $key => $value) {
+            error_log($key);
+            error_log($value);
+            if (preg_match('/^tags-\d+$/', $key)) {
+                error_log($key);
+                $question->tags()->attach($value);
+            }
+        }
+
         $fileController = new FileController();
         $fileController->upload($request, $question->id);
 

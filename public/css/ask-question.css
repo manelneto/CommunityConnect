@@ -28,19 +28,36 @@
  }
 
  #create-question label{
+   margin-top: 0.5rem;
     margin-left: 2rem;
-    margin-bottom: 0.5rem;
     font-weight: 600;
  }
 
-#create-question button:hover {
-   background-color: var(--dark-blue);
+.all-tags{
+   appearance: none;
+    padding: 5px;
+    border: none;
+    background-color: var(--blue);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-right: 5px;
+    width: fit-content;
+    margin-bottom: 0.3rem;
 }
 
 #create-question label {
    margin-left: 2rem;
    margin-bottom: 0.5rem;
    font-weight: 600;
+}
+
+section#property-tags{
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   margin-left: 2rem;
+   margin-right: 2rem;
 }
 
 textarea#content.form-control{

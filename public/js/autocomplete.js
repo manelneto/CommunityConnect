@@ -15,7 +15,8 @@ window.onload = async () => {
     }
 
     const editQuestion = document.querySelector('#question-edit');
-    if (admin || editQuestion) {
+    const createQuestion = document.querySelector('#create-question');
+    if (admin || editQuestion || createQuestion) {
         const urlTags = '../../api/tags';
         const responseTags = await fetch(urlTags);
         const allTags = await responseTags.json();
@@ -179,4 +180,68 @@ if (questionTags) {
         }
 
     });
+}
+
+const tagAskQuestion = document.querySelector('#tag-ask-question');
+if (tagAskQuestion) {
+    let matchingTags = [];
+    let index = 0;
+
+    tagAskQuestion.addEventListener('input', function (event) {
+        const tagName = tagAskQuestion.value.toUpperCase();
+
+        if (tagName === '') return;
+
+        matchingTags = tagsAdmin.filter(tag => tag && tag[0].toUpperCase().startsWith(tagName)).filter(Boolean);
+    });
+
+    tagAskQuestion.addEventListener('keydown', async function (event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            if (matchingTags.length > 0) {
+                index = (index + 1) % matchingTags.length;
+                tagAskQuestion.value = matchingTags[index][0];
+                tagAskQuestion.setAttribute('value', matchingTags[index][1]);
+            }
+        }
+
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const tagName = tagAskQuestion.value;
+            const tagId = tagAskQuestion.getAttribute('value');
+
+            const button = document.createElement('button');
+            button.classList.add('all-buttons');
+            button.textContent = 'X';
+
+            button.style.width = '20px';
+            button.style.padding = '0';
+
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                const tag = event.target.parentNode;
+                tag.remove();
+            });
+
+            const p = document.createElement('div');
+            p.classList.add('all-tags');
+            p.textContent = tagName;
+            p.id = tagId;
+
+            p.insertBefore(button, p.firstChild);
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = `tags-${tagId}`;
+            input.value = tagId;
+
+            p.appendChild(input);
+
+            const section = document.querySelector('#property-tags');
+            section.appendChild(p);
+
+            tagAskQuestion.value = "";
+            }
+        }
+    );
 }

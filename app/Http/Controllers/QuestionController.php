@@ -111,7 +111,8 @@ class QuestionController extends Controller
     {
         $this->authorize('create', Question::class);
         $communities = Community::all();
-        return view('questions.create', ['communities' => $communities]);
+        $tags = Tag::all();
+        return view('questions.create', ['communities' => $communities, 'tags' => $tags]);
     }
 
     /**
@@ -136,6 +137,15 @@ class QuestionController extends Controller
         $question->id_user = Auth::user()->id;
 
         $question->save();
+
+        foreach ($request->all() as $key => $value) {
+            error_log($key);
+            error_log($value);
+            if (preg_match('/^tags-\d+$/', $key)) {
+                error_log($key);
+                $question->tags()->attach($value);
+            }
+        }
 
         $fileController = new FileController();
         $fileController->upload($request, $question->id);

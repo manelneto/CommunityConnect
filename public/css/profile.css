@@ -95,12 +95,34 @@ a.edit-profile {
 .view-icon{
   width: 25px;
   height: 25px;
-  align-items: end;
+}
+
+.read-not-tooltip{
+  display: none;
+}
+
+.read-not-tooltip {
+  display:none;
+  position: absolute;
+  right: -60px;
+  font-size: 12px;
+  background-color: #f0f0f0;
+  padding: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.view-icon:hover{
+  cursor: pointer;
 }
 
 .notifications-icon {
   width: 35px;
   height: 35px;
+}
+
+.notifications-container{
+  display:none;
 }
 
 .notifications-number {

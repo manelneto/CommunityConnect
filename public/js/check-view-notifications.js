@@ -21,5 +21,15 @@ if (viewIcons) {
             numberNots.textContent = parseInt(numberNots.textContent) - 1;
             checkVisualizationNotifications(id);
         });
+        
+        viewIcon.addEventListener('mouseover', (event) => {
+            event.preventDefault();
+            viewIcon.nextElementSibling.style.display = 'flex';
+        });
+
+        viewIcon.addEventListener('mouseout', (event) => {
+            event.preventDefault();
+            viewIcon.nextElementSibling.style.display = 'none';
+        });
     });
 }

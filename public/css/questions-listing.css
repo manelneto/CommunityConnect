@@ -168,7 +168,7 @@ a.edit-question-button:hover {
   margin-left: auto;
 }
 
-span.follow-question-tooltip {
+.follow-question-tooltip {
   visibility: hidden;
   position: absolute;
   right: 35px;

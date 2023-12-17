@@ -16,6 +16,7 @@
                             <p class="notification-date">{{ $notification->date->format('Y-m-d') }}</p>
                             @if (!$notification->read)
                                 <img id="{{ $notification->id }}" class="view-icon" src="{{ asset('assets/view.png') }}" alt="View-icon"/>
+                                <p class="read-not-tooltip">Mark as read</p>
                             @endif
                         </li>
                         @endforeach

@@ -42,23 +42,19 @@
                             </select>
                             <label id="content-label" for="content">Content</label>
                             <textarea id="content" class="question-description non-movable-textarea" name="content" rows="6" cols="56" placeholder="Elaborate your question">{{ $question->content }}</textarea>
+                            <section id="property-tags" class="edit-question-tags">
+                                <label for="add-tag">Tags</label>
+                                <input id="add-tag" class="form-control" type="text" name="add-tag" placeholder="Enter the tag name, click Tab for autocomplete and Enter to add more tags">
+                                @foreach ($question->tags as $tag)
+                                    <div id="{{ $tag->id }}" class="all-tags">
+                                        <button class="all-buttons">X</button>{{ $tag->name }}
+                                        <input type="hidden" name="tags-{{ $tag->id}}" value="{{ $tag->id }}">
+                                    </div>
+                                @endforeach
+                            </section>
                             <label for="file">File</label>
                             <input id="file" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt" value="{{ asset($question->file) }}">
-                            <input type="hidden" name="type" value="question">
-                            <div class="edit-question-tags">
-                                @foreach ($question->tags as $tag) 
-                                    <li id="{{ $tag->id }}-{{ $question->id }}" class="question-tag margin-on-tags">
-                                        {{ $tag->name }}
-                                        <div class="tag-tooltip-content color-black">Delete this tag.</div>
-                                    </li>
-                                @endforeach
-                                <input id="add-tag" class="form-control" type="text" name="add-tag" placeholder="Add a tag (Tab to autocomplete)">
-                                @error('tag')
-                                    <span class="error-message-tag-add">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                            </div>
+                            <input type="hidden" name="type" value="question">                            
                         </div>
                     </div>
                     <div class="edit-buttons">

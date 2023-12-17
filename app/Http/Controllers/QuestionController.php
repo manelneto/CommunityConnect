@@ -148,10 +148,7 @@ class QuestionController extends Controller
         $question->save();
 
         foreach ($request->all() as $key => $value) {
-            error_log($key);
-            error_log($value);
             if (preg_match('/^tags-\d+$/', $key)) {
-                error_log($key);
                 $question->tags()->attach($value);
             }
         }
@@ -220,7 +217,7 @@ class QuestionController extends Controller
         $isModerator = in_array($question->id_community, Auth::user()?->moderatorCommunities->pluck('id')->toArray());
         $ownsQuestion = $question->user->id == Auth::user()->id;
 
-        // Only non-moderators can update the title and id_community
+        // Only non-moderators can update the title and id_community --------------TODO
         if (!$isModerator or ($isModerator and $ownsQuestion)) {
             $request->validate([
                 'title' => 'required|string|max:255',
@@ -238,27 +235,20 @@ class QuestionController extends Controller
 
         $addTagName = $request->input('add-tag');
 
-        // Add tag if field is filled
-        if (!empty($addTagName)) {
-            $tagName = $request->input('add-tag');
-            $tag = Tag::where('name', $tagName)->first();
-
-            // Check if tag exists
-            if (!$tag) {
-                return back()->withErrors(['tag' => "Tag doesn't exist."]);
-            }
-
-            // Check if tag is already attached to the question
-            if ($question->tags->contains($tag->id)) {
-                return back()->withErrors(['tag' => "Tag already attached."]);
-            }
-
-            $question->tags()->attach($tag->id);
-        }
-
         $question->last_edited = now();
         
         $question->save();
+
+        foreach ($question->tags as $tag) {
+            $question->tags()->detach($tag->id);
+        }
+
+        foreach ($request->all() as $key => $value) {
+            if (preg_match('/^tags-\d+$/', $key)) {
+                $question->tags()->attach($value);
+            }
+        }
+
         return redirect('questions/' . $id);
     } catch (ModelNotFoundException $e) {
         return "Question not found.";

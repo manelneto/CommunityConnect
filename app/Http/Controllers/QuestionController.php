@@ -24,12 +24,12 @@ class QuestionController extends Controller
         $sort = $request->get('sort') == 'recent' ? 'date' : 'likes_count';
         $searchTerm = $request->get('text', '');
 
-        if ($request->routeIs('questions')) {
+        if ($community === 0 && count($communities) === 0 && (int) $request->get('community', 0) === 0 && (int) $request->get('communities', 0) === 0) {
             // all questions
             $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->whereBetween('date', [$after, $before]);
-        } else if ($request->routeIs('community')) {
+        } else if ($community !== 0 || (int) $request->get('community', 0) !== 0) {
             // community page
             $id_community = $community !== 0 ? $community : $request->get('community');
             $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])

@@ -24,13 +24,14 @@
     font-weight: 600;
     border-radius: 5px;
     width: 40%;
-    margin: auto; 
+    margin-top: 1rem;
+    align-self: center; 
  }
 
  #create-question label{
    margin-top: 0.5rem;
-    margin-left: 2rem;
-    font-weight: 600;
+   margin-left: 2rem;
+   font-weight: 600;
  }
 
 .all-tags{
@@ -44,12 +45,6 @@
     margin-right: 5px;
     width: fit-content;
     margin-bottom: 0.3rem;
-}
-
-#create-question label {
-   margin-left: 2rem;
-   margin-bottom: 0.5rem;
-   font-weight: 600;
 }
 
 section#property-tags{
@@ -80,5 +75,9 @@ textarea#content.form-control{
 }
 
 #create-question .tooltip-icon{
-   margin-bottom: 5px;
+   margin-bottom: 12px;
+}
+
+textarea#content.form-control::placeholder {
+   font-size: small;
 }

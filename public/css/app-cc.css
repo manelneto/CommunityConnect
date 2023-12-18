@@ -477,6 +477,13 @@ article.right-bar-popular .right-bar-name:hover {
   stroke: #AD8A56;
 }
 
+.community-connect-stats-text {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
 /* Little colored bar */
 .right-bar-stats .left-top-square::before {
   content: "";

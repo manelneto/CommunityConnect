@@ -2,22 +2,23 @@
         @can('create', App\Models\Question::class)
             <a class="ask-a-question-button" href="{{ route('create-question') }}">Ask a Question</a><!-- TODO -->
         @endauth
+        <p class="community-connect-stats-text">Community Connect Stats</p>
         <section class="right-bar-stats">
             <article class="left-top-square">
                 <h3 class="square-text">Questions</h3>
-                <p class="square-number">6</p>
+                <p class="square-number">{{ $totalQuestions }}</p>
             </article>
             <article class="right-top-square">
                 <h3 class="square-text">Answers</h3>
-                <p class="square-number">12</p>
+                <p class="square-number">{{ $totalAnswers }}</p>
             </article>
             <article class="left-bottom-square">
                 <h3 class="square-text">Solved</h3>
-                <p class="square-number">4</p>
+                <p class="square-number">{{ $totalSolvedQuestions }}</p>
             </article>
             <article class="right-bottom-square">
                 <h3 class="square-text">Users</h3>
-                <p class="square-number">150</p>
+                <p class="square-number">{{ $totalUsers }}</p>
             </article>
         </section>
         <section class="right-bar-popular-questions">

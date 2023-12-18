@@ -6,6 +6,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Community;
 use App\Models\Tag;
+use App\Models\Question;
+use App\Models\Answer;
+use App\Models\User;
 
 class RightBarServiceProvider extends ServiceProvider
 {
@@ -35,8 +38,20 @@ class RightBarServiceProvider extends ServiceProvider
             ->take(5)
             ->get();
 
+            $totalQuestions = Question::count();
+            $totalAnswers = Answer::count();
+            $totalUsers = User::count();
+
+            $totalSolvedQuestions = Question::whereHas('answers', function ($query) {
+                $query->where('correct', true);
+            })->count();
+
             $view->with('popularCommunities', $popularCommunities)
-                ->with('popularTags', $popularTags);
+                ->with('popularTags', $popularTags)
+                ->with('totalQuestions', $totalQuestions)
+                ->with('totalAnswers', $totalAnswers)
+                ->with('totalUsers', $totalUsers)
+                ->with('totalSolvedQuestions', $totalSolvedQuestions);
         });
     }
 }

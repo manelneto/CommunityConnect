@@ -3,8 +3,8 @@
     <div class="content-right">
         <div class="question-details">
             <a href="../users/{{ $question->id_user }}" class="question-username">{{ $question->user->username }}</a>
-            <span class="question-asked-date">Asked: {{ $question->date }}</span>
-            <span class="question-community">In: {{ $question->community->name }}</span>
+            <p class="question-asked-date">Asked: {{ $question->date }}</p>
+            <p class="question-community">In: {{ $question->community->name }}</p>
             @if( $question->last_edited != null)
             <p class="question-edited-date">Edited: {{ $question->last_edited }}</p>
             @endif

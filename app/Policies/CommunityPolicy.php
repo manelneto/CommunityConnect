@@ -11,6 +11,13 @@ class CommunityPolicy
 
     use HandlesAuthorization;
 
+    public function store(User $user): bool
+    {
+        return $user->id === Auth::user()->id
+            && $user->administrator
+            && !$user->anonymous();
+    }
+
     public function follow(User $user): bool
     {
         return $user->id === Auth::user()->id

@@ -10,15 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class CommunityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $communities = Community::with(['users'])
             ->withCount(['users'])
             ->get();
         return view('pages.communities', ['communities' => $communities]);
+    }
+
+    public function store(Request $request)
+    {
+        $this->authorize('store', Community::class);
+
+        if (Community::where('name', $request->community)->exists()) {
+            return redirect()->back()->withErrors('Community already exists.');
+        }
+
+        $community = new Community();
+        $community->name = $request->community;
+        $community->save();
+
+        return redirect()->route('communities');
     }
 
     public function follow(Request $request)
@@ -37,7 +49,7 @@ class CommunityController extends Controller
             return response('Followed Community');
         } catch (ModelNotFoundException $e) {
             return response('Community not found');
-        };
+        }
     }
 
     public function unfollow(Request $request)
@@ -55,6 +67,6 @@ class CommunityController extends Controller
             return response('Unfollowed Community');
         } catch (ModelNotFoundException $e) {
             return response('Community not found');
-        };
+        }
     }
 }

@@ -30,15 +30,17 @@
             <label id="photo-label" for="photo">Profile Photo</label>
             <input id="photo" type="file" name="file" accept="image/png,image/jpg,image/jpeg">
             <input type="hidden" name="type" value="profile">
-            <button id="edit-password" class="edit-password-button">Edit Password</button>
-            <label class="edit-password" for="current-password">Current Password</label>
-            <input class="edit-password" id="current-password" type="password" name="current-password" placeholder="Enter your current password here">
-            <label class="edit-password" for="password">New Password</label>
-            <input class="edit-password" id="password" type="password" name="password" placeholder="Enter your new password here" class="user-details-input">
-            <p class="password-error">Password must be at least 8 characters long</p>
-            <label class="edit-password" for="password_confirmation">Confirm Password</label>
-            <input class="edit-password" id="password_confirmation" type="password" name="password_confirmation" placeholder="Retype your new password here">
-            <p class="password-confirmation-error">Passwords do not match</p>
+            @if (Auth::user()?->id === $user->id)
+                <button id="edit-password" class="edit-password-button">Edit Password</button>
+                <label class="edit-password" for="current-password">Current Password</label>
+                <input class="edit-password" id="current-password" type="password" name="current-password" placeholder="Enter your current password here">
+                <label class="edit-password" for="password">New Password</label>
+                <input class="edit-password" id="password" type="password" name="password" placeholder="Enter your new password here" class="user-details-input">
+                <p class="password-error">Password must be at least 8 characters long</p>
+                <label class="edit-password" for="password_confirmation">Confirm Password</label>
+                <input class="edit-password" id="password_confirmation" type="password" name="password_confirmation" placeholder="Retype your new password here">
+                <p class="password-confirmation-error">Passwords do not match</p>
+            @endif
             <button formaction="../../users/{{ $user->id }}" id="submit">Save</button>
         </form>
     </main>

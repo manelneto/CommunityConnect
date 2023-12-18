@@ -22,49 +22,26 @@
         </section>
         <section class="right-bar-popular-questions">
             <h2 class="popular-communities-text">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22.8 4.8H20.4V15.6H4.8V18C4.8 18.66 5.34 19.2 6 19.2H19.2L24 24V6C24 5.34 23.46 4.8 22.8 4.8ZM18 12V1.2C18 0.54 17.46 0 16.8 0H1.2C0.54 0 0 0.54 0 1.2V18L4.8 13.2H16.8C17.46 13.2 18 12.66 18 12Z" fill="#272930" />
+                <svg width="24" height="24" viewBox="0 0 52 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M34.0357 30.5715C36.1068 30.5715 37.7857 32.2505 37.7857 34.3215V38.6115L37.7688 38.8439C37.1029 43.4001 33.0104 45.5909 26.1431 45.5909C19.3006 45.5909 15.1428 43.4251 14.2453 38.9213L14.2143 38.6072V34.3215C14.2143 32.2505 15.8932 30.5715 17.9643 30.5715H34.0357ZM35.0941 17.7142L47.9643 17.7144C50.0353 17.7144 51.7143 19.3933 51.7143 21.4644V25.7543L51.6974 25.9868C51.0315 30.5429 46.939 32.7338 40.0717 32.7338L39.7112 32.7303C39.05 30.3669 36.9522 28.6035 34.4189 28.4409L34.0357 28.4287L32.0595 28.4302C34.2452 26.6624 35.6428 23.9588 35.6428 20.9287C35.6428 19.8016 35.4495 18.7196 35.0941 17.7142ZM4.03571 17.7144L16.9059 17.7142C16.5505 18.7196 16.3571 19.8016 16.3571 20.9287C16.3571 23.7805 17.5952 26.3432 19.5631 28.1087L19.9405 28.4302L17.9643 28.4287C15.2596 28.4287 12.9804 30.2509 12.2876 32.7346L12.2145 32.7338C5.37202 32.7338 1.21421 30.568 0.316697 26.0642L0.285706 25.7501V21.4644C0.285706 19.3933 1.96464 17.7144 4.03571 17.7144ZM26 13.4287C30.1421 13.4287 33.5 16.7865 33.5 20.9287C33.5 25.0708 30.1421 28.4287 26 28.4287C21.8579 28.4287 18.5 25.0708 18.5 20.9287C18.5 16.7865 21.8579 13.4287 26 13.4287ZM39.9286 0.571533C44.0707 0.571533 47.4286 3.9294 47.4286 8.07153C47.4286 12.2137 44.0707 15.5715 39.9286 15.5715C35.7864 15.5715 32.4286 12.2137 32.4286 8.07153C32.4286 3.9294 35.7864 0.571533 39.9286 0.571533ZM12.0714 0.571533C16.2136 0.571533 19.5714 3.9294 19.5714 8.07153C19.5714 12.2137 16.2136 15.5715 12.0714 15.5715C7.92928 15.5715 4.57142 12.2137 4.57142 8.07153C4.57142 3.9294 7.92928 0.571533 12.0714 0.571533Z" fill="black" />
                 </svg>
                 Popular Communities
-                @foreach ($popularCommunities as $community)
-                    <p> {{ $community->name }} </p>
-                    <p> {{ $community->users_count }} </p>
-                @endforeach
-                @foreach ($popularTags as $tag)
-                    <p> {{ $tag->name }} </p>
-                    <p> {{ $tag->questions_count }} </p>
-                @endforeach
             </h2>
-            <article class="popular-question">
-                <img class="user-profile-picture" src="{{ asset('profile/default.png') }}" alt="User's profile picture" />
-                <h3><a class="question-title" href="#">How do I cook rice without water?</a></h3>
-                <div class="popular-question-answers">
-                    <svg width="12" height="12" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22.8 4.8H20.4V15.6H4.8V18C4.8 18.66 5.34 19.2 6 19.2H19.2L24 24V6C24 5.34 23.46 4.8 22.8 4.8ZM18 12V1.2C18 0.54 17.46 0 16.8 0H1.2C0.54 0 0 0.54 0 1.2V18L4.8 13.2H16.8C17.46 13.2 18 12.66 18 12Z" />
-                    </svg>
-                    <p class="popular-question-n-of-answers">6 answers</p>
-                </div>
-            </article>
-            <article class="popular-question">
-                <img class="user-profile-picture" src="{{ asset('profile/default.png') }}" alt="User's profile picture" />
-                <h3><a class="question-title" href="#">How do I cook rice without water?</a></h3>
-                <div class="popular-question-answers">
-                    <svg width="12" height="12" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22.8 4.8H20.4V15.6H4.8V18C4.8 18.66 5.34 19.2 6 19.2H19.2L24 24V6C24 5.34 23.46 4.8 22.8 4.8ZM18 12V1.2C18 0.54 17.46 0 16.8 0H1.2C0.54 0 0 0.54 0 1.2V18L4.8 13.2H16.8C17.46 13.2 18 12.66 18 12Z" />
-                    </svg>
-                    <p class="popular-question-n-of-answers">6 answers</p>
-                </div>
-            </article>
-            <article class="popular-question">
-                <img class="user-profile-picture" src="{{ asset('profile/default.png') }}" alt="User's profile picture" />
-                <h3><a class="question-title" href="#">How do I cook rice without water?</a></h3>
-                <div class="popular-question-answers">
-                    <svg width="12" height="12" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22.8 4.8H20.4V15.6H4.8V18C4.8 18.66 5.34 19.2 6 19.2H19.2L24 24V6C24 5.34 23.46 4.8 22.8 4.8ZM18 12V1.2C18 0.54 17.46 0 16.8 0H1.2C0.54 0 0 0.54 0 1.2V18L4.8 13.2H16.8C17.46 13.2 18 12.66 18 12Z" />
-                    </svg>
-                    <p class="popular-question-n-of-answers">6 answers</p>
-                </div>
-            </article>
+            <div class="popular-communities">
+                @foreach($popularCommunities as $community)
+                    <article class="right-bar-popular">
+                        <div class="right-bar-name-and-badge">
+                            @if ($loop->iteration <= 3)
+                                <svg class="right-bar-medal-svg" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.5 7.66667L4.75 1H1L5.22419 8.88517M8.5 7.66667L12.25 1H16L11.7758 8.88517M8.5 7.66667C9.76 7.66667 10.9232 8.13625 11.7758 8.88517M8.5 7.66667C7.24 7.66667 6.07673 8.13625 5.22419 8.88517M5.22419 8.88517C4.35793 9.64608 3.8125 10.6953 3.8125 11.8333C3.8125 14.1345 5.91117 16 8.5 16C11.0888 16 13.1875 14.1345 13.1875 11.8333C13.1875 10.6953 12.6421 9.64608 11.7758 8.88517" stroke-width="2" stroke-linejoin="round"/>
+                                </svg>
+                            @endif
+                            <p class="right-bar-name"> {{$community->name}} </p>
+                        </div>
+                        <p class="right-bar-count"> {{$community->users_count}} followers </p>
+                    </article>
+                @endforeach
+            </div>
         </section>
         <section class="right-bar-top-members">
             <h2 class="top-members-text">

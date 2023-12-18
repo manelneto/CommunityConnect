@@ -26,7 +26,7 @@ class RightBarServiceProvider extends ServiceProvider
             // communities with the most followers
             $popularCommunities = Community::withCount('users')
                     ->orderBy('users_count', 'desc')
-                    ->take(4)
+                    ->take(5)
                     ->get();
 
             // tags that appear in the most questions

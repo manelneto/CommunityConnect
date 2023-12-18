@@ -2,45 +2,46 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\AnswerComment;
-
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
 
-class AnswerCommentPolicy {
+class AnswerCommentPolicy
+{
 
     use HandlesAuthorization;
 
-    private function isModeratorOfCommunity($comment): bool
+    public function create(User $user): bool
     {
-        if (!Auth::check()) {
-            return false;
-        }
-
-        return in_array(
-            $comment->answer->question->id_community,
-            Auth::user()->moderatorCommunities->pluck('id')->toArray()
-        );
+        return $user->id === Auth::user()->id
+            && !$user->blocked;
     }
 
     public function store(User $user): bool
     {
-        return Auth::check();
+        return $user->id === Auth::user()->id
+            && !$user->blocked;
     }
 
     public function edit(User $user, AnswerComment $comment): bool
     {
-        return Auth::check() && ($user->id === Auth::user()->id) && (($comment->id_user === $user->id || Auth::user()->administrator) || $this->isModeratorOfCommunity($comment));
+        return $user->id === Auth::user()->id
+            && !$user->blocked
+            && ($comment->id_user === $user->id || $user->administrator || $user->moderates($comment->answer->question->id_community));
     }
 
     public function update(User $user, AnswerComment $comment): bool
     {
-        return Auth::check() && ($user->id === Auth::user()->id) && (($comment->id_user === $user->id || Auth::user()->administrator) || $this->isModeratorOfCommunity($comment));
+        return $user->id === Auth::user()->id
+            && !$user->blocked
+            && ($comment->id_user === $user->id || $user->administrator || $user->moderates($comment->answer->question->id_community));
     }
 
     public function destroy(User $user, AnswerComment $comment): bool
     {
-        return Auth::check() && ($user->id === Auth::user()->id) && (($comment->id_user === $user->id || Auth::user()->administrator) || $this->isModeratorOfCommunity($comment));
+        return $user->id === Auth::user()->id
+            && !$user->blocked
+            && ($comment->id_user === $user->id || $user->administrator || $user->moderates($comment->answer->question->id_community));
     }
 }

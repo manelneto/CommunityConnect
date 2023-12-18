@@ -15,7 +15,7 @@
         @foreach ($question->comments as $comment)
             @include('partials.question_comment', ['comment' => $comment])
         @endforeach
-        @auth
+        @can ('create', App\Models\QuestionComment::class)
         <section class="add-tooltip-comment">
             <p class="add-question-comment-tap">Comment this question...</p>
             <div class="tooltip-icon">
@@ -36,9 +36,9 @@
                     <button class="submit-comment" type="submit">Post Comment</button>
                 </form>
             </article>
-        @endauth
+        @endcan
     </div>
-    @auth
+    @can ('create', App\Models\Answer::class)
     <article class="leave">
         <section class="add-tooltip">
             <h2 id="leave-answer-on-question">Leave an Answer</h2>
@@ -64,7 +64,7 @@
             <button type="submit">Post Answer</button>
         </form>
     </article>
-    @endauth
+    @endcan
 
     <!-- Answers -->
 
@@ -88,7 +88,7 @@
                     @foreach($answer->comments as $comment)
                         @include('partials.answer_comment', ['comment' => $comment])
                     @endforeach
-                    @auth
+                    @can ('create', App\Models\AnswerComment::class)
                         <p class="add-answer-comment-tap">Comment this answer...</p>
                         <article class="leave-comment leave-answer-comment leave-comment-question hidden">
                         <form action="/answer-comments" method="post">
@@ -98,7 +98,7 @@
                             <button class="submit-comment" type="submit">Post Comment</button>
                         </form>
                         </article>
-                    @endauth
+                    @endcan
                 </div>
             </div>
         @endforeach

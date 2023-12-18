@@ -3,7 +3,7 @@
 @section('main')
     <main id="profile-info">
         <section id="edit-profile-a">
-            <h1>{{ $user->username }}</h1>
+            <h1>{{ $user->username }} @if ($user->blocked) (blocked) @endif</h1>
             <div id="profile-buttons">
                 @if (Auth::user()?->id === $user->id)
                 <img class="notifications-icon" src="{{ asset('assets/notifications.png') }}" alt="Notifications-icon"/>
@@ -23,13 +23,15 @@
                     </ul>
                 </article>
                 @endif
-                @if (Auth::user()?->id === $user->id || Auth::user()?->administrator)
+                @can ('edit', $user)
                     <a class="edit-profile" href="{{ route('edit-user', $user->id) }}">Edit</a>
+                @endcan
+                @can ('destroy', $user)
                     <form action="../users/{{ $user->id }}/delete" method="post">
                         @csrf
                         <button id="delete-account" type="submit"> Delete account </button>
                     </form>
-                @endif
+                @endcan
             </div>
         </section>
         <h2 class="profile-email">{{ $user->email }}</h2>

@@ -1,4 +1,4 @@
-@if (Auth::user()?->id === $comment->id_user || Auth::user()?->administrator || Auth::user()?->moderates($comment->answer->question->id_community))
+@can ('edit', $comment)
     <form class="comment edit-answer-comment" method="post">
         @csrf
         <div class="comments-details">
@@ -17,4 +17,4 @@
         <p class="date edit-question-comment-date">{{ $comment->date }}</p>
         <p class="description"> - {{ $comment->content }}</p>
     </article>
-@endif
+@endcan

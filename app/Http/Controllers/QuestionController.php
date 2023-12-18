@@ -171,7 +171,7 @@ class QuestionController extends Controller
             $answers = Answer::with(['user', 'likes', 'dislikes', 'comments'])
                 ->withCount(['likes', 'dislikes'])
                 ->where('id_question', $id)
-                ->orderBy('date')
+                ->orderBy('likes_count', 'desc')
                 ->get();
 
             return view('questions.show', [

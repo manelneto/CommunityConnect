@@ -1,6 +1,6 @@
 @section('nav')
     <ul class="main-nav-list">
-        <li class="img-menu {{ Request::routeIs('communities') ? 'active-nav-item' : '' }}">
+        <li class="img-menu {{ Request::routeIs('communities') || Request::routeIs('community') ? 'active-nav-item' : '' }}">
             <a href="{{ route('communities') }}">
                 <svg width="135" height="135" viewBox="0 0 135 135" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M128.324 40.4316C131.009 44.2548 127.808 48.9221 123.137 48.9221H6.74787C3.02116 48.9221 0 45.9009 0 42.1742V29.8256C0 13.3608 13.3608 0 29.8256 0H45.4807C56.4797 0 59.9211 3.57637 64.3072 9.44702L73.7542 21.9981C75.8461 24.7647 76.116 25.1021 80.0298 25.1021H98.8563C111.034 25.1021 121.81 31.1555 128.324 40.4316Z" />

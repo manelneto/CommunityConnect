@@ -32,7 +32,7 @@ class RightBarServiceProvider extends ServiceProvider
             // tags that appear in the most questions
             $popularTags = Tag::withCount('questionTags as questions_count')
             ->orderByDesc('questions_count')
-            ->take(4)
+            ->take(5)
             ->get();
 
             $view->with('popularCommunities', $popularCommunities)

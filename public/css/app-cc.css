@@ -453,6 +453,11 @@ article.right-bar-popular .right-bar-count {
 article.right-bar-popular .right-bar-name {
   font-size: 18px;
   font-weight: bold;
+  color: #000;
+}
+
+article.right-bar-popular .right-bar-name:hover {
+  color: var(--blue);
 }
 
 .right-bar-name-and-badge {
@@ -555,7 +560,7 @@ article.right-bar-popular .right-bar-name {
 }
 
 .popular-communities-text,
-.top-members-text {
+.popular-tags-text {
   display: flex;
   align-items: center;
   font-size: 20px;

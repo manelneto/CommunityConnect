@@ -36,6 +36,7 @@ function checkToEnableSubmitButton(error_map) {
 
 let submitButton = document.querySelector('#submit');
 if (!submitButton) submitButton = document.querySelector('.submit');
+if (!submitButton) submitButton = document.querySelector('button[type="submit"]');
 
 
 const error_map = new Map();

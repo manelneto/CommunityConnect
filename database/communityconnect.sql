@@ -726,7 +726,7 @@ CREATE TRIGGER award_badge_on_first_100_question
 CREATE OR REPLACE FUNCTION award_badge_on_first_100_answer() RETURNS TRIGGER AS 
 $BODY$
 BEGIN
-    IF (SELECT COUNT(*) FROM answer WHERE id_user = NEW.id_user) = 100 AND NOT EXISTS (SELECT * FROM user_earns_badge WHERE id_user = NEW.id_user AND id_badge = 6) THEN
+    IF (SELECT COUNT(*) FROM answer WHERE id_user = NEW.id_user) = 5 AND NOT EXISTS (SELECT * FROM user_earns_badge WHERE id_user = NEW.id_user AND id_badge = 6) THEN
         INSERT INTO user_earns_badge (id_user, id_badge) VALUES (NEW.id_user, 6);
     END IF;
     RETURN NEW;
@@ -1826,7 +1826,7 @@ INSERT INTO tag (name) VALUES ('mechanical engineering');
 INSERT INTO tag (name) VALUES ('civil engineering');
 INSERT INTO tag (name) VALUES ('electrical engineering');
 INSERT INTO tag (name) VALUES ('chemical engineering');
-INSERT INTO tag (name) VALUES ('biomedical engineering');
+INSERT INTO tag (name) VALUES ('engineering');
 INSERT INTO tag (name) VALUES ('hardware');
 INSERT INTO tag (name) VALUES ('software');
 INSERT INTO tag (name) VALUES ('programming');
@@ -8217,4 +8217,4 @@ insert into answer_comment (content, date, last_edited, id_user, id_answer) valu
 insert into answer_comment (content, date, last_edited, id_user, id_answer) values ('Your practical approach is commendable.', '2022-11-09', '2022-11-19', 291, 973);
 insert into answer_comment (content, date, last_edited, id_user, id_answer) values ('Interesting perspective! I have never thought about it that way before.', '2022-10-01', null, 390, 133);
 
-insert into reputation (id_user, id_community, rating, expert) values (1, 1, 1000, true);
+insert into reputation (id_user, id_community, rating, expert) values (2, 1, 1000, true);

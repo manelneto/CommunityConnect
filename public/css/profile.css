@@ -104,10 +104,10 @@ a.edit-profile {
 .read-not-tooltip {
   display:none;
   position: absolute;
-  right: -60px;
   font-size: 12px;
+  right: 5em;
+  padding: 1em 1em;
   background-color: #f0f0f0;
-  padding: 5px 0;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -140,29 +140,39 @@ a.edit-profile {
   padding: 0;
 }
 
+.profile-notification {
+  display: grid;
+  grid-template-columns: 30em 8em 2em;
+  padding: 1rem;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.profile-notification > .notification-text {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.profile-notification > .notification-date {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.profile-notification > .view-icon {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
 .notifications {
-  display: none;
-  width: 550px;
-  position:absolute;
+  position: absolute;
   top: 145px;
-  left: 700px;
-  flex-direction: column;
-  right: 0;
+  right: 300px;
   background-color: white;
   border: 1px solid #ccc;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   overflow-y: scroll;
   height: 25em;
-}
-
-.profile-notification{
-  display:flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 1rem;
-  justify-content: space-around;
-  border-bottom: 1px solid #eee;
 }
 
 #my-questions,

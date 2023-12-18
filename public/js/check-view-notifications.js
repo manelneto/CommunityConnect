@@ -17,6 +17,7 @@ if (viewIcons) {
         viewIcon.addEventListener('click', (event) => {
             event.preventDefault();
             const id = viewIcon.id;
+            viewIcon.previousElementSibling.remove();
             viewIcon.remove();
             numberNots.textContent = parseInt(numberNots.textContent) - 1;
             checkVisualizationNotifications(id);
@@ -24,12 +25,12 @@ if (viewIcons) {
         
         viewIcon.addEventListener('mouseover', (event) => {
             event.preventDefault();
-            viewIcon.nextElementSibling.style.display = 'flex';
+            viewIcon.previousElementSibling.style.display = 'block';
         });
 
         viewIcon.addEventListener('mouseout', (event) => {
             event.preventDefault();
-            viewIcon.nextElementSibling.style.display = 'none';
+            viewIcon.previousElementSibling.style.display = 'none';
         });
     });
 }

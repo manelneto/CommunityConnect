@@ -43,13 +43,18 @@
   padding: 5px;
 }
 
+.leave > form > textarea{
+  height: 4rem;
+}
+
 .leave > form > input {
   margin-bottom: 1rem;
 }
 
 .leave > form > label {
+  margin-top: 0.5rem;
+  margin-bottom: 3px;
   display: block;
-  margin-bottom: 0.5rem;
 }
 
 .answer-details {
@@ -86,11 +91,10 @@
   background-color: var(--blue);
   border: none;
   color: #fff;
-  padding: 10px 40px;
+  padding: 7px 15px;
   border-radius: 5px;
-  font-size: 14px;
   cursor: pointer;
-  display: block;
+  display:block;
 }
 
 section#answers form.answer {
@@ -120,6 +124,10 @@ section#answers form.answer {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+#leave-answer-on-question {
+  font-size: 18px;
 }
 
 .edit-question-comment, .edit-answer-comment{

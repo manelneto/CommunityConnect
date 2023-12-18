@@ -36,6 +36,10 @@ class RegisterController extends Controller
             'type' => 'in:profile'
         ]);
 
+        if (preg_match('/^anonymous.*$/', $request->username)) {
+            return redirect()->back()->withErrors('Username must not start with "anonymous"');
+        }
+
         $id = User::create([
             'username' => $request->username,
             'email' => $request->email,

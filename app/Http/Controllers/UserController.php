@@ -162,30 +162,6 @@ class UserController extends Controller
         }
     }
 
-    public function block(Request $request) {
-        try {
-            $user = User::findOrFail($request->input('user'));
-            $this->authorize('block', User::class);
-            $user->blocked = true;
-            $user->save();
-            return redirect('admin');
-        } catch (ModelNotFoundException $e) {
-            return redirect()->back()->withErrors('User not found');
-        }        
-    }
-
-    public function unblock(Request $request) {
-        try {
-            $user = User::findOrFail($request->input('user'));
-            $this->authorize('unblock', User::class);
-            $user->blocked = false;
-            $user->save();
-            return redirect('admin');
-        } catch (ModelNotFoundException $e) {
-            return redirect()->back()->withErrors('User not found');
-        }
-    }
-
     public function destroy(int $id) {
         $user = User::findOrFail($id);
         $this->authorize('destroy', $user);
@@ -205,6 +181,30 @@ class UserController extends Controller
             }
         } catch (ModelNotFoundException $e) {
             return "User not found.";
+        }
+    }
+
+    public function block(Request $request) {
+        try {
+            $user = User::findOrFail($request->input('user'));
+            $this->authorize('block', $user);
+            $user->blocked = true;
+            $user->save();
+            return redirect('admin');
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->withErrors('User not found');
+        }
+    }
+
+    public function unblock(Request $request) {
+        try {
+            $user = User::findOrFail($request->input('user'));
+            $this->authorize('unblock', $user);
+            $user->blocked = false;
+            $user->save();
+            return redirect('admin');
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->withErrors('User not found');
         }
     }
 

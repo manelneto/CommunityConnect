@@ -23,13 +23,14 @@ channel.bind('answer', function(notification) {
     const a = document.createElement('a');
     a.href = `/questions/${notification.id_question}`;
     a.innerHTML = notification.message;
-    a.style.color = 'black';
 
     article.appendChild(h3);
     article.appendChild(a);
 
     const notifications = document.getElementById('notifications');
     notifications.appendChild(article);
+
+    window.setTimeout(() => document.getElementById('notifications').firstElementChild.remove(), 15000);
   }
 });
 
@@ -44,13 +45,14 @@ channel.bind('commentQuestion', function(notification) {
     const a = document.createElement('a');
     a.href = `/questions/${notification.id_question}`;
     a.innerHTML = notification.message;
-    a.style.color = 'black';
 
     article.appendChild(h3);
     article.appendChild(a);
 
     const notifications = document.getElementById('notifications');
     notifications.appendChild(article);
+
+    window.setTimeout(() => document.getElementById('notifications').firstElementChild.remove(), 15000);
   }
 });
 
@@ -65,13 +67,14 @@ channel.bind('commentAnswer', function(notification) {
         const a = document.createElement('a');
         a.href = `/questions/${notification.id_question}`;
         a.innerHTML = notification.message;
-        a.style.color = 'black';
 
         article.appendChild(h3);
         article.appendChild(a);
 
         const notifications = document.getElementById('notifications');
         notifications.appendChild(article);
+
+        window.setTimeout(() => document.getElementById('notifications').firstElementChild.remove(), 15000);
     }
 });
 
@@ -86,13 +89,14 @@ channel.bind('voteQuestion', function(notification) {
       const a = document.createElement('a');
       a.href = `/questions/${notification.id_question}`;
       a.innerHTML = notification.message;
-      a.style.color = 'black';
 
       article.appendChild(h3);
       article.appendChild(a);
 
       const notifications = document.getElementById('notifications');
       notifications.appendChild(article);
+
+      window.setTimeout(() => document.getElementById('notifications').firstElementChild.remove(), 15000);
   }
 });
 
@@ -107,12 +111,13 @@ channel.bind('voteAnswer', function(notification) {
       const a = document.createElement('a');
       a.href = `/questions/${notification.id_question}`;
       a.innerHTML = notification.message;
-      a.style.color = 'black';
 
       article.appendChild(h3);
       article.appendChild(a);
 
       const notifications = document.getElementById('notifications');
       notifications.appendChild(article);
+
+      window.setTimeout(() => document.getElementById('notifications').firstElementChild.remove(), 15000);
   }
 });

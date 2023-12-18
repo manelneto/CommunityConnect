@@ -6515,13 +6515,13 @@ insert into answer (content, date, file, last_edited, correct, id_user, id_quest
 insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('What else do we need to do to make this a success?', '2022-08-12', null, '2022-09-23', true, 596, 219);
 insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('Can you give me more information?', '2022-08-10', null, '2022-09-11', true, 245, 638);
 insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('This depends on a lot of factors.', '2022-07-06', null, '2022-08-18', true, 2, 450);
-insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('What else do we need to do to make this a success?', null, '2022-09-05', true, 313, 655);
+insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('What else do we need to do to make this a success?', '2022-07-06', null, '2022-09-05', true, 313, 655);
 insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('This depends on a lot of factors.', '2022-07-08', null, '2022-09-20', false, 311, 543);
 insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('This depends on a lot of factors.', '2022-07-20', null, null, true, 566, 392);
 insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('This depends on a lot of factors.', '2022-07-12', null, null, true, 860, 812);
 insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('I need to do some research before I can answer that.', '2022-08-08', null, null, false, 665, 183);
 insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('Can you give me more information?', '2022-08-11', null, '2022-09-15', false, 231, 781);
-insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('What else do we need to do to make this a success?', null, null, false, 575, 650);
+insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('What else do we need to do to make this a success?', '2022-07-08', null, null, false, 575, 650);
 insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('Can you give me more information?', '2022-07-08', null, null, true, 254, 599);
 insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('Describe the circumstances in more detail.', '2022-07-13', null, null, true, 486, 20);
 insert into answer (content, date, file, last_edited, correct, id_user, id_question) values ('I need to do some research before I can answer that.', '2022-07-21', null, '2022-09-16', true, 201, 226);

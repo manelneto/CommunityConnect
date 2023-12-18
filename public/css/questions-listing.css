@@ -96,6 +96,10 @@ fieldset label {
   font-size: 14px;
 }
 
+.question-community-click {
+  color: var(--blue);
+}
+
 .question-asked-date {
   margin-right: 15px;
 }

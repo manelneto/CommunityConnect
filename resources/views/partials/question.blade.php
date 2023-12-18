@@ -4,7 +4,11 @@
         <div class="question-details">
             <a href="../users/{{ $question->id_user }}" class="question-username">{{ $question->user->username }}</a>
             <p class="question-asked-date">Asked: {{ $question->date }}</p>
-            <p class="question-community">In: {{ $question->community->name }}</p>
+            <p class="question-community">In: 
+                <a class="question-community-click" href="{{ route('community', ['id' => $question->community->id]) }}">
+                    {{ $question->community->name }}
+                </a>
+            </p>
             @if( $question->last_edited != null)
             <p class="question-edited-date">Edited: {{ $question->last_edited }}</p>
             @endif

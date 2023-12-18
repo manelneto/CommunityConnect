@@ -78,7 +78,11 @@
 }
 
 #sign-page-form .form-group, #register-page-form .form-group{
-  margin-top: 20px;
+  margin-top: 15px;
+}
+
+.form-group #password_confirmation, .form-group #username, .form-group #password, .form-group #username_or_email{
+  margin-bottom: 0;
 }
 
 #sign-page-form .form-group:first-of-type, #register-page-form .form-group:first-of-type{

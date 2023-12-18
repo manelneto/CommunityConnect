@@ -14,6 +14,13 @@ class TagPolicy
             && !$user->anonymous();
     }
 
+    public function update(User $user): bool
+    {
+        return $user->id === Auth::user()->id
+            && $user->administrator
+            && !$user->anonymous();
+    }
+
     public function destroy(User $user): bool
     {
         return $user->id === Auth::user()->id

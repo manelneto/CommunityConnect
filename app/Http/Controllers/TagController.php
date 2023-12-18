@@ -34,7 +34,25 @@ class TagController extends Controller
 
         return redirect('admin');
     }
-   
+
+    public function update(Request $request, int $id)
+    {
+        $this->authorize('update', Tag::class);
+
+        $request->validate([
+            'tag' => 'required|string',
+        ]);
+
+        try {
+            $tag = Tag::findOrFail($id);
+            $tag->name = $request->tag;
+            $tag->save();
+            return redirect()->back();
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->withErrors('Tag not found');
+        }
+    }
+
     public function destroy(Request $request)
     {
         $tag = Tag::findOrFail($request->input('tag'));

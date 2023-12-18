@@ -157,6 +157,41 @@ if (inputTags) {
     });
 }
 
+const editTags = document.querySelector('#old-tag-admin');
+if (editTags) {
+    let matchingTags = [];
+    let index = 0;
+
+    const form = document.querySelector('#edit-tag');
+
+    editTags.addEventListener('input', function (event) {
+        const tagName = editTags.value.toUpperCase();
+
+        if (tagName === '') return;
+
+        const match = tagsAdmin.find((element) => element[0].toUpperCase() === tagName);
+        if (match) {
+            form.action = `../tags/${match[1]}`;
+        } else {
+            form.action = '../tags/0';
+        }
+
+        matchingTags = tagsAdmin.filter(tag => tag && tag[0].toUpperCase().startsWith(tagName)).filter(Boolean);
+    });
+
+    editTags.addEventListener('keydown', async function (event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            if (matchingTags.length > 0) {
+                index = (index + 1) % matchingTags.length;
+                editTags.value = matchingTags[index][0];
+                editTags.setAttribute('value', matchingTags[index][1]);
+                form.action = `../tags/${matchingTags[index][1]}`;
+            }
+        }
+    });
+}
+
 const questionTags = document.querySelector('#add-tag');
 if (questionTags) {
     let matchingTags = [];

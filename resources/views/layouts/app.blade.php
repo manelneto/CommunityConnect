@@ -50,13 +50,12 @@
         <script src="{{ asset('js/remove-tag-from-question.js') }} " defer></script>
         <script src="{{ asset('js/show-notifications.js') }} " defer></script>
         <script src="{{ asset('js/check-view-notifications.js') }} " defer></script>
-        <script src="{{ asset('js/question-votes.js') }} " defer></script>
-        <script src="{{ asset('js/answer-votes.js') }} " defer></script>
         <script src="{{ asset('js/mark-answer.js') }} " defer></script>
         <script src="{{ asset('js/autocomplete.js') }} " defer></script>
         <script src="{{ asset('js/errors.js') }} " defer></script>
         <script src="{{ asset('js/edit-answer.js') }} " defer></script>
         <script src="{{ asset('js/comments.js') }} " defer></script>
+        <script src="{{ asset('js/votes.js') }}" defer></script>
     </head>
     <body>
         <section id="notifications"></section>

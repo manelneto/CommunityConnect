@@ -32,11 +32,11 @@ Route::redirect('/', '/communities');
 
 // Authentication
 Route::controller(RegisterController::class)->group(function () {
-    Route::get('/register', 'showRegisterForm')->name('register');
+    Route::get('/register', 'show')->name('register');
     Route::post('/register', 'register');
 });
 Route::controller(LoginController::class)->group(function () {
-    Route::get('/login', 'showLoginForm')->name('login');
+    Route::get('/login', 'show')->name('login');
     Route::post('/login', 'authenticate');
     Route::get('/logout', 'logout')->name('logout');
 });

@@ -62,4 +62,8 @@ class User extends Authenticatable
     public function moderates($id) {
         return $this->moderatorCommunities()->where('id_community', $id)->exists();
     }
+
+    public function anonymous(): bool {
+        return preg_match('/^anonymous.*$/', $this->username) === 1;
+    }
 }

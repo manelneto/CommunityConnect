@@ -30,7 +30,7 @@
                 </div>
             @endguest
             @auth
-                <div class="group-buttons">
+                <div class="group-buttons logged">
                     <a href="{{ route('profile', Auth::user()->id) }}" class="my-account-button">My account ({{ Auth::user()->username }})</a>
                     <a href="{{ route('logout') }}" class="logout-button">Logout</a>
                 </div>

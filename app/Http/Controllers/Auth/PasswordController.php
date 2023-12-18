@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Hash;
 class PasswordController extends Controller
 {
     public function show(string $username, string $token) {
+        if (Auth::check()) {
+            return redirect('/communities');
+        }
         return view('auth.password', ['username' => $username, 'token' => $token]);
     }
 
@@ -24,6 +27,10 @@ class PasswordController extends Controller
 
         try {
             $user = User::where('username', $request->input('username'))->first();
+
+            if (!$user) {
+                return redirect()->back()->withErrors('User not found');
+            }
 
             if (!password_verify($request->input('token'), $user->password)) {
                 return redirect()->back()->withErrors(['token' => 'Token is incorrect.']);

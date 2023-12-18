@@ -33,7 +33,7 @@ class MailController extends Controller
         }
 
         if (!empty($missing)) {
-            return redirect()->back()->withErrors('Environment variables missing: ' . implode(' ', $missing));
+            return redirect()->back()->withErrors('Environment variables missing: ' . implode(', ', $missing));
         }
 
         $request->validate([
@@ -46,14 +46,14 @@ class MailController extends Controller
             $email = $usernameOrEmail;
             $user = User::where('email', $email)->first();
             if (!$user) {
-                return redirect()->back()->withErrors('The provided email do not match our records.');
+                return redirect()->back()->withErrors('The provided email does not match our records.');
             }
             $username = $user->username;
         } else {
             $username = $usernameOrEmail;
             $user = User::where('username', $username)->first();
             if (!$user) {
-                return redirect()->back()->withErrors('The provided username do not match our records');
+                return redirect()->back()->withErrors('The provided username does not match our records');
             }
             $email = $user->email;
         }
@@ -62,7 +62,7 @@ class MailController extends Controller
         $user->password = Hash::make($token);
         $user->save();
 
-        $link = env('APP_URL') . "password/$username/$token";
+        $link = env('APP_URL') . "/password/$username/$token";
 
         $data = [
             'username' => $username,

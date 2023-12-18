@@ -16,19 +16,22 @@ class AnswerPolicy
     public function create(User $user): bool
     {
         return $user->id === Auth::user()->id
-            && !$user->blocked;
+            && !$user->blocked
+            && !$user->anonymous();
     }
 
     public function store(User $user): bool
     {
         return $user->id === Auth::user()->id
-            && !$user->blocked;
+            && !$user->blocked
+            && !$user->anonymous();
     }
 
     public function edit(User $user, Answer $answer): bool
     {
         return $user->id === Auth::user()->id
             && !$user->blocked
+            && !$user->anonymous()
             && ($answer->id_user === $user->id || $user->administrator || $user->moderates($answer->question->id_community));
     }
 
@@ -36,6 +39,7 @@ class AnswerPolicy
     {
         return $user->id === Auth::user()->id
             && !$user->blocked
+            && !$user->anonymous()
             && ($answer->id_user === $user->id || $user->administrator || $user->moderates($answer->question->id_community));
     }
 
@@ -43,6 +47,7 @@ class AnswerPolicy
     {
         return $user->id === Auth::user()->id
             && !$user->blocked
+            && !$user->anonymous()
             && ($answer->id_user === $user->id || $user->administrator || $user->moderates($answer->question->id_community));
     }
 
@@ -50,6 +55,7 @@ class AnswerPolicy
     {
         return $user->id === Auth::user()->id
             && !$user->blocked
+            && !$user->anonymous()
             && $answer->question->id_user === $user->id;
     }
 
@@ -57,6 +63,7 @@ class AnswerPolicy
     {
         return $user->id === Auth::user()->id
             && !$user->blocked
+            && !$user->anonymous()
             && $answer->question->id_user === $user->id;
     }
 }

@@ -15,17 +15,14 @@ use App\Models\User;
 
 class RegisterController extends Controller
 {
-    /**
-     * Display a login form.
-     */
-    public function showRegisterForm(): View
+    public function show()
     {
+        if (Auth::check()) {
+            return redirect('/communities');
+        }
         return view('auth.register');
     }
 
-    /**
-     * Register a new user.
-     */
     public function register(Request $request)
     {
         $request->validate([
@@ -35,6 +32,10 @@ class RegisterController extends Controller
             'file' => 'image|mimes:png,jpg,jpeg|max:2048',
             'type' => 'in:profile'
         ]);
+
+        if (preg_match('/^anonymous.*$/', $request->username)) {
+            return redirect()->back()->withErrors('Username must not start with "anonymous"');
+        }
 
         $id = User::create([
             'username' => $request->username,

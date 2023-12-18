@@ -1,19 +1,28 @@
-.horizontal-wrapper {
-  display: flex;
-  align-items: flex-start;
-}
-
 .question-edit-container {
   display: flex;
   flex-direction: column;
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 
-.horizontal-wrapper-edit {
-  width: 100%;
+.question-edit-container #property-tags{
+  margin-left:0;
+  margin-right:0;
+}
+
+.question-edit-container #property-tags #add-tag{
+  margin-left: 0;
+}
+
+.question-edit-container label{
+  margin-top: 0.6rem;
+}
+
+.question-edit-container .question-description{
+  margin-top: 0.2rem;
 }
 
 .question-title-edit {
-  font-size: 18px;
   border: 1px solid #c6c6c6;
   color: var(--dark-blue);
 }
@@ -32,29 +41,19 @@
 }
 
 .edit-buttons button {
+  margin-top: 20px;
   padding: 5px 25px;
-  font-size: 18px;
   color: #ffffff;
   border-radius: 5px;
 }
 
 .edit-button {
   background-color: var(--blue);
-  margin-right: 10px;
-}
-
-.edit-button:hover {
-  background-color: var(--hover-red);
-  transition: 0.2s;
+  margin-right: 7px;
 }
 
 .delete-button {
   background-color: var(--hover-red);
-}
-
-.delete-button:hover {
-  background-color: #cccccc;
-  transition: 0.2s;
 }
 
 #question-edit {
@@ -72,7 +71,13 @@
   width: 100%;
 }
 
-.content-right {
+.all-tags .all-buttons{
+  color: white;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.edit-question-info {
   display: flex;
   flex-direction: column;
 }
@@ -83,19 +88,6 @@
 
 #add-tag:focus {
   border: 2px solid var(--blue);
-}
-
-.margin-on-tags {
-  margin-right: 5px;
-}
-
-.margin-on-tags:hover {
-  background-color: var(--hover-red);
-  transition: 0.2s;
-}
-
-.margin-on-tags:last-of-type {
-  margin-right: 0;
 }
 
 .color-black {

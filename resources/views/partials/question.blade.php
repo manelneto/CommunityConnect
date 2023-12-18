@@ -3,10 +3,15 @@
     <div class="content-right">
         <div class="question-details">
             <a href="../users/{{ $question->id_user }}" class="question-username">{{ $question->user->username }}</a>
-            <span class="question-asked-date">Asked: {{ $question->date }}</span>
-            <span class="question-community">In: {{ $question->community->name }}</span>
+            <p class="question-asked-date">Asked: {{ $question->date }}</p>
+            <p class="question-community">In: {{ $question->community->name }}</p>
             @if( $question->last_edited != null)
             <p class="question-edited-date">Edited: {{ $question->last_edited }}</p>
+            @endif
+            @if (Request::route()->getName() == 'question')
+                @can ('edit', $question)
+                    <a href="{{ route('edit-question', ['id' => $question->id]) }}" class="edit-question-button">Edit</a>
+                @endcan
             @endif
             @if (Request::route()->getName() == 'question' && Auth::user())
                 @if (Auth::user()?->followedQuestions->contains($question->id))
@@ -32,13 +37,6 @@
         @endforeach
         @if ($question->file)
             <p class="file"><a href="{{ asset($question->file) }}" target="_blank">Download file here</a></p>
-        @endif
-        <!-- Edit Question Button -->
-
-        @if (Request::route()->getName() == 'question')
-            @can ('edit', $question)
-                <a href="{{ route('edit-question', ['id' => $question->id]) }}" class="edit-question-button">Edit</a>
-            @endcan
         @endif
         <div class="answers-details">
             <a href="{{ route('question', ['id' => $question->id]) . '#answers' }}" class="question-answer-btn">

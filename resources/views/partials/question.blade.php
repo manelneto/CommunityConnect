@@ -8,6 +8,11 @@
             @if( $question->last_edited != null)
             <p class="question-edited-date">Edited: {{ $question->last_edited }}</p>
             @endif
+            @if (Request::route()->getName() == 'question')
+                @can ('edit', $question)
+                    <a href="{{ route('edit-question', ['id' => $question->id]) }}" class="edit-question-button">Edit</a>
+                @endcan
+            @endif
             @if (Request::route()->getName() == 'question' && Auth::user())
                 @if (Auth::user()?->followedQuestions->contains($question->id))
                 <button id="{{ $question->id }}" class="unfollow-question-button">
@@ -32,13 +37,6 @@
         @endforeach
         @if ($question->file)
             <p class="file"><a href="{{ asset($question->file) }}" target="_blank">Download file here</a></p>
-        @endif
-        <!-- Edit Question Button -->
-
-        @if (Request::route()->getName() == 'question')
-            @can ('edit', $question)
-                <a href="{{ route('edit-question', ['id' => $question->id]) }}" class="edit-question-button">Edit</a>
-            @endcan
         @endif
         <div class="answers-details">
             <a href="{{ route('question', ['id' => $question->id]) . '#answers' }}" class="question-answer-btn">

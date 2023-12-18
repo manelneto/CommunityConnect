@@ -1,13 +1,21 @@
-#edit-profile-title{
+#edit-profile-title {
     text-align: center;
     margin-top: 2rem;
     font-size: 20px;
 }
 
+#edit-profile-tooltip-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 5px;
+    justify-content: center;
+}
+
 form#edit-profile {
     margin-right: 4rem;
     margin-left: 4rem;
-    margin-top:1rem;
+    margin-top: 1rem;
 }
 
 #edit-profile h1 {
@@ -67,25 +75,24 @@ form#edit-profile {
     display: none;
 }
 
-#edit-profile p{
+#edit-profile p {
     margin-bottom: 10px;
     padding: 0px;
 }
 
-#user-edit-profile svg{
+#user-edit-profile svg {
     width: 15px;
     height: 15px;
-    margin-bottom: 20px;
 }
 
-#edit-profile .tooltip-text{
+#edit-profile .tooltip-text {
     visibility: hidden;
     width: 400px;
     background-color: #fff;
     color: #000;
     text-align: center;
     border-radius: 6px;
-    padding: 5px;  
+    padding: 5px;
     position: absolute;
     z-index: 1;
     top: 100%;
@@ -94,6 +101,6 @@ form#edit-profile {
     box-shadow: 0 0 10px #000001;
 }
 
-#edit-profile #user-edit-profile:hover .tooltip-text{
+#edit-profile #user-edit-profile:hover .tooltip-text {
     visibility: visible;
 }

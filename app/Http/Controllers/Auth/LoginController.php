@@ -10,22 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-
-    /**
-     * Display a login form.
-     */
-    public function showLoginForm()
+    public function show()
     {
         if (Auth::check()) {
             return redirect('/communities');
-        } else {
-            return view('auth.login');
         }
+        return view('auth.login');
     }
 
-    /**
-     * Handle an authentication attempt.
-     */
     public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
@@ -46,9 +38,6 @@ class LoginController extends Controller
         ])->onlyInput('username_or_email');
     }
 
-    /**
-     * Log out the user from application.
-     */
     public function logout(Request $request)
     {
         Auth::logout();

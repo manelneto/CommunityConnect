@@ -15,17 +15,14 @@ use App\Models\User;
 
 class RegisterController extends Controller
 {
-    /**
-     * Display a login form.
-     */
-    public function showRegisterForm(): View
+    public function show()
     {
+        if (Auth::check()) {
+            return redirect('/communities');
+        }
         return view('auth.register');
     }
 
-    /**
-     * Register a new user.
-     */
     public function register(Request $request)
     {
         $request->validate([

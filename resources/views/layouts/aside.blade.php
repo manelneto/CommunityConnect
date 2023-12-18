@@ -28,6 +28,11 @@
                 Popular Communities
                 @foreach ($popularCommunities as $community)
                     <p> {{ $community->name }} </p>
+                    <p> {{ $community->users_count }} </p>
+                @endforeach
+                @foreach ($popularTags as $tag)
+                    <p> {{ $tag->name }} </p>
+                    <p> {{ $tag->questions_count }} </p>
                 @endforeach
             </h2>
             <article class="popular-question">

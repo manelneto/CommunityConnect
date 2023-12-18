@@ -43,6 +43,11 @@
   padding: 5px;
 }
 
+.non-movable-textarea{
+  padding: 10px;
+  font-size: 14px;
+}
+
 .leave > form > textarea{
   height: 4rem;
 }

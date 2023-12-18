@@ -145,6 +145,12 @@ section#answers form.answer {
   margin-bottom: 0px;
 }
 
+.comments-details .edited-date,
+.comment-not-edit .edited-date {
+  font-size: 14px;
+  color: #abacb1;
+}
+
 .comments-details {
   margin-bottom: 5px;
 }

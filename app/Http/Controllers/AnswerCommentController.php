@@ -69,6 +69,7 @@ class AnswerCommentController extends Controller {
 
         try {
             $comment->content = $request->input('content');
+            $comment->last_edited = now();
             $comment->save();
             // $answer = Answer::findOrFail($comment->id_answer);
             return redirect('questions/' . $comment->answer->id_question);

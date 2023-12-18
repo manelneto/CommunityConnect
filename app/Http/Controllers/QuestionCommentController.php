@@ -66,6 +66,7 @@ class QuestionCommentController extends Controller {
 
         try {
             $comment->content = $request->input('content');
+            $comment->last_edited = now();
             $comment->save();
             return redirect('questions/' . $comment->id_question);
         }

@@ -139,15 +139,12 @@ fieldset label {
 }
 
 a.edit-question-button {
-  background-color: #c6c6c6;
+  background-color: var(--blue);
   margin-left: 10px;
   padding: 4px 10px;
   border-radius: 5px;
-}
-
-a.edit-question-button:hover {
-  background-color: var(--blue);
-  transition: 0.2s;
+  margin-left: auto;
+  right: 0;
 }
 
 .question-details button:hover + .follow-question-tooltip {
@@ -161,11 +158,12 @@ a.edit-question-button:hover {
 .question-details {
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
 }
 
-.question-details .add-tooltip {
-  margin-left: auto;
+.unfollow-question-button, .follow-question-button {
+  margin-left:auto;
+  right: 0;
 }
 
 .follow-question-tooltip {

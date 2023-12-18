@@ -12,7 +12,7 @@
     <!-- Question Comments -->
     
     <div class="comments">
-        @foreach ($question->comments as $comment)
+        @foreach ($questionComments as $comment)
             @include('partials.question_comment', ['comment' => $comment])
         @endforeach
         @can ('create', App\Models\QuestionComment::class)

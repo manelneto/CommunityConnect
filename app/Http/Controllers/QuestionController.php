@@ -174,9 +174,14 @@ class QuestionController extends Controller
                 ->orderBy('likes_count', 'desc')
                 ->get();
 
+            $questionComments = QuestionComment::where('id_question', $id)
+                        ->orderBy('date', 'asc')
+                        ->get();
+
             return view('questions.show', [
                 'question' => $question,
                 'answers' => $answers,
+                'questionComments' => $questionComments
             ]);
 
         } catch (ModelNotFoundException $e) {

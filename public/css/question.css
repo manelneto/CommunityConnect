@@ -40,8 +40,11 @@
   resize: none;
   border: 2px solid #c6c6c6;
   font-size: 16px;
-  margin-bottom: 20px;
   padding: 5px;
+}
+
+.leave > form > textarea{
+  height: 4rem;
 }
 
 .leave > form > input {
@@ -49,8 +52,9 @@
 }
 
 .leave > form > label {
+  margin-top: 0.5rem;
+  margin-bottom: 3px;
   display: block;
-  margin-bottom: 0.5rem;
 }
 
 .answer-details {
@@ -79,20 +83,18 @@
   outline: none;
 }
 
+.edit-question-comment-content, .edit-answer-comment-content {
+  width: 75%;
+}
+
 .leave > form > button {
   background-color: var(--blue);
   border: none;
   color: #fff;
-  padding: 10px 40px;
+  padding: 7px 15px;
   border-radius: 5px;
-  font-size: 14px;
   cursor: pointer;
-  display: block;
-}
-
-.leave > form > button:hover {
-  background-color: var(--hover-red);
-  transition: 0.2s;
+  display:block;
 }
 
 section#answers form.answer {
@@ -102,16 +104,51 @@ section#answers form.answer {
   border-bottom: 0;
 }
 
+.question-edited-date {
+  margin-left: 10px;
+  color: #abacb1;
+  font-size: 14px;
+}
+
+.question-tags .question-tag {
+  margin-left: 5px;
+}
+
 .answer {
   padding: 35px 50px;
-  border-bottom: 1px solid #c6c6c6;
   display: flex;
   align-items: flex-start;
 }
 
-.comment {
-  margin: 0 50px;
-  border-bottom: 1px solid #c6c6c6;
+.comments-details, #content-comment{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#leave-answer-on-question {
+  font-size: 18px;
+}
+
+.edit-question-comment, .edit-answer-comment{
+  margin-left: 4rem;
+}
+
+.edit-question-comment-date, .edit-answer-comment-date {
+  margin-left: 10px;
+  margin-bottom: 0px;
+}
+
+.comments-details {
+  margin-bottom: 5px;
+}
+
+#content-comment {
+  margin-bottom: 10px;
+}
+
+#content-comment .edit {
+  margin-left: 10px;
 }
 
 article.comment:first-of-type {
@@ -145,10 +182,47 @@ article.answer-comment:last-of-type {
 
 .answer > .content-right > .description,
 .comment > .description {
-  padding: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
   margin-top: 4px;
   font-size: 18px;
   display: block;
+}
+
+#answers .add-tooltip {
+  margin-left: 2rem;
+  margin-right: 4rem;
+  margin-bottom: 0.3rem;
+  margin-top: 1rem;
+}
+
+.ignore-tooltip-h2-changes {
+  font-size: 18px;
+}
+
+.comment-not-edit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  border-bottom: 1px solid #c6c6c6;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.comment-not-edit-answer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #c6c6c6; 
 }
 
 .comment > .description {
@@ -367,14 +441,6 @@ button.mark-incorrect {
   margin-left: 5px !important;
 }
 
-.add-tooltip > h2 {
-  font-size: 20px;
-}
-
-.add-tooltip > h2.ignore-tooltip-h2-changes {
-  font-size: 1.5em;
-}
-
 .question-details .tooltip-icon .tooltip-text {
   visibility: hidden;
   width: 400px;
@@ -407,7 +473,10 @@ button.mark-incorrect {
 
 .add-question-comment-tap,
 .add-answer-comment-tap {
-  padding: 10px 60px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 4rem;
+  padding-right: 10px;
   color: #adadad;
 }
 
@@ -419,22 +488,29 @@ button.mark-incorrect {
 }
 
 #question-comment, #answer-comment {
-  width: 500px;
-  font-size: 16px;
+  width: 70%;
+  margin-left: 4rem;
   border: 2px solid #c6c6c6;
   padding: 5px;
+  margin-bottom: 15px;
+}
+
+#question-comment::placeholder, #answer-comment::placeholder {
+  font-size: small;
+}
+
+.submit-comment {
+  background-color: var(--blue);
+  border: none;
+  color: #fff;
+  padding: 5px 7px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
 }
 
 #question-comment:focus {
   border: 2px solid var(--blue);
-}
-
-#question-comment::placeholder {
-  font-size: 16px;
-}
-
-textarea#content::placeholder {
-  font-size: 16px;
 }
 
 .answer-container {
@@ -445,23 +521,8 @@ textarea#content::placeholder {
   border-top: 1px solid #c6c6c6;
 }
 
-#answers .add-tooltip {
-  padding: 30px;
-}
-
-.edit-answer-comment-content, .edit-question-comment-content{
-  display: inline !important;
-}
-
-.edit-answer-comment-username, .edit-question-comment-username {
-  display: inline !important;
-}
-
-.edit-answer-comment-date, .edit-question-comment-date {
-  display: inline !important;
-  margin-right: 10px;
-}
-
-.edit-answer-comment, .edit-question-comment {
-  margin-top: 20px;
+.add-tooltip-comment {
+  display:flex;
+  flex-direction: row;
+  align-items: center;
 }

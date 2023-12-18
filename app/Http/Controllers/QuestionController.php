@@ -156,7 +156,7 @@ class QuestionController extends Controller
         $fileController = new FileController();
         $fileController->upload($request, $question->id);
 
-        return redirect()->route('questions')->withSuccess('Question posted successfully!');
+        return redirect('questions/' . $question->id)->withSuccess('Question posted successfully!');
     }
 
     /**

@@ -6,21 +6,22 @@
             <h1>{{ $user->username }} @if ($user->blocked) (blocked) @endif</h1>
             <div id="profile-buttons">
                 @if (Auth::user()?->id === $user->id)
-                    <img class="notifications-icon" src="{{ asset('assets/notifications.png') }}" alt="Notifications-icon"/>
-                    <p class="notifications-number">{{ count($unread) }}</p>
-                    <article class="notifications-container">
-                        <ul class="notifications">
-                            @foreach ($notifications as $notification)
-                            <li class="profile-notification">
-                                <p class="notification-text">{{ $notification->content }}</p>
-                                <p class="notification-date">{{ $notification->date->format('Y-m-d') }}</p>
-                                @if (!$notification->read)
-                                    <img id="{{ $notification->id }}" class="view-icon" src="{{ asset('assets/view.png') }}" alt="View-icon"/>
-                                @endif
-                            </li>
-                            @endforeach
-                        </ul>
-                    </article>
+                <img class="notifications-icon" src="{{ asset('assets/notifications.png') }}" alt="Notifications-icon"/>
+                <p class="notifications-number">{{ count($unread) }}</p>
+                <article class="notifications-container">
+                    <ul class="notifications">
+                        @foreach ($notifications as $notification)
+                        <li class="profile-notification">
+                            <p class="notification-text">{{ $notification->content }}</p>
+                            <p class="notification-date">{{ $notification->date->format('Y-m-d') }}</p>
+                            @if (!$notification->read)
+                                <img id="{{ $notification->id }}" class="view-icon" src="{{ asset('assets/view.png') }}" alt="View-icon"/>
+                                <p class="read-not-tooltip">Mark as read</p>
+                            @endif
+                        </li>
+                        @endforeach
+                    </ul>
+                </article>
                 @endif
                 @can ('edit', $user)
                     <a class="edit-profile" href="{{ route('edit-user', $user->id) }}">Edit</a>

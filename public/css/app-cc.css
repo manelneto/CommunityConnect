@@ -82,8 +82,6 @@ fieldset {
 .header-content {
   display: grid;
   grid-template-columns: [start-col-header] 300px [mid1-col-header] auto [mid2-col-header] 300px [end-col-header];
-  /* justify-content: center; */
-  /* max-width: 1600px; */
   margin: 0 auto;
 }
 

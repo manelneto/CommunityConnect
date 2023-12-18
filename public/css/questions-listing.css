@@ -5,6 +5,10 @@
   padding: 10px 30px;
 }
 
+.question-upvotes{
+  padding-left: 20px;
+}
+
 #questions-stats > #filters-button {
   background-color: var(--blue);
   border-radius: 5px;
@@ -18,9 +22,9 @@
 }
 
 #questions-info > h2 {
-  font-size: 1.8em;
+  margin-top: 1rem;
+  font-size: 1.5em;
   font-weight: bold;
-  margin-bottom: 0.5em;
 }
 
 #questions-info > #questions-stats {
@@ -135,15 +139,12 @@ fieldset label {
 }
 
 a.edit-question-button {
-  background-color: #c6c6c6;
+  background-color: var(--blue);
   margin-left: 10px;
   padding: 4px 10px;
   border-radius: 5px;
-}
-
-a.edit-question-button:hover {
-  background-color: var(--blue);
-  transition: 0.2s;
+  margin-left: auto;
+  right: 0;
 }
 
 .question-details button:hover + .follow-question-tooltip {
@@ -157,14 +158,15 @@ a.edit-question-button:hover {
 .question-details {
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
 }
 
-.question-details .add-tooltip {
-  margin-left: auto;
+.unfollow-question-button, .follow-question-button {
+  margin-left:auto;
+  right: 0;
 }
 
-span.follow-question-tooltip {
+.follow-question-tooltip {
   visibility: hidden;
   position: absolute;
   right: 35px;

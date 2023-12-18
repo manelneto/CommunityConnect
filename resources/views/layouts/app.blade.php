@@ -59,6 +59,7 @@
         <script src="{{ asset('js/comments.js') }} " defer></script>
     </head>
     <body>
+        <section id="notifications"></section>
         <header class="website-header">
             @yield('header')
         </header>
@@ -79,7 +80,6 @@
             @yield('aside')
         </aside>
         @endif
-        <section id="notifications"></section>
         <footer class="main-footer">
             @yield('footer')
         </footer>

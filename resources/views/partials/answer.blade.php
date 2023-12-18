@@ -59,6 +59,9 @@
                     </svg>
                 @endif
                 <p class="date">Answer added {{ $answer->date }}</p>
+                @if ($answer->last_edited != null)
+                    <p class="date edited-date">edited {{ $answer->last_edited }}</p>
+                @endif
             </div>
             @if ($answer->correct)
                 <svg class="icon-correct" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="25px" height="25px">

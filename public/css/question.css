@@ -60,11 +60,17 @@
 .answer-details {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .answer-details p.date {
   margin-left: 1rem;
   margin-top: 1px;
+}
+
+.answer-details p.edited-date {
+  color: #abacb1;
+  font-size: 14px;
 }
 
 .answer-details p.rating {

@@ -72,6 +72,7 @@ class AnswerController extends Controller {
 
         try {
             $answer->content = $request->input('content');
+            $answer->last_edited = now();
             $answer->save();
 
             $fileController = new FileController();

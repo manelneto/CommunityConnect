@@ -1,5 +1,5 @@
-async function voteAnswer(id, vote) {
-    return await fetch('/api/answers/vote', {
+async function vote(id, vote, content, type) {
+    return await fetch(`/api/${content}/${type}`, {
         method: 'POST',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -9,15 +9,12 @@ async function voteAnswer(id, vote) {
     });
 }
 
+async function voteAnswer(id, vote) {
+    return await vote(id, vote, 'answers', 'vote');
+}
+
 async function unvoteAnswer(id, vote) {
-    return await fetch('/api/answers/unvote', {
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            'Content-Type': "application/x-www-form-urlencoded"
-        },
-        body: encodeForAjax({id: id, vote: vote})
-    });
+    return await vote(id, vote, 'answers', 'unvote');
 }
 
 const answerLikes = document.querySelectorAll('.answer-upvotes');

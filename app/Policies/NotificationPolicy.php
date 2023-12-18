@@ -15,6 +15,7 @@ class NotificationPolicy
     public function read(User $user, Notification $notification): bool
     {
         return $user->id === Auth::user()->id
+            && !$user->anonymous()
             && $notification->id_user === $user->id;
     }
 }

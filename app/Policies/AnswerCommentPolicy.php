@@ -15,19 +15,22 @@ class AnswerCommentPolicy
     public function create(User $user): bool
     {
         return $user->id === Auth::user()->id
-            && !$user->blocked;
+            && !$user->blocked
+            && !$user->anonymous();
     }
 
     public function store(User $user): bool
     {
         return $user->id === Auth::user()->id
-            && !$user->blocked;
+            && !$user->blocked
+            && !$user->anonymous();
     }
 
     public function edit(User $user, AnswerComment $comment): bool
     {
         return $user->id === Auth::user()->id
             && !$user->blocked
+            && !$user->anonymous()
             && ($comment->id_user === $user->id || $user->administrator || $user->moderates($comment->answer->question->id_community));
     }
 
@@ -35,6 +38,7 @@ class AnswerCommentPolicy
     {
         return $user->id === Auth::user()->id
             && !$user->blocked
+            && !$user->anonymous()
             && ($comment->id_user === $user->id || $user->administrator || $user->moderates($comment->answer->question->id_community));
     }
 
@@ -42,6 +46,7 @@ class AnswerCommentPolicy
     {
         return $user->id === Auth::user()->id
             && !$user->blocked
+            && !$user->anonymous()
             && ($comment->id_user === $user->id || $user->administrator || $user->moderates($comment->answer->question->id_community));
     }
 }

@@ -14,12 +14,14 @@ class AnswerVotePolicy
     public function vote(User $user): bool
     {
         return $user->id === Auth::user()->id
-            && !$user->blocked;
+            && !$user->blocked
+            && !$user->anonymous();
     }
 
     public function unvote(User $user): bool
     {
         return $user->id === Auth::user()->id
-            && !$user->blocked;
+            && !$user->blocked
+            && !$user->anonymous();
     }
 }

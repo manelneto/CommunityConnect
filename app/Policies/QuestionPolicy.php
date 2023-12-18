@@ -14,25 +14,29 @@ class QuestionPolicy
 
     public function personalIndex(User $user): bool
     {
-        return $user->id === Auth::user()->id;
+        return $user->id === Auth::user()->id
+            && !$user->anonymous();
     }
 
     public function create(User $user): bool
     {
         return $user->id === Auth::user()->id
-            && !$user->blocked;
+            && !$user->blocked
+            && !$user->anonymous();
     }
 
     public function store(User $user): bool
     {
         return $user->id === Auth::user()->id
-            && !$user->blocked;
+            && !$user->blocked
+            && !$user->anonymous();
     }
 
     public function edit(User $user, Question $question): bool
     {
         return $user->id === Auth::user()->id
             && !$user->blocked
+            && !$user->anonymous()
             && ($question->id_user === $user->id || $user->administrator || $user->moderates($question->id_community));
     }
 
@@ -40,6 +44,7 @@ class QuestionPolicy
     {
         return $user->id === Auth::user()->id
             && !$user->blocked
+            && !$user->anonymous()
             && ($question->id_user === $user->id || $user->administrator || $user->moderates($question->id_community));
     }
 
@@ -47,25 +52,29 @@ class QuestionPolicy
     {
         return $user->id === Auth::user()->id
             && !$user->blocked
+            && !$user->anonymous()
             && ($question->id_user === $user->id || $user->administrator || $user->moderates($question->id_community));
     }
 
     public function follow(User $user): bool
     {
         return $user->id === Auth::user()->id
-            && !$user->blocked;
+            && !$user->blocked
+            && !$user->anonymous();
     }
 
     public function unfollow(User $user): bool
     {
         return $user->id === Auth::user()->id
-            && !$user->blocked;
+            && !$user->blocked
+            && !$user->anonymous();
     }
 
     public function remove_tag(User $user, Question $question): bool
     {
         return $user->id === Auth::user()->id
             && !$user->blocked
+            && !$user->anonymous()
             && ($question->id_user === $user->id || $user->administrator || $user->moderates($question->id_community));
     }
 }

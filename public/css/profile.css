@@ -125,6 +125,10 @@ a.edit-profile {
   display:none;
 }
 
+.notifications::-webkit-scrollbar {
+  width: 0px;
+}
+
 .notifications-number {
   position: relative;
   top: -5px;

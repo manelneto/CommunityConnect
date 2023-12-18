@@ -47,7 +47,6 @@
         <script src="{{ asset('js/follow-question.js') }} " defer></script>
         <script src="{{ asset('js/follow-tag.js') }} " defer></script>
         <script src="{{ asset('js/forgot-password.js') }} " defer></script>
-        <script src="{{ asset('js/remove-tag-from-question.js') }} " defer></script>
         <script src="{{ asset('js/show-notifications.js') }} " defer></script>
         <script src="{{ asset('js/check-view-notifications.js') }} " defer></script>
         <script src="{{ asset('js/mark-answer.js') }} " defer></script>

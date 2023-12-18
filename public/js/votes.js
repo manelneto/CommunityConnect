@@ -67,7 +67,7 @@ async function handleVote(event, element, oppositeSelector, vote, content) {
 
 const questionLikes = document.querySelectorAll('.question-upvotes');
 if (questionLikes) {
-    questionLikes.forEach((like) => like.addEventListener('click', async (event) => await handleVote(event, like, '.question-downvotes',true, 'questions')));
+    questionLikes.forEach((like) => like.addEventListener('click', async (event) => await handleVote(event, like, '.question-downvotes', true, 'questions')));
 }
 
 const questionDislikes = document.querySelectorAll('.question-downvotes');

@@ -4,18 +4,21 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FileController;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
-use Illuminate\View\View;
 
 use App\Models\User;
 
 class RegisterController extends Controller
 {
-    public function show()
+    public function show(): Factory|\Illuminate\Foundation\Application|View|Redirector|Application|RedirectResponse
     {
         if (Auth::check()) {
             return redirect('/communities');
@@ -38,9 +41,9 @@ class RegisterController extends Controller
         }
 
         $id = User::create([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
         ])->id;
 
         $fileController = new FileController();
@@ -50,6 +53,6 @@ class RegisterController extends Controller
         Auth::attempt($credentials);
         $request->session()->regenerate();
 
-        return redirect()->route('communities')->withSuccess('You have successfully registered & logged in!');
+        return redirect()->route('communities')->with('success', 'You have successfully registered & logged in');
     }
 }

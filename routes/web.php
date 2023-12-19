@@ -37,7 +37,7 @@ Route::controller(RegisterController::class)->group(function () {
 });
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'show')->name('login');
-    Route::post('/login', 'authenticate');
+    Route::post('/login', 'login');
     Route::get('/logout', 'logout')->name('logout');
 });
 

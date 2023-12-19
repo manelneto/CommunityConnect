@@ -310,7 +310,7 @@ a.sign-up-button {
 .mobile-aside-bar {
   position: absolute;
   background-color: var(--light-gray);
-  height: 100%;
+  height: calc(100vh - 40px);
   width: 270px;
   padding: 20px;
   padding-left: 2rem;
@@ -736,6 +736,7 @@ article.notification {
   .side-bar-icon,
   .mobile-aside-bar {
     display: block;
+    top: 0;
   }
 
   main {

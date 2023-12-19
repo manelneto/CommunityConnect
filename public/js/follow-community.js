@@ -26,20 +26,23 @@ if (communities) {
     communities.forEach((community) => {
         const button = community.querySelector('button');
         const numberFollowers = community.querySelector('.number-followers');
-        button.addEventListener('click', async (event) => {
-            event.preventDefault();
-            const id = button.id;
-            if (button.classList.contains('follow-community')) {
-                await followCommunity(id);
-                button.textContent = 'Unfollow';
-                numberFollowers.textContent = parseInt(numberFollowers.textContent) + 1 + ' Followers';
-            } else {
-                await unfollowCommunity(id);
-                button.textContent = 'Follow';
-                numberFollowers.textContent = parseInt(numberFollowers.textContent) - 1 + ' Followers';
-            }
-            button.classList.toggle('follow-community');
-            button.classList.toggle('unfollow-community');
-        });
+
+        if (button) {
+            button.addEventListener('click', async (event) => {
+                event.preventDefault();
+                const id = button.id;
+                if (button.classList.contains('follow-community')) {
+                    await followCommunity(id);
+                    button.textContent = 'Unfollow';
+                    numberFollowers.textContent = parseInt(numberFollowers.textContent) + 1 + ' Followers';
+                } else {
+                    await unfollowCommunity(id);
+                    button.textContent = 'Follow';
+                    numberFollowers.textContent = parseInt(numberFollowers.textContent) - 1 + ' Followers';
+                }
+                button.classList.toggle('follow-community');
+                button.classList.toggle('unfollow-community');
+            });
+        }
     });
 }

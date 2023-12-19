@@ -10,7 +10,7 @@ function getUserId() {
     }
 }
 
-function createNotification(title, notification) {
+function addNotification(title, notification) {
     const article = document.createElement('article');
     article.classList.add('notification');
 
@@ -34,30 +34,30 @@ const channel = pusher.subscribe('CommunityConnect');
 
 channel.bind('answer', function (notification) {
     if (getUserId() === notification.id_user) {
-        createNotification('New answer', notification);
+        addNotification('New answer', notification);
     }
 });
 
 channel.bind('commentQuestion', function (notification) {
     if (getUserId() === notification.id_user) {
-        createNotification('New comment on your question', notification);
+        addNotification('New comment on your question', notification);
     }
 });
 
 channel.bind('commentAnswer', function (notification) {
     if (getUserId() === notification.id_user) {
-        createNotification('New comment on your answer', notification);
+        addNotification('New comment on your answer', notification);
     }
 });
 
 channel.bind('voteQuestion', function(notification) {
     if (getUserId() === notification.id_user) {
-        createNotification('New vote on your question', notification);
+        addNotification('New vote on your question', notification);
     }
 });
 
 channel.bind('voteAnswer', function(notification) {
     if (getUserId() === notification.id_user) {
-        createNotification('New vote on your answer', notification);
+        addNotification('New vote on your answer', notification);
     }
 });

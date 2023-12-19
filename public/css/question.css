@@ -562,6 +562,10 @@ button.mark-incorrect {
   display: none;
 }
 
+form.comment.edit-answer-comment > footer#content-comment > label {
+  display: none;
+}
+
 @media (max-width: 919px){
   .question-tag {
     background-color: rgba(103, 103, 103, 0.37);

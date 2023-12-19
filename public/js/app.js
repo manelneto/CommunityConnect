@@ -821,9 +821,26 @@ if (filtersButton) {
 const applyButton = document.querySelector('#apply-button');
 
 if (applyButton) {
-    applyButton.addEventListener('click', async function (event) {
+    applyButton.addEventListener("click", async function (event) {
         event.preventDefault();
-        await loadMoreQuestions();
+
+        currentPage = 1;
+        const questions = await getQuestions(currentPage);
+
+        const questionsCountElement = document.querySelector("#questions-number");
+        if (questionsCountElement) {
+            questionsCountElement.textContent = `${questions.total} questions`;
+        }
+
+        const section = document.querySelector("#questions");
+        section.innerHTML = "";
+
+        questions.data.forEach((question) => {
+            const newQuestion = addQuestion(question);
+            section.append(newQuestion);
+        });
+
+        isFetching = false;
     });
 
     window.addEventListener('scroll', async () => {
@@ -835,30 +852,8 @@ if (applyButton) {
 }
 
 async function loadMoreQuestions() {
-    let communities = Array();
-    const usernameButton = document.querySelector('.my-account-button');
-    if (usernameButton) {
-        const username = usernameButton.textContent.split('(')[1];
-        const user = await fetchUser(username.slice(0, -1));
-        user[0]['communities'].forEach((community) => communities.push(community['id']));
-    }
-
-    isFetching = true;
-    const after = document.querySelector('#after').value || '2020-01-01';
-    const before = document.querySelector('#before').value || '2030-12-31';
-    let community = window.location.pathname.split('/').pop();
-    if (community === 'questions') {
-        community = 0;
-        communities = 0;
-    } else if (community === 'feed') {
-        community = -1;
-    }
-
-    const text = document.querySelector('.live-search').value;
-    const sort = document.querySelector('input[name="sort"]:checked').value;
-
     currentPage++;
-    const newQuestions = await fetchQuestions(after, before, community, communities, text, sort, currentPage);
+    const newQuestions = await getQuestions(currentPage);
 
     const section = document.querySelector('#questions');
     newQuestions.data.forEach((question) => {
@@ -867,6 +862,32 @@ async function loadMoreQuestions() {
     });
 
     isFetching = false;
+}
+
+async function getQuestions(currentPage) {
+    let communities = Array();
+    const usernameButton = document.querySelector(".my-account-button");
+    if (usernameButton) {
+        const username = usernameButton.textContent.split('(')[1];
+        const user = await fetchUser(username.slice(0, -1));
+        user[0]['communities'].forEach((community) => communities.push(community['id']));
+    }
+
+    isFetching = true;
+    const after = document.querySelector("#after").value || "2020-01-01";
+    const before = document.querySelector("#before").value || "2030-12-31";
+    let community = window.location.pathname.split('/').pop();
+    if (community === 'questions') {
+        community = 0;
+        communities = 0;
+    } else if (community === 'feed') {
+        community = -1;
+    }
+
+    const text = document.querySelector(".live-search").value;
+    const sort = document.querySelector('input[name="sort"]:checked').value;
+
+    return await fetchQuestions(after, before, community, communities, text, sort, currentPage);
 }
 
 async function fetchQuestions(after, before, community, communities, text, sort, page) {

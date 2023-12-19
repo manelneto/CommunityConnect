@@ -3,25 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification;
+use Exception;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Response;
 
 class NotificationController extends Controller
 {
-    public function read(Request $request)
+    public function read(Request $request): Application|Response|\Illuminate\Contracts\Foundation\Application|ResponseFactory
     {
-        $id = $request->get('id');
-        $notification = Notification::findOrFail($id);
-        $this->authorize('read', $notification);
+        $request->validate([
+            'id' => 'required|integer',
+        ]);
+
+        $id = $request->input('id');
 
         try {
+            $notification = Notification::findOrFail($id);
+            $this->authorize('read', $notification);
+
             $notification->read = true;
             $notification->save();
-
-            return response('Notification read');
-        } catch (ModelNotFoundException $e) {
-            return response('Notification not found');
+        } catch (Exception) {
+            return response('Notification could not be read');
         }
+
+        return response('Notification read');
     }
 }

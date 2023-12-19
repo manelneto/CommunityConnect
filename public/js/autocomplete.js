@@ -1,7 +1,80 @@
-let users = [];
-let blocked = [];
-let unblocked = [];
-let tagsAdmin = [];
+let users = Array();
+let blocked = Array();
+let unblocked = Array();
+let tags = Array();
+
+function autocomplete(array, input, output) {
+    let matching = Array();
+    let index = 0;
+
+    input.addEventListener('input', () => {
+        const inputValue = input.value.toUpperCase();
+
+        if (inputValue === '') return;
+
+        const match = array.find((element) => element[0].toUpperCase() === inputValue);
+        if (match) {
+            output.setAttribute('value', match[1]);
+        } else {
+            output.setAttribute('value', '0');
+        }
+
+        matching = array.filter(value => value && value[0].toUpperCase().startsWith(inputValue)).filter(Boolean);
+    });
+
+    input.addEventListener('keydown', async function (event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            if (matching.length > 0) {
+                index = (index + 1) % matching.length;
+                input.value = matching[index][0];
+                output.setAttribute('value', matching[index][1]);
+            }
+        }
+    });
+}
+
+function addButton(inputTag) {
+    const tagName = inputTag.value;
+    const tagId = inputTag.getAttribute('value');
+
+    if (!tags.some((element) => element[1] === parseInt(tagId))) {
+        inputTag.value = "";
+        addError("Tag doesn't exist");
+        return;
+    }
+
+    const button = document.createElement('button');
+    button.classList.add('all-buttons');
+    button.textContent = 'X';
+    button.style.width = '20px';
+    button.style.padding = '0';
+
+    button.addEventListener('click', function (event) {
+        event.preventDefault();
+        const tag = event.target.parentNode;
+        tag.remove();
+    });
+
+    const p = document.createElement('div');
+    p.classList.add('all-tags');
+    p.textContent = tagName;
+    p.id = tagId;
+
+    p.insertBefore(button, p.firstChild);
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = `tags-${tagId}`;
+    input.value = tagId;
+
+    p.appendChild(input);
+
+    const section = document.querySelector('#property-tags');
+    section.appendChild(p);
+
+    inputTag.value = "";
+}
 
 window.onload = async () => {
     const admin = document.querySelector('#admin-page');
@@ -9,345 +82,75 @@ window.onload = async () => {
         const url = '../../api/users';
         const response = await fetch(url);
         const allUsers = await response.json();
-        users = allUsers.map(user => [user.username, user.id]).filter(Boolean);
-        blocked = allUsers.filter(user => user.blocked).map(user => [user.username, user.id]);
-        unblocked = allUsers.filter(user => !user.blocked).map(user => [user.username, user.id]);
+        users = allUsers.map(user => [user.username, user.id]).filter(Boolean).sort((a, b) => (a[0].localeCompare(b[0])));
+        blocked = allUsers.filter(user => user.blocked).map(user => [user.username, user.id]).sort((a, b) => (a[0].localeCompare(b[0])));
+        unblocked = allUsers.filter(user => !user.blocked).map(user => [user.username, user.id]).sort((a, b) => (a[0].localeCompare(b[0])));
+
+        const inputUser = document.querySelector('#user');
+        if (inputUser) {
+            autocomplete(users, inputUser, inputUser);
+        }
+
+        const inputBlock = document.querySelector('#block-user');
+        const outputBlock = document.querySelector('#block-user + input');
+        if (inputBlock && outputBlock) {
+            autocomplete(unblocked, inputBlock, outputBlock)
+        }
+
+        const inputUnblock = document.querySelector('#unblock-user');
+        const outputUnblock = document.querySelector('#unblock-user + input');
+        if (inputUnblock && outputUnblock) {
+            autocomplete(blocked, inputUnblock, outputUnblock)
+        }
     }
 
     const editQuestion = document.querySelector('#question-edit');
     const createQuestion = document.querySelector('#create-question');
     if (admin || editQuestion || createQuestion) {
-        const urlTags = '../../api/tags';
-        const responseTags = await fetch(urlTags);
-        const allTags = await responseTags.json();
-        tagsAdmin = allTags.map(tag => [tag.name, tag.id]).filter(Boolean);
+        const url = '../../api/tags';
+        const response = await fetch(url);
+        const allTags = await response.json();
+        tags = allTags.map(tag => [tag.name, tag.id]).filter(Boolean).sort((a, b) => (a[0].localeCompare(b[0])));
+
+        const inputDeleteTag = document.querySelector('#delete-tag');
+        const outputDeleteTag = document.querySelector('#delete-tag + input');
+        if (inputDeleteTag && outputDeleteTag) {
+            autocomplete(tags, inputDeleteTag, outputDeleteTag);
+        }
+
+        const inputEditTag = document.querySelector('#old-tag-admin');
+        const outputEditTag = document.querySelector('#old-tag-admin + input');
+        if (inputEditTag && outputDeleteTag) {
+            autocomplete(tags, inputEditTag, outputEditTag);
+        }
+
+        const inputTagEditQuestion = document.querySelector('#property-tags > #add-tag');
+        if (inputTagEditQuestion) {
+            autocomplete(tags, inputTagEditQuestion, inputTagEditQuestion);
+            inputTagEditQuestion.addEventListener('keydown', async function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    addButton(inputTagEditQuestion);
+                }
+            });
+        }
+
+        const inputTagCreateQuestion = document.querySelector('#tag-ask-question');
+        if (inputTagCreateQuestion) {
+            autocomplete(tags, inputTagCreateQuestion, inputTagCreateQuestion);
+            inputTagCreateQuestion.addEventListener('keydown', async function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    addButton(inputTagCreateQuestion);
+                }
+            });
+        }
     }
 };
 
-const inputUser = document.querySelector('#user');
-if (inputUser) {
-    let matchingUsers = [];
-    let index = 0;
-    
-    inputUser.addEventListener('input', function (event) {
-        const username = inputUser.value.toUpperCase();
-    
-        if (username === '') return;
-
-        const match = users.find((element) => element[0].toUpperCase() === username);
-        if (match) {
-            inputUser.setAttribute('value', match[1]);
-        } else {
-            inputUser.setAttribute('value', '0');
-        }
-
-        matchingUsers = users.filter(user => user && user[0].toUpperCase().startsWith(username)).filter(Boolean);
-    });
-
-    inputUser.addEventListener('keydown', async function (event) {
-        if (event.key === 'Tab') {
-            event.preventDefault();
-            if (matchingUsers.length > 0) {
-                index = (index + 1) % matchingUsers.length;
-                inputUser.value = matchingUsers[index][0];
-                inputUser.setAttribute('value', matchingUsers[index][1]);
-            }
-        }
-
-    });
-}
-
-const inputBlock = document.querySelector('#block-user');
-if (inputBlock) {
-    let matchingUsers = [];
-    let index = 0;
-
-    const user = document.querySelector('#block-user + input');
-
-    inputBlock.addEventListener('input', function (event) {
-        const username = inputBlock.value.toUpperCase();
-    
-        if (username === '') return;
-
-        const match = users.find((element) => element[0].toUpperCase() === username);
-        if (match) {
-            user.setAttribute('value', match[1]);
-        } else {
-            user.setAttribute('value', '0');
-        }
-
-        matchingUsers = unblocked.filter(user => user && user[0].toUpperCase().startsWith(username)).filter(Boolean);
-    });
-
-    inputBlock.addEventListener('keydown', async function (event) {
-        if (event.key === 'Tab') {
-            event.preventDefault();
-            if (matchingUsers.length > 0) {
-                index = (index + 1) % matchingUsers.length;
-                inputBlock.value = matchingUsers[index][0];
-                user.value = matchingUsers[index][1];
-            }
-        }
-
-    });
-}
-
-const inputUnblock = document.querySelector('#unblock-user');
-if (inputUnblock) {
-    let matchingUsers = [];
-    let index = 0;
-
-    const user = document.querySelector('#unblock-user + input');
-
-    inputUnblock.addEventListener('input', function (event) {
-        const username = inputUnblock.value.toUpperCase();
-    
-        if (username === '') return;
-
-        const match = users.find((element) => element[0].toUpperCase() === username);
-        if (match) {
-            user.setAttribute('value', match[1]);
-        } else {
-            user.setAttribute('value', '0');
-        }
-
-        matchingUsers = blocked.filter(user => user && user[0].toUpperCase().startsWith(username)).filter(Boolean);
-    });
-
-    inputUnblock.addEventListener('keydown', async function (event) {
-
-        if (event.key === 'Tab') {
-            event.preventDefault();
-            if (matchingUsers.length > 0) {
-                index = (index + 1) % matchingUsers.length;
-                inputUnblock.value = matchingUsers[index][0];
-                inputUnblock.setAttribute('value', matchingUsers[index][1]);
-                user.value = matchingUsers[index][1];
-            }
-        }
-
-    });
-}
-
-const inputTags = document.querySelector('#delete-tag');
-if (inputTags) {
-    let matchingTags = [];
-    let index = 0;
-    
-    inputTags.addEventListener('input', function (event) {
-        const tagName = inputTags.value.toUpperCase();
-    
-        if (tagName === '') return;
-    
-        matchingTags = tagsAdmin.filter(tag => tag && tag[0].toUpperCase().startsWith(tagName)).filter(Boolean);
-    });
-
-    inputTags.addEventListener('keydown', async function (event) {
-        const tag = document.querySelector('#delete-tag + input');
-        if (event.key === 'Tab') {
-            event.preventDefault();
-            if (matchingTags.length > 0) {
-                index = (index + 1) % matchingTags.length;
-                inputTags.value = matchingTags[index][0];
-                inputTags.setAttribute('value', matchingTags[index][1]);
-                tag.value = matchingTags[index][1];
-            }
-        }
-
-    });
-}
-
-const editTags = document.querySelector('#old-tag-admin');
-if (editTags) {
-    let matchingTags = [];
-    let index = 0;
-
-    const form = document.querySelector('#edit-tag');
-
-    editTags.addEventListener('input', function (event) {
-        const tagName = editTags.value.toUpperCase();
-
-        if (tagName === '') return;
-
-        const match = tagsAdmin.find((element) => element[0].toUpperCase() === tagName);
-        if (match) {
-            form.action = `../tags/${match[1]}`;
-        } else {
-            form.action = '../tags/0';
-        }
-
-        matchingTags = tagsAdmin.filter(tag => tag && tag[0].toUpperCase().startsWith(tagName)).filter(Boolean);
-    });
-
-    editTags.addEventListener('keydown', async function (event) {
-        if (event.key === 'Tab') {
-            event.preventDefault();
-            if (matchingTags.length > 0) {
-                index = (index + 1) % matchingTags.length;
-                editTags.value = matchingTags[index][0];
-                editTags.setAttribute('value', matchingTags[index][1]);
-                form.action = `../tags/${matchingTags[index][1]}`;
-            }
-        }
-    });
-}
-
-const questionTags = document.querySelector('#add-tag');
-if (questionTags) {
-    let matchingTags = [];
-    let index = 0;
-
-    questionTags.addEventListener('input', function (event) {
-        const tagName = questionTags.value.toUpperCase();
-
-        if (tagName === '') return;
-
-        matchingTags = tagsAdmin.filter(tag => tag && tag[0].toUpperCase().startsWith(tagName)).filter(Boolean);
-    });
-
-    questionTags.addEventListener('keydown', async function (event) {
-        if (event.key === 'Tab') {
-            event.preventDefault();
-            if (matchingTags.length > 0) {
-                index = (index + 1) % matchingTags.length;
-                questionTags.value = matchingTags[index][0];
-            }
-        }
-
-    });
-}
-
-const tagAskQuestion = document.querySelector('#tag-ask-question');
-if (tagAskQuestion) {
-    let matchingTags = [];
-    let index = 0;
-
-    tagAskQuestion.addEventListener('input', function (event) {
-        const tagName = tagAskQuestion.value.toUpperCase();
-
-        if (tagName === '') return;
-
-        matchingTags = tagsAdmin.filter(tag => tag && tag[0].toUpperCase().startsWith(tagName)).filter(Boolean);
-    });
-
-    tagAskQuestion.addEventListener('keydown', async function (event) {
-        if (event.key === 'Tab') {
-            event.preventDefault();
-            if (matchingTags.length > 0) {
-                index = (index + 1) % matchingTags.length;
-                tagAskQuestion.value = matchingTags[index][0];
-                tagAskQuestion.setAttribute('value', matchingTags[index][1]);
-            }
-        }
-
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            const tagName = tagAskQuestion.value;
-            const tagId = tagAskQuestion.getAttribute('value');
-
-            const button = document.createElement('button');
-            button.classList.add('all-buttons');
-            button.textContent = 'X';
-
-            button.style.width = '20px';
-            button.style.padding = '0';
-
-            button.addEventListener('click', function (event) {
-                event.preventDefault();
-                const tag = event.target.parentNode;
-                tag.remove();
-            });
-
-            const p = document.createElement('div');
-            p.classList.add('all-tags');
-            p.textContent = tagName;
-            p.id = tagId;
-
-            p.insertBefore(button, p.firstChild);
-
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = `tags-${tagId}`;
-            input.value = tagId;
-
-            p.appendChild(input);
-
-            const section = document.querySelector('#property-tags');
-            section.appendChild(p);
-
-            tagAskQuestion.value = "";
-            }
-        }
-    );
-}
-
-const tagEditQuestion = document.querySelector('#property-tags > #add-tag');
-if (tagEditQuestion) {
-    let matchingTags = [];
-    let index = 0;
-
-    tagEditQuestion.addEventListener('input', function (event) {
-        const tagName = tagEditQuestion.value.toUpperCase();
-
-        if (tagName === '') return;
-
-        matchingTags = tagsAdmin.filter(tag => tag && tag[0].toUpperCase().startsWith(tagName)).filter(Boolean);
-    });
-
-    tagEditQuestion.addEventListener('keydown', async function (event) {
-        if (event.key === 'Tab') {
-            event.preventDefault();
-            if (matchingTags.length > 0) {
-                index = (index + 1) % matchingTags.length;
-                tagEditQuestion.value = matchingTags[index][0];
-                tagEditQuestion.setAttribute('value', matchingTags[index][1]);
-            }
-        }
-
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            const tagName = tagEditQuestion.value;
-            const tagId = tagEditQuestion.getAttribute('value');
-
-            const button = document.createElement('button');
-            button.classList.add('all-buttons');
-            button.textContent = 'X';
-
-            button.style.width = '20px';
-            button.style.padding = '0';
-
-            button.addEventListener('click', function (event) {
-                event.preventDefault();
-                const tag = event.target.parentNode;
-                tag.remove();
-            });
-
-            const p = document.createElement('div');
-            p.classList.add('all-tags');
-            p.textContent = tagName;
-            p.id = tagId;
-
-            p.insertBefore(button, p.firstChild);
-
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = `tags-${tagId}`;
-            input.value = tagId;
-
-            p.appendChild(input);
-
-            const section = document.querySelector('#property-tags');
-            section.appendChild(p);
-
-            tagEditQuestion.value = "";
-            }
-        }
-    );
-}
-
-const existingTagsEditQuestion = document.querySelectorAll('.all-tags > .all-buttons');
-if (existingTagsEditQuestion) {
-    existingTagsEditQuestion.forEach(tag => {
+const existingTags = document.querySelectorAll('.all-tags > .all-buttons');
+if (existingTags) {
+    existingTags.forEach(tag => {
         tag.addEventListener('click', function (event) {
             event.preventDefault();
             const tag = event.target.parentNode;

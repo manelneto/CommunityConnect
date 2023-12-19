@@ -17,9 +17,6 @@ function addError(text) {
         const errorBox = document.createElement('section');
         errorBox.classList.add('error-box');
 
-        const title = document.createElement('h2');
-        title.textContent = 'Errors';
-
         const list = document.createElement('ul');
 
         const error = document.createElement('li');
@@ -27,8 +24,14 @@ function addError(text) {
 
         list.appendChild(error);
         errorBox.appendChild(list);
-        errorBox.appendChild(title);
 
         document.querySelector('main').appendChild(errorBox);
     }
+    window.setTimeout(() => {
+        const errors = document.querySelector('.error-box ul');
+        errors.firstElementChild.remove();
+        if (!errors.querySelector('li')) {
+            errors.parentElement.remove();
+        }
+    }, 7500);
 }

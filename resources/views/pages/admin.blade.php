@@ -105,7 +105,7 @@
         </details>
         <details>
             <summary>Edit a tag</summary>
-            <form id="edit-tag" action="../tags/0" method="post" class="form-admin">
+            <form id="edit-tag" action="../tags/edit" method="post" class="form-admin">
                 @csrf
                 <section class="add-tooltip-admin">
                     <label for="old-tag-admin">Old Tag</label>
@@ -116,9 +116,10 @@
                         <p class="tooltip-text">You can edit a tag by entering its name in the respective field and the new name in the following field. Each tag must be unique. When you're done, click on the <b>Edit</b> button.</p>
                     </div>
                 </section>
-                <input type="text" id="old-tag-admin" name="old-tag" placeholder="Enter old tag name here" class="user-details-input">
+                <input type="text" id="old-tag-admin" name="old_tag" placeholder="Enter old tag name here" class="user-details-input">
+                <input type="hidden" name="tag" value="">
                 <label for="new-tag-admin">New Tag</label>
-                <input type="text" id="new-tag-admin" name="tag" placeholder="Enter new tag name here" class="user-details-input">
+                <input type="text" id="new-tag-admin" name="new_tag" placeholder="Enter new tag name here" class="user-details-input">
                 <button class="admin-button" type="submit">Edit</button>
             </form>
         </details>

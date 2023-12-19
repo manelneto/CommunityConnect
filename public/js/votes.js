@@ -15,7 +15,7 @@ async function voteContent(voteSVG, voteSVGpath, votesNumber, id, vote, content)
         voteSVG.classList.replace('unvoted', 'voted');
         voteSVGpath.setAttribute('fill', '#38B6FF');
         if (content === 'questions')
-            voteSVG.nextSibling.textContent = ` ${votesNumber + 1} `;
+            voteSVG.nextSibling.textContent = ` ${votesNumber + 1}`;
         else
             voteSVG.previousSibling.textContent = `${votesNumber + 1} `;
     } else {
@@ -29,7 +29,7 @@ async function unvoteContent(voteSVG, voteSVGpath, votesNumber, id, vote, conten
         voteSVG.classList.replace('voted', 'unvoted');
         voteSVGpath.setAttribute('fill', '#ABACB1');
         if (content === 'questions')
-            voteSVG.nextSibling.textContent = ` ${votesNumber - 1} `;
+            voteSVG.nextSibling.textContent = ` ${votesNumber - 1}`;
         else
             voteSVG.previousSibling.textContent = `${votesNumber - 1} `;
     } else {

@@ -1,56 +1,40 @@
 async function followQuestion(id) {
-  console.log("following question", id);
-  await fetch(`/api/questions/${id}/follow`, {
-    method: "POST",
-    headers: {
-      "X-CSRF-TOKEN": document
-        .querySelector('meta[name="csrf-token"]')
-        .getAttribute("content"),
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: encodeForAjax({ id: id }),
-  });
+    await fetch('/api/questions/follow', {
+        method: "POST",
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: encodeForAjax({id: id})
+    });
 }
 
 async function unfollowQuestion(id) {
-  console.log("unfollowing question", id);
-  await fetch(`/api/questions/${id}/unfollow`, {
-    method: "POST",
-    headers: {
-      "X-CSRF-TOKEN": document
-        .querySelector('meta[name="csrf-token"]')
-        .getAttribute("content"),
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: encodeForAjax({ id: id }),
-  });
+    await fetch('/api/questions/unfollow', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: encodeForAjax({id: id})
+    });
 }
 
-const questionButtons = document.querySelectorAll(".question-details button");
-const questionTooltips = document.querySelectorAll(".follow-question-tooltip");
+const questionButton = document.querySelector('.question-details button');
 
-if (questionButtons) {
-  questionButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      const id = button.id;
-      if (button.classList.contains("follow-question-button")) {
-        followQuestion(id);
-        if (questionTooltips) {
-          questionTooltips.forEach((tooltip) => {
-            tooltip.textContent = "Unfollow this question.";
-          });
+if (questionButton) {
+    questionButton.addEventListener('click', async (event) => {
+        event.preventDefault();
+        const id = questionButton.id;
+        const questionTooltip = document.querySelector('.follow-question-tooltip');
+        if (questionButton.classList.contains('follow-question-button')) {
+            await followQuestion(id);
+            questionTooltip.textContent = 'Unfollow this question';
+        } else {
+            await unfollowQuestion(id);
+            questionTooltip.textContent = 'Follow this question';
         }
-      } else { 
-        unfollowQuestion(id);
-        if (questionTooltips) {
-          questionTooltips.forEach((tooltip) => {
-            tooltip.textContent = "Follow this question.";
-          });
-        }
-      }
-      button.classList.toggle("follow-question-button");
-      button.classList.toggle("unfollow-question-button");
+        questionButton.classList.toggle('follow-question-button');
+        questionButton.classList.toggle('unfollow-question-button');
     });
-  });
 }

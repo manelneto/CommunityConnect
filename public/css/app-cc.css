@@ -693,8 +693,16 @@ article.notification {
 
 .footer-links {
   margin-top: 25px;
-  margin-left: 30rem;
+  /* margin-left: 30rem; */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   color: var();
+}
+
+.footer-links *:hover {
+  color: var(--blue);
+  transition: 0.2s;
 }
 
 .footer-links a {
@@ -748,8 +756,8 @@ article.notification {
   }
 
   .main-footer ul {
-    display: none;
-    margin-left: 0;
+    /* display: none; */
+    /* margin-left: 0; */
   }
 }
 
@@ -760,6 +768,10 @@ article.notification {
 
   body {
     display: block;
+  }
+
+  main {
+    min-height: calc(100vh - 80px - 85px);
   }
 
   #about-us-title,

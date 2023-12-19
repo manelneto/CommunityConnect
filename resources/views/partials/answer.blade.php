@@ -58,9 +58,9 @@
                         </defs>
                     </svg>
                 @endif
-                <p class="date">Answer added {{ $answer->date }}</p>
+                <p class="date">Answer added: {{ $answer->date }}</p>
                 @if ($answer->last_edited != null)
-                    <p class="date edited-date">edited {{ $answer->last_edited }}</p>
+                    <p class="date edited-date">Edited: {{ $answer->last_edited }}</p>
                 @endif
             </div>
             @if ($answer->correct)

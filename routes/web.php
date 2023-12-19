@@ -93,7 +93,7 @@ Route::get('/admin', [UserController::class, 'index'])->name('admin');
 Route::post('/admin/block', [UserController::class, 'block'])->name('block');
 Route::post('/admin/unblock', [UserController::class, 'unblock'])->name('unblock');
 Route::post('/tags', [TagController::class, 'store'])->name('create-tag');
-Route::post('/tags/{id}', [TagController::class, 'update'])->where('id', '[0-9]+')->name('edit-tag');
+Route::post('/tags/edit', [TagController::class, 'update'])->name('edit-tag');
 Route::post('/tags/delete', [TagController::class, 'destroy'])->name('delete-tag');
 Route::post('/communities', [CommunityController::class, 'store'])->name('create-community');
 
@@ -105,13 +105,11 @@ Route::get('/feed', [QuestionController::class, 'personalIndex'])->name('feed');
 // API
 Route::get('api/questions', [QuestionController::class, 'search']);
 Route::get('api/users', [UserController::class, 'search']);
-Route::get('api/users/check-username-email-exists', [UserController::class, 'checkUsernameOrEmailExists']);
-Route::get('api/tags/exist', [TagController::class, 'checkTagExists']);
 Route::get('api/tags', [TagController::class, 'search']);
 Route::post('api/communities/follow', [CommunityController::class, 'follow']);
 Route::post('api/communities/unfollow', [CommunityController::class, 'unfollow']);
-Route::post('api/questions/{id}/follow', [QuestionController::class, 'follow']);
-Route::post('api/questions/{id}/unfollow', [QuestionController::class, 'unfollow']);
+Route::post('api/questions/follow', [QuestionController::class, 'follow']);
+Route::post('api/questions/unfollow', [QuestionController::class, 'unfollow']);
 Route::post('api/tags/follow', [TagController::class, 'follow']);
 Route::post('api/tags/unfollow', [TagController::class, 'unfollow']);
 Route::post('api/questions/edit/remove-tag/{questionId}/{tagId}', [QuestionController::class, 'remove_tag']);

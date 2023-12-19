@@ -37,16 +37,12 @@
                     </div>
                 </section>
                 <input type="text" id="username" name="username" placeholder="Enter username here" class="user-details-input">
-                <p class="username-error">Username is already taken</p>
                 <label for="email">Email</label>
                 <input type="text" id="email" name="email" placeholder="Enter email here" class="user-details-input">
-                <p class="email-error">Email is already taken</p>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter password here" class="user-details-input">
-                <p class="password-error">Password needs to be at least 8 characters long </p>
                 <label for="password_confirmation">Confirm Password</label>
                 <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm password here" class="user-details-input">
-                <p class="password-confirmation-error">Passwords do not match</p>
                 <button class="admin-button submit" type="submit">Create User</button>
             </form>
         </details>
@@ -105,7 +101,7 @@
         </details>
         <details>
             <summary>Edit a tag</summary>
-            <form id="edit-tag" action="../tags/0" method="post" class="form-admin">
+            <form id="edit-tag" action="../tags/edit" method="post" class="form-admin">
                 @csrf
                 <section class="add-tooltip-admin">
                     <label for="old-tag-admin">Old Tag</label>
@@ -116,9 +112,10 @@
                         <p class="tooltip-text">You can edit a tag by entering its name in the respective field and the new name in the following field. Each tag must be unique. When you're done, click on the <b>Edit</b> button.</p>
                     </div>
                 </section>
-                <input type="text" id="old-tag-admin" name="old-tag" placeholder="Enter old tag name here" class="user-details-input">
+                <input type="text" id="old-tag-admin" name="old_tag" placeholder="Enter old tag name here" class="user-details-input">
+                <input type="hidden" name="tag" value="">
                 <label for="new-tag-admin">New Tag</label>
-                <input type="text" id="new-tag-admin" name="tag" placeholder="Enter new tag name here" class="user-details-input">
+                <input type="text" id="new-tag-admin" name="new_tag" placeholder="Enter new tag name here" class="user-details-input">
                 <button class="admin-button" type="submit">Edit</button>
             </form>
         </details>
@@ -135,7 +132,7 @@
                         <p class="tooltip-text">You can delete a tag by entering its name in the respective field. When you're done, click on the <b>Delete</b> button.</p>
                     </div>
                 </section>
-                <input type="text" id="delete-tag" name="tag" placeholder="Enter tag name here and click Tab for autocomplete">
+                <input type="text" id="delete-tag" name="tag" placeholder="Enter tag name here and click Tab for autocomplete" class="user-details-input">
                 <input type="hidden" name="tag" value="">
                 <button class="admin-button" type="submit">Delete</button>
             </form>

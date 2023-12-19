@@ -15,12 +15,10 @@
                 <div class="form-group">
                     <label for="username_or_email">Username or Email*</label>
                     <input type="text" id="username_or_email" name="username_or_email" required placeholder="Enter username or email here" class="user-details-input">
-                    <p class="username-or-email-error">Username or Email does <b>not</b> exist</p>
                 </div>
                 <div id="password-group" class="form-group">
                     <label for="password">Password *</label>
                     <input type="password" id="password" name="password" required placeholder="Enter password here" class="user-details-input">
-                    <p class="password-error">Password needs to be at least 8 characters long</p>
                 </div>
                 <a id="forgot-password" href="{{ route('login') }}">Forgot Password?</a>
                 <button type="submit">Sign In</button>

@@ -16,12 +16,6 @@
   font-size: smaller;
 }
 
-.username-or-email-error, .password-error, .username-error, .email-error, .password-confirmation-error{
-  color: red;
-  font-size: 12px;
-  display: none;
-}
-
 #sign-page-main-content {
   background-color: var(--light-gray);
   display: grid;

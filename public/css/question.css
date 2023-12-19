@@ -544,6 +544,16 @@ button.mark-incorrect {
   align-items: center;
 }
 
+.answer form label {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.answer textarea {
+  width: 80%;
+}
+
 @media (max-width: 919px){
   .question-tag {
     background-color: rgba(103, 103, 103, 0.37);

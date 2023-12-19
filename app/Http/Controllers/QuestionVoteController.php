@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class QuestionVoteController extends Controller {
     public function vote(Request $request)
     {
-        $this->authorize('vote', QuestionVote::class);
+        $this->authorize('vote', QuestionVote::class)->withStatus(201);;
 
         $id = $request->get('id');
         $vote = $request->get('vote');

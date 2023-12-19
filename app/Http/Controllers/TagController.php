@@ -101,10 +101,4 @@ class TagController extends Controller
             return response('Tag not found');
         };
     }
-    
-    public function checkTagExists(Request $request)
-    {
-        $tag = Tag::where('name', $request->tag)->exists();
-        return response()->json(['exists' => $tag]);
-    }
 }

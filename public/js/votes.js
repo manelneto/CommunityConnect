@@ -19,7 +19,7 @@ async function voteContent(voteSVG, voteSVGpath, votesNumber, id, vote, content)
         else
             voteSVG.previousSibling.textContent = `${votesNumber + 1} `;
     } else {
-        addError('Vote could not be added');
+        addError('You cannot vote on your own content');
     }
 }
 
@@ -39,6 +39,11 @@ async function unvoteContent(voteSVG, voteSVGpath, votesNumber, id, vote, conten
 
 async function handleVote(event, element, oppositeSelector, vote, content) {
     event.preventDefault();
+
+    if (!document.querySelector('.my-account-button')) {
+        addError('You have to be logged in to vote');
+        return;
+    }
 
     const id = element.getAttribute('data-id');
     const votesNumber = parseInt(element.textContent);

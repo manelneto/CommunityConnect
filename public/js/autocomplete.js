@@ -78,11 +78,12 @@ function addButton(inputTag) {
 
 window.onload = async () => {
     const admin = document.querySelector('#admin-page');
-    if (admin) {
+    const user = document.querySelector('.user-details-input');
+    if (admin || user) {
         const url = '../../api/users';
         const response = await fetch(url);
         const allUsers = await response.json();
-        users = allUsers.map(user => [user.username, user.id]).filter(Boolean).sort((a, b) => (a[0].localeCompare(b[0])));
+        users = allUsers.map(user => [user.username, user.id, user.email]).filter(Boolean).sort((a, b) => (a[0].localeCompare(b[0])));
         blocked = allUsers.filter(user => user.blocked).map(user => [user.username, user.id]).sort((a, b) => (a[0].localeCompare(b[0])));
         unblocked = allUsers.filter(user => !user.blocked).map(user => [user.username, user.id]).sort((a, b) => (a[0].localeCompare(b[0])));
 

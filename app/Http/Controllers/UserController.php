@@ -207,15 +207,4 @@ class UserController extends Controller
             return redirect()->back()->withErrors('User not found');
         }
     }
-
-    public function checkUsernameOrEmailExists(Request $request)
-    {
-        $username = $request->username_or_email;
-
-        $user = User::where('username', $username)->exists();
-        $email = User::where('email', $username)->exists();
-    
-
-        return response()->json(['user' => $user, 'email' => $email]);
-    }
 }

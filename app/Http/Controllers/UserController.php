@@ -3,52 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Notification;
 use App\Models\Question;
 use App\Models\Reputation;
-use App\Models\User;
-use App\Models\Notification;
 use App\Models\Tag;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\User;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function search(Request $request)
+    public function search(Request $request): JsonResponse
     {
         $username = ($request->has('username') && $request->get('username') !== '') ? $request->get('username') : '';
-        $users = User::with('communities')
-            ->where('username', 'ILIKE', '%' . $username . '%')
-            ->get();
+        $users = User::with('communities')->where('username', 'ILIKE', '%' . $username . '%')->get();
         return response()->json($users);
     }
 
     /**
-     * Display a listing of the resource.
+     * @throws AuthorizationException
      */
-    public function index()
+    public function admin(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $this->authorize('index', User::class);
+        $this->authorize('admin', User::class);
         $users = User::all();
         $tags = Tag::all();
         return view('pages.admin', ['users' => $users, 'tags' => $tags]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @throws AuthorizationException
      */
-    public function create()
-    {
-        $this->authorize('create', User::class);
-        $users = User::all();
-        return view('pages.admin', ['users' => $users]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(Request $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $this->authorize('store', User::class);
 
@@ -58,21 +53,17 @@ class UserController extends Controller
             'password' => 'required|min:8|confirmed'
         ]);
 
-        User::create([
+        $id = User::create([
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'image' => 'default.png'
-        ]);
+        ])->id;
 
-        $users = User::all();
-        return view('pages.admin', ['users' => $users]);
+        return redirect('users/' . $id)->with('success', 'User successfully created');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
+    public function show($id): Factory|Application|View|\Illuminate\Contracts\Foundation\Application|RedirectResponse
     {
         try {
             $user = User::with(['badges', 'moderatorCommunities'])->findOrFail($id);
@@ -91,120 +82,128 @@ class UserController extends Controller
                 'unread' => $unread,
                 'moderatorCommunities' => $moderatorCommunities
             ]);
-        } catch (ModelNotFoundException $e) {
+        } catch (Exception) {
             return redirect()->back()->withErrors('User not found');
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(int $id)
+    public function edit(int $id): Factory|Application|View|\Illuminate\Contracts\Foundation\Application|RedirectResponse
     {
-        $user = User::findOrFail($id);
-        $this->authorize('edit', $user);
-
         try {
+            $user = User::findOrFail($id);
+            $this->authorize('edit', $user);
             return view('users.edit', ['user' => $user]);
-        } catch (ModelNotFoundException $e) {
-            return "User not found.";
+        } catch (Exception) {
+            return redirect()->back()->withErrors('User cannot be edited');
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $id): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $user = User::findOrFail($id);
-        $this->authorize('update', $user);
-
-        if ($request->input('username') !== $user->username) {
-            $request->validate([
-                'username' => 'required|string|max:20|unique:users'
-            ]);
-        }
-
-        if ($request->input('email') !== $user->email) {
-            $request->validate([
-                'email' => 'required|email|max:250|unique:users'
-            ]);
-        }
-
-        if ($request->hasFile('file')) {
-            $request->validate([
-                'file' => 'image|mimes:png,jpg,jpeg|max:2048'
-            ]);
-
-            $fileController = new FileController();
-            $fileController->upload($request, $id);
-        }
-
-        if ($request->input('password') !== null) {
-            $request->validate([
-                'current-password' => 'required|min:8',
-                'password' => 'required|min:8|confirmed'
-            ]);
-        }
-
         try {
+            $user = User::findOrFail($id);
+            $this->authorize('update', $user);
+
+            if ($request->input('username') !== $user->username) {
+                $request->validate([
+                    'username' => 'required|string|max:20|unique:users'
+                ]);
+            }
+
+            if ($request->input('email') !== $user->email) {
+                $request->validate([
+                    'email' => 'required|email|max:250|unique:users'
+                ]);
+            }
+
+            if ($request->hasFile('file')) {
+                $request->validate([
+                    'file' => 'image|mimes:png,jpg,jpeg|max:2048'
+                ]);
+
+                $fileController = new FileController();
+                $fileController->upload($request, $id);
+            }
+
+            if ($request->input('password') !== null) {
+                $request->validate([
+                    'current-password' => 'required|min:8',
+                    'password' => 'required|min:8|confirmed'
+                ]);
+            }
+
             $user->username = $request->input('username');
             $user->email = $request->input('email');
             $user->save();
+
             if (!password_verify($request->input('current-password'), $user->password) && $request->input('current-password') !== null) {
-                return redirect('users/' . $id . '/edit')->withErrors(['current-password' => 'Current password is incorrect.']);
+                return redirect()->back()->withErrors(['current-password' => 'Current password is incorrect']);
             }
+
             $user->password = $request->input('password') !== NULL ? Hash::make($request->input('password')) : $user->password;
             $user->save();
-            return redirect('users/' . $id);
-        } catch (ModelNotFoundException $e) {
-            return "User not found.";
+        } catch (Exception) {
+            return redirect()->back()->withErrors('User could not be edited');
         }
+
+        return redirect('users/' . $id)->with('success', 'User successfully edited');
     }
 
-    public function destroy(int $id) {
-        $user = User::findOrFail($id);
-        $this->authorize('destroy', $user);
-
+    public function destroy(int $id): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    {
         try {
+            $user = User::findOrFail($id);
+            $this->authorize('destroy', $user);
+
             $user->delete();
 
             $fileController = new FileController();
             $fileController->delete('profile', $id);
+        } catch (Exception) {
+            return redirect()->back()->withErrors('User could not be deleted');
+        }
 
-            if (Auth::user()->administrator && $id !== Auth::user()->id) {
-                return redirect('users/' . $id);
-            }
-            else {
-                auth()->logout();
-                return redirect('login');
-            }
-        } catch (ModelNotFoundException $e) {
-            return "User not found.";
+        if (Auth::user()->administrator && $id !== Auth::user()->id) {
+            return redirect()->back()->with('success', 'User successfully deleted');
+        } else {
+            auth()->logout();
+            return redirect('login')->with('success', 'User successfully deeleted');
         }
     }
 
-    public function block(Request $request) {
+    public function block(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'user' => 'required|integer',
+        ]);
+
         try {
             $user = User::findOrFail($request->input('user'));
             $this->authorize('block', $user);
             $user->blocked = true;
             $user->save();
-            return redirect('admin');
-        } catch (ModelNotFoundException $e) {
-            return redirect()->back()->withErrors('User not found');
+        } catch (Exception) {
+            return redirect()->back()->with('success', 'User could not be blocked');
         }
+
+        return redirect()->back()->with('success', 'User successfully blocked');
     }
 
-    public function unblock(Request $request) {
+    public function unblock(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'user' => 'required|integer',
+        ]);
+
         try {
             $user = User::findOrFail($request->input('user'));
             $this->authorize('unblock', $user);
             $user->blocked = false;
             $user->save();
-            return redirect('admin');
-        } catch (ModelNotFoundException $e) {
-            return redirect()->back()->withErrors('User not found');
+        } catch (Exception) {
+            return redirect()->back()->with('success', 'User could not be unblocked');
         }
+
+        return redirect()->back()->with('success', 'User successfully unblocked');
     }
 }

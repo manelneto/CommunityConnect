@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AnswerEvent;
 use App\Models\Answer;
 use App\Models\Question;
-use App\Events\AnswerEvent;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 
-class AnswerController extends Controller {
+class AnswerController extends Controller
+{
     /**
-     * Store a newly created resource in storage.
+     * @throws AuthorizationException
      */
-    public function store(Request $request)
+    public function store(Request $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $this->authorize('store', Answer::class);
 
@@ -24,46 +31,28 @@ class AnswerController extends Controller {
             'type' => 'in:answer'
         ]);
 
-        $answer = new Answer();
-        $answer->content = $request['content'];
-        $answer->id_question = $request['id_question'];
-        $answer->id_user = Auth::user()->id;
-
-        $answer->save();
-
-        $question = Question::findOrFail($answer->id_question);
-
-        event(new AnswerEvent($answer->id_question, $question->title, $question->id_user));
-
-        $fileController = new FileController();
-        $fileController->upload($request, $answer->id);
-
-        return redirect('questions/' . $answer->id_question)->withSuccess('Answer posted successfully!');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(int $id)
-    {
-        $answer = Answer::findOrFail($id);
-        $this->authorize('edit', $answer);
         try {
-            return view('answer.edit', ['answer' => $answer]);
+            $answer = new Answer();
+            $answer->content = $request->input('content');
+            $answer->id_question = $request->input('id_question');
+            $answer->id_user = Auth::user()->id;
+
+            $answer->save();
+
+            $fileController = new FileController();
+            $fileController->upload($request, $answer->id);
+
+            $question = Question::findOrFail($answer->id_question);
+            event(new AnswerEvent($answer->id_question, $question->title, $question->id_user));
+        } catch (Exception) {
+            return redirect()->back()->withErrors('Answer could not be created');
         }
-        catch (ModelNotFoundException $e) {
-            return "Answer not found.";
-        }
+
+        return redirect()->back()->with('success', 'Answer successfully created');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $id): RedirectResponse
     {
-        $answer = Answer::findOrFail($id);
-        $this->authorize('update', $answer);
-
         $request->validate([
             'content' => 'required|string|max:1000',
             'file' => 'max:2048',
@@ -71,67 +60,78 @@ class AnswerController extends Controller {
         ]);
 
         try {
+            $answer = Answer::findOrFail($id);
+            $this->authorize('update', $answer);
+
             $answer->content = $request->input('content');
             $answer->last_edited = now();
             $answer->save();
 
             $fileController = new FileController();
             $fileController->upload($request, $answer->id);
+        } catch (Exception) {
+            return redirect()->back()->withErrors('Answer could not be edited');
+        }
 
-            return redirect('questions/' . $answer->id_question);
-        }
-        catch (ModelNotFoundException $e) {
-            return "Answer not found.";
-        }
+        return redirect()->back()->with('success', 'Answer successfully edited');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(int $id)
+    public function destroy(int $id): RedirectResponse
     {
-        $answer = Answer::findOrFail($id);
-        $this->authorize('destroy', $answer);
         try {
+            $answer = Answer::findOrFail($id);
+            $this->authorize('destroy', $answer);
+
             $fileController = new FileController();
             $fileController->delete('answer', $id);
+
             $answer->delete();
-            return redirect('questions/' . $answer->id_question);
+        } catch (Exception) {
+            return redirect()->back()->withErrors('Answer could not be deleted');
         }
-        catch (ModelNotFoundException $e) {
-            return "Answer not found.";
-        }
+
+        return redirect()->back()->with('success', 'Answer successfully deleted');
     }
 
-    public function markCorrect(Request $request)
+    public function markCorrect(Request $request): Application|Response|\Illuminate\Contracts\Foundation\Application|ResponseFactory
     {
+        $request->validate([
+            'id' => 'required|integer',
+        ]);
+
         try {
-            $id = $request->get('id');
+            $id = $request->input('id');
             $answer = Answer::findOrFail($id);
 
             $this->authorize('correct', $answer);
 
             $answer->correct = true;
             $answer->save();
-            return response('Answer marked as correct!');
-        } catch (ModelNotFoundException $e) {
-            return response("Answer not found.");
+        } catch (Exception) {
+            return response("Answer could not be marked as correct");
         }
+
+        return response('Answer marked as correct');
     }
 
-    public function markIncorrect(Request $request)
+    public function markIncorrect(Request $request): Application|Response|\Illuminate\Contracts\Foundation\Application|ResponseFactory
     {
+        $request->validate([
+            'id' => 'required|integer',
+        ]);
+
         try {
-            $id = $request->get('id');
+            $id = $request->input('id');
             $answer = Answer::findOrFail($id);
 
-            $this->authorize('correct', $answer);
+            $this->authorize('incorrect', $answer);
 
             $answer->correct = false;
             $answer->save();
-            return response('Deleted answer mark!');
-        } catch (ModelNotFoundException $e) {
-            return response("Answer not found.");
+        } catch (Exception) {
+            return response("Answer mark could not be deleted");
         }
+
+        return response('Deleted answer mark');
     }
 }

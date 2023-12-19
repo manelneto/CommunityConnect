@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Answer;
-use App\Models\Question;
 use App\Events\CommentAnswerEvent;
+use App\Models\Answer;
 use App\Models\AnswerComment;
+use App\Models\Question;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 
-class AnswerCommentController extends Controller {
+class AnswerCommentController extends Controller
+{
     /**
-     * Store a newly created resource in storage.
+     * @throws AuthorizationException
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $this->authorize('store', AnswerComment::class);
 
@@ -23,77 +26,56 @@ class AnswerCommentController extends Controller {
             'id_answer' => 'required|integer',
         ]);
 
-        $comment = new AnswerComment();
-        $comment->content = $request['content'];
-        $comment->id_answer = $request['id_answer'];
-        $comment->id_user = Auth::user()->id;
-
-        $comment->save();
-
-        $answer = Answer::findOrFail($comment->id_answer);
-
-        $question = Question::findOrFail($answer->id_question);
-
-        event(new CommentAnswerEvent($question->id, $question->title, $answer->id_user));
-
-        return redirect('questions/' . $question->id)->withSuccess('Comment posted successfully!');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(int $id)
-    {
-        $comment = AnswerComment::findOrFail($id);
-        $this->authorize('edit', $comment);
-
         try {
-            return view('comment.edit', ['comment' => $comment]);
+            $comment = new AnswerComment();
+            $comment->content = $request->input('content');
+            $comment->id_answer = $request->input('id_answer');
+            $comment->id_user = Auth::user()->id;
+
+            $comment->save();
+
+            $answer = Answer::findOrFail($comment->id_answer);
+            $question = Question::findOrFail($answer->id_question);
+
+            event(new CommentAnswerEvent($question->id, $question->title, $answer->id_user));
+        } catch (Exception) {
+            return redirect()->back()->withErrors('Comment could not be created');
         }
-        catch (ModelNotFoundException $e) {
-            return "Comment not found.";
-        }
+
+        return redirect()->back()->with('success', 'Comment successfully created');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $id): RedirectResponse
     {
-        $comment = AnswerComment::findOrFail($id);
-        $this->authorize('update', $comment);
-
         $request->validate([
             'content' => 'required|string|max:1000'
         ]);
 
         try {
+            $comment = AnswerComment::findOrFail($id);
+            $this->authorize('update', $comment);
+
             $comment->content = $request->input('content');
             $comment->last_edited = now();
             $comment->save();
-            // $answer = Answer::findOrFail($comment->id_answer);
-            return redirect('questions/' . $comment->answer->id_question);
+        } catch (Exception) {
+            return redirect()->back()->withErrors('Comment could not be edited');
         }
-        catch (ModelNotFoundException $e) {
-            return "Comment not found.";
-        }
+
+        return redirect()->back()->with('success', 'Comment successfully edited');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(int $id)
+    public function destroy(int $id): RedirectResponse
     {
-        $comment = AnswerComment::findOrFail($id);
-        $this->authorize('destroy', $comment);
-
         try {
+            $comment = AnswerComment::findOrFail($id);
+            $this->authorize('destroy', $comment);
+
             $comment->delete();
-            // $answer = Answer::findOrFail($comment->id_answer);
-            return redirect('questions/' . $comment->answer->id_question);
+        } catch (Exception) {
+            return redirect()->back()->withErrors('Comment could not be deleted');
         }
-        catch (ModelNotFoundException $e) {
-            return "Comment not found.";
-        }
+
+        return redirect()->back()->with('success', 'Comment successfully deleted');
     }
 }

@@ -7,16 +7,30 @@ use App\Models\Answer;
 use App\Models\AnswerVote;
 use App\Models\Question;
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
-class AnswerVoteController extends Controller {
-    public function vote(Request $request)
+class AnswerVoteController extends Controller
+{
+    /**
+     * @throws AuthorizationException
+     */
+    public function vote(Request $request): Application|Response|\Illuminate\Contracts\Foundation\Application|ResponseFactory
     {
         $this->authorize('vote', AnswerVote::class)->withStatus(201);
 
-        $id = $request->get('id');
-        $vote = $request->get('vote');
+        $request->validate([
+            'id' => 'required|integer',
+            'vote' => 'required',
+        ]);
+
+        $id = $request->input('id');
+        $vote = $request->input('vote');
+
         try {
             $answer = Answer::findOrFail($id);
             $user = Auth::user()->id;
@@ -28,31 +42,40 @@ class AnswerVoteController extends Controller {
 
             $question = Question::findOrFail($answer->id_question);
 
-            event(New AnswerVoteEvent($question->id, $question->title, $answer->id_user, $vote));
-
-            return response('Vote added');
-        } catch (Exception $e) {
-            return response($e->getMessage(), 201);
+            event(new AnswerVoteEvent($question->id, $question->title, $answer->id_user, $vote));
+        } catch (Exception) {
+            return response('Vote could not be added', 201);
         }
+
+        return response('Vote added');
     }
 
-    public function unvote(Request $request)
+    /**
+     * @throws AuthorizationException
+     */
+    public function unvote(Request $request): Application|Response|\Illuminate\Contracts\Foundation\Application|ResponseFactory
     {
-        $this->authorize('unvote', AnswerVote::class);
+        $this->authorize('unvote', AnswerVote::class)->withStatus(201);
 
-        $id = $request->get('id');
-        $vote = $request->get('vote');
+        $request->validate([
+            'id' => 'required|integer',
+            'vote' => 'required',
+        ]);
+
+        $id = $request->input('id');
+        $vote = $request->input('vote');
+
         try {
-            $answer = Answer::findOrFail($id);
             $user = Auth::user()->id;
             AnswerVote::where([
                 'id_user' => $user,
                 'id_answer' => $id,
                 'likes' => $vote,
             ])->delete();
-            return response('Vote removed');
-        } catch (Exception $e) {
-            return response($e->getMessage(), 201);
+        } catch (Exception) {
+            return response('Vote could not be removed', 201);
         }
+
+        return response('Vote removed');
     }
 }

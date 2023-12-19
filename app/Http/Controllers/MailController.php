@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\MailModel;
 use App\Models\User;
 use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -14,7 +14,8 @@ use Symfony\Component\Mailer\Exception\TransportException;
 
 class MailController extends Controller
 {
-    function send(Request $request) {
+    function send(Request $request): RedirectResponse
+    {
         $missing = [];
         $required = [
             'MAIL_MAILER',
@@ -40,13 +41,13 @@ class MailController extends Controller
             'username_or_email' => 'required',
         ]);
 
-        $usernameOrEmail = $request->username_or_email;
+        $usernameOrEmail = $request->input('username_or_email');
 
         if (str_contains($usernameOrEmail, '@')) {
             $email = $usernameOrEmail;
             $user = User::where('email', $email)->first();
             if (!$user) {
-                return redirect()->back()->withErrors('The provided email does not match our records.');
+                return redirect()->back()->withErrors('The provided email does not match our records');
             }
             $username = $user->username;
         } else {
@@ -71,11 +72,12 @@ class MailController extends Controller
 
         try {
             Mail::to($email)->send(new MailModel($data));
-            return redirect()->back()->with('success', "$username, check your email inbox ($email)");
-        } catch (TransportException $e) {
+        } catch (TransportException) {
             return redirect()->back()->withErrors('SMTP connection error');
-        } catch (Exception $e) {
+        } catch (Exception) {
             return redirect()->back()->withErrors('Unknown error');
         }
+
+        return redirect()->back()->with('success', "$username, check your email inbox ($email)");
     }
 }

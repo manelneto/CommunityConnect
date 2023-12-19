@@ -89,7 +89,7 @@ Route::controller(AnswerCommentController::class)->group(function() {
 });
 
 // Admin
-Route::get('/admin', [UserController::class, 'index'])->name('admin');
+Route::get('/admin', [UserController::class, 'admin'])->name('admin');
 Route::post('/admin/block', [UserController::class, 'block'])->name('block');
 Route::post('/admin/unblock', [UserController::class, 'unblock'])->name('unblock');
 Route::post('/tags', [TagController::class, 'store'])->name('create-tag');

@@ -1,4 +1,5 @@
 const editAnswers = document.querySelectorAll('.answer');
+
 if (editAnswers) {
     editAnswers.forEach((answer) => {
         const button = answer.querySelector('.edit');

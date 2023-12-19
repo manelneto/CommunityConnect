@@ -33,3 +33,25 @@
   color: var(--blue);
   font-size: 18px;
 }
+
+#last-info{
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 1200px){
+  #about-us-page{
+    height: 100vh;
+  }
+}
+
+@media (max-width: 991px){
+  #about-us-page{
+    height: 100vh;
+  }
+}
+
+@media (max-width: 650px){
+  #about-us-page{
+    height: 170vh;
+  }
+}

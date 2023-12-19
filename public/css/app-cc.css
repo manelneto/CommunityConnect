@@ -311,8 +311,9 @@ a.sign-up-button {
   position: absolute;
   background-color: var(--light-gray);
   height: 100%;
-  width: 400px;
+  width: 270px;
   padding: 20px;
+  padding-left: 2rem;
   animation: 0.5s ease-out 0s 1 slideInFromLeft;
 }
 
@@ -745,6 +746,11 @@ article.notification {
   .tooltip-icon {
     position: static;
   }
+
+  .main-footer ul {
+    display: none;
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 991px) {
@@ -763,13 +769,17 @@ article.notification {
     padding-top: 2rem;
   }
 
-  
+  .main-footer ul {
+    display: none;
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 479px) {
   body {
+    height: 200vh;
     display: grid;
-    grid-template-rows: [body-initial] 80px [body-medium1] auto [body-medium2] 70px [body-end];
+    grid-template-rows: [body-initial] 80px [body-medium1] 100% [body-medium2] 70px [body-end];
     grid-template-columns: [c-initial] 100vh [c-end];
   }
 

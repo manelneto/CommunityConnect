@@ -95,7 +95,7 @@
                         <p class="tooltip-text">You can create a tag by entering its name in the respective field. Each tag must be unique. When you're done, click on the <b>Add</b> button.</p>
                     </div>
                 </section>
-                <input type="text" id="add-tag-admin" name="tag" placeholder="Enter tag name here" class="user-details-input">
+                <input type="text" id="add-tag-admin" name="name" placeholder="Enter tag name here" class="user-details-input">
                 <button class="admin-button" type="submit">Add</button>
             </form>
         </details>
@@ -113,9 +113,9 @@
                     </div>
                 </section>
                 <input type="text" id="old-tag-admin" name="old_tag" placeholder="Enter old tag name here" class="user-details-input">
-                <input type="hidden" name="tag" value="">
+                <input type="hidden" name="id" value="">
                 <label for="new-tag-admin">New Tag</label>
-                <input type="text" id="new-tag-admin" name="new_tag" placeholder="Enter new tag name here" class="user-details-input">
+                <input type="text" id="new-tag-admin" name="name" placeholder="Enter new tag name here" class="user-details-input">
                 <button class="admin-button" type="submit">Edit</button>
             </form>
         </details>
@@ -133,7 +133,7 @@
                     </div>
                 </section>
                 <input type="text" id="delete-tag" name="tag" placeholder="Enter tag name here and click Tab for autocomplete" class="user-details-input">
-                <input type="hidden" name="tag" value="">
+                <input type="hidden" name="id" value="">
                 <button class="admin-button" type="submit">Delete</button>
             </form>
         </details>

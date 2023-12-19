@@ -3,102 +3,137 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\UserFollowsTag;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class TagController extends Controller
 {
 
-    public function search(Request $request)
+    public function search(Request $request): JsonResponse
     {
-        $tag = ($request->has('tag') && $request->get('tag') !== '') ? $request->get('tag') : '';
+        $tag = ($request->has('tag') && $request->input('tag') !== '') ? $request->get('tag') : '';
         $tags = Tag::where('name', 'ILIKE', '%' . $tag . '%')->get();
         return response()->json($tags);
     }
 
-    public function store(Request $request)
+    /**
+     * @throws AuthorizationException
+     */
+    public function store(Request $request): RedirectResponse
     {
         $this->authorize('store', Tag::class);
 
-        $alreadyExists = Tag::where('name', $request->tag)->exists();
-
-        if ($alreadyExists) {
-            return redirect('admin')->with('error', 'Tag already exists.');
-        }
+        $request->validate([
+            'name' => 'required|string|unique:tag',
+        ]);
 
         $tag = new Tag();
-        $tag->name = $request->tag;
+        $tag->name = $request->input('name');
         $tag->save();
 
-        return redirect('admin');
+        return redirect()->back()->with('success', 'Tag successfully created');
     }
 
-    public function update(Request $request)
+    /**
+     * @throws AuthorizationException
+     */
+    public function update(Request $request): RedirectResponse
     {
         $this->authorize('update', Tag::class);
 
         $request->validate([
-            'tag' => 'required|integer',
-            'new_tag' => 'required|string',
+            'id' => 'required|integer',
+            'name' => 'required|string|unique:tag',
         ]);
 
         try {
-            $tag = Tag::findOrFail($request->tag);
-            $tag->name = $request->new_tag;
+            $tag = Tag::findOrFail($request->input('id'));
+            $tag->name = $request->input('name');
             $tag->save();
-            return redirect()->back();
-        } catch (ModelNotFoundException $e) {
+        } catch (Exception) {
             return redirect()->back()->withErrors('Tag not found');
         }
+
+        return redirect()->back()->with('success', 'Tag successfully edited');
     }
 
-    public function destroy(Request $request)
+    /**
+     * @throws AuthorizationException
+     */
+    public function destroy(Request $request): RedirectResponse
     {
-        $tag = Tag::findOrFail($request->input('tag'));
         $this->authorize('destroy', Tag::class);
+
+        $request->validate([
+            'id' => 'required|integer',
+        ]);
+
         try {
+            $tag = Tag::findOrFail($request->input('id'));
             $tag->delete();
-            return redirect('admin');
-        } catch (ModelNotFoundException $e) {
-            return "Tag not found.";
+        } catch (Exception) {
+            return redirect()->back()->withErrors('Tag not found');
         }
+
+        return redirect()->back()->with('success', 'Tag successfully deleted');
     }
 
-    public function follow(Request $request)
+    /**
+     * @throws AuthorizationException
+     */
+    public function follow(Request $request): Application|Response|\Illuminate\Contracts\Foundation\Application|ResponseFactory
     {
         $this->authorize('follow', Tag::class);
 
-        $id = $request->get('id');
+        $request->validate([
+            'id' => 'required|integer',
+        ]);
+
+        $id = $request->input('id');
         try {
-            $tag = Tag::findOrFail($id);
             $user = Auth::user()->id;
             UserFollowsTag::insert([
                 'id_user' => $user,
-                'id_tag' => $id
+                'id_tag' => $id,
             ]);
-            return response('Followed Tag');
-        } catch (ModelNotFoundException $e) {
-            return response('Tag not found');
-        };
+        } catch (Exception) {
+            return response('Tag could not be followed');
+        }
+
+        return response('Tag successfully followed');
     }
 
-    public function unfollow(Request $request)
+    /**
+     * @throws AuthorizationException
+     */
+    public function unfollow(Request $request): Application|Response|\Illuminate\Contracts\Foundation\Application|ResponseFactory
     {
         $this->authorize('unfollow', Tag::class);
 
-        $id = $request->get('id');
+        $request->validate([
+            'id' => 'required|integer',
+        ]);
+
+        $id = $request->input('id');
         try {
-            $tag = Tag::findOrFail($id);
             $user = Auth::user()->id;
             UserFollowsTag::where([
                 'id_user' => $user,
                 'id_tag' => $id
             ])->delete();
-            return response('Unfollowed Tag');
-        } catch (ModelNotFoundException $e) {
-            return response('Tag not found');
-        };
+        } catch (Exception) {
+            return response('Tag  could not be unfollowed');
+        }
+
+        return response('Tag successfully unfollowed');
+
     }
 }

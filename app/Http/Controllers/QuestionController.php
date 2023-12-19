@@ -70,8 +70,10 @@ class QuestionController extends Controller
                 // exact match search
                 $searchTerm = trim($searchTerm, '"');
                 $questions->where(function ($query) use ($searchTerm) {
-                    $query->where('title', 'ILIKE', '%' . $searchTerm . '%')
-                        ->orWhere('content', 'ILIKE', '%' . $searchTerm . '%');
+                    $searchTermRegex = '\m' . preg_quote($searchTerm) . '\M';
+
+                    $query->where('title', '~*', $searchTermRegex)
+                        ->orWhere('content', '~*', $searchTermRegex);
                 });
             } else if (preg_match('/^\[.+\]$/', $searchTerm)) {
                 // search by tag

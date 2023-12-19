@@ -2,43 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AnswerComment;
-use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Community;
-use App\Models\QuestionComment;
+use App\Models\Question;
+use App\Models\Tag;
 use App\Models\UserFollowsCommunity;
 use App\Models\UserFollowsQuestion;
 use App\Models\UserFollowsTag;
-use App\Models\Tag;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class QuestionController extends Controller
 {
-    public function search(Request $request, int $community = 0, array $communities = [])
+    public function index(Request $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $after = $request->get('after', '2020-01-01');
-        $before = $request->get('before', '2030-12-31');
-        $sort = $request->get('sort') == 'recent' ? 'date' : 'likes_count';
-        $searchTerm = $request->get('text', '');
+        $questions = json_decode($this->search($request)->content());
+        return view('questions.index', ['questions' => $questions]);
+    }
 
-        if ($community === 0 && count($communities) === 0 && (int) $request->get('community', 0) === 0 && (int) $request->get('communities', 0) === 0) {
+    public function search(Request $request, int $community = 0, array $communities = []): JsonResponse
+    {
+        $after = $request->input('after', '2020-01-01');
+        $before = $request->input('before', '2030-12-31');
+        $sort = $request->input('sort') == 'recent' ? 'date' : 'likes_count';
+        $searchTerm = $request->input('text', '');
+
+        if ($community === 0 && count($communities) === 0 && (int)$request->input('community', 0) === 0 && (int)$request->input('communities', 0) === 0) {
             // all questions
             $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->whereBetween('date', [$after, $before]);
-        } else if ($community > 0 || (int) $request->get('community', 0) > 0) {
+        } else if ($community > 0 || (int)$request->input('community', 0) > 0) {
             // community page
-            $id_community = $community !== 0 ? $community : $request->get('community');
+            $id_community = $community !== 0 ? $community : $request->input('community');
             $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers'])
                 ->whereBetween('date', [$after, $before])
                 ->where('id_community', $id_community);
         } else {
-            // personal feed -> questions from communities that user follows AND questions that user follows AND questions from tags that user follows
+            // personal feed
             $communities = $communities !== [] ? $communities : explode(',', $request->get('communities', ''));
             $user = Auth::user()?->id;
             $userQuestions = UserFollowsQuestion::where('id_user', $user)->pluck('id_question')->toArray();
@@ -47,10 +59,11 @@ class QuestionController extends Controller
             $questions = Question::with(['user.communitiesRating', 'community', 'likes', 'dislikes', 'answers'])
                 ->withCount(['likes', 'dislikes', 'answers']);
 
+            // questions from communities that user follows AND questions that user follows AND questions with tags that user follows
             $questions = $questions->where(function ($query) use ($communities, $userQuestions, $userTags, $after, $before) {
-                $query->whereBetween('date', [$after, $before])
-                    ->where(function ($query) use ($communities, $userQuestions, $userTags) {
-                        $query->when(isset($communities[0]) && $communities[0] !== '', function ($query) use ($communities) {
+                $query->whereBetween('date', [$after, $before])->where(function ($query) use ($communities, $userQuestions, $userTags) {
+                    $query
+                        ->when(isset($communities[0]) && $communities[0] !== '', function ($query) use ($communities) {
                             $query->whereIn('id_community', $communities);
                         })
                         ->when(!empty($userQuestions), function ($query) use ($userQuestions) {
@@ -61,7 +74,7 @@ class QuestionController extends Controller
                                 $query->whereIn('id', $userTags);
                             });
                         });
-                    });
+                });
             });
         }
 
@@ -72,17 +85,16 @@ class QuestionController extends Controller
                 $questions->where(function ($query) use ($searchTerm) {
                     $searchTermRegex = '\m' . preg_quote($searchTerm) . '\M';
 
-                    $query->where('title', '~*', $searchTermRegex)
-                        ->orWhere('content', '~*', $searchTermRegex);
+                    $query->where('title', '~*', $searchTermRegex)->orWhere('content', '~*', $searchTermRegex);
                 });
-            } else if (preg_match('/^\[.+\]$/', $searchTerm)) {
+            } else if (preg_match('/^\[.+]$/', $searchTerm)) {
                 // search by tag
                 $tagName = trim($searchTerm, '[]');
                 $questions->whereHas('tags', function ($query) use ($tagName) {
                     $query->where('name', $tagName);
                 });
             } else {
-                // full-text-search
+                // full-text search
                 $formattedTerm = addslashes(str_replace(' ', ' | ', $searchTerm));
                 $questions->whereRaw("tsvectors @@ to_tsquery('english', ?)", [$formattedTerm]);
             }
@@ -91,34 +103,29 @@ class QuestionController extends Controller
         return response()->json($questions->orderBy($sort, 'desc')->paginate(10));
     }
 
+    public function communityIndex(Request $request, int $community): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        $questions = json_decode($this->search($request, $community)->content());
+        return view('questions.index', ['questions' => $questions]);
+    }
+
     /**
-     * Display a listing of the resource.
+     * @throws AuthorizationException
      */
-    public function index(Request $request)
+    public function personalIndex(Request $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $questions = json_decode($this->search($request, 0, array())->content());
-        return view('questions.index', ['questions' => $questions]);
-    }
-
-    public function communityIndex(Request $request, int $community)
-    {
-        $questions = json_decode($this->search($request, $community, array())->content());
-        return view('questions.index', ['questions' => $questions]);
-    }
-
-    public function personalIndex(Request $request) {
         $this->authorize('personalIndex', Question::class);
 
         $user = Auth::user()->id;
         $communities = UserFollowsCommunity::where('id_user', $user)->pluck('id_community')->toArray();
-        $questions = json_decode($this->search($request, -1, $communities)->content()); 
+        $questions = json_decode($this->search($request, -1, $communities)->content());
         return view('questions.index', ['questions' => $questions]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @throws AuthorizationException
      */
-    public function create()
+    public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $this->authorize('create', Question::class);
         $communities = Community::all();
@@ -127,9 +134,9 @@ class QuestionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @throws AuthorizationException
      */
-    public function store(Request $request)
+    public function store(Request $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $this->authorize('store', Question::class);
 
@@ -142,9 +149,9 @@ class QuestionController extends Controller
         ]);
 
         $question = new Question();
-        $question->title = $request['title'];
-        $question->content = $request['content'];
-        $question->id_community = $request['id_community'];
+        $question->title = $request->input('title');
+        $question->content = $request->input('content');
+        $question->id_community = $request->input('id_community');
         $question->id_user = Auth::user()->id;
 
         $question->save();
@@ -158,17 +165,13 @@ class QuestionController extends Controller
         $fileController = new FileController();
         $fileController->upload($request, $question->id);
 
-        return redirect('questions/' . $question->id)->withSuccess('Question posted successfully!');
+        return redirect('questions/' . $question->id)->with('success', 'Question successfully created');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(int $id)
+    public function show(int $id): Factory|Application|View|\Illuminate\Contracts\Foundation\Application|RedirectResponse
     {
         try {
-            $question = Question::withCount(['answers', 'likes', 'dislikes', 'tags', 'comments'])
-                ->findOrFail($id);
+            $question = Question::withCount(['answers', 'likes', 'dislikes', 'tags', 'comments'])->findOrFail($id);
 
             $answers = Answer::with(['user', 'likes', 'dislikes', 'comments'])
                 ->withCount(['likes', 'dislikes'])
@@ -186,152 +189,128 @@ class QuestionController extends Controller
                 'question' => $question,
                 'answers' => $answers,
             ]);
-
-        } catch (ModelNotFoundException $e) {
-            return "Question not found.";
+        } catch (Exception) {
+            return redirect()->back()->withErrors('Question not found');
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(int $id)
+    public function edit(int $id): Factory|Application|View|\Illuminate\Contracts\Foundation\Application|RedirectResponse
     {
         try {
             $question = Question::with('tags')->withCount(['likes', 'dislikes'])->findOrFail($id);
             $this->authorize('edit', $question);
             $communities = Community::all();
             return view('questions.edit', ['question' => $question, 'communities' => $communities]);
-        } catch (ModelNotFoundException $e) {
-            return "Question not found.";
+        } catch (Exception) {
+            return redirect()->back()->withErrors('Question cannot be edited');
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $id): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-    $question = Question::findOrFail($id);
-    $this->authorize('update', $question);
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'id_community' => 'required|integer',
+            'content' => 'required|string|max:1000',
+            'file' => 'max:2048',
+            'type' => 'in:question'
+        ]);
 
-    $request->validate([
-        'content' => 'required|string|max:1000',
-        'file' => 'max:2048',
-        'type' => 'in:question'
-    ]);
-
-    try {
-        $isModerator = in_array($question->id_community, Auth::user()?->moderatorCommunities->pluck('id')->toArray());
-        $ownsQuestion = $question->user->id == Auth::user()->id;
-
-        // Only non-moderators can update the title and id_community --------------TODO
-        if (!$isModerator or ($isModerator and $ownsQuestion)) {
-            $request->validate([
-                'title' => 'required|string|max:255',
-                'id_community' => 'required|integer'
-            ]);
+        try {
+            $question = Question::findOrFail($id);
+            $this->authorize('update', $question);
 
             $question->title = $request->input('title');
             $question->id_community = $request->input('id_community');
-        }
+            $question->content = $request->input('content');
 
-        $question->content = $request->input('content');
+            $fileController = new FileController();
+            $fileController->upload($request, $question->id);
 
-        $fileController = new FileController();
-        $fileController->upload($request, $question->id);
+            $question->last_edited = now();
 
-        $addTagName = $request->input('add-tag');
+            $question->save();
 
-        $question->last_edited = now();
-        
-        $question->save();
-
-        foreach ($question->tags as $tag) {
-            $question->tags()->detach($tag->id);
-        }
-
-        foreach ($request->all() as $key => $value) {
-            if (preg_match('/^tags-\d+$/', $key)) {
-                $question->tags()->attach($value);
+            foreach ($question->tags as $tag) {
+                $question->tags()->detach($tag->id);
             }
+
+            foreach ($request->all() as $key => $value) {
+                if (preg_match('/^tags-\d+$/', $key)) {
+                    $question->tags()->attach($value);
+                }
+            }
+        } catch (Exception) {
+            return redirect()->back()->withErrors('Answer could not be edited');
         }
 
-        return redirect('questions/' . $id);
-    } catch (ModelNotFoundException $e) {
-        return "Question not found.";
+        return redirect('questions/' . $id)->with('success', 'Question successfully edited');
     }
-}
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(int $id)
+    public function destroy(int $id): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $question = Question::findOrFail($id);
-        $this->authorize('destroy', $question);
         try {
+            $question = Question::findOrFail($id);
+            $this->authorize('destroy', $question);
+
             $fileController = new FileController();
             $fileController->delete('question', $id);
+
             $question->delete();
-            return redirect('questions/');
-        } catch (ModelNotFoundException $e) {
-            return "Question not found.";
+        } catch (Exception) {
+            return redirect()->back()->withErrors('Question could not be deleted');
         }
+
+        return redirect('questions/')->with('success', 'Question successfully deleted');
     }
 
-    public function follow(Request $request)
+    /**
+     * @throws AuthorizationException
+     */
+    public function follow(Request $request): Application|Response|\Illuminate\Contracts\Foundation\Application|ResponseFactory
     {
         $this->authorize('follow', Question::class);
 
-        $id = $request->get('id');
+        $request->validate([
+            'id' => 'required|integer',
+        ]);
+
+        $id = $request->input('id');
         try {
-            $question = Question::findOrFail($id);
             $user = Auth::user()->id;
             UserFollowsQuestion::insert([
                 'id_user' => $user,
                 'id_question' => $id
             ]);
-            return response('Followed Question');
-        } catch (ModelNotFoundException $e) {
-            return response('Question not found');
+        } catch (Exception) {
+            return response('Question could not be followed');
         }
-        ;
+
+        return response('Question successfully followed');
     }
 
-    public function unfollow(Request $request)
+    /**
+     * @throws AuthorizationException
+     */
+    public function unfollow(Request $request): Application|Response|\Illuminate\Contracts\Foundation\Application|ResponseFactory
     {
         $this->authorize('unfollow', Question::class);
 
-        $id = $request->get('id');
+        $request->validate([
+            'id' => 'required|integer',
+        ]);
+
+        $id = $request->input('id');
         try {
-            $question = Question::findOrFail($id);
             $user = Auth::user()->id;
             UserFollowsQuestion::where([
                 'id_user' => $user,
                 'id_question' => $id
             ])->delete();
-            return response('Unfollowed Question');
-        } catch (ModelNotFoundException $e) {
-            return response('Question not found');
+        } catch (Exception) {
+            return response('Question could not be unfollowed');
         }
-    }
 
-    public function remove_tag(Request $request) 
-    {
-        $id_question = $request->get('questionId');
-        $question = Question::findOrFail($id_question);
-        $this->authorize('remove_tag', $question);
-
-        $id_tag = $request->get('tagId');
-
-        try {
-            $tag = Tag::findOrFail($id_tag);
-            $question->tags()->detach($tag->id);
-            return response('Tag removed from question');
-        } catch (ModelNotFoundException $e) {
-            return response('Question not found');
-        }
+        return response('Question successfully unfollowed');
     }
 }

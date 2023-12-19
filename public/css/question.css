@@ -554,6 +554,14 @@ button.mark-incorrect {
   width: 80%;
 }
 
+.answer > h2 {
+  display: none;
+}
+
+.answer > .content-right > h3 {
+  display: none;
+}
+
 @media (max-width: 919px){
   .question-tag {
     background-color: rgba(103, 103, 103, 0.37);

@@ -78,7 +78,7 @@ Route::controller(AnswerController::class)->group(function () {
     Route::get('/answers/{id}/edit', 'edit')->where('id', '[0-9]+')->name('edit-answer');
     Route::post('/answers', 'store');
     Route::post('/answers/{id}', 'update')->where('id', '[0-9]+');
-    Route::post('/answers/{id}/delete', 'destroy')->where('id', '[0-9]+');
+    Route::post('/answers/{id}/delete', 'destroy')->where('id', '[0-9]+')->name('delete-answer');
 });
 
 // Answer Comments

@@ -5,20 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
-    static $disk = 'CommunityConnect';
-    static $types = [
+    static string $disk = 'CommunityConnect';
+    static array $types = [
         'profile' => ['png', 'jpg', 'jpeg'],
         'question' => ['doc', 'pdf', 'txt', 'png', 'jpg', 'jpeg'],
         'answer' => ['doc', 'pdf', 'txt', 'png', 'jpg', 'jpeg']
     ];
 
-    function upload(Request $request, int $id)
+    function upload(Request $request, int $id): bool
     {
         $type = $request->type;
         if (!$request->hasFile('file') || !array_key_exists($type, self::$types)) {
@@ -40,8 +40,8 @@ class FileController extends Controller
                     $user = User::findOrFail($id);
                     $user->image = "profile/$filename";
                     $user->save();
-                } catch (ModelNotFoundException $e) {
-                    return "User not found";
+                } catch (Exception) {
+                    return false;
                 }
                 break;
             case 'question':
@@ -49,8 +49,8 @@ class FileController extends Controller
                     $question = Question::findOrFail($id);
                     $question->file = "question/$filename";
                     $question->save();
-                } catch (ModelNotFoundException $e) {
-                    return "Question not found";
+                } catch (Exception) {
+                    return false;
                 }
                 break;
             case 'answer':
@@ -58,8 +58,8 @@ class FileController extends Controller
                     $answer = Answer::findOrFail($id);
                     $answer->file = "answer/$filename";
                     $answer->save();
-                } catch (ModelNotFoundException $e) {
-                    return "Answer not found";
+                } catch (Exception) {
+                    return false;
                 }
                 break;
             default:
@@ -70,7 +70,7 @@ class FileController extends Controller
         return true;
     }
 
-    public function delete(string $type, int $id)
+    public function delete(string $type, int $id): bool
     {
         try {
             if ($type === 'profile' && User::findOrFail($id)?->image !== 'profile/default.png') {
@@ -91,7 +91,7 @@ class FileController extends Controller
             } else {
                 return false;
             }
-        } catch (ModelNotFoundException $e) {
+        } catch (Exception) {
             return false;
         }
         return true;

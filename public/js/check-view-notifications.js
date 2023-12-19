@@ -1,4 +1,4 @@
-async function checkVisualizationNotifications(id) {
+async function readNotification(id) {
     await fetch('/api/notifications/read', {
         method: 'POST',
         headers: {
@@ -10,17 +10,17 @@ async function checkVisualizationNotifications(id) {
 }
 
 const viewIcons = document.querySelectorAll('.view-icon');
-const numberNots = document.querySelector('.notifications-number');
+const notificationsNumber = document.querySelector('.notifications-number');
 
 if (viewIcons) {
     viewIcons.forEach((viewIcon) => {
-        viewIcon.addEventListener('click', (event) => {
+        viewIcon.addEventListener('click', async (event) => {
             event.preventDefault();
             const id = viewIcon.id;
             viewIcon.previousElementSibling.remove();
             viewIcon.remove();
-            numberNots.textContent = parseInt(numberNots.textContent) - 1;
-            checkVisualizationNotifications(id);
+            notificationsNumber.textContent = `${parseInt(notificationsNumber.textContent) - 1}`;
+            await readNotification(id);
         });
         
         viewIcon.addEventListener('mouseover', (event) => {

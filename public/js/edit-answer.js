@@ -12,7 +12,7 @@ if (editAnswers) {
                     file.remove();
                 }
 
-                const paragraphs= answer.querySelectorAll('.answer .description');
+                const paragraphs = answer.querySelectorAll('.answer .description');
                 const array = Array();
                 paragraphs.forEach((paragraph) => {
                     array.push(paragraph.textContent);

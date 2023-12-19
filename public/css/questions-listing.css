@@ -118,7 +118,8 @@ fieldset label {
 }
 
 .question-container {
-  margin: 35px 50px;
+  padding: 35px 50px;
+  background-color: white;
 }
 
 .answers-details {

@@ -25,6 +25,7 @@
     border-radius: 5px;
     width: 40%;
     align-self: center; 
+    margin-bottom: 2rem;
  }
 
  #create-question label{

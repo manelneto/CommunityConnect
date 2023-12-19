@@ -33,3 +33,7 @@
   color: var(--blue);
   font-size: 18px;
 }
+
+#last-info{
+  padding-bottom: 2rem;
+}

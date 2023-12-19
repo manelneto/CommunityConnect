@@ -28,5 +28,8 @@ class AppServiceProvider extends ServiceProvider
             $schema = explode(':', $app_url)[0];
             URL::forceScheme($schema);
         }
+
+        // register right bar composer
+        $this->app->register(RightBarServiceProvider::class);
     }
 }

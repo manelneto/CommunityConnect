@@ -69,6 +69,7 @@
 
 #question-edit input {
   width: 100%;
+  color: #abacb1;
 }
 
 .all-tags .all-buttons{
@@ -92,4 +93,8 @@
 
 .color-black {
   color: black;
+}
+
+.edit-buttons{
+  margin-bottom: 2rem;
 }

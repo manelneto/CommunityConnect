@@ -43,6 +43,11 @@
   padding: 5px;
 }
 
+.non-movable-textarea{
+  padding: 10px;
+  font-size: 14px;
+}
+
 .leave > form > textarea{
   height: 4rem;
 }
@@ -547,4 +552,15 @@ button.mark-incorrect {
 
 .answer textarea {
   width: 80%;
+}
+
+@media (max-width: 919px){
+  .question-tag {
+    background-color: rgba(103, 103, 103, 0.37);
+    color: #fff;
+    padding: 5px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+  }
 }

@@ -150,7 +150,7 @@
                         <p class="tooltip-text">You can create a community by entering its name in the respective field. Each community must be unique. When you're done, click on the <b>Add</b> button.</p>
                     </div>
                 </section>
-                <input type="text" id="add-community-admin" name="community" placeholder="Enter community name here" class="user-details-input">
+                <input type="text" id="add-community-admin" name="name" placeholder="Enter community name here" class="user-details-input">
                 <button class="admin-button" type="submit">Add</button>
             </form>
         </details>

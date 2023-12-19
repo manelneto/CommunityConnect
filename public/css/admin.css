@@ -91,3 +91,7 @@ form p{
 .form-admin label{
     margin-top: 8px;
 }
+
+#admin input:focus {
+    border: 1px solid var(--blue);
+}

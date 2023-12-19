@@ -1,5 +1,12 @@
-const button = document.querySelector('#edit-password');
+function toggle(element) {
+    if (element.style.display === 'none' || !element.style.display) {
+        element.style.display = 'flex';
+    } else {
+        element.style.display = 'none';
+    }
+}
 
+const button = document.querySelector('#edit-password');
 if (button) {
     button.addEventListener('click', function(event) {
         event.preventDefault();

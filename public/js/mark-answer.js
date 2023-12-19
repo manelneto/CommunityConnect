@@ -26,11 +26,11 @@ if (answers) {
     answers.forEach((answer) => {
         const button = answer.querySelector('.mark');
         if (button) {
-            button.addEventListener('click', function (event) {
+            button.addEventListener('click', async function (event) {
                 event.preventDefault();
                 const id = button.getAttribute('data-id');
                 if (button.classList.contains('mark-correct')) {
-                    markAnswer(id);
+                    await markAnswer(id);
                     button.textContent = 'Remove correct mark';
 
                     const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -52,7 +52,7 @@ if (answers) {
 
                     answer.querySelector('header').appendChild(svg);
                 } else {
-                    deleteMarkAnswer(id);
+                    await deleteMarkAnswer(id);
                     button.textContent = 'Mark as correct';
                     const iconCorrect = answer.querySelector('.icon-correct');
                     iconCorrect.remove();

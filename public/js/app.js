@@ -5,14 +5,6 @@ function encodeForAjax(data) {
     }).join('&');
 }
 
-function toggle(element) {
-    if (element.style.display === 'none' || !element.style.display) {
-        element.style.display = 'flex';
-    } else {
-        element.style.display = 'none';
-    }
-}
-
 function addError(text) {
     if (document.querySelector('.error-box')) {
         const list = document.querySelector('.error-box ul');

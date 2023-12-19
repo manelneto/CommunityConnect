@@ -14,7 +14,7 @@ select {
 }
 
 #last-faq, #last-tag{
-    margin-bottom: 2rem;
+    padding-bottom: 2rem;
 }
 
 .admin-button {
@@ -43,7 +43,7 @@ select {
 }
 
 #admin-title, #faq-title {
-    margin-top: 2rem;
+    padding-top: 2rem;
     text-align: center;
 }
 

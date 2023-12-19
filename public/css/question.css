@@ -543,3 +543,14 @@ button.mark-incorrect {
   flex-direction: row;
   align-items: center;
 }
+
+@media (max-width: 919px){
+  .question-tag {
+    background-color: rgba(103, 103, 103, 0.37);
+    color: #fff;
+    padding: 5px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+  }
+}

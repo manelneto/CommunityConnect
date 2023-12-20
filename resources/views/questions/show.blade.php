@@ -77,7 +77,7 @@
                         <form class="leave-comment leave-answer-comment leave-comment-question hidden" action="{{ route('answer-comments') }}" method="post">
                             @csrf
                             <label for="answer-comment-{{ $answer->id }}">Content</label>
-                            <input id="answer-comment-{{ $answer->id }}" name="content" placeholder="Type in your comment here">
+                            <input id="answer-comment-{{ $answer->id }}" class="answer-comment" name="content" placeholder="Type in your comment here">
                             <input type="hidden" name="id_answer" value="{{ $answer->id }}">
                             <button class="submit-comment" type="submit">Post Comment</button>
                         </form>

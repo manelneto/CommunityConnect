@@ -167,7 +167,7 @@ class UserController extends Controller
             return redirect()->back()->with('success', 'User successfully deleted');
         } else {
             auth()->logout();
-            return redirect('login')->with('success', 'User successfully deeleted');
+            return redirect('login')->with('success', 'User successfully deleted');
         }
     }
 

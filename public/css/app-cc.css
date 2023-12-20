@@ -150,7 +150,8 @@ header.website-header {
   height: 12px;
 }
 
-.tooltip-icon .tooltip-text {
+.tooltip-icon .tooltip-text,
+.question-details .tooltip-icon .tooltip-text {
   visibility: hidden;
   width: 400px;
   background-color: #fff;
@@ -693,11 +694,9 @@ article.notification {
 
 .footer-links {
   margin-top: 25px;
-  /* margin-left: 30rem; */
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  color: var();
 }
 
 .footer-links *:hover {

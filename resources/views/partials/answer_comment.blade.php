@@ -17,6 +17,7 @@
     </form>
 @else
     <article class="comment-not-edit-answer">
+        <h3>Comment</h3>
         <a class="username" href="{{ route('profile', ['id' => $comment->id_user]) }}">{{ $comment->user->username }}</a>
         <p class="date edit-question-comment-date">{{ $comment->date }}</p>
         @if ($comment->last_edited !== null)

@@ -116,7 +116,7 @@ fieldset {
   position: absolute;
   margin-top: 25px;
   right: 5px;
-  padding-left: 0px;
+  padding-left: 0;
   cursor: pointer;
 }
 
@@ -290,6 +290,10 @@ a.sign-up-button {
   margin-top: 40px;
 }
 
+section.right-bar-stats > h2 {
+  display: none;
+}
+
 @keyframes slideInFromLeft {
   from {
     transform: translateX(-100%);
@@ -313,8 +317,7 @@ a.sign-up-button {
   background-color: var(--light-gray);
   height: calc(100vh - 40px);
   width: 270px;
-  padding: 20px;
-  padding-left: 2rem;
+  padding: 20px 20px 20px 2rem;
   animation: 0.5s ease-out 0s 1 slideInFromLeft;
 }
 

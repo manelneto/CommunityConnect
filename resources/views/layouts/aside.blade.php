@@ -1,9 +1,10 @@
 @section ('aside')
         @can('create', App\Models\Question::class)
-            <a class="ask-a-question-button" href="{{ route('create-question') }}">Ask a Question</a><!-- TODO -->
+            <a class="ask-a-question-button" href="{{ route('create-question') }}">Ask a Question</a>
         @endauth
         <p class="community-connect-stats-text">Community Connect Stats</p>
         <section class="right-bar-stats">
+            <h2>Stats</h2>
             <article class="left-top-square">
                 <h3 class="square-text">Questions</h3>
                 <p class="square-number">{{ $totalQuestions }}</p>

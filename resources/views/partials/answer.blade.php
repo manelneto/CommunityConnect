@@ -29,7 +29,7 @@
     </header>
     <article class="content-right">
         <h3>Answer</H3>
-        @if (Request::route()->getName() === 'profile')
+        @if (Request::routeIs('profile'))
             <a class="question-of-answer" href="{{ route('question', ['id' => $answer->id_question]) }}"><b>Question:</b> {{ $answer->question->title }}</a>
         @endif
         <header class="answer-info">
@@ -75,7 +75,7 @@
         @if ($answer->file)
             <p class="file"><a href="{{ asset($answer->file) }}" target="_blank">Download file here</a></p>
         @endif
-        @if (Request::route()->getName() !== 'profile')
+        @if (!Request::routeIs('profile'))
             <form method="post">
                 @csrf
                 <div class="answer-buttons">

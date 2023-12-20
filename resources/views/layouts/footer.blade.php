@@ -1,5 +1,5 @@
 @section('footer')
-    <img class="footer-img" src="{{ asset('assets/logo.png') }}" alt="community connect logo with text" />
+    <img class="footer-img" src="{{ asset('assets/logo.png') }}" alt="Community Connect logo" />
     <ul class="footer-links">
         <li class="footer-link">
             <a href="{{ route('about-contact-us') }}">About & Contact Us</a>

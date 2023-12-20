@@ -31,4 +31,3 @@
         </section>
     </main>
 @endsection
-

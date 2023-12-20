@@ -80,7 +80,8 @@
 .comment-not-edit-answer .edited-date,
 .content-right > .answer > .date,
 .comment > .date,
-.comment-not-edit-answer .date {
+.comment-not-edit-answer .date,
+.edit-question-comment-date {
   color: #abacb1;
   font-size: 14px;
 }
@@ -138,7 +139,7 @@ section#answers form.answer {
   align-items: flex-start;
 }
 
-.comments-details, #content-comment{
+.comments-details, .content-comment{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -161,11 +162,11 @@ section#answers form.answer {
   margin-bottom: 5px;
 }
 
-#content-comment {
+.content-comment {
   margin-bottom: 10px;
 }
 
-#content-comment .edit {
+.content-comment .edit {
   margin-left: 10px;
 }
 
@@ -526,8 +527,9 @@ button.mark-incorrect {
 
 .answer > h2,
 .answer > .content-right > h3,
-form.comment.edit-answer-comment > footer#content-comment > label,
-article.comment-not-edit-answer > h3 {
+form.comment > footer.content-comment > label,
+article.comment-not-edit-answer > h3,
+article.comment-not-edit > h3 {
   display: none;
 }
 

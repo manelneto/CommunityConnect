@@ -69,8 +69,8 @@ Route::controller(QuestionController::class)->group(function () {
 // Question Comments
 Route::controller(QuestionCommentController::class)->group(function() {
     Route::post('/question-comments', 'store');
-    Route::post('/question-comments/{id}', 'update')->where('id', '[0-9]+');
-    Route::post('/question-comments/{id}/delete', 'destroy')->where('id', '[0-9]+');
+    Route::post('/question-comments/{id}', 'update')->where('id', '[0-9]+')->name('edit-question-comment');
+    Route::post('/question-comments/{id}/delete', 'destroy')->where('id', '[0-9]+')->name('delete-question-comment');
 });
 
 // Answers
@@ -84,8 +84,8 @@ Route::controller(AnswerController::class)->group(function () {
 // Answer Comments
 Route::controller(AnswerCommentController::class)->group(function() {
     Route::post('/answer-comments', 'store');
-    Route::post('/answer-comments/{id}', 'update')->where('id', '[0-9]+');
-    Route::post('/answer-comments/{id}/delete', 'destroy')->where('id', '[0-9]+');
+    Route::post('/answer-comments/{id}', 'update')->where('id', '[0-9]+')->name('edit-answer-comment');
+    Route::post('/answer-comments/{id}/delete', 'destroy')->where('id', '[0-9]+')->name('delete-answer-comment');
 });
 
 // Admin

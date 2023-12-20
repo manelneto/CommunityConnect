@@ -8,11 +8,11 @@
                 <p class="date edit-question-comment-date edited-date">Edited: {{ $comment->last_edited }}</p>
             @endif
         </header>
-        <footer id="content-comment">
-            <label for="question-comment-{{ $comment->id }}">Content</label>
-            <input id="question-comment-{{ $comment->id }}" class="description non-movable-textarea edit-answer-comment-content" name="content" value="{{ $comment->content }}">
-            <button class="edit" formaction="../../answer-comments/{{ $comment->id }}">Edit</button>
-            <button class="delete" formaction="../../answer-comments/{{ $comment->id }}/delete">Delete</button>
+        <footer class="content-comment">
+            <label for="answer-comment-{{ $comment->id }}">Content</label>
+            <input id="answer-comment-{{ $comment->id }}" class="description non-movable-textarea edit-answer-comment-content" name="content" value="{{ $comment->content }}">
+            <button class="edit" formaction="{{ route('edit-answer-comment', ['id' => $comment->id]) }}">Edit</button>
+            <button class="delete" formaction="{{ route('delete-answer-comment', ['id' => $comment->id]) }}">Delete</button>
         </footer>
     </form>
 @else

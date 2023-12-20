@@ -253,7 +253,7 @@ if (editAnswers) {
                 label2.textContent = 'File';
 
                 const input = document.createElement('input');
-                input.id = `content-${id}`;
+                input.id = `file-${id}`;
                 input.type = 'file';
                 input.name = 'file';
                 input.accept = 'image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt';

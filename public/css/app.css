@@ -1579,10 +1579,6 @@ a.edit-profile {
     height: 35px;
 }
 
-.notifications::-webkit-scrollbar {
-    width: 0;
-}
-
 .notifications-number {
     position: relative;
     top: -5px;
@@ -2104,7 +2100,7 @@ button.mark-incorrect {
     top: 35px;
     transform: translateX(-50%);
     border: 1px solid #adadad;
-    color: #fff;
+    color: white;
     padding: 20px;
     border-radius: 4px;
     display: flex;
@@ -2171,7 +2167,7 @@ button.mark-incorrect {
 
 .tag-tooltip-content a.watch-tag-button:hover {
     background-color: #00a1fd;
-    border-color: #00a1fd;
+    border-color: var(--blue);
 }
 
 .tag-tooltip-content button.follow-tag-button:hover {

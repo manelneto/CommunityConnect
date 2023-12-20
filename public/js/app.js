@@ -346,7 +346,7 @@ if (answers) {
                     svg.appendChild(path1);
                     svg.appendChild(path2);
 
-                    answer.querySelector('header').appendChild(svg);
+                    answer.querySelector('header.answer-info').appendChild(svg);
                 } else {
                     await deleteMarkAnswer(id);
                     button.textContent = 'Mark as correct';

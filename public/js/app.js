@@ -155,20 +155,14 @@ function addError(text) {
     }
     window.setTimeout(() => {
         const errors = document.querySelector('#errors ul');
-        errors.firstElementChild.remove();
+        if (errors && errors.firstElementChild) {
+            errors.firstElementChild.remove();
+        }
         if (!errors.querySelector('li')) {
             errors.parentElement.remove();
         }
     }, 7500);
 }
-
-window.setTimeout(() => {
-    const errors = document.querySelector('#errors ul');
-    if (errors) {
-        errors.parentElement.remove();
-        errors.remove();
-    }
-}, 7500);
 
 window.setTimeout(() => {
     const success = document.querySelector('#success');

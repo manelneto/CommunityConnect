@@ -7,21 +7,23 @@
             </svg>
             Watch tag
         </a>
-        @if (Auth::user()?->followedTags->contains($tag->id))
-            <button data-id="{{ $tag->id }}" class="unfollow-tag-button">
-                <svg width="20" height="20" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.875 15L18.75 13.125H41.25L43.125 15V48.2905L30 40.5127L16.875 48.2905V15ZM20.625 16.875V41.7095L30 36.1538L39.375 41.7095V16.875H20.625Z"></path>
-                </svg>
-                Unfollow tag
-            </button>
-        @else
-            <button data-id="{{ $tag->id }}" class="follow-tag-button">
-                <svg width="20" height="20" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.875 15L18.75 13.125H41.25L43.125 15V48.2905L30 40.5127L16.875 48.2905V15ZM20.625 16.875V41.7095L30 36.1538L39.375 41.7095V16.875H20.625Z"></path>
-                </svg>
-                Follow tag
-            </button>
-        @endif
+        @auth
+            @if (Auth::user()?->followedTags->contains($tag->id))
+                <button data-id="{{ $tag->id }}" class="unfollow-tag-button">
+                    <svg width="20" height="20" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.875 15L18.75 13.125H41.25L43.125 15V48.2905L30 40.5127L16.875 48.2905V15ZM20.625 16.875V41.7095L30 36.1538L39.375 41.7095V16.875H20.625Z"></path>
+                    </svg>
+                    Unfollow tag
+                </button>
+            @else
+                <button data-id="{{ $tag->id }}" class="follow-tag-button">
+                    <svg width="20" height="20" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.875 15L18.75 13.125H41.25L43.125 15V48.2905L30 40.5127L16.875 48.2905V15ZM20.625 16.875V41.7095L30 36.1538L39.375 41.7095V16.875H20.625Z"></path>
+                    </svg>
+                    Follow tag
+                </button>
+            @endif
+        @endauth
     </div>
     {{ $tag->name }}
 </li>

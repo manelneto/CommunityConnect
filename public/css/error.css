@@ -9,6 +9,7 @@
   top: 2%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1000;
 }
 
 #errors {
@@ -22,6 +23,7 @@
   top: 2%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1000;
 }
 
 #success > h2,

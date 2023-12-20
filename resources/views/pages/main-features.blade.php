@@ -11,8 +11,8 @@
                     <li>Search questions by exact match search, full-text search, tags, multiple attributes and filters</li>
                     <li>View question details</li>
                     <li>View profiles</li>
-                    <li>Form field placeholders, contextual error messages and contextual help</li>
-                    <li>About and contact us</li>
+                    <li>Have form field placeholders, contextual error messages and contextual help</li>
+                    <li>Consult about and contact us</li>
                     <li>View communities</li>
                     <li>View ratings</li>
                 </ul>
@@ -21,38 +21,38 @@
                 <h3>If you are a visitor, you can:</h3>
                 <ul>
                     <li>Login</li>
-                    <li>Registration</li>
+                    <li>Register</li>
                 </ul>
-            </article> 
+            </article>
             <article class="feature-section">
                 <h3>If you are an authenticated user, you can:</h3>
                 <ul> 
                     <li>View personal feed</li>
                     <li>Post questions and answers</li>
-                    <li>View own questions and answers</li>
+                    <li>View your own questions and answers</li>
                     <li>Logout</li>
-                    <li>View and edit profile</li>
+                    <li>View and edit your profile</li>
                     <li>Like/dislike questions and answers</li>
                     <li>Comment on questions and answers</li>
                     <li>Mark interest in questions and tags</li>
-                    <li>View and receive answer, comments, like/dislike and badge notifications</li>
-                    <li>Recover password</li>
-                    <li>Delete own account</li>
-                    <li>Profile picture</li>
+                    <li>View and receive notifications of answers, comments, likes/dislikes and badges</li>
+                    <li>Recover your password</li>
+                    <li>Delete your own account</li>
+                    <li>Have a profile picture</li>
                     <li>View personal notifications</li>
                     <li>Receive badges</li>
                     <li>Become an expert</li>
                     <li>Attach files</li>
                     <li>Have a rating</li>
                     <li>Follow a community</li>
-                </ul> 
+                </ul>
             </article>
             <article class="feature-section">
                 <h3>If you are the author of a question, you can:</h3>
-                <ul> 
-                    <li>Edit questions</li>
-                    <li>Delete questions</li>
-                    <li>Edit tags of own questions</li>
+                <ul>
+                    <li>Edit the question</li>
+                    <li>Delete the question</li>
+                    <li>Edit the tags of the question</li>
                     <li>Mark answers as correct</li>
                     <li>Remove correct mark from answers</li>
                 </ul>

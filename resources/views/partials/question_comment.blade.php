@@ -12,7 +12,7 @@
             <label for="question-comment-{{ $comment->id }}">Content</label>
             <input id="question-comment-{{ $comment->id }}" class="description non-movable-textarea edit-question-comment-content" name="content" value="{{ $comment->content }}">
             <button class="edit" formaction="{{ route('edit-question-comment', ['id' => $comment->id]) }}">Edit</button>
-            <button class="delete" formaction="{{ route('delete-answer-comment', ['id' => $comment->id]) }}">Delete</button>
+            <button class="delete" formaction="{{ route('delete-question-comment', ['id' => $comment->id]) }}">Delete</button>
         </footer>
     </form>
 @else

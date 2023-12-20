@@ -22,7 +22,7 @@
             <form class="leave-comment leave-comment-question hidden" action="{{ route('question-comments') }}" method="post">
                 @csrf
                 <label for="question-comment">Content</label>
-                <input id="question-comment" name="content" placeholder="Type in your comment here">
+                <input id="question-comment" name="content" placeholder="Type in your comment here" required>
                 <input type="hidden" name="id_question" value="{{ $question->id }}">
                 <button class="submit-comment" type="submit">Post Comment</button>
             </form>
@@ -43,7 +43,7 @@
             <form action="{{ route('answers') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <label for="content">Content</label>
-                <textarea id="content" name="content" rows="6" cols="60" placeholder="Enter your answer here"></textarea>
+                <textarea id="content" name="content" rows="6" cols="60" placeholder="Enter your answer here" required></textarea>
                 <input type="hidden" name="id_question" value="{{ $question->id }}">
                 <label for="file">File</label>
                 <input id="file" type="file" name="file" accept="image/png,image/jpg,image/jpeg,application/doc,application/pdf,application/txt">
@@ -77,7 +77,7 @@
                         <form class="leave-comment leave-answer-comment leave-comment-question hidden" action="{{ route('answer-comments') }}" method="post">
                             @csrf
                             <label for="answer-comment-{{ $answer->id }}">Content</label>
-                            <input id="answer-comment-{{ $answer->id }}" class="answer-comment" name="content" placeholder="Type in your comment here">
+                            <input id="answer-comment-{{ $answer->id }}" class="answer-comment" name="content" placeholder="Type in your comment here" required>
                             <input type="hidden" name="id_answer" value="{{ $answer->id }}">
                             <button class="submit-comment" type="submit">Post Comment</button>
                         </form>

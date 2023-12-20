@@ -63,7 +63,7 @@ class QuestionCommentController extends Controller
         return redirect()->back()->with('success', 'Comment successfully edited');
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): RedirectResponse
     {
         try {
             $comment = QuestionComment::findOrFail($id);

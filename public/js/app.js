@@ -759,7 +759,7 @@ function addNotification(title, notification) {
     const notifications = document.getElementById('notifications');
     notifications.appendChild(article);
 
-    window.setTimeout(() => document.getElementById('notifications').firstElementChild.remove(), 15000);
+    window.setTimeout(() => document.getElementById('notifications').firstElementChild.nextElementSibling.remove(), 15000);
 }
 
 const channel = pusher.subscribe('CommunityConnect');
@@ -939,8 +939,8 @@ function addQuestion(question) {
 
     like.appendChild(likePath);
 
-    question.likes.forEach((like) => {
-        if (like.id_user === id && like.likes) {
+    question.likes.forEach((vote) => {
+        if (vote.id_user === parseInt(id)) {
             like.classList.replace('unvoted', 'voted');
             likePath.setAttribute('fill', '#38B6FF');
         }
@@ -959,8 +959,8 @@ function addQuestion(question) {
 
     dislike.appendChild(dislikePath);
 
-    question.dislikes.forEach((dislike) => {
-        if (dislike.id_user === id && like.likes) {
+    question.dislikes.forEach((vote) => {
+        if (vote.id_user === parseInt(id)) {
             dislike.classList.replace('unvoted', 'voted');
             dislikePath.setAttribute('fill', '#38B6FF');
         }

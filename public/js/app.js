@@ -908,12 +908,12 @@ async function fetchQuestions(after, before, community, communities, text, sort,
 }
 
 function addQuestion(question) {
-    let expert = "";
-    question.user.communities_rating.forEach((rating) => {
-        if (rating.pivot.id_community === question.community.id && rating.pivot.expert) {
-            expert = `<img class="experts-stars" src="../assets/rating-images/star-expert.png" alt="Expert stars">`
-        }
-    });
+    const edited = question.last_edited ? `<p class="question-edited-date">Edited: ${question.last_edited}</p>` : '';
+
+    let content = '';
+    question.content.split("\n").forEach((paragraph) => content += `<p class="question-description">${paragraph}</p>`)
+
+    const file = question.file ? `<p class="file"><a href="/${question.file}" target="_blank">Download file here</a></p>` : '';
 
     const id = getUserId();
 
@@ -957,28 +957,33 @@ function addQuestion(question) {
         }
     });
 
-    const newQuestion = document.createElement("div");
-    newQuestion.classList.add("question-container");
+    const newQuestion = document.createElement('article');
+    newQuestion.classList.add('question-container');
     newQuestion.innerHTML = `
-        <img class="member-pfp question-member-pfp" src="../${question.user.image}" alt="User's profile picture" />
-        <div class="content-right">
-            <div class="question-details">
-                <a href="../users/${question.user.id}" class="question-username">${question.user.username}</a>
-                ${expert}
-                <span class="question-asked-date">Asked: ${question.date}</span>
-                <span class="question-community">In: ${question.community.name}</span>
-            </div>
+        <h3>Question</h3>
+        <img class="member-pfp question-member-pfp" src="../${question.user.image}" alt="User's profile picture"/>
+        <article class="content-right">
+            <h3>Question</h3>
+            <header class="question-details">
+                <a class="question-username" href="../users/${question.user.id}">${question.user.username}</a>
+                <p class="question-asked-date">Asked: ${question.date}</p>
+                <p class="question-community">In: <a class="question-community-click" href="../communities/${question.community.id}">${question.community.name}</a></p>
+                ${edited}
+            </header>
             <h2 class="question-title"><a href="../questions/${question.id}">${question.title}</a></h2>
-            <p class="question-description">${question.content}</p>
-            <div class="answers-details">
-                <button class="question-answer-btn">
+            ${content}
+            ${file}
+            <footer class="answers-details">
+                <a class="question-answer-btn" href="../questions/${question.id}#answers">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M22.8 4.8H20.4V15.6H4.8V18C4.8 18.66 5.34 19.2 6 19.2H19.2L24 24V6C24 5.34 23.46 4.8 22.8 4.8ZM18 12V1.2C18 0.54 17.46 0 16.8 0H1.2C0.54 0 0 0.54 0 1.2V18L4.8 13.2H16.8C17.46 13.2 18 12.66 18 12Z" fill="#abacb1" />
-                    </svg>${question.answers_count} Answers</button>
-                <span class="question-upvotes" data-id="${question.id}"> ${question.likes_count}</span>
-                <span class="question-downvotes" data-id="${question.id}"> ${question.dislikes_count}</span>
-            </div>
-        </div>
+                    </svg>
+                    ${question.answers_count} Answers
+                </a>
+                <p class="question-upvotes" data-id="${question.id}"> ${question.likes_count}</p>
+                <p class="question-downvotes" data-id="${question.id}"> ${question.dislikes_count}</p>
+            </footer>
+        </article>
     `;
 
     const upvote = newQuestion.querySelector('.question-upvotes');
@@ -1109,14 +1114,14 @@ if (followTagButtons) {
     followTagButtons.forEach((button) => {
         button.addEventListener('click', async (event) => {
             event.preventDefault();
-            const id = button.id;
-            const p = button.querySelector('p');
+            const id = button.getAttribute('data-id');
+            const svg = button.querySelector('svg');
             if (button.classList.contains('follow-tag-button')) {
                 await followTag(id);
-                p.textContent = 'Unfollow tag';
+                svg.nextSibling.textContent = 'Unfollow tag';
             } else {
                 await unfollowTag(id);
-                p.textContent = 'Follow tag';
+                svg.nextSibling.textContent = 'Follow tag';
             }
             button.classList.toggle('follow-tag-button');
             button.classList.toggle('unfollow-tag-button');

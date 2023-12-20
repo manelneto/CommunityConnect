@@ -525,12 +525,19 @@ button.mark-incorrect {
   width: 80%;
 }
 
-.answer > h2,
+.answer > h3,
 .answer > .content-right > h3,
 form.comment > footer.content-comment > label,
 article.comment-not-edit-answer > h3,
-article.comment-not-edit > h3 {
+article.comment-not-edit > h3,
+.question-container > h3,
+.question-container > .content-right > h3 {
   display: none;
+}
+
+p.question-upvotes,
+p.question-downvotes {
+  display: inline;
 }
 
 @media (max-width: 919px){

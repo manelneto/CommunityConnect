@@ -1,5 +1,5 @@
-<section class="answer">
-    <h2>Answer</h2>
+<article class="answer">
+    <h3>Answer</h3>
     <header class="content-left">
         <img class="member-pfp answer-member-pfp" src="{{ asset($answer->user->image) }}" alt="User's profile photo"/>
         <div class="answers-votes">
@@ -34,7 +34,7 @@
         @endif
         <header class="answer-info">
             <div class="answer-details">
-                <a class="username" href="../users/{{ $answer->id_user }}">{{ $answer->user->username }}</a>
+                <a class="username" href="{{ route('profile', ['id' => $answer->id_user]) }}">{{ $answer->user->username }}</a>
                 @if (isset($answer->user->communitiesRating))
                     @foreach ($answer->user->communitiesRating as $communityRating)
                         @if ($communityRating->pivot->id_community === $answer->question->id_community)
@@ -98,4 +98,4 @@
             </form>
         @endif
     </article>
-</section>
+</article>

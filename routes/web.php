@@ -48,7 +48,7 @@ Route::post('/password', [PasswordController::class, 'update'])->name('update-pa
 
 // Profile
 Route::controller(UserController::class)->group(function () {
-    Route::post('/users', 'store');
+    Route::post('/users', 'store')->name('users');
     Route::get('/users/{id}', 'show')->where('id', '[0-9]+')->name('profile');
     Route::get('/users/{id}/edit', 'edit')->where('id', '[0-9]+')->name('edit-user');
     Route::post('/users/{id}', 'update')->where('id', '[0-9]+');

@@ -91,3 +91,7 @@ form p{
 .form-admin label{
     margin-top: 8px;
 }
+
+.add-tooltip-admin > h3 {
+    display: none;
+}

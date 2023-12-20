@@ -5,7 +5,7 @@
         <section id="main-features-content">
             <h1 id="title-main-features">Main Features</h1>
             <article class="feature-section">
-                <h3>If you are an user, you can:</h3>
+                <h3>If you are a user, you can:</h3>
                 <ul>
                     <li>View popular questions</li>
                     <li>Search questions by exact match search, full-text search, tags, multiple attributes and filters</li>

@@ -10,7 +10,7 @@
             </details>
             <details>
                 <summary>How can I participate?</summary>
-                <p class="form-faq">To participate, simply create a free account. Click on the Sign Up button, fill in the necessary information, and start exploring and interacting with communities.</p>
+                <p class="form-faq">To participate, simply create a free account. Click on the Sign-Up button, fill in the necessary information, and start exploring and interacting with communities.</p>
             </details>
             <details>
                 <summary>Can I participate in multiple communities simultaneously?</summary>

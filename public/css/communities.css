@@ -100,7 +100,7 @@
     background-color: var(--hover-red); 
 }
 
-
-
-
+#communities-header > h2 {
+    display: none;
+}
 

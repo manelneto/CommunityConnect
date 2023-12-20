@@ -30,7 +30,7 @@
                 <label class="edit-password" for="password_confirmation">Confirm Password</label>
                 <input class="edit-password user-details-input" id="password_confirmation" type="password" name="password_confirmation" placeholder="Retype your new password here">
             @endif
-            <button formaction="{{ route('users', ['id' => $user->id]) }}" id="submit">Save</button>
+            <button formaction="{{ route('update-user', ['id' => $user->id]) }}" id="submit">Save</button>
         </form>
     </main>
 @endsection

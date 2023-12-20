@@ -803,13 +803,13 @@ channel.bind('voteAnswer', function (notification) {
 /* Notifications: show on profile */
 
 const notificationIcon = document.querySelector('.notifications-icon');
-const notificationsContainer = document.querySelector('.notifications-container');
+const notificationsContainer = document.querySelector('.notifications');
 
 if (notificationIcon && notificationsContainer) {
     notificationIcon.addEventListener('click', (event) => {
         event.preventDefault();
         if (notificationsContainer.style.display === 'none' || !notificationsContainer.style.display) {
-            notificationsContainer.style.display = 'flex';
+            notificationsContainer.style.display = 'block';
         } else {
             notificationsContainer.style.display = 'none';
         }

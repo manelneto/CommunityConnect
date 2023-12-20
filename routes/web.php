@@ -52,7 +52,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/users/{id}', 'show')->where('id', '[0-9]+')->name('profile');
     Route::get('/users/{id}/edit', 'edit')->where('id', '[0-9]+')->name('edit-user');
     Route::post('/users/{id}', 'update')->where('id', '[0-9]+');
-    Route::post('/users/{id}/delete', 'destroy')->where('id', '[0-9]+');
+    Route::post('/users/{id}/delete', 'destroy')->where('id', '[0-9]+')->name('delete-user');
 });
 
 // Questions

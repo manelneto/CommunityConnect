@@ -82,6 +82,6 @@ textarea#content.form-control::placeholder {
 }
 
 #create-question > h1,
-#create-question > form > #property-tags > h3 {
+section#property-tags > h3 {
     display: none;
 }

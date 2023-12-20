@@ -62,8 +62,8 @@ Route::controller(QuestionController::class)->group(function () {
     Route::post('/questions', 'store');
     Route::get('/questions/{id}', 'show')->where('id', '[0-9]+')->name('question');
     Route::get('/questions/{id}/edit', 'edit')->where('id', '[0-9]+')->name('edit-question');
-    Route::post('/questions/{id}', 'update')->where('id', '[0-9]+');
-    Route::post('/questions/{id}/delete', 'destroy')->where('id', '[0-9]+');
+    Route::post('/questions/{id}', 'update')->where('id', '[0-9]+')->name('update-question');
+    Route::post('/questions/{id}/delete', 'destroy')->where('id', '[0-9]+')->name('delete-question');
 });
 
 // Question Comments

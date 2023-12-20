@@ -28,7 +28,7 @@
 }
 
 .question-title-edit:focus {
-  border: 2px solid var(--blue);
+  border: 1px solid var(--blue);
   outline: none;
 }
 
@@ -83,7 +83,7 @@
 }
 
 #add-tag:focus {
-  border: 2px solid var(--blue);
+  border: 1px solid var(--blue);
 }
 
 .color-black {

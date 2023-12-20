@@ -54,6 +54,16 @@ section#property-tags{
    margin-right: 2rem;
 }
 
+textarea#content {
+   border: 1px solid #ccc;
+}
+
+textarea#content:focus,
+textarea#content:focus-visible {
+   border: 1px solid var(--blue);
+   outline: none;
+}
+
 textarea#content.form-control{
    padding:10px;
 }
@@ -81,7 +91,9 @@ textarea#content.form-control::placeholder {
    font-size: small;
 }
 
-#create-question > h1,
 section#property-tags > h3 {
     display: none;
+}
+#create-question form input:focus {
+   border: 1px solid var(--blue);
 }

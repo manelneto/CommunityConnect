@@ -38,7 +38,7 @@
 .non-movable-textarea {
   display: flex;
   resize: none;
-  border: 2px solid #c6c6c6;
+  border: 1px solid #c6c6c6;
   font-size: 16px;
   padding: 5px;
 }
@@ -98,7 +98,7 @@
 
 .leave > form > textarea:focus-visible,
 .non-movable-textarea:focus-visible {
-  border: 2px solid var(--blue);
+  border: 1px solid var(--blue);
   outline: none;
 }
 
@@ -315,6 +315,10 @@ button.mark-incorrect {
   flex-direction: row;
 }
 
+#answer-comment:focus {
+  border: 1px solid var(--blue);
+}
+
 .question-tags,
 .question-tag {
   display: inline;
@@ -478,7 +482,7 @@ button.mark-incorrect {
 #question-comment, .answer-comment {
   width: 70%;
   margin-left: 4rem;
-  border: 2px solid #c6c6c6;
+  border: 1px solid #c6c6c6;
   padding: 5px;
   margin-bottom: 15px;
 }
@@ -498,7 +502,7 @@ button.mark-incorrect {
 }
 
 #question-comment:focus {
-  border: 2px solid var(--blue);
+  border: 1px solid var(--blue);
 }
 
 .answer-container {

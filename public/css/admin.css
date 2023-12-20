@@ -95,3 +95,7 @@ form p{
 .add-tooltip-admin > h3 {
     display: none;
 }
+
+#admin input:focus {
+    border: 1px solid var(--blue);
+}

@@ -183,7 +183,7 @@ class UserController extends Controller
             $user->blocked = true;
             $user->save();
         } catch (Exception) {
-            return redirect()->back()->with('success', 'User could not be blocked');
+            return redirect()->back()->withErrors('User could not be blocked');
         }
 
         return redirect()->back()->with('success', 'User successfully blocked');
@@ -201,7 +201,7 @@ class UserController extends Controller
             $user->blocked = false;
             $user->save();
         } catch (Exception) {
-            return redirect()->back()->with('success', 'User could not be unblocked');
+            return redirect()->back()->withErrors('User could not be unblocked');
         }
 
         return redirect()->back()->with('success', 'User successfully unblocked');

@@ -32,7 +32,7 @@ class LoginController extends Controller
 
         if (Auth::attempt([$field => $credentials['username_or_email'], 'password' => $credentials['password']])) {
             $request->session()->regenerate();
-            return redirect()->intended('/communities');
+            return redirect()->intended('/communities')->with('success', 'You have successfully logged in');
         }
 
         return back()->withErrors(['username_or_email' => 'The provided credentials do not match our records'])->onlyInput('username_or_email');

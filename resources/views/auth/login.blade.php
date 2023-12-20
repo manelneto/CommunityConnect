@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@include ('layouts.errors')
 
 @section('main')
     <main class="registers">
@@ -10,7 +9,6 @@
                 <h3 id="subtitle-text">Log In to Community Connect to ask questions, answer people's questions, and connect with others.</h3>
                 <a id="go-to-sign-in" href="{{ route('register') }}">Don't have an account? Sign Up</a>
             </article>
-            @yield('errors')
             <form id="sign-page-form" action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="form-group">

@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@include ('layouts.errors')
 
 @section('main')
     <main id="question-edit" class="main-content main-info">

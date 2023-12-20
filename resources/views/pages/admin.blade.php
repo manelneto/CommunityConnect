@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@include ('layouts.errors')
 
 @section('main')
 <main id="admin-page">
@@ -23,7 +22,6 @@
                 <button id="find-user" class="admin-button" type="submit">Visit</button>
             </form>
         </details>
-        @yield('errors')
         <details>
             <summary>Create a user</summary>
             <form action="{{ route('users') }}" method="post" class="form-admin">

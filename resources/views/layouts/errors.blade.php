@@ -1,6 +1,6 @@
 @section('errors')
     @if ($errors->any())
-        <section class="error-box">
+        <section id="errors">
             <h2>Errors</h2>
             <ul>
                 @foreach ($errors->all() as $error)

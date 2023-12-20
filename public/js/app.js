@@ -132,16 +132,16 @@ function addButton(inputTag) {
 /* addError() */
 
 function addError(text) {
-    if (document.querySelector('.error-box')) {
-        const list = document.querySelector('.error-box ul');
+    if (document.querySelector('#errors')) {
+        const list = document.querySelector('#errors ul');
 
         const error = document.createElement('li');
         error.textContent = text;
 
         list.appendChild(error);
     } else {
-        const errorBox = document.createElement('section');
-        errorBox.classList.add('error-box');
+        const errors = document.createElement('section');
+        errors.id = 'errors'
 
         const list = document.createElement('ul');
 
@@ -149,18 +149,33 @@ function addError(text) {
         error.textContent = text;
 
         list.appendChild(error);
-        errorBox.appendChild(list);
+        errors.appendChild(list);
 
-        document.querySelector('main').appendChild(errorBox);
+        document.querySelector('body').appendChild(errors);
     }
     window.setTimeout(() => {
-        const errors = document.querySelector('.error-box ul');
+        const errors = document.querySelector('#errors ul');
         errors.firstElementChild.remove();
         if (!errors.querySelector('li')) {
             errors.parentElement.remove();
         }
     }, 7500);
 }
+
+window.setTimeout(() => {
+    const errors = document.querySelector('#errors ul');
+    if (errors) {
+        errors.parentElement.remove();
+        errors.remove();
+    }
+}, 7500);
+
+window.setTimeout(() => {
+    const success = document.querySelector('#success');
+    if (success) {
+        success.remove();
+    }
+}, 7500);
 
 /* Autocomplete */
 

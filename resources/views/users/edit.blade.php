@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@include ('layouts.errors')
 
 @section('main')
     <main>
@@ -18,7 +17,6 @@
                 </p>
             </div>
         </section>
-        @yield('errors')
         <form method="post" id="edit-profile" enctype="multipart/form-data">
             @csrf
             <h1><input type="text" id="username" name="username" value="{{ $user->username }}" placeholder="Enter your username here" class="user-details-input"></h1>

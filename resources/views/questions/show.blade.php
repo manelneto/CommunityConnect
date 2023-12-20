@@ -1,9 +1,7 @@
 @extends('layouts.app')
-@include ('layouts.errors')
 
 @section('main')
 <main id="question">
-    @yield('errors')
     @include('partials.question', ['question' => $question])
     <section class="comments">
         <h3>Question Comments</h3>

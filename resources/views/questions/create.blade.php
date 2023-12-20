@@ -1,9 +1,7 @@
 @extends('layouts.app')
-@include ('layouts.errors')
 
 @section('main')
     <main id="create-question-page">
-        @yield('errors')
         <section id="create-question">
             <h1>Ask a Question</h1>
             <article class="add-tooltip" id="add-question-tooltip-section">

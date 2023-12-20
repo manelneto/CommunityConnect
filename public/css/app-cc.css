@@ -79,6 +79,11 @@ fieldset {
 
 /* Header */
 
+.header-content > h2,
+.mid-header h3 {
+  display: none;
+}
+
 .header-content {
   display: grid;
   grid-template-columns: [start-col-header] 300px [mid1-col-header] auto [mid2-col-header] 300px [end-col-header];

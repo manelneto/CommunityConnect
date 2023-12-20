@@ -947,15 +947,12 @@ summary::before {
     margin-right: 0.5em;
 }
 
-.form-admin, .form-faq {
+.form-admin, .form-faq, .feature {
     display: flex;
     flex-direction: column;
     margin-left: 4rem;
     width: 80%;
-    padding-left: 15px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-right: 5px;
+    padding: 15px 5px 15px 15px;
     background-color: var(--light-gray);
 }
 
@@ -1446,11 +1443,6 @@ article.horizontal-wrapper-edit h2 {
 #title-main-features {
     margin-top: 2rem;
     text-align: center;
-}
-
-.feature-section {
-    margin-left: 4rem;
-    margin-right: 4rem;
 }
 
 #feature-section-final {

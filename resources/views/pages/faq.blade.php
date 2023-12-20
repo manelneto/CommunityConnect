@@ -13,6 +13,10 @@
                 <p class="form-faq">To participate, simply create a free account. Click on the Sign-Up button, fill in the necessary information, and start exploring and interacting with communities.</p>
             </details>
             <details>
+                <summary>How can I win badges?</summary>
+                <p class="form-faq">You can win badges by participating in the communities. There are six types of badges available: first question, first answer, first comment on question, first comment on answer, 100 questions and 100 answers. The badges you won are visible on your profile.</p>
+            </details>
+            <details>
                 <summary>Can I participate in multiple communities simultaneously?</summary>
                 <p class="form-faq">Yes, authenticated users can participate in multiple communities simultaneously. This allows you to create a personalized feed.</p>
             </details>

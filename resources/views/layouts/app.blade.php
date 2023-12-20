@@ -19,20 +19,8 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Styles -->
-        <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/app-cc.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/register-login.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/questions-listing.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/question.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/edit-questions.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-        <link href="{{ asset('css/error.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/edit-profile.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/ask-question.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/communities.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/about-contact-us.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/main-features.css') }}" rel="stylesheet">
 
         <!-- JavaScript -->
         <script src="https://js.pusher.com/7.0/pusher.min.js" defer></script>

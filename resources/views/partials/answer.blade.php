@@ -76,23 +76,25 @@
             <p class="file"><a href="{{ asset($answer->file) }}" target="_blank">Download file here</a></p>
         @endif
         @if (Request::route()->getName() !== 'profile')
-            <form class="answer-buttons" method="post">
+            <form method="post">
                 @csrf
-                @if ($answer->correct)
-                    @can ('incorrect', $answer)
-                        <button data-id="{{ $answer->id }}" class="mark mark-incorrect">Remove correct mark</button>
+                <div class="answer-buttons">
+                    @if ($answer->correct)
+                        @can ('incorrect', $answer)
+                            <button data-id="{{ $answer->id }}" class="mark mark-incorrect">Remove correct mark</button>
+                        @endcan
+                    @else
+                        @can ('correct', $answer)
+                            <button data-id="{{ $answer->id }}" class="mark mark-correct">Mark as correct</button>
+                        @endcan
+                    @endif
+                    @can ('edit', $answer)
+                        <button data-id="{{ $answer->id }}" class="edit">Edit</button>
                     @endcan
-                @else
-                    @can ('correct', $answer)
-                        <button data-id="{{ $answer->id }}" class="mark mark-correct">Mark as correct</button>
+                    @can ('destroy', $answer)
+                        <button class="delete" formaction="{{ route('delete-answer', ['id' => $answer->id]) }}">Delete</button>
                     @endcan
-                @endif
-                @can ('edit', $answer)
-                    <button data-id="{{ $answer->id }}" class="edit">Edit</button>
-                @endcan
-                @can ('destroy', $answer)
-                    <button class="delete" formaction="{{ route('delete-answer', ['id' => $answer->id]) }}">Delete</button>
-                @endcan
+                </div>
             </form>
         @endif
     </article>

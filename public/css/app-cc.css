@@ -290,10 +290,6 @@ a.sign-up-button {
   margin-top: 40px;
 }
 
-section.right-bar-stats > h2 {
-  display: none;
-}
-
 @keyframes slideInFromLeft {
   from {
     transform: translateX(-100%);
@@ -419,6 +415,12 @@ section.right-bar-stats > h2 {
   height: 150px;
 }
 
+section.right-bar-stats > h2,
+.popular-communities > h3,
+.popular-tags > h3 {
+  display: none;
+}
+
 .right-bar-stats article {
   display: flex;
   position: relative;
@@ -472,15 +474,15 @@ article.right-bar-popular .right-bar-name:hover {
   align-items: center;
 }
 
-.right-bar-popular:first-child .right-bar-medal-svg {
+.right-bar-popular:nth-child(2) .right-bar-medal-svg {
   stroke: #C9B037;
 }
 
-.right-bar-popular:nth-child(2) .right-bar-medal-svg {
+.right-bar-popular:nth-child(3) .right-bar-medal-svg {
   stroke: #B4B4B4;
 }
 
-.right-bar-popular:nth-child(3) .right-bar-medal-svg {
+.right-bar-popular:nth-child(4) .right-bar-medal-svg {
   stroke: #AD8A56;
 }
 

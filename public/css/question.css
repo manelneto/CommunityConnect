@@ -531,7 +531,14 @@ form.comment > footer.content-comment > label,
 article.comment-not-edit-answer > h3,
 article.comment-not-edit > h3,
 .question-container > h3,
-.question-container > .content-right > h3 {
+.question-container > .content-right > h3,
+section.comments > h3,
+.leave-comment > label,
+.leave > h2,
+.answer-container > h2,
+#answers > h2,
+.add-tooltip-comment > h3
+{
   display: none;
 }
 

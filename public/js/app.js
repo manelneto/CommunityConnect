@@ -638,6 +638,17 @@ if (forgotPassword) {
         document.querySelector('#sign-page-form').action = "../mail"
     });
 }
+/* Profile: delete account */
+
+const deleteAccount = document.querySelector('#delete-account');
+if (deleteAccount) {
+    deleteAccount.addEventListener('click', (event) => {
+        event.preventDefault();
+        deleteAccount.textContent = 'Are you sure?';
+        deleteAccount.style.background = '#272930';
+        deleteAccount.addEventListener('click', () => deleteAccount.parentElement.submit());
+    });
+}
 
 /* Profile: hide and show sections */
 

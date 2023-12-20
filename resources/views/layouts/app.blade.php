@@ -35,7 +35,7 @@
         <header class="website-header">
             @yield('header')
         </header>
-        @if (Request::route()->getName() === 'login' || Request::route()->getName() === 'register' || Request::route()->getName() === 'password') <!-- TODO -->
+        @if (Request::route()->getName() === 'login' || Request::route()->getName() === 'register' || Request::route()->getName() === 'password')
             @yield('main')
         @else
             <nav class="menu-nav">

@@ -15,7 +15,7 @@
             @csrf
             <article class="horizontal-wrapper horizontal-wrapper-edit">
                 <h2>Edit Question</h2>
-                <img class="member-pfp question-member-pfp" src="{{ asset($question->user->image) }}" alt="User's profile picture" />
+                <img class="member-pfp question-member-pfp" src="{{ asset($question->user->image) }}" alt="User's profile picture">
                 <article class="edit-question-info">
                     <h2>Edit Question</h2>
                     <header class="question-details">

@@ -1,6 +1,6 @@
 <article class="question-container">
     <h3>Question</h3>
-    <img class="member-pfp question-member-pfp" src="{{ asset($question->user->image) }}" alt="User's profile picture"/>
+    <img class="member-pfp question-member-pfp" src="{{ asset($question->user->image) }}" alt="User's profile picture">
     <article class="content-right">
         <h3>Question</h3>
         <header class="question-details">

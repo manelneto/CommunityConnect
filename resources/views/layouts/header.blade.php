@@ -8,16 +8,16 @@
                 </svg>
             @endif
             <a class="cc-logo-with-text" href="{{ route('communities') }}">
-                <img id="CC-image" src="{{ asset('assets/logo.png') }}" alt="Community Connect logo"/>
+                <img id="CC-image" src="{{ asset('assets/logo.png') }}" alt="Community Connect logo">
             </a>
         </div>
         @if (Request::routeIs('questions') || Request::routeIs('community') || Request::routeIs('feed'))
             <article class="mid-header">
                 <form action="{{ route('questions') }}" class="main-search" method="get">
                     <h3><label for="main-search">Search</label></h3>
-                    <input id="main-search" type="text" name="text" class="live-search" placeholder="Search" value="{{ request('text') }}" />
+                    <input id="main-search" type="text" name="text" class="live-search" placeholder="Search" value="{{ request('text') }}">
                     <button type="submit" class="main-search-button">
-                        <img src="{{ asset('assets/search.png') }}" alt="search icon" />
+                        <img src="{{ asset('assets/search.png') }}" alt="search icon">
                     </button>
                     <div class="search-bar-info hidden">
                         <p><strong>"word"</strong> exact search</p>

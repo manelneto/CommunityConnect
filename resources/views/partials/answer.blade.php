@@ -1,7 +1,7 @@
 <article class="answer">
     <h3>Answer</h3>
     <header class="content-left">
-        <img class="member-pfp answer-member-pfp" src="{{ asset($answer->user->image) }}" alt="User's profile photo"/>
+        <img class="member-pfp answer-member-pfp" src="{{ asset($answer->user->image) }}" alt="User's profile photo">
         <div class="answers-votes">
             <p class="answer-upvotes" data-id="{{ $answer->id }}">{{ $answer->likes_count}}
                 @if (in_array(Auth::user()?->id, array_column($answer->likes()->get()->toArray(), 'id_user')))

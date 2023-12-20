@@ -6,7 +6,7 @@
             <h1>{{ $user->username }} @if ($user->blocked) (blocked) @endif</h1>
             <div id="profile-buttons">
                 @if (Auth::user()?->id === $user->id)
-                    <img class="notifications-icon" src="{{ asset('assets/notifications.png') }}" alt="Notifications icon"/>
+                    <img class="notifications-icon" src="{{ asset('assets/notifications.png') }}" alt="Notifications icon">
                     <p class="notifications-number">{{ count($unread) }}</p>
                     <ul class="notifications">
                         @foreach ($notifications as $notification)
@@ -15,7 +15,7 @@
                             <p class="notification-date">{{ $notification->date->format('Y-m-d') }}</p>
                             @if (!$notification->read)
                                 <p class="read-not-tooltip">Mark as read</p>
-                                <img id="{{ $notification->id }}" class="view-icon" src="{{ asset('assets/view.png') }}" alt="View icon"/>
+                                <img id="{{ $notification->id }}" class="view-icon" src="{{ asset('assets/view.png') }}" alt="View icon">
                             @endif
                         </li>
                         @endforeach

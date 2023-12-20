@@ -15,7 +15,7 @@
             @csrf
             <label id="username-label" for="username">Username</label>
             <input type="text" id="username" class="user-details-input" name="username" value="{{ $user->username }}" placeholder="Enter your username here">
-            <img class="member-pfp question-member-pfp" src="{{ asset($user->image) }}" alt="User's profile picture" />
+            <img class="member-pfp question-member-pfp" src="{{ asset($user->image) }}" alt="User's profile picture">
             <label id="email-label" for="email">Email</label>
             <input id="email" class="user-details-input"  type="email" name="email" value="{{ $user->email }}" placeholder="Enter your email here">
             <label id="photo-label" for="photo">Profile Photo</label>

@@ -13,7 +13,7 @@ select {
     box-sizing: border-box;
 }
 
-#last-faq, #last-tag{
+#last-faq, #last-tag {
     padding-bottom: 2rem;
 }
 
@@ -62,14 +62,14 @@ summary {
 }
 
 summary::marker {
-    color: var(--dark-blue); 
+    color: var(--dark-blue);
     font-size: 1.5em;
     display: none;
 }
 
 summary::before {
-    content: "\25BC"; 
-    margin-right: 0.5em; 
+    content: "\25BC";
+    margin-right: 0.5em;
 }
 
 .form-admin, .form-faq {
@@ -84,11 +84,11 @@ summary::before {
     background-color: var(--light-gray);
 }
 
-form p{
+form p {
     margin-bottom: 5px;
 }
 
-.form-admin label{
+.form-admin label {
     margin-top: 8px;
 }
 

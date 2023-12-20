@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\FileController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -24,7 +23,7 @@ class User extends Authenticatable
         'register_date' => 'datetime',
     ];
 
-    public function userBadges() // TODO
+    public function userBadges()
     {
         return $this->hasMany(UserEarnsBadge::class, 'id_user');
     }

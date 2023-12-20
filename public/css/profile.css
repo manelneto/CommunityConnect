@@ -1,284 +1,284 @@
 main#profile-info {
-  background-color: white;
+    background-color: white;
 }
 
 #profile-info h1 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 28px;
-  margin-bottom: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    margin-bottom: 5px;
 }
 
 #profile-info h2 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 18px;
-  color: #555;
-  margin-bottom: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
 }
 
-.profile-email{
-  margin-left:4rem;
+.profile-email {
+    margin-left: 4rem;
 }
 
 #profile-buttons {
-  display: flex;
-  margin-left:auto;
-  right: 0;
+    display: flex;
+    margin-left: auto;
+    right: 0;
 }
 
 #profile-info ul {
-  display: block;
-  font-family: Arial, Helvetica, sans-serif;
-  list-style: none;
-  padding: 0;
-  text-align: center;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    list-style: none;
+    padding: 0;
+    text-align: center;
 }
 
 #profile-info li.profile {
-  display: inline-block;
-  font-weight: bold;
-  cursor: pointer;
-  color: #555;
-  margin-left: 25px;
-  margin-right: 25px;
+    display: inline-block;
+    font-weight: bold;
+    cursor: pointer;
+    color: #555;
+    margin-left: 25px;
+    margin-right: 25px;
 }
 
 #edit-profile-a {
-  display: flex;
-  justify-content: left;
-  height: 30px;
-  padding-top: 2rem;
-  margin-left: 4rem;
+    display: flex;
+    justify-content: left;
+    height: 30px;
+    padding-top: 2rem;
+    margin-left: 4rem;
 }
 
 a.edit-profile {
-  background-color: var(--blue);
-  margin-left: 0.5rem;
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  color: #fff;
-  padding-right: 15px;
-  padding-left: 15px;
-  height: 39px;
-  line-height: 39px; 
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
+    background-color: var(--blue);
+    margin-left: 0.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: #fff;
+    padding-right: 15px;
+    padding-left: 15px;
+    height: 39px;
+    line-height: 39px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-#delete-account{
-  margin-right: 4rem;
-  margin-left: 0.5rem;
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  color: #fff;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  background-color: var(--hover-red);
+#delete-account {
+    margin-right: 4rem;
+    margin-left: 0.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: var(--hover-red);
 }
 
-.view-icon{
-  width: 25px;
-  height: 25px;
-}
-
-.read-not-tooltip{
-  display: none;
+.view-icon {
+    width: 25px;
+    height: 25px;
 }
 
 .read-not-tooltip {
-  display:none;
-  position: absolute;
-  font-size: 12px;
-  right: 5em;
-  padding: 1em 1em;
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none;
 }
 
-.view-icon:hover{
-  cursor: pointer;
+.read-not-tooltip {
+    display: none;
+    position: absolute;
+    font-size: 12px;
+    right: 5em;
+    padding: 1em 1em;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.view-icon:hover {
+    cursor: pointer;
 }
 
 .notifications-icon {
-  width: 35px;
-  height: 35px;
+    width: 35px;
+    height: 35px;
 }
 
 .notifications::-webkit-scrollbar {
-  width: 0;
+    width: 0;
 }
 
 .notifications-number {
-  position: relative;
-  top: -5px;
-  right: 10px;
-  background-color: var(--hover-red);
-  border-radius: 50%;
-  color: white;
-  text-align: center;
-  font-size: 12px;
-  width: 22px; 
-  height: 20px; 
-  line-height: 20px;
-  padding: 0;
+    position: relative;
+    top: -5px;
+    right: 10px;
+    background-color: var(--hover-red);
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    width: 22px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0;
 }
 
 .profile-notification {
-  display: grid;
-  grid-template-columns: 30em 8em 2em;
-  padding: 1rem;
-  align-items: center;
-  border-bottom: 1px solid #eee;
+    display: grid;
+    grid-template-columns: 30em 8em 2em;
+    padding: 1rem;
+    align-items: center;
+    border-bottom: 1px solid #eee;
 }
 
 .profile-notification > .notification-text {
-  grid-column-start: 1;
-  grid-column-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
 }
 
 .profile-notification > .notification-date {
-  grid-column-start: 2;
-  grid-column-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
 }
 
 .profile-notification > .view-icon {
-  grid-column-start: 3;
-  grid-column-end: 4;
+    grid-column-start: 3;
+    grid-column-end: 4;
 }
 
 #profile-info > #edit-profile-a > #profile-buttons > .notifications {
-  display: none;
-  position: absolute;
-  top: 145px;
-  right: 300px;
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  overflow-y: scroll;
-  max-height: 25em;
+    display: none;
+    position: absolute;
+    top: 145px;
+    right: 300px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow-y: scroll;
+    max-height: 25em;
 }
 
 #my-questions,
 #my-answers {
-  display: none;
+    display: none;
 }
 
 #questions-button.active {
-  display: block;
+    display: block;
 }
 
 #answers-button.active {
-  display: block;
+    display: block;
 }
 
 .main-user-pfp {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 120px;
-  margin-bottom: 20px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
 }
 
 .user-register-date {
-  font-weight: normal;
-  text-align: center;
-  color: #abacb1;
-  margin-top: 30px;
-  font-size: 15px;
+    font-weight: normal;
+    text-align: center;
+    color: #abacb1;
+    margin-top: 30px;
+    font-size: 15px;
 }
 
 .user-badges .user-received-badge img {
-  margin-top: 30px;
-  width: 125px;
+    margin-top: 30px;
+    width: 125px;
 }
 
 .about-user .user-stats {
-  display: flex !important;
-  justify-content: center;
-  margin-top: 30px;
+    display: flex !important;
+    justify-content: center;
+    margin-top: 30px;
 }
 
 .about-user .user-stats li {
-  border: 2px solid #abacb1;
-  display: flex !important;
-  align-items: center;
-  justify-content: space-around;
-  padding: 10px 20px;
-  width: fit-content;
-  margin: auto;
+    border: 2px solid #abacb1;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 20px;
+    width: fit-content;
+    margin: auto;
 }
 
 .about-user .user-stats li .user-stats-text {
-  display: block;
-  text-align: left;
-  font-size: 0.9em;
-  color: #5c5c5c;
-  margin-left: 20px;
+    display: block;
+    text-align: left;
+    font-size: 0.9em;
+    color: #5c5c5c;
+    margin-left: 20px;
 }
 
 .user-stats-text-less-margin {
-  margin-left: 14px !important;
+    margin-left: 14px !important;
 }
 
 .about-user .user-stats li .user-stats-count {
-  color: #000;
-  font-size: 20px;
+    color: #000;
+    font-size: 20px;
 }
 
 .selected-profile-tab {
-  color: var(--blue) !important;
+    color: var(--blue) !important;
 }
 
 .card-rating {
-  text-align: center;     
-  width: 140px;
-  height: 140px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid #abacb1;
+    text-align: center;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #abacb1;
 }
 
 .rating-stars {
-  width: 50px;
-  height: 40px;
+    width: 50px;
+    height: 40px;
 }
 
-#rating-communities{
-  margin-top: 2rem;
-  display:flex;
-  justify-content: center;
+#rating-communities {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
 }
 
 #rating-communities article {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 #rating-communities div:last-of-type {
-  margin-right: 0;
+    margin-right: 0;
 }
 
 .svg-and-text {
-  display: flex;
-  align-items: center;
-  color: #43DB1D;
-  font-weight: bold;
+    display: flex;
+    align-items: center;
+    color: #43DB1D;
+    font-weight: bold;
 }
 
 .svg-and-text svg {
-  margin-right: 5px;
+    margin-right: 5px;
 }
 
 #rating-communities > h4,
 #my-questions > h5,
 #my-answers > h5 {
-  display: none;
+    display: none;
 }

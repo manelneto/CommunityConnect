@@ -1,9 +1,9 @@
-#main-features-page{
+#main-features-page {
     background-color: #fff;
 }
 
-.feature-section h3{
-    margin-top:20px;
+.feature-section h3 {
+    margin-top: 20px;
     font-size: 20px;
 }
 
@@ -17,11 +17,11 @@
     margin-right: 4rem;
 }
 
-#feature-section-final{
+#feature-section-final {
     padding-bottom: 2rem;
 }
 
-.feature-section ul li{
+.feature-section ul li {
     font-size: 18px;
     list-style: circle;
     margin-left: 20px;

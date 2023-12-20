@@ -1,199 +1,200 @@
-#sign-page-form #forgot-password{
-  font-size: 12px;
-  color: var(--dark-blue);
+#sign-page-form #forgot-password {
+    font-size: 12px;
+    color: var(--dark-blue);
 }
 
-#sign-page-content h3, #register-content h3{
-  width: 470px;
+#sign-page-content h3, #register-content h3 {
+    width: 470px;
 }
 
 #sign-page-form #forgot-password:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 ::placeholder {
-  color: #9e9e9e;
-  font-size: smaller;
+    color: #9e9e9e;
+    font-size: smaller;
 }
 
 #sign-page-main-content {
-  background-color: var(--light-gray);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: center;
-  color: var(--dark-blue);
+    background-color: var(--light-gray);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    color: var(--dark-blue);
 }
 
-.registers{
-  /* height: 120vh; */
-  display:flex;
-  justify-content: space-between;
-  align-items: center;
+.registers {
+    /* height: 120vh; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #sign-page-content {
-  grid-column: 1;
-  margin-top: 2rem;
+    grid-column: 1;
+    margin-top: 2rem;
 }
 
 #register-content {
-  grid-column: 1;
+    grid-column: 1;
 }
 
-#sign-page-main-content #sign-page-content #title-text, #sign-page-main-content #register-content #title-text{
-  font-size: 48px;
-  margin-bottom: 25px;
+#sign-page-main-content #sign-page-content #title-text, #sign-page-main-content #register-content #title-text {
+    font-size: 48px;
+    margin-bottom: 25px;
 }
 
 #sign-page-main-content #sign-page-content #subtitle-text, #sign-page-main-content #register-content #subtitle-text {
-  font-size: 22px;
-  margin-bottom: 45px;
+    font-size: 22px;
+    margin-bottom: 45px;
 }
 
-#sign-page-main-content #sign-page-content #go-to-sign-in,#sign-page-main-content #register-content #go-to-sign-in  {
-  background-color: black;
-  font-size: 18px;
-  padding: 10px 40px;
-  border-radius: 5px;
+#sign-page-main-content #sign-page-content #go-to-sign-in, #sign-page-main-content #register-content #go-to-sign-in {
+    background-color: black;
+    font-size: 18px;
+    padding: 10px 40px;
+    border-radius: 5px;
 }
 
 #sign-page-main-content > h1 {
-  display: none;
+    display: none;
 }
 
-@media (max-width: 1200px){
-  .registers{
-    min-height: 100vh;
-    background-color: var(--light-gray);
-    grid-column: span 3;
-    justify-content: center;
-  }
-  #register-content{
-    margin-left: 5vw;
-  }
+@media (max-width: 1200px) {
+    .registers {
+        min-height: 100vh;
+        background-color: var(--light-gray);
+        grid-column: span 3;
+        justify-content: center;
+    }
+
+    #register-content {
+        margin-left: 5vw;
+    }
 }
 
-@media (max-width: 991px){
-  .main-footer{
-    margin-top: auto;
-  }
+@media (max-width: 991px) {
+    .main-footer {
+        margin-top: auto;
+    }
 
-  .footer-links{
-    /* display: none; */
-  }
+    .footer-links {
+        /* display: none; */
+    }
 
-  .footer-img{
-    margin-right: auto;
-  }
+    .footer-img {
+        margin-right: auto;
+    }
 
-  .registers{
-    /* margin: 0 5vw; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: nowrap;
-  }
-  
+    .registers {
+        /* margin: 0 5vw; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
 }
 
-@media (max-width: 790px){
-  main#sign-page-main-content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: nowrap;
-  }
+@media (max-width: 790px) {
+    main#sign-page-main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
 
-  .registers{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: nowrap;
-  }
+    .registers {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
 }
 
-@media (max-width: 650px){
-  .registers{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: nowrap;
-  }
+@media (max-width: 650px) {
+    .registers {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
 
-  .registers #sign-page-content{
-    margin-bottom: 3rem;
-  }
+    .registers #sign-page-content {
+        margin-bottom: 3rem;
+    }
 
-  #sign-page-main-content{
-    display: block;
-  }
+    #sign-page-main-content {
+        display: block;
+    }
 }
 
 #sign-page-form, #register-page-form {
-  grid-column: 2;
-  margin: auto;
-  background-color: white;
-  padding: 40px;
-  border-radius: 25px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    grid-column: 2;
+    margin: auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-#register-page-form{
-  height: 470px;
-  margin-top: 3rem;
-  margin-bottom:3rem;
+#register-page-form {
+    height: 470px;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
-#sign-page-form .form-group, #register-page-form .form-group{
-  margin-top: 15px;
+#sign-page-form .form-group, #register-page-form .form-group {
+    margin-top: 15px;
 }
 
-.form-group #password_confirmation, .form-group #username, .form-group #password, .form-group #username_or_email{
-  margin-bottom: 0;
+.form-group #password_confirmation, .form-group #username, .form-group #password, .form-group #username_or_email {
+    margin-bottom: 0;
 }
 
-#sign-page-form .form-group:first-of-type, #register-page-form .form-group:first-of-type{
-  margin-top: 0;
+#sign-page-form .form-group:first-of-type, #register-page-form .form-group:first-of-type {
+    margin-top: 0;
 }
 
 #sign-page-form .form-group:last-of-type, #register-page-form .form-group:last-of-type {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
-#sign-page-form .form-group label, #register-page-form .form-group label{
-  display: block;
-  font-size: 18px;
-  font-weight: bold;
+#sign-page-form .form-group label, #register-page-form .form-group label {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-#sign-page-form .form-group input:not(#photo), #register-page-form .form-group input:not(#photo){
-  width: 100%;
-  padding: 10px;
-  border: 1px solid var(--dark-blue);
-  box-sizing: border-box;
-  border-radius: 5px;
-  font-size: 18px;
-  margin-top: 5px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+#sign-page-form .form-group input:not(#photo), #register-page-form .form-group input:not(#photo) {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--dark-blue);
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-top: 5px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
 }
 
 #photo {
-  margin-top: 5px
+    margin-top: 5px
 }
 
-#sign-page-form button[type="submit"], #register-page-form button[type="submit"]{
-  display: block;
-  padding: 10px 30px;
-  color: #fff;
-  background-color: var(--blue);
-  border-radius: 5px;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 30px auto 10px auto;
+#sign-page-form button[type="submit"], #register-page-form button[type="submit"] {
+    display: block;
+    padding: 10px 30px;
+    color: #fff;
+    background-color: var(--blue);
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 30px auto 10px auto;
 }
 
-#sign-page-form button[type="submit"]:disabled, #register-page-form button[type="submit"]:disabled{
-  background-color: #777;
-  opacity: 0.3;
-  transition: 0.2s;
+#sign-page-form button[type="submit"]:disabled, #register-page-form button[type="submit"]:disabled {
+    background-color: #777;
+    opacity: 0.3;
+    transition: 0.2s;
 }

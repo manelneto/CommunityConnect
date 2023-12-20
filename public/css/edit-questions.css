@@ -1,99 +1,99 @@
 .question-edit-container {
-  display: flex;
-  flex-direction: column;
-  margin-left: 4rem;
-  margin-right: 4rem;
+    display: flex;
+    flex-direction: column;
+    margin-left: 4rem;
+    margin-right: 4rem;
 }
 
-.question-edit-container #property-tags{
-  margin-left:0;
-  margin-right:0;
+.question-edit-container #property-tags {
+    margin-left: 0;
+    margin-right: 0;
 }
 
-.question-edit-container #property-tags #add-tag{
-  margin-left: 0;
+.question-edit-container #property-tags #add-tag {
+    margin-left: 0;
 }
 
-.question-edit-container label{
-  margin-top: 0.6rem;
+.question-edit-container label {
+    margin-top: 0.6rem;
 }
 
-.question-edit-container .question-description{
-  margin-top: 0.2rem;
+.question-edit-container .question-description {
+    margin-top: 0.2rem;
 }
 
 .question-title-edit {
-  border: 1px solid #c6c6c6;
-  color: var(--dark-blue);
+    border: 1px solid #c6c6c6;
+    color: var(--dark-blue);
 }
 
 .question-title-edit:focus {
-  border: 1px solid var(--blue);
-  outline: none;
+    border: 1px solid var(--blue);
+    outline: none;
 }
 
 .edit-question-text {
-  display: block;
-  margin: 20px 0;
-  width: fit-content;
-  font-size: 22px;
-  font-weight: bold;
+    display: block;
+    margin: 20px 0;
+    width: fit-content;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 .edit-buttons button {
-  margin-top: 20px;
-  padding: 5px 25px;
-  color: #ffffff;
-  border-radius: 5px;
+    margin-top: 20px;
+    padding: 5px 25px;
+    color: #ffffff;
+    border-radius: 5px;
 }
 
 .edit-button {
-  background-color: var(--blue);
-  margin-right: 7px;
+    background-color: var(--blue);
+    margin-right: 7px;
 }
 
 .delete-button {
-  background-color: var(--hover-red);
+    background-color: var(--hover-red);
 }
 
 #question-edit {
-  background-color: white;
-  border-right: 1px solid #c6c6c6;
-  border-left: 1px solid #c6c6c6;
+    background-color: white;
+    border-right: 1px solid #c6c6c6;
+    border-left: 1px solid #c6c6c6;
 }
 
 #question-edit input {
-  width: 100%;
-  color: #abacb1;
+    width: 100%;
+    color: #abacb1;
 }
 
-.all-tags .all-buttons{
-  color: white;
-  font-weight: bold;
-  margin-right: 5px;
+.all-tags .all-buttons {
+    color: white;
+    font-weight: bold;
+    margin-right: 5px;
 }
 
 .edit-question-info {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 #add-tag {
-  margin-left: 15px;
+    margin-left: 15px;
 }
 
 #add-tag:focus {
-  border: 1px solid var(--blue);
+    border: 1px solid var(--blue);
 }
 
 .color-black {
-  color: black;
+    color: black;
 }
 
-.edit-buttons{
-  margin-bottom: 2rem;
+.edit-buttons {
+    margin-bottom: 2rem;
 }
 
 article.horizontal-wrapper-edit h2 {
-  display: none;
+    display: none;
 }

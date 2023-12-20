@@ -3,6 +3,10 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
  }
+
+ #create-question h1{
+   display: none;
+ }
  
  #create-question form {
    display: flex;

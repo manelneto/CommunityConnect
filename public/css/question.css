@@ -69,11 +69,19 @@
 }
 
 .answer-details p.date {
+  color: #abacb1;
   margin-left: 1rem;
   margin-top: 1px;
 }
 
-.answer-details p.edited-date {
+.answer-details p.edited-date,
+.comments-details .edited-date,
+.comment-not-edit .edited-date,
+.comment-not-edit-answer .edited-date,
+.content-right > .answer > .date,
+.comment > .date,
+.comment-not-edit-answer .date,
+.edit-question-comment-date {
   color: #abacb1;
   font-size: 14px;
 }
@@ -131,7 +139,7 @@ section#answers form.answer {
   align-items: flex-start;
 }
 
-.comments-details, #content-comment{
+.comments-details, .content-comment{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -147,24 +155,18 @@ section#answers form.answer {
 
 .edit-question-comment-date, .edit-answer-comment-date {
   margin-left: 10px;
-  margin-bottom: 0px;
-}
-
-.comments-details .edited-date,
-.comment-not-edit .edited-date {
-  font-size: 14px;
-  color: #abacb1;
+  margin-bottom: 0;
 }
 
 .comments-details {
   margin-bottom: 5px;
 }
 
-#content-comment {
+.content-comment {
   margin-bottom: 10px;
 }
 
-#content-comment .edit {
+.content-comment .edit {
   margin-left: 10px;
 }
 
@@ -208,17 +210,15 @@ article.answer-comment:last-of-type {
 }
 
 #answers .add-tooltip {
-  margin-left: 2rem;
-  margin-right: 4rem;
-  margin-bottom: 0.3rem;
-  margin-top: 1rem;
+  margin: 1rem 4rem 0.3rem 2rem;
 }
 
 .ignore-tooltip-h2-changes {
   font-size: 18px;
 }
 
-.comment-not-edit {
+.comment-not-edit,
+.comment-not-edit-answer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -229,17 +229,9 @@ article.answer-comment:last-of-type {
   padding-top: 10px;
 }
 
-.comment-not-edit-answer{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 4rem;
-  margin-right: 4rem;
+.comment-not-edit-answer {
   flex-wrap: wrap;
-  padding-bottom: 10px;
-  padding-top: 10px;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #c6c6c6; 
 }
 
 .comment > .description {
@@ -256,12 +248,6 @@ article.answer-comment:last-of-type {
   display: block;
   font-size: 20px;
   margin-bottom: 15px;
-}
-
-.content-right > .answer > .date,
-.comment > .date {
-  font-size: 14px;
-  color: #abacb1;
 }
 
 .question-of-answer {
@@ -463,19 +449,7 @@ button.mark-incorrect {
 }
 
 .question-details .tooltip-icon .tooltip-text {
-  visibility: hidden;
-  width: 400px;
-  background-color: #fff;
-  color: #000;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px;  
-  position: absolute;
-  z-index: 1;
-  top: -5px;
-  left: 115%;
   margin-left: -430px;
-  box-shadow: 0 0 10px #000001;
 }
 
 .question-details .tooltip-icon:hover .tooltip-text {
@@ -487,17 +461,14 @@ button.mark-incorrect {
   display: inline;
 }
 
-.comment .description .date {
+.comment .date {
   font-size: 14px;
   color: #adadad;
 }
 
 .add-question-comment-tap,
 .add-answer-comment-tap {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 4rem;
-  padding-right: 10px;
+  padding: 10px 10px 10px 4rem;
   color: #adadad;
 }
 
@@ -508,7 +479,7 @@ button.mark-incorrect {
   cursor: pointer;
 }
 
-#question-comment, #answer-comment {
+#question-comment, .answer-comment {
   width: 70%;
   margin-left: 4rem;
   border: 1px solid #c6c6c6;
@@ -516,7 +487,7 @@ button.mark-incorrect {
   margin-bottom: 15px;
 }
 
-#question-comment::placeholder, #answer-comment::placeholder {
+#question-comment::placeholder, .answer-comment::placeholder {
   font-size: small;
 }
 
@@ -556,6 +527,28 @@ button.mark-incorrect {
 
 .answer textarea {
   width: 80%;
+}
+
+.answer > h3,
+.answer > .content-right > h3,
+form.comment > footer.content-comment > label,
+article.comment-not-edit-answer > h3,
+article.comment-not-edit > h3,
+.question-container > h3,
+.question-container > .content-right > h3,
+section.comments > h3,
+.leave-comment > label,
+.leave > h2,
+.answer-container > h2,
+#answers > h2,
+.add-tooltip-comment > h3
+{
+  display: none;
+}
+
+p.question-upvotes,
+p.question-downvotes {
+  display: inline;
 }
 
 @media (max-width: 919px){

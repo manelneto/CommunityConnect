@@ -1,4 +1,4 @@
-#create-question h1 {
+#create-question h2 {
     text-align: center;
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -12,7 +12,7 @@
  }
 
  input#file{
-   padding:0rem;
+   padding:0;
  }
  
  #create-question button {
@@ -91,6 +91,9 @@ textarea#content.form-control::placeholder {
    font-size: small;
 }
 
+section#property-tags > h3 {
+    display: none;
+}
 #create-question form input:focus {
    border: 1px solid var(--blue);
 }

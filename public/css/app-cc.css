@@ -79,6 +79,11 @@ fieldset {
 
 /* Header */
 
+.header-content > h2,
+.mid-header h3 {
+  display: none;
+}
+
 .header-content {
   display: grid;
   grid-template-columns: [start-col-header] 300px [mid1-col-header] auto [mid2-col-header] 300px [end-col-header];
@@ -116,7 +121,7 @@ fieldset {
   position: absolute;
   margin-top: 25px;
   right: 5px;
-  padding-left: 0px;
+  padding-left: 0;
   cursor: pointer;
 }
 
@@ -150,7 +155,8 @@ header.website-header {
   height: 12px;
 }
 
-.tooltip-icon .tooltip-text {
+.tooltip-icon .tooltip-text,
+.question-details .tooltip-icon .tooltip-text {
   visibility: hidden;
   width: 400px;
   background-color: #fff;
@@ -312,8 +318,7 @@ a.sign-up-button {
   background-color: var(--light-gray);
   height: calc(100vh - 40px);
   width: 270px;
-  padding: 20px;
-  padding-left: 2rem;
+  padding: 20px 20px 20px 2rem;
   animation: 0.5s ease-out 0s 1 slideInFromLeft;
 }
 
@@ -415,6 +420,12 @@ a.sign-up-button {
   height: 150px;
 }
 
+section.right-bar-stats > h2,
+.popular-communities > h3,
+.popular-tags > h3 {
+  display: none;
+}
+
 .right-bar-stats article {
   display: flex;
   position: relative;
@@ -468,15 +479,15 @@ article.right-bar-popular .right-bar-name:hover {
   align-items: center;
 }
 
-.right-bar-popular:first-child .right-bar-medal-svg {
+.right-bar-popular:nth-child(2) .right-bar-medal-svg {
   stroke: #C9B037;
 }
 
-.right-bar-popular:nth-child(2) .right-bar-medal-svg {
+.right-bar-popular:nth-child(3) .right-bar-medal-svg {
   stroke: #B4B4B4;
 }
 
-.right-bar-popular:nth-child(3) .right-bar-medal-svg {
+.right-bar-popular:nth-child(4) .right-bar-medal-svg {
   stroke: #AD8A56;
 }
 
@@ -693,11 +704,9 @@ article.notification {
 
 .footer-links {
   margin-top: 25px;
-  /* margin-left: 30rem; */
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  color: var();
 }
 
 .footer-links *:hover {

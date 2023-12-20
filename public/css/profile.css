@@ -25,18 +25,6 @@ main#profile-info {
   right: 0;
 }
 
-#profile-info .member-pfp question-member-pfp {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 #profile-info ul {
   display: block;
   font-family: Arial, Helvetica, sans-serif;
@@ -121,12 +109,8 @@ a.edit-profile {
   height: 35px;
 }
 
-.notifications-container{
-  display:none;
-}
-
 .notifications::-webkit-scrollbar {
-  width: 0px;
+  width: 0;
 }
 
 .notifications-number {
@@ -167,7 +151,8 @@ a.edit-profile {
   grid-column-end: 4;
 }
 
-.notifications {
+#profile-info > #edit-profile-a > #profile-buttons > .notifications {
+  display: none;
   position: absolute;
   top: 145px;
   right: 300px;
@@ -194,13 +179,15 @@ a.edit-profile {
 
 .main-user-pfp {
   position: relative;
-  left: 43%;
+  left: 50%;
+  transform: translateX(-50%);
   width: 120px;
   height: 120px;
   margin-bottom: 20px;
 }
 
 .user-register-date {
+  font-weight: normal;
   text-align: center;
   color: #abacb1;
   margin-top: 30px;
@@ -271,7 +258,7 @@ a.edit-profile {
   justify-content: center;
 }
 
-#rating-communities div {
+#rating-communities article {
   margin-right: 10px;
 }
 
@@ -290,3 +277,8 @@ a.edit-profile {
   margin-right: 5px;
 }
 
+#rating-communities > h4,
+#my-questions > h5,
+#my-answers > h5 {
+  display: none;
+}

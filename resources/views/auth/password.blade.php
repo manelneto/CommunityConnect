@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@include ('layouts.errors')
 
 @section('main')
     <main id="sign-page-main-content" class="registers">
@@ -7,7 +6,6 @@
             <h1 id="title-text">Reset your Password</h1>
             <h3 id="subtitle-text">Reset your Community Connect password to ask questions, answer people's questions, and connect with others.</h3>
         </article>
-        @yield('errors')
         <form id="sign-page-form" action="{{ route('update-password') }}" method="post">
             @csrf
             <input type="hidden" name="token" value="{{ $token }}">

@@ -1,31 +1,31 @@
-.error-box {
-  color: red;
+#success {
+  color: green;
   text-align: center;
-  border: 1px solid red;
-  background-color: #f8d7da;
+  border: 1px solid green;
+  background-color: lightgreen;
   padding: 1rem;
-  border-radius: 15px;
-  text-align: center;
   border-radius: 15px;
   position: fixed;
   top: 2%;
-  left: 45%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.error-box ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.error-box h2 {
-  display: none;
-}
-
-.error-message-tag-add {
+#errors {
   color: red;
   text-align: center;
   border: 1px solid red;
-  background-color: #f8d7da;
+  background-color: lightpink;
   padding: 1rem;
   border-radius: 15px;
+  position: fixed;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#success > h2,
+#errors > h2,
+#notifications > h2 {
+  display: none;
 }

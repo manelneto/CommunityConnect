@@ -8,9 +8,9 @@
         </header>
         @can ('follow', App\Models\Community::class)
             @if (Auth::user()->communities->contains($community->id))
-            <button id="{{ $community->id }}" class="unfollow-community">Unfollow</button>
+                <button id="{{ $community->id }}" class="unfollow-community">Unfollow</button>
             @else
-            <button id="{{ $community->id }}" class="follow-community">Follow</button>
+                <button id="{{ $community->id }}" class="follow-community">Follow</button>
             @endif
         @endcan
     </div>

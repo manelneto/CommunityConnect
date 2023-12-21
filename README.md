@@ -23,6 +23,7 @@ As credenciais para acesso ao ***Community Connect*** são as expostas na tabela
 | Moderador | johnmod | johnmod@gmail.com | CCpassword |
 | Administrador | admin | admin@email.com | Lbaw23114 |
 
+## Equipa
 
 * António Henrique Martins Azevedo, up202108689@up.pt
 * António Marujo Rama, up202108801@up.pt
